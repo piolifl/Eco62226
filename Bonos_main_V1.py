@@ -58,7 +58,8 @@ ins = {
     '1':['al30',100,'gd30'],'2':['al30',100,'gd35'],'3':['al30',100,'al35'],
     '4':['gd30',100,'al30'],'5':['gd30',100,'gd35'],'6':['gd30',100,'al35'] }
 
-while True:
+
+while limite <= 1000:
     if time.strftime("%H:%M:%S") >= '17:00:10':
         print('...................... MERCADO CERRADO 17HS .......................')
         break
@@ -78,6 +79,13 @@ while True:
                 if ccl48(e[0]).cantidad_BI() > e[1] and ccl48(e[2]).cantidad_OF() >= comproCCL and mep48(e[2]).cantidad_BI() >= comproCCL and mep48(e[0]).cantidad_OF() >= comproMEP :
 
                     print(f'Ratio positivo, sale ganando {comproMEP - e[1]}')
+
+                    vender(ccl48(e[0]),e[1],ccl48(e[0]).precio_BI())
+                    comprar(ccl48(e[2]),comproCCL,ccl48(e[2]).precio_OF())
+                    vender(mep48(e[2]),comproCCL,mep48(e[2]).precio_BI())
+                    comprar(mep48(e[0]),comproMEP,mep48(e[0]).precio_OF())
+
+                    limite -= e[1]
                     break
                 else:
                     print('No hay suficientes compradores/vendedores',time.strftime("%H:%M:%S")),time.sleep(1)
@@ -102,6 +110,7 @@ while True:
                 if mep48(e[0]).cantidad_BI() > e[1] and mep48(e[2]).cantidad_OF() >= comproMEP and ccl48(e[2]).cantidad_BI() >= comproMEP and ccl48(e[0]).cantidad_OF() >= comproCCL :
 
                     print(f'Ratio positivo, sale ganando {comproCCL - e[1]}')
+                    limite -= e[1]
                     break
                 else:
                     print('No hay suficientes compradores/vendedores',time.strftime("%H:%M:%S")),time.sleep(1)
@@ -109,7 +118,5 @@ while True:
             else:
                 print(f'Sin ratios posibles {e[0]} / {e[2]} ',time.strftime("%H:%M:%S")),time.sleep(1)
                 break
-
-    print()
-       
+     
     
