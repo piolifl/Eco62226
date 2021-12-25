@@ -52,6 +52,7 @@ def mep_ccl(t1,t2,t3,t4):
 
 
 costos = 0.0052
+limite = 1000
 
 ins = {
     '1':['al30',100,'gd30'],'2':['al30',100,'gd35'],'3':['al30',100,'al35'],
@@ -60,11 +61,11 @@ ins = {
 while True:
     for i, e in ins.items():
         while e[0] != '0':
-            '''while True:
+            while True:
                 if ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000 and mep48(e[0]).precio_BI() != 1000 and mep48(e[2]).precio_OF() != 1000:
                     break
                 else:
-                    print('Esperando completar los precios ',time.strftime("%H:%M:%S")),time.sleep(2)'''
+                    print('Esperando completar los precios ',time.strftime("%H:%M:%S")),time.sleep(2)
             ccl_mep(
                     ccl48(e[0]).precio_BI(),ccl48(e[2]).precio_OF(),
                     mep48(e[2]).precio_BI(),mep48(e[0]).precio_OF())
