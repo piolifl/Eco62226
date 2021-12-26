@@ -63,14 +63,14 @@ while limite <= 1000:
         break
     for i, e in ins.items():
         while e[0] != '0':
-            '''while True:
+            while True:
                 if ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000 and mep48(e[0]).precio_BI() != 1000 and mep48(e[2]).precio_OF() != 1000:
                     if ccl48(e[0]).cantidad_BI() > e[1] and ccl48(e[2]).cantidad_OF() >= comproCCL and mep48(e[2]).cantidad_BI() >= comproCCL and mep48(e[0]).cantidad_OF() >= comproMEP:
                         break
                     else:
                         print('No hay suficientes compradores/vendedores',time.strftime("%H:%M:%S")),time.sleep(1)
                 else:
-                    print('Esperando completar los precios ',time.strftime("%H:%M:%S")),time.sleep(2)'''
+                    print('Esperando completar los precios ',time.strftime("%H:%M:%S")),time.sleep(2)
             ccl_mep(
                     ccl48(e[0]).precio_BI(),ccl48(e[2]).precio_OF(),
                     mep48(e[2]).precio_BI(),mep48(e[0]).precio_OF())
