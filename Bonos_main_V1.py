@@ -48,7 +48,7 @@ def mep_ccl(t1,t2,t3,t4):
     print(f'venMEP: {vendoMEP}',end=" // ")
     print(f'bonosMEP: {comproMEP}',end=" // ")
     print(f'venCCL:{vendoCCL}',end=" // ")
-    print(f'bonosCCL:{comproCCL}',end=" //// ")    
+    print(f'bonosCCL:{comproCCL}',end=" //// ") 
 
 costos = 0.0052
 limite = 1000
@@ -63,30 +63,28 @@ while limite <= 1000:
         break
     for i, e in ins.items():
         while e[0] != '0':
-            while True:
+            '''while True:
                 if ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000 and mep48(e[0]).precio_BI() != 1000 and mep48(e[2]).precio_OF() != 1000:
-                    break
+                    if ccl48(e[0]).cantidad_BI() > e[1] and ccl48(e[2]).cantidad_OF() >= comproCCL and mep48(e[2]).cantidad_BI() >= comproCCL and mep48(e[0]).cantidad_OF() >= comproMEP:
+                        break
+                    else:
+                        print('No hay suficientes compradores/vendedores',time.strftime("%H:%M:%S")),time.sleep(1)
                 else:
-                    print('Esperando completar los precios ',time.strftime("%H:%M:%S")),time.sleep(2)
+                    print('Esperando completar los precios ',time.strftime("%H:%M:%S")),time.sleep(2)'''
             ccl_mep(
                     ccl48(e[0]).precio_BI(),ccl48(e[2]).precio_OF(),
                     mep48(e[2]).precio_BI(),mep48(e[0]).precio_OF())
 
             if comproMEP > e[1]:
 
-                if ccl48(e[0]).cantidad_BI() > e[1] and ccl48(e[2]).cantidad_OF() >= comproCCL and mep48(e[2]).cantidad_BI() >= comproCCL and mep48(e[0]).cantidad_OF() >= comproMEP :
+                #vender(ccl48(e[0]),e[1],ccl48(e[0]).precio_BI())
+                #comprar(ccl48(e[2]),comproCCL,ccl48(e[2]).precio_OF())
+                #vender(mep48(e[2]),comproCCL,mep48(e[2]).precio_BI())
+                #comprar(mep48(e[0]),comproMEP,mep48(e[0]).precio_OF())
 
-                    #vender(ccl48(e[0]),e[1],ccl48(e[0]).precio_BI())
-                    #comprar(ccl48(e[2]),comproCCL,ccl48(e[2]).precio_OF())
-                    #vender(mep48(e[2]),comproCCL,mep48(e[2]).precio_BI())
-                    #comprar(mep48(e[0]),comproMEP,mep48(e[0]).precio_OF())
-
-                    print(f'Ratio positivo, sale ganando {comproMEP - e[1]}')
-                    limite -= e[1]
-                    break
-                else:
-                    print('No hay suficientes compradores/vendedores',time.strftime("%H:%M:%S")),time.sleep(1)
-                    break
+                print(f'Ratio positivo, sale ganando {comproMEP - e[1]}')
+                limite -= e[1]
+                break
             else:
                 print(f'Sin posibles ratios entre {e[0]} y {e[2]} ',time.strftime("%H:%M:%S")),time.sleep(0)
                 break
@@ -95,7 +93,10 @@ while limite <= 1000:
         while e[0] != '0':
             while True:
                 if mep48(e[0]).precio_BI() != 1000 and mep48(e[2]).precio_OF() != 1000 and ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000:
-                    break
+                    if mep48(e[0]).cantidad_BI() > e[1] and mep48(e[2]).cantidad_OF() >= comproMEP and ccl48(e[2]).cantidad_BI() >= comproMEP and ccl48(e[0]).cantidad_OF() >= comproCCL:
+                        break
+                    else:
+                        print('No hay suficientes compradores/vendedores',time.strftime("%H:%M:%S")),time.sleep(1)
                 else:
                     print('Esperando completar los precios ',time.strftime("%H:%M:%S")),time.sleep(2)
             mep_ccl(
@@ -104,19 +105,14 @@ while limite <= 1000:
 
             if comproCCL > e[1]:
 
-                if mep48(e[0]).cantidad_BI() > e[1] and mep48(e[2]).cantidad_OF() >= comproMEP and ccl48(e[2]).cantidad_BI() >= comproMEP and ccl48(e[0]).cantidad_OF() >= comproCCL :
+                #vender(mep48(e[0]),e[1],mep48(e[0]).precio_BI())
+                #comprar(mep48(e[2]),comproMEP,mep48(e[2]).precio_OF())
+                #vender(ccl48(e[2]),comproMEP,ccl48(e[2]).precio_BI())
+                #comprar(ccl48(e[0]),comproCCL,ccl48(e[0]).precio_OF())
 
-                    #vender(mep48(e[0]),e[1],mep48(e[0]).precio_BI())
-                    #comprar(mep48(e[2]),comproMEP,mep48(e[2]).precio_OF())
-                    #vender(ccl48(e[2]),comproMEP,ccl48(e[2]).precio_BI())
-                    #comprar(ccl48(e[0]),comproCCL,ccl48(e[0]).precio_OF())
-
-                    print(f'Ratio positivo, sale ganando {comproCCL - e[1]}')
-                    limite -= e[1]
-                    break
-                else:
-                    print('No hay suficientes compradores/vendedores',time.strftime("%H:%M:%S")),time.sleep(1)
-                    break
+                print(f'Ratio positivo, sale ganando {comproCCL - e[1]}')
+                limite -= e[1]
+                break
             else:
                 print(f'Sin posibles ratios entre {e[0]} y {e[2]} ',time.strftime("%H:%M:%S")),time.sleep(0)
                 break
