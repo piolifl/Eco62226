@@ -29,7 +29,7 @@ costos = 0.0052
 
 call = {
         '1': ['185',2, 24,'210',4, 12.5],
-        '2': ['190',2, 26.55,'220',3, 15.65],
+        '2': ['190',2, 26.55,'210',3, 15.65],
         '3': ['195', 2,  21.55,'210',  3,  14],
         '4': ['200', 2,  21.65,'220',  3,  12.2],
         '5': ['250', 2,  4.5,'270',  3,  2.55]
@@ -54,13 +54,13 @@ while True:
 
                         print(f'CERRADO bull CALL: {e[0]} = {strikeCall(e[0]).precio_BI()}  // {e[3]} = {strikeCall(e[3]).precio_OF()} RESULT = {saldo} ')
 
-                        vender(strikeCall(e[0]),e[1],strikeCall(e[0]).precio_BI())
-                        comprar(strikeCall(e[3]),e[4],strikeCall(e[3]).precio_OF())
+                        #vender(strikeCall(e[0]),e[1],strikeCall(e[0]).precio_BI())
+                        #comprar(strikeCall(e[3]),e[4],strikeCall(e[3]).precio_OF())
 
                         e[0] = '0'
                         break
                     else:
-                        print('NO hay compradores/vendedores ',time.strftime("%H:%M:%S"))
+                        print(f'NO hay compradores/vendedores {e[0]}/{e[3]} ',time.strftime("%H:%M:%S"))
                         break
                 else:
                     print(f'Sin precios para {e[0]} o {e[3]} ',time.strftime("%H:%M:%S"))
