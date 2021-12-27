@@ -59,8 +59,8 @@ while True:
 
                 print(f'CERRADO bull CALL: {e[0]} = {strikeCall(e[0]).precio_BI()}  // {e[3]} = {strikeCall(e[3]).precio_OF()} RESULT = {saldo} ')
 
-                #vender(strikeCall(e[0]),e[1],strikeCall(e[0]).precio_BI())
-                #comprar(strikeCall(e[3]),e[4],strikeCall(e[3]).precio_OF())
+                vender(strikeCall(e[0]),e[1],strikeCall(e[0]).precio_BI())
+                comprar(strikeCall(e[3]),e[4],strikeCall(e[3]).precio_OF())
 
                 e[0] = '0'
 
