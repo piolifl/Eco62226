@@ -64,28 +64,28 @@ while limite <= 1000:
         break
     for i, e in ins.items():
         while e[0] != '0':
-            while True:
-                if ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000 and mep48(e[0]).precio_BI() != 1000 and mep48(e[2]).precio_OF() != 1000:
-                    if ccl48(e[0]).cantidad_BI() > e[1] and ccl48(e[2]).cantidad_OF() >= comproCCL and mep48(e[2]).cantidad_BI() >= comproCCL and mep48(e[0]).cantidad_OF() >= comproMEP:
-                        break
-                    else:
-                        print('No hay suficientes compradores/vendedores',time.strftime("%H:%M:%S")),time.sleep(1)
-                else:
-                    print('Esperando completar los precios ',time.strftime("%H:%M:%S")),time.sleep(2)
-
             ccl_mep( ccl48(e[0]).precio_BI(),ccl48(e[2]).precio_OF(),mep48(e[2]).precio_BI(),mep48(e[0]).precio_OF())
             
             if comproMEP > e[1]:
 
-                #vender(ccl48(e[0]),e[1],ccl48(e[0]).precio_BI())
-                #comprar(ccl48(e[2]),comproCCL,ccl48(e[2]).precio_OF())
-                #vender(mep48(e[2]),comproCCL,mep48(e[2]).precio_BI())
-                #comprar(mep48(e[0]),comproMEP,mep48(e[0]).precio_OF())
+                if ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000 and mep48(e[0]).precio_BI() != 1000 and mep48(e[2]).precio_OF() != 1000:
 
-                gana += comproMEP - e[1]
-                limite -= e[1]
-                print(f'Gana {comproMEP - e[1]} bonos')
+                    if ccl48(e[0]).cantidad_BI() > e[1] and ccl48(e[2]).cantidad_OF() >= comproCCL and mep48(e[2]).cantidad_BI() >= comproCCL and mep48(e[0]).cantidad_OF() >= comproMEP:
 
+                        #vender(ccl48(e[0]),e[1],ccl48(e[0]).precio_BI())
+                        #comprar(ccl48(e[2]),comproCCL,ccl48(e[2]).precio_OF())
+                        #vender(mep48(e[2]),comproCCL,mep48(e[2]).precio_BI())
+                        #comprar(mep48(e[0]),comproMEP,mep48(e[0]).precio_OF())
+
+                        gana += comproMEP - e[1]
+                        limite -= e[1]
+                        print(f'Gana {comproMEP - e[1]} bonos')
+                    else:
+                        print('Sin compradores/vendedores CCL/MEP',time.strftime("%H:%M:%S"))
+                        break
+                else:
+                    print('No hay precios CCL/MEP',time.strftime("%H:%M:%S"))
+                    break
             else:
                 print(f'Sin ratios CCL/MEP {e[0]}/{e[2]} ',time.strftime("%H:%M:%S")),time.sleep(0)
 
@@ -93,16 +93,25 @@ while limite <= 1000:
 
             if comproCCL > e[1]:
 
-                #vender(mep48(e[0]),e[1],mep48(e[0]).precio_BI())
-                #comprar(mep48(e[2]),comproMEP,mep48(e[2]).precio_OF())
-                #vender(ccl48(e[2]),comproMEP,ccl48(e[2]).precio_BI())
-                #comprar(ccl48(e[0]),comproCCL,ccl48(e[0]).precio_OF())
+                if mep48(e[0]).precio_BI() != 1000 and mep48(e[2]).precio_OF() != 1000 and ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000:
 
-                gana += comproCCL - e[1]
-                limite -= e[1]
-                print(f'Gana {comproCCL - e[1]} bonos')
-                break
+                    if mep48(e[0]).cantidad_BI() > e[1] and mep48(e[2]).cantidad_OF() >= comproMEP and ccl48(e[2]).cantidad_BI() >= comproMEP and ccl48(e[0]).cantidad_OF() >= comproCCL:
 
+                        #vender(mep48(e[0]),e[1],mep48(e[0]).precio_BI())
+                        #comprar(mep48(e[2]),comproMEP,mep48(e[2]).precio_OF())
+                        #vender(ccl48(e[2]),comproMEP,ccl48(e[2]).precio_BI())
+                        #comprar(ccl48(e[0]),comproCCL,ccl48(e[0]).precio_OF())
+
+                        gana += comproCCL - e[1]
+                        limite -= e[1]
+                        print(f'Gana {comproCCL - e[1]} bonos')
+                        break
+                    else:
+                        print('Sin compradores/vendedores MEP/CCL',time.strftime("%H:%M:%S"))
+                        break
+                else:
+                    print('No hay precios MEP/CCL ',time.strftime("%H:%M:%S"))
+                    break
             else:
                 print(f'Sin ratios MEP/CCL {e[0]}/{e[2]} ',time.strftime("%H:%M:%S")),time.sleep(0)
                 break

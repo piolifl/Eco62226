@@ -40,15 +40,6 @@ while True:
         break
     for i, e in call.items():
         while e[0] != '0':
-            while True:
-                if strikeCall(e[0]).precio_BI() != 1000 != strikeCall(e[3]).precio_OF():
-                    if strikeCall(e[0]).cantidad_BI() >= e[1] and strikeCall(e[0]).cantidad_OF() >= e[4]:
-                        break
-                    else:
-                        print('Esperando compradores/vendedores ',time.strftime("%H:%M:%S")),time.sleep(1)
-                else:
-                    print('Esperando completar los precios ',time.strftime("%H:%M:%S")),time.sleep(1)
-
             ratioActual = round(strikeCall(e[0]).precio_BI()  / strikeCall(e[3]).precio_OF(),2)
             ratioEntrada = round(e[2]  / e[5] ,2)
             saldo = round(
@@ -57,13 +48,23 @@ while True:
             
             if ratioActual > ratioEntrada * (1 + 0.15) and saldo > 100:
 
-                print(f'CERRADO bull CALL: {e[0]} = {strikeCall(e[0]).precio_BI()}  // {e[3]} = {strikeCall(e[3]).precio_OF()} RESULT = {saldo} ')
+                if strikeCall(e[0]).precio_BI() != 1000 != strikeCall(e[3]).precio_OF():
 
-                vender(strikeCall(e[0]),e[1],strikeCall(e[0]).precio_BI())
-                comprar(strikeCall(e[3]),e[4],strikeCall(e[3]).precio_OF())
+                    if strikeCall(e[0]).cantidad_BI() >= e[1] and strikeCall(e[0]).cantidad_OF() >= e[4]:
 
-                e[0] = '0'
+                        print(f'CERRADO bull CALL: {e[0]} = {strikeCall(e[0]).precio_BI()}  // {e[3]} = {strikeCall(e[3]).precio_OF()} RESULT = {saldo} ')
 
+                        vender(strikeCall(e[0]),e[1],strikeCall(e[0]).precio_BI())
+                        comprar(strikeCall(e[3]),e[4],strikeCall(e[3]).precio_OF())
+
+                        e[0] = '0'
+                        break
+                    else:
+                        print('NO hay compradores/vendedores ',time.strftime("%H:%M:%S"))
+                        break
+                else:
+                    print(f'Sin precios para {e[0]} o {e[3]} ',time.strftime("%H:%M:%S"))
+                    break
             else:
                 ggal = ticker['acciones']['48']['ggal'].precio_LA()
                 print(f'GGAL: {ggal} - bull CALL: {e[0]} = {strikeCall(e[0]).precio_BI()}  // {e[3]} = {strikeCall(e[3]).precio_OF()} da ratioEntrada:{ratioEntrada} /// ratioActual {ratioActual} = {saldo} /// ',time.strftime("%H:%M:%S")),time.sleep(1)
