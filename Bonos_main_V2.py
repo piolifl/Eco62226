@@ -59,7 +59,7 @@ ins = {
     '4':['gd30',100,'al30'],'5':['gd30',100,'gd35'],'6':['gd30',100,'al35'] }
 
 while limite <= 1000:
-    if time.strftime("%H:%M:%S") <= '17:00:10':
+    if time.strftime("%H:%M:%S") >= '17:00:10':
         print('...................... MERCADO CERRADO 17HS .......................')
         break
     for i, e in ins.items():
