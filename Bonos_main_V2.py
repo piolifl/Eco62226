@@ -84,8 +84,8 @@ while limite <= 1000:
         break
     for i, e in ins.items():
         while e[0] != '0':
-            ccl_mep( ccl48(e[0]).precio_BI(),ccl48(e[2]).precio_OF(),mep48(e[2]).precio_BI(),mep48(e[0]).precio_OF())
-            
+
+            ccl_mep( ccl48(e[0]).precio_BI(),ccl48(e[2]).precio_OF(),mep48(e[2]).precio_BI(),mep48(e[0]).precio_OF())           
             if comproMEP > e[1]:
 
                 if ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000 and mep48(e[0]).precio_BI() != 1000 and mep48(e[2]).precio_OF() != 1000:
@@ -108,8 +108,8 @@ while limite <= 1000:
             else:
                 print(f'Sin ratios CCL/MEP {e[0]}/{e[2]} ',time.strftime("%H:%M:%S")),time.sleep(0)
 
-                mep_ccl(mep48(e[0]).precio_BI(),mep48(e[2]).precio_OF(),ccl48(e[2]).precio_BI(),ccl48(e[0]).precio_OF())
 
+                mep_ccl(mep48(e[0]).precio_BI(),mep48(e[2]).precio_OF(),ccl48(e[2]).precio_BI(),ccl48(e[0]).precio_OF())
             if comproCCL > e[1]:
 
                 if mep48(e[0]).precio_BI() != 1000 and mep48(e[2]).precio_OF() != 1000 and ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000:
@@ -132,10 +132,9 @@ while limite <= 1000:
                     print('No hay precios MEP/CCL ',time.strftime("%H:%M:%S"))
             else:
                 print(f'Sin ratios MEP/CCL {e[0]}/{e[2]} ',time.strftime("%H:%M:%S")),time.sleep(0)
-
-                ccl_pes(ccl48(e[0]).precio_BI(),ccl48(e[2]).precio_OF(),pes48(e[2]).precio_BI(),pes48(e[0]).precio_OF())
                 
 
+                ccl_pes(ccl48(e[0]).precio_BI(),ccl48(e[2]).precio_OF(),pes48(e[2]).precio_BI(),pes48(e[0]).precio_OF())
             if comproPES > e[1]:
 
                 if ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000 and pes48(e[0]).precio_BI() != 1000 and pes48(e[2]).precio_OF() != 1000:

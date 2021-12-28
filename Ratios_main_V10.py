@@ -32,7 +32,7 @@ call = {
         '2': ['190',2, 26.55,'210',3, 15.65],
         '3': ['195', 2,  21.55,'210',  3,  14],
         '4': ['200', 2,  21.65,'220',  3,  12.2],
-        '5': ['250', 2,  4.5,'270',  3,  2.55]
+        '5': ['0', 2,  4.5,'0',  3,  2.55]
         }
 while True:
     if time.strftime("%H:%M:%S") >= '17:00:10':
@@ -46,7 +46,7 @@ while True:
                 ((strikeCall(e[0]).precio_BI() * e[1] * 100 * (1 - costos)) - (e[2] * e[1] * 100) * (1 + costos)) -
                 ((strikeCall(e[3]).precio_OF() * e[4] * 100 * (1 + costos)) - (e[5] * e[4] * 100)) * (1 - costos),2)
             
-            if ratioActual > ratioEntrada * (1 + 0.05) and saldo > 10:
+            if ratioActual > ratioEntrada * (1 + 0.1) and saldo > 50:
 
                 if strikeCall(e[0]).precio_BI() != 1000 != strikeCall(e[3]).precio_OF():
 
