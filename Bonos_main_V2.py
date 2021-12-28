@@ -140,16 +140,16 @@ while limite <= 1000:
 
                 if ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000 and pes48(e[0]).precio_BI() != 1000 and pes48(e[2]).precio_OF() != 1000:
 
-                    if ccl48(e[0]).cantidad_BI() > e[1] and ccl48(e[2]).cantidad_OF() >= comproMEP and pes48(e[2]).cantidad_BI() >= comproMEP and pes48(e[0]).cantidad_OF() >= comproCCL:
+                    if ccl48(e[0]).cantidad_BI() > e[1] and ccl48(e[2]).cantidad_OF() >= comproCCL and pes48(e[2]).cantidad_BI() >= comproCCL and pes48(e[0]).cantidad_OF() >= comproPES:
 
                         #vender(ccl48(e[0]),e[1],ccl48(e[0]).precio_BI())
                         #comprar(ccl48(e[2]),comproMEP,ccl48(e[2]).precio_OF())
                         #vender(pes48(e[2]),comproMEP,pes48(e[2]).precio_BI())
                         #comprar(pes48(e[0]),comproCCL,pes48(e[0]).precio_OF())
 
-                        gana += comproCCL - e[1]
+                        gana += comproPES - e[1]
                         limite -= e[1]
-                        print(f'Gana {comproCCL - e[1]} bonos')
+                        print(f'Gana {comproPES - e[1]} bonos')
                         break
                     else:
                         print('Sin compradores/vendedores CCL/PES',time.strftime("%H:%M:%S"))
