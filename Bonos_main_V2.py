@@ -49,14 +49,34 @@ def mep_ccl(t1,t2,t3,t4):
     print(f'bonos:{comproMEP}',end=" / ")
     print(f'venCCL:{vendoCCL}',end=" / ")
     print(f'bonos:{comproCCL}',end=" / ") 
+def ccl_pes(t1,t2,t3,t4):
+    global vendoCCL,comproCCL,vendoPES,comproPES
+    vendoCCL = round(((t1/100) * (1 - costos)) * ins['1'][1],2)
+    comproCCL = round(vendoCCL / (t2/100),0)
+    vendoPES = round(comproCCL * ((t3/100)* (1-costos)),2)
+    comproPES = round(vendoPES // (t4/100),0)
+    print(f'venCCL:{vendoCCL}',end=" / ")
+    print(f'bonos:{comproCCL}',end=" / ")
+    print(f'venPES:{vendoPES}',end=" / ")
+    print(f'bonos:{comproPES}',end=" / ")
+def mep_pes(t1,t2,t3,t4):
+    global vendoPES,comproPES,vendoMEP,comproMEP
+    vendoMEP = round(((t1/100) * (1 - costos)) * ins['1'][1],2)
+    comproMEP = round(vendoMEP / (t2/100),0)
+    vendoPES = round(comproMEP * ((t3/100)* (1-costos)),2)
+    comproPES = round(vendoPES // (t4/100),0)
+    print(f'venMEP:{vendoMEP}',end=" / ")
+    print(f'bonos:{comproMEP}',end=" / ")
+    print(f'venPES:{vendoPES}',end=" / ")
+    print(f'bonos:{comproPES}',end=" / ") 
 
 costos = 0.0052
 limite = 1000
 gana = 0
 
 ins = {
-    '1':['al30',100,'gd30'],'2':['al30',100,'gd35'],'3':['al30',100,'al35'],
-    '4':['gd30',100,'al30'],'5':['gd30',100,'gd35'],'6':['gd30',100,'al35'] }
+    '1':['al30',100,'gd30'],'2':['0',100,'gd35'],'3':['0',100,'al35'],
+    '4':['gd30',100,'al30'],'5':['0',100,'gd35'],'6':['0',100,'al35'] }
 
 while limite <= 1000:
     if time.strftime("%H:%M:%S") >= '17:00:10':
@@ -85,7 +105,6 @@ while limite <= 1000:
                         break
                 else:
                     print('No hay precios CCL/MEP',time.strftime("%H:%M:%S"))
-                    break
             else:
                 print(f'Sin ratios CCL/MEP {e[0]}/{e[2]} ',time.strftime("%H:%M:%S")),time.sleep(0)
 
@@ -111,7 +130,33 @@ while limite <= 1000:
                         break
                 else:
                     print('No hay precios MEP/CCL ',time.strftime("%H:%M:%S"))
-                    break
             else:
                 print(f'Sin ratios MEP/CCL {e[0]}/{e[2]} ',time.strftime("%H:%M:%S")),time.sleep(0)
+
+                ccl_pes(ccl48(e[0]).precio_BI(),ccl48(e[2]).precio_OF(),pes48(e[2]).precio_BI(),pes48(e[0]).precio_OF())
+                
+
+            if comproPES > e[1]:
+
+                if ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000 and pes48(e[0]).precio_BI() != 1000 and pes48(e[2]).precio_OF() != 1000:
+
+                    if ccl48(e[0]).cantidad_BI() > e[1] and ccl48(e[2]).cantidad_OF() >= comproMEP and pes48(e[2]).cantidad_BI() >= comproMEP and pes48(e[0]).cantidad_OF() >= comproCCL:
+
+                        #vender(ccl48(e[0]),e[1],ccl48(e[0]).precio_BI())
+                        #comprar(ccl48(e[2]),comproMEP,ccl48(e[2]).precio_OF())
+                        #vender(pes48(e[2]),comproMEP,pes48(e[2]).precio_BI())
+                        #comprar(pes48(e[0]),comproCCL,pes48(e[0]).precio_OF())
+
+                        gana += comproCCL - e[1]
+                        limite -= e[1]
+                        print(f'Gana {comproCCL - e[1]} bonos')
+                        break
+                    else:
+                        print('Sin compradores/vendedores CCL/PES',time.strftime("%H:%M:%S"))
+                        break
+                else:
+                    print('No hay precios CCL/PES ',time.strftime("%H:%M:%S"))
+                    break
+            else:
+                print(f'Sin ratios CCL/PES {e[0]}/{e[2]} ',time.strftime("%H:%M:%S")),time.sleep(0)
                 break
