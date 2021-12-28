@@ -79,7 +79,7 @@ ins = {
     '4':['gd30',100,'al30'],'5':['0',100,'gd35'],'6':['0',100,'al35'] }
 
 while True:
-    if time.strftime("%H:%M:%S") >= '17:00:10' or limite == 0:
+    if time.strftime("%H:%M:%S") >= '17:00:10' or limite > 0:
         print('...................... MERCADO CERRADO 17HS .......................')
         break
     for i, e in ins.items():
@@ -87,7 +87,7 @@ while True:
 
             ccl_mep( ccl48(e[0]).precio_BI(),ccl48(e[2]).precio_OF(),mep48(e[2]).precio_BI(),mep48(e[0]).precio_OF()) 
                       
-            if comproMEP > e[1]:
+            if comproMEP > e[1] and limite > 0:
 
                 if ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000 and mep48(e[0]).precio_BI() != 1000 and mep48(e[2]).precio_OF() != 1000:
 
@@ -102,16 +102,15 @@ while True:
                         limite -= e[1]
                         print(f'Limite:{limite}, Gana:{comproMEP - e[1]}, Total:{gana}')
                     else:
-                        print('Sin compradores/vendedores CCL/MEP')
+                        print(f'Sin compradores/vendedores {e[0]}.ccl / {e[2]}.mep')
                 else:
-                    print('No hay precios CCL/MEP')
+                    print(f'No hay precios {e[0]}.ccl / {e[2]}.mep')
             else:
-                print(f'Sin ratios {e[0]}.ccl / {e[2]}.mep ')
-
+                print(f'Sin ratios {e[0]}.ccl / {e[2]}.mep')
 
                 mep_ccl(mep48(e[0]).precio_BI(),mep48(e[2]).precio_OF(),ccl48(e[2]).precio_BI(),ccl48(e[0]).precio_OF())
 
-            if comproCCL > e[1]:
+            if comproCCL > e[1] and limite > 0:
 
                 if mep48(e[0]).precio_BI() != 1000 and mep48(e[2]).precio_OF() != 1000 and ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000:
 
@@ -126,15 +125,15 @@ while True:
                         limite -= e[1]
                         print(f'Limite:{limite}, Gana:{comproCCL - e[1]}, Total:{gana}')
                     else:
-                        print('Sin compradores/vendedores MEP/CCL')
+                        print(f'Sin compradores/vendedores {e[0]}.mep / {e[2]}.ccl')
                 else:
-                    print('No hay precios MEP/CCL ')
+                    print(f'No hay precios {e[0]}.mep / {e[2]}.ccl')
             else:
-                print(f'Sin ratios {e[0]}.mep / {e[2]}.ccl ')
+                print(f'Sin ratios {e[0]}.mep / {e[2]}.ccl')
 
                 ccl_pes(ccl48(e[0]).precio_BI(),ccl48(e[2]).precio_OF(),pes48(e[2]).precio_BI(),pes48(e[0]).precio_OF())
 
-            if comproPES > e[1]:
+            if comproPES > e[1] and limite > 0:
 
                 if ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000 and pes48(e[0]).precio_BI() != 1000 and pes48(e[2]).precio_OF() != 1000:
 
@@ -149,15 +148,15 @@ while True:
                         limite -= e[1]
                         print(f'Limite:{limite}, Gana:{comproPES - e[1]}, Total:{gana}')
                     else:
-                        print('Sin compradores/vendedores CCL/PES')
+                        print(f'Sin compradores/vendedores {e[0]}.ccl / {e[2]}.pesos')
                 else:
-                    print('No hay precios CCL/PES ')
+                    print(f'No hay precios {e[0]}.ccl / {e[2]}.pesos')
             else:
-                print(f'Sin ratios {e[0]}.ccl / {e[2]}.peso ')
+                print(f'Sin ratios {e[0]}.ccl / {e[2]}.pesos')
                 
                 mep_pes(mep48(e[0]).precio_BI(),mep48(e[2]).precio_OF(),pes48(e[2]).precio_BI(),pes48(e[0]).precio_OF())
 
-            if comproPES > e[1]:
+            if comproPES > e[1] and limite > 0:
 
                 if mep48(e[0]).precio_BI() != 1000 and mep48(e[2]).precio_OF() != 1000 and pes48(e[0]).precio_BI() != 1000 and pes48(e[2]).precio_OF() != 1000:
 
@@ -173,11 +172,11 @@ while True:
                         print(f'Limite:{limite}, Gana:{comproPES - e[1]}, Total:{gana}')
                         break
                     else:
-                        print('Sin compradores/vendedores CCL/PES')
+                        print(f'Sin compradores/vendedores {e[0]}.ccl / {e[2]}.pesos')
                         break
                 else:
-                    print('No hay precios CCL/PES ')
+                    print(f'No hay precios {e[0]}.ccl / {e[2]}.pesos')
                     break
             else:
-                print(f'Sin ratios {e[0]}.ccl / {e[2]}.peso ')
+                print(f'Sin ratios {e[0]}.ccl / {e[2]}.pesos')
                 break
