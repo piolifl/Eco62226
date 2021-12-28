@@ -35,40 +35,40 @@ def ccl_mep(t1,t2,t3,t4):
     comproCCL = round(vendoCCL / (t2/100),0)
     vendoMEP = round(comproCCL * ((t3/100)* (1-costos)),2)
     comproMEP = round(vendoMEP // (t4/100),0)
-    print(f'venCCL:{vendoCCL}',end=" / ")
-    print(f'bonos:{comproCCL}',end=" / ")
-    print(f'venMEP:{vendoMEP}',end=" / ")
-    print(f'bonos:{comproMEP}',end=" / ")   
+    print(f'venCCL:{vendoCCL}',end="    / ")
+    print(f'bonos: {comproCCL}',end="   / ")
+    print(f'venMEP:{vendoMEP}',end="    / ")
+    print(f'bonos:{comproMEP}',end="    / ")   
 def mep_ccl(t1,t2,t3,t4):
     global vendoCCL,comproCCL,vendoMEP,comproMEP
     vendoMEP = round(((t1/100) * (1 - costos)) * ins['1'][1],2)
     comproMEP = round(vendoMEP / (t2/100),0)
     vendoCCL = round(comproMEP * ((t3/100)* (1-costos)),2)
     comproCCL = round(vendoCCL // (t4/100),0)
-    print(f'venMEP:{vendoMEP}',end=" / ")
-    print(f'bonos:{comproMEP}',end=" / ")
-    print(f'venCCL:{vendoCCL}',end=" / ")
-    print(f'bonos:{comproCCL}',end=" / ") 
+    print(f'venMEP:{vendoMEP}',end="    / ")
+    print(f'bonos:{comproMEP}',end="    / ")
+    print(f'venCCL:{vendoCCL}',end="    / ")
+    print(f'bonos:{comproCCL}',end="    / ") 
 def ccl_pes(t1,t2,t3,t4):
     global vendoCCL,comproCCL,vendoPES,comproPES
     vendoCCL = round(((t1/100) * (1 - costos)) * ins['1'][1],2)
     comproCCL = round(vendoCCL / (t2/100),0)
     vendoPES = round(comproCCL * ((t3/100)* (1-costos)),2)
     comproPES = round(vendoPES // (t4/100),0)
-    print(f'venCCL:{vendoCCL}',end=" / ")
-    print(f'bonos:{comproCCL}',end=" / ")
-    print(f'venPES:{vendoPES}',end=" / ")
-    print(f'bonos:{comproPES}',end=" / ")
+    print(f'venCCL:{vendoCCL}',end="    / ")
+    print(f'bonos:{comproCCL}',end="    / ")
+    print(f'venPES:{vendoPES}',end="    / ")
+    print(f'bonos:{comproPES}',end="    / ")
 def mep_pes(t1,t2,t3,t4):
     global vendoPES,comproPES,vendoMEP,comproMEP
     vendoMEP = round(((t1/100) * (1 - costos)) * ins['1'][1],2)
     comproMEP = round(vendoMEP / (t2/100),0)
     vendoPES = round(comproMEP * ((t3/100)* (1-costos)),2)
     comproPES = round(vendoPES // (t4/100),0)
-    print(f'venMEP:{vendoMEP}',end=" / ")
-    print(f'bonos:{comproMEP}',end=" / ")
-    print(f'venPES:{vendoPES}',end=" / ")
-    print(f'bonos:{comproPES}',end=" / ") 
+    print(f'venMEP:{vendoMEP}',end="    / ")
+    print(f'bonos:{comproMEP}',end="    / ")
+    print(f'venPES:{vendoPES}',end="    / ")
+    print(f'bonos:{comproPES}',end="    / ") 
 
 costos = 0.0052
 limite = 1000
@@ -106,7 +106,7 @@ while limite <= 1000:
                 else:
                     print('No hay precios CCL/MEP',time.strftime("%H:%M:%S"))
             else:
-                print(f'Sin ratios CCL/MEP {e[0]}/{e[2]} ',time.strftime("%H:%M:%S")),time.sleep(0)
+                print(f'Sin ratios {e[0]}.ccl / {e[2]}.mep ',time.strftime("%H:%M:%S")),time.sleep(0)
 
 
                 mep_ccl(mep48(e[0]).precio_BI(),mep48(e[2]).precio_OF(),ccl48(e[2]).precio_BI(),ccl48(e[0]).precio_OF())
@@ -131,8 +131,8 @@ while limite <= 1000:
                 else:
                     print('No hay precios MEP/CCL ',time.strftime("%H:%M:%S"))
             else:
-                print(f'Sin ratios MEP/CCL {e[0]}/{e[2]} ',time.strftime("%H:%M:%S")),time.sleep(0)
-                
+                print(f'Sin ratios {e[0]}.mep / {e[2]}.ccl ',time.strftime("%H:%M:%S")),time.sleep(0)
+
 
                 ccl_pes(ccl48(e[0]).precio_BI(),ccl48(e[2]).precio_OF(),pes48(e[2]).precio_BI(),pes48(e[0]).precio_OF())
             if comproPES > e[1]:
@@ -157,5 +157,5 @@ while limite <= 1000:
                     print('No hay precios CCL/PES ',time.strftime("%H:%M:%S"))
                     break
             else:
-                print(f'Sin ratios CCL/PES {e[0]}/{e[2]} ',time.strftime("%H:%M:%S")),time.sleep(0)
+                print(f'Sin ratios {e[0]}.ccl / {e[2]}.peso ',time.strftime("%H:%M:%S")),time.sleep(0)
                 break
