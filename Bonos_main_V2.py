@@ -78,105 +78,115 @@ ins = {
     '1':['al30',100,'gd30'],'2':['0',100,'gd35'],'3':['0',100,'al35'],
     '4':['gd30',100,'al30'],'5':['0',100,'gd35'],'6':['0',100,'al35'] }
 
-while True:
-    if time.strftime("%H:%M:%S") >= '17:00:10' and limite > 0:
+while limite >0:
+    if time.strftime("%H:%M:%S") >= '17:00:10':
         print('...................... MERCADO CERRADO 17HS .......................')
         break
     for i, e in ins.items():
         while e[0] != '0':
 
             ccl_mep( ccl48(e[0]).precio_BI(),ccl48(e[2]).precio_OF(),mep48(e[2]).precio_BI(),mep48(e[0]).precio_OF()) 
-                      
-            if comproMEP > e[1] and limite > 0:
 
-                if ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000 and mep48(e[0]).precio_BI() != 1000 and mep48(e[2]).precio_OF() != 1000:
+            if limite >0:
+                if comproMEP > e[1]:
+                    if ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000 and mep48(e[0]).precio_BI() != 1000 and mep48(e[2]).precio_OF() != 1000:
 
-                    if ccl48(e[0]).cantidad_BI() > e[1] and ccl48(e[2]).cantidad_OF() >= comproCCL and mep48(e[2]).cantidad_BI() >= comproCCL and mep48(e[0]).cantidad_OF() >= comproMEP:
+                        if ccl48(e[0]).cantidad_BI() > e[1] and ccl48(e[2]).cantidad_OF() >= comproCCL and mep48(e[2]).cantidad_BI() >= comproCCL and mep48(e[0]).cantidad_OF() >= comproMEP:
 
-                        #vender(ccl48(e[0]),e[1],ccl48(e[0]).precio_BI())
-                        #comprar(ccl48(e[2]),comproCCL,ccl48(e[2]).precio_OF())
-                        #vender(mep48(e[2]),comproCCL,mep48(e[2]).precio_BI())
-                        #comprar(mep48(e[0]),comproMEP,mep48(e[0]).precio_OF())
+                            #vender(ccl48(e[0]),e[1],ccl48(e[0]).precio_BI())
+                            #comprar(ccl48(e[2]),comproCCL,ccl48(e[2]).precio_OF())
+                            #vender(mep48(e[2]),comproCCL,mep48(e[2]).precio_BI())
+                            #comprar(mep48(e[0]),comproMEP,mep48(e[0]).precio_OF())
 
-                        gana += comproMEP - e[1]
-                        limite -= e[1]
-                        print(f'Limite:{limite}, Gana:{comproMEP - e[1]}, Total:{gana}')
+                            gana += comproMEP - e[1]
+                            limite -= e[1]
+                            print(f'Limite:{limite}, Gana:{comproMEP - e[1]}, Total:{gana}')
+                        else:
+                            print(f'Sin compradores/vendedores {e[0]}.ccl / {e[2]}.mep')
                     else:
-                        print(f'Sin compradores/vendedores {e[0]}.ccl / {e[2]}.mep')
+                        print(f'No hay precios {e[0]}.ccl / {e[2]}.mep')
                 else:
-                    print(f'No hay precios {e[0]}.ccl / {e[2]}.mep')
+                    print(f'Sin ratios {e[0]}.ccl / {e[2]}.mep')
             else:
-                print(f'Sin ratios {e[0]}.ccl / {e[2]}.mep')
-
-                mep_ccl(mep48(e[0]).precio_BI(),mep48(e[2]).precio_OF(),ccl48(e[2]).precio_BI(),ccl48(e[0]).precio_OF())
-
-            if comproCCL > e[1] and limite > 0:
-
-                if mep48(e[0]).precio_BI() != 1000 and mep48(e[2]).precio_OF() != 1000 and ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000:
-
-                    if mep48(e[0]).cantidad_BI() > e[1] and mep48(e[2]).cantidad_OF() >= comproMEP and ccl48(e[2]).cantidad_BI() >= comproMEP and ccl48(e[0]).cantidad_OF() >= comproCCL:
-
-                        #vender(mep48(e[0]),e[1],mep48(e[0]).precio_BI())
-                        #comprar(mep48(e[2]),comproMEP,mep48(e[2]).precio_OF())
-                        #vender(ccl48(e[2]),comproMEP,ccl48(e[2]).precio_BI())
-                        #comprar(ccl48(e[0]),comproCCL,ccl48(e[0]).precio_OF())
-
-                        gana += comproCCL - e[1]
-                        limite -= e[1]
-                        print(f'Limite:{limite}, Gana:{comproCCL - e[1]}, Total:{gana}')
-                    else:
-                        print(f'Sin compradores/vendedores {e[0]}.mep / {e[2]}.ccl')
-                else:
-                    print(f'No hay precios {e[0]}.mep / {e[2]}.ccl')
-            else:
-                print(f'Sin ratios {e[0]}.mep / {e[2]}.ccl')
-
-                ccl_pes(ccl48(e[0]).precio_BI(),ccl48(e[2]).precio_OF(),pes48(e[2]).precio_BI(),pes48(e[0]).precio_OF())
-
-            if comproPES > e[1] and limite > 0:
-
-                if ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000 and pes48(e[0]).precio_BI() != 1000 and pes48(e[2]).precio_OF() != 1000:
-
-                    if ccl48(e[0]).cantidad_BI() > e[1] and ccl48(e[2]).cantidad_OF() >= comproCCL and pes48(e[2]).cantidad_BI() >= comproCCL and pes48(e[0]).cantidad_OF() >= comproPES:
-
-                        #vender(ccl48(e[0]),e[1],ccl48(e[0]).precio_BI())
-                        #comprar(ccl48(e[2]),comproCCL,ccl48(e[2]).precio_OF())
-                        #vender(pes48(e[2]),comproCCL,pes48(e[2]).precio_BI())
-                        #comprar(pes48(e[0]),comproPES,pes48(e[0]).precio_OF())
-
-                        gana += comproPES - e[1]
-                        limite -= e[1]
-                        print(f'Limite:{limite}, Gana:{comproPES - e[1]}, Total:{gana}')
-                    else:
-                        print(f'Sin compradores/vendedores {e[0]}.ccl / {e[2]}.pesos')
-                else:
-                    print(f'No hay precios {e[0]}.ccl / {e[2]}.pesos')
-            else:
-                print(f'Sin ratios {e[0]}.ccl / {e[2]}.pesos')
-                
-                mep_pes(mep48(e[0]).precio_BI(),mep48(e[2]).precio_OF(),pes48(e[2]).precio_BI(),pes48(e[0]).precio_OF())
-
-            if comproPES > e[1] and limite > 0:
-
-                if mep48(e[0]).precio_BI() != 1000 and mep48(e[2]).precio_OF() != 1000 and pes48(e[0]).precio_BI() != 1000 and pes48(e[2]).precio_OF() != 1000:
-
-                    if mep48(e[0]).cantidad_BI() > e[1] and mep48(e[2]).cantidad_OF() >= comproCCL and pes48(e[2]).cantidad_BI() >= comproCCL and pes48(e[0]).cantidad_OF() >= comproPES:
-
-                        #vender(mep48(e[0]),e[1],mep48(e[0]).precio_BI())
-                        #comprar(mep48(e[2]),comproMEP,mep48(e[2]).precio_OF())
-                        #vender(pes48(e[2]),comproMEP,pes48(e[2]).precio_BI())
-                        #comprar(pes48(e[0]),comproPES,pes48(e[0]).precio_OF())
-
-                        gana += comproPES - e[1]
-                        limite -= e[1]
-                        print(f'Limite:{limite}, Gana:{comproPES - e[1]}, Total:{gana}')
-                        break
-                    else:
-                        print(f'Sin compradores/vendedores {e[0]}.ccl / {e[2]}.pesos')
-                        break
-                else:
-                    print(f'No hay precios {e[0]}.ccl / {e[2]}.pesos')
-                    break
-            else:
-                print(f'Sin ratios {e[0]}.ccl / {e[2]}.pesos')
+                print(f'Limite de {limite} agotado !')
                 break
+
+            mep_ccl(mep48(e[0]).precio_BI(),mep48(e[2]).precio_OF(),ccl48(e[2]).precio_BI(),ccl48(e[0]).precio_OF())
+
+            if limite > 0:
+                if comproCCL > e[1]:
+                    if mep48(e[0]).precio_BI() != 1000 and mep48(e[2]).precio_OF() != 1000 and ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000:
+                        if mep48(e[0]).cantidad_BI() > e[1] and mep48(e[2]).cantidad_OF() >= comproMEP and ccl48(e[2]).cantidad_BI() >= comproMEP and ccl48(e[0]).cantidad_OF() >= comproCCL:
+
+                            #vender(mep48(e[0]),e[1],mep48(e[0]).precio_BI())
+                            #comprar(mep48(e[2]),comproMEP,mep48(e[2]).precio_OF())
+                            #vender(ccl48(e[2]),comproMEP,ccl48(e[2]).precio_BI())
+                            #comprar(ccl48(e[0]),comproCCL,ccl48(e[0]).precio_OF())
+
+                            gana += comproCCL - e[1]
+                            limite -= e[1]
+                            print(f'Limite:{limite}, Gana:{comproCCL - e[1]}, Total:{gana}')
+                        else:
+                            print(f'Sin compradores/vendedores {e[0]}.mep / {e[2]}.ccl')
+                    else:
+                        print(f'No hay precios {e[0]}.mep / {e[2]}.ccl')
+                else:
+                    print(f'Sin ratios {e[0]}.mep / {e[2]}.ccl')
+            else:
+                print(f'Limite de {limite} agotado !')
+                break
+
+            ccl_pes(ccl48(e[0]).precio_BI(),ccl48(e[2]).precio_OF(),pes48(e[2]).precio_BI(),pes48(e[0]).precio_OF())
+
+            if limite >0:
+                if comproPES > e[1]:
+                    if ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000 and pes48(e[0]).precio_BI() != 1000 and pes48(e[2]).precio_OF() != 1000:
+
+                        if ccl48(e[0]).cantidad_BI() > e[1] and ccl48(e[2]).cantidad_OF() >= comproCCL and pes48(e[2]).cantidad_BI() >= comproCCL and pes48(e[0]).cantidad_OF() >= comproPES:
+
+                            #vender(ccl48(e[0]),e[1],ccl48(e[0]).precio_BI())
+                            #comprar(ccl48(e[2]),comproCCL,ccl48(e[2]).precio_OF())
+                            #vender(pes48(e[2]),comproCCL,pes48(e[2]).precio_BI())
+                            #comprar(pes48(e[0]),comproPES,pes48(e[0]).precio_OF())
+
+                            gana += comproPES - e[1]
+                            limite -= e[1]
+                            print(f'Limite:{limite}, Gana:{comproPES - e[1]}, Total:{gana}')
+                        else:
+                            print(f'Sin compradores/vendedores {e[0]}.ccl / {e[2]}.pesos')
+                    else:
+                        print(f'No hay precios {e[0]}.ccl / {e[2]}.pesos')
+                else:
+                    print(f'Sin ratios {e[0]}.ccl / {e[2]}.pesos')
+            else:
+                print(f'Limite de {limite} agotado !')
+                break
+                    
+
+            mep_pes(mep48(e[0]).precio_BI(),mep48(e[2]).precio_OF(),pes48(e[2]).precio_BI(),pes48(e[0]).precio_OF())
+
+            if limite > 0:
+                if comproPES > e[1]:
+                    if mep48(e[0]).precio_BI() != 1000 and mep48(e[2]).precio_OF() != 1000 and pes48(e[0]).precio_BI() != 1000 and pes48(e[2]).precio_OF() != 1000:
+
+                        if mep48(e[0]).cantidad_BI() > e[1] and mep48(e[2]).cantidad_OF() >= comproCCL and pes48(e[2]).cantidad_BI() >= comproCCL and pes48(e[0]).cantidad_OF() >= comproPES:
+
+                            #vender(mep48(e[0]),e[1],mep48(e[0]).precio_BI())
+                            #comprar(mep48(e[2]),comproMEP,mep48(e[2]).precio_OF())
+                            #vender(pes48(e[2]),comproMEP,pes48(e[2]).precio_BI())
+                            #comprar(pes48(e[0]),comproPES,pes48(e[0]).precio_OF())
+
+                            gana += comproPES - e[1]
+                            limite -= e[1]
+                            print(f'Limite:{limite}, Gana:{comproPES - e[1]}, Total:{gana}')
+                            
+                        else:
+                            print(f'Sin compradores/vendedores {e[0]}.ccl / {e[2]}.pesos')
+                    else:
+                        print(f'No hay precios {e[0]}.ccl / {e[2]}.pesos')
+                else:
+                    print(f'Sin ratios {e[0]}.ccl / {e[2]}.pesos')
+            else:
+                print(f'Limite de {limite} agotado !')
+                break
+                    
