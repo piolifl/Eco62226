@@ -46,7 +46,7 @@ while True:
                 ((strikeCall(e[0]).precio_BI() * e[1] * 100 * (1 - costos)) - (e[2] * e[1] * 100) * (1 + costos)) -
                 ((strikeCall(e[3]).precio_OF() * e[4] * 100 * (1 + costos)) - (e[5] * e[4] * 100)) * (1 - costos),2)
             
-            if ratioActual > ratioEntrada * (1 + 0.1) and saldo > 50:
+            if ratioActual > ratioEntrada * (1 + 0.1) and saldo > 100:
 
                 if strikeCall(e[0]).precio_BI() != 1000 != strikeCall(e[3]).precio_OF():
 

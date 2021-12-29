@@ -204,6 +204,8 @@ while limite >0:
             else:
                 print(f'CI cerrado {e[0]}.mep / {e[2]}.ccl ... continua largo')
 
+
+
             ccl_pes(ccl48(e[0]).precio_BI(),ccl48(e[2]).precio_OF(),pes48(e[2]).precio_BI(),pes48(e[0]).precio_OF())
 
             if limite >0:
