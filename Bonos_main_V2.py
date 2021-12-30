@@ -51,7 +51,7 @@ def ccl_mep(t1,t2,t3,t4):
     print(time.strftime("%H:%M:%S"), f'CCL:{vendoCCL}',end="  ")
     print(f'bon:{comproCCL}',end="  ")
     print(f'MEP:{vendoMEP}',end="  ")
-    print(f'bon:{comproMEP}',end="  ")   
+    print(f'bon:{comproMEP}',end="____")   
 def mep_ccl(t1,t2,t3,t4):
     global vendoCCL,comproCCL,vendoMEP,comproMEP
     vendoMEP = round(((t1/100) * (1 - costos)) * ins['1'][1],2)
@@ -61,7 +61,7 @@ def mep_ccl(t1,t2,t3,t4):
     print(time.strftime("%H:%M:%S"), f'MEP:{vendoMEP}',end="  ")
     print(f'bon:{comproMEP}',end="  ")
     print(f'CCL:{vendoCCL}',end="  ")
-    print(f'bon:{comproCCL}',end="  ") 
+    print(f'bon:{comproCCL}',end="____") 
 def ccl_pes(t1,t2,t3,t4):
     global vendoCCL,comproCCL,vendoPES,comproPES
     vendoCCL = round(((t1/100) * (1 - costos)) * ins['1'][1],2)
@@ -71,7 +71,7 @@ def ccl_pes(t1,t2,t3,t4):
     print(time.strftime("%H:%M:%S"), f'CCL:{vendoCCL}',end="  ")
     print(f'bon:{comproCCL}',end="  ")
     print(f'PES:{vendoPES}',end="  ")
-    print(f'bon:{comproPES}',end="  ")
+    print(f'bon:{comproPES}',end="____")
 def mep_pes(t1,t2,t3,t4):
     global vendoPES,comproPES,vendoMEP,comproMEP
     vendoMEP = round(((t1/100) * (1 - costos)) * ins['1'][1],2)
@@ -81,10 +81,10 @@ def mep_pes(t1,t2,t3,t4):
     print(time.strftime("%H:%M:%S"), f'MEP:{vendoMEP}',end="  ")
     print(f'bon:{comproMEP}',end="  ")
     print(f'PES:{vendoPES}',end="  ")
-    print(f'bon:{comproPES}',end="  ") 
+    print(f'bon:{comproPES}',end="____") 
 
 costos = 0.0052
-limite = 400
+limite = 1000
 gana = 0
 
 ins = {
@@ -117,9 +117,9 @@ while limite >0:
                         else:
                             print(f'Sin compradores/vendedores {e[0]}.ccl / {e[2]}.mep')
                     else:
-                        print(f'No hay precios {e[0]}.ccl / {e[2]}.mep')
+                        print(f'Sin precios 48hs // {e[0]}.ccl - {e[2]}.mep')
                 else:
-                    print(f'Sin ratios {e[0]}.ccl / {e[2]}.mep')
+                    print(f'NO en 48hs // {e[0]}.ccl - {e[2]}.mep')
             else:
                 print(f'Limite de {limite} agotado !')
                 break
@@ -143,9 +143,9 @@ while limite >0:
                             else:
                                 print(f'Sin compradores/vendedores {e[0]}.ccl / {e[2]}.mep')
                         else:
-                            print(f'No hay precios {e[0]}.ccl / {e[2]}.mep')
+                            print(f'Sin precios {e[0]}.ccl / {e[2]}.mep')
                     else:
-                        print(f'Sin ratios {e[0]}.ccl / {e[2]}.mep')
+                        print(f'NO en CI // {e[0]}.ccl - {e[2]}.mep')
                 else:
                     print(f'Limite de {limite} agotado !')
                     break
@@ -170,9 +170,9 @@ while limite >0:
                         else:
                             print(f'Sin compradores/vendedores {e[0]}.mep / {e[2]}.ccl')
                     else:
-                        print(f'No hay precios {e[0]}.mep / {e[2]}.ccl')
+                        print(f'Sin precios {e[0]}.mep / {e[2]}.ccl')
                 else:
-                    print(f'Sin ratios {e[0]}.mep / {e[2]}.ccl')
+                    print(f'NO 48hs // {e[0]}.mep - {e[2]}.ccl')
             else:
                 print(f'Limite de {limite} agotado !')
                 break
@@ -195,9 +195,9 @@ while limite >0:
                             else:
                                 print(f'Sin compradores/vendedores {e[0]}.mep / {e[2]}.ccl')
                         else:
-                            print(f'No hay precios {e[0]}.mep / {e[2]}.ccl')
+                            print(f'Sin precios 48hs // {e[0]}.mep - {e[2]}.ccl')
                     else:
-                        print(f'Sin ratios {e[0]}.mep / {e[2]}.ccl')
+                        print(f'NO en CI // {e[0]}.mep - {e[2]}.ccl')
                 else:
                     print(f'Limite de {limite} agotado !')
                     break
@@ -206,9 +206,11 @@ while limite >0:
 
 
 
-            ccl_pes(ccl48(e[0]).precio_BI(),ccl48(e[2]).precio_OF(),pes48(e[2]).precio_BI(),pes48(e[0]).precio_OF())
 
-            if limite >0:
+
+            '''ccl_pes(ccl48(e[0]).precio_BI(),ccl48(e[2]).precio_OF(),pes48(e[2]).precio_BI(),pes48(e[0]).precio_OF())
+
+            if limite > 0:
                 if comproPES > e[1]:
                     if ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000 and pes48(e[0]).precio_BI() != 1000 and pes48(e[2]).precio_OF() != 1000:
 
@@ -225,9 +227,9 @@ while limite >0:
                         else:
                             print(f'Sin compradores/vendedores {e[0]}.ccl / {e[2]}.pesos')
                     else:
-                        print(f'No hay precios {e[0]}.ccl / {e[2]}.pesos')
+                        print(f'Sin precios 48hs // {e[0]}.ccl - {e[2]}.pesos')
                 else:
-                    print(f'Sin ratios {e[0]}.ccl / {e[2]}.pesos')
+                    print(f'NO en 48hs // {e[0]}.ccl - {e[2]}.pesos')
             else:
                 print(f'Limite de {limite} agotado !')
                 break
@@ -253,10 +255,10 @@ while limite >0:
                         else:
                             print(f'Sin compradores/vendedores {e[0]}.ccl / {e[2]}.pesos')
                     else:
-                        print(f'No hay precios {e[0]}.ccl / {e[2]}.pesos')
+                        print(f'Sin precios 48hs // {e[0]}.ccl - {e[2]}.pesos')
                 else:
-                    print(f'Sin ratios {e[0]}.ccl / {e[2]}.pesos')
+                    print(f'NO en 48hs // {e[0]}.ccl - {e[2]}.pesos')
             else:
                 print(f'Limite de {limite} agotado !')
-                break
+                break'''
                     
