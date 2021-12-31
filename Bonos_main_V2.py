@@ -98,9 +98,8 @@ mep = round(0,4)
 peso = round(0,4)
 
 ins = {
-    '1':['al30',100,'gd30'],'2':['0',100,'gd35'],'3':['0',100,'al35'],
-    '4':['gd30',100,'al30'],'5':['0',100,'gd35'],'6':['0',100,'al35']}
-
+    '1':['al30',100,'gd30'],'2':['al30',100,'s31e2'],'3':['al30',100,'al35'],
+    '4':['0',100,'al30'],'5':['0',100,'gd35'],'6':['0',100,'al35']}
 
 while limite >0:
     if time.strftime("%H:%M:%S") >= '17:00:10':
@@ -117,15 +116,28 @@ while limite >0:
 
                             if cclCI(e[0]).cantidad_BI() > e[1] and cclCI(e[2]).cantidad_OF() >= comproCCL and mepCI(e[2]).cantidad_BI() >= comproCCL and mepCI(e[0]).cantidad_OF() >= comproMEP:
 
-                                #vender(cclCI(e[0]),e[1],cclCI(e[0]).precio_BI())
-                                #comprar(cclCI(e[2]),comproCCL,cclCI(e[2]).precio_OF())
-                                #vender(mepCI(e[2]),comproCCL,mepCI(e[2]).precio_BI())
-                                #comprar(mepCI(e[0]),comproMEP,mepCI(e[0]).precio_OF())
+                                if 's31e2' == e[2] == 's28f2' or 's31m2' == e[2] == 's29a2':
 
-                                gana += comproMEP - e[1]
-                                limite -= e[1]
-                                print(f'Total bonos:{gana}, total CCL: {saldoCCL}, total MEP {saldoMEP}')
-                                continue
+                                    #vender(cclCI(e[0]),e[1],cclCI(e[0]).precio_BI())                #BONO
+                                    #comprar(cclCI(e[2]),comproCCL,cclCI(e[2]).precio_OF()/100)      #LETRA
+                                    #vender(mepCI(e[2]),comproCCL,mepCI(e[2]).precio_BI()/100)       #LETRA
+                                    #comprar(mepCI(e[0]),comproMEP,mepCI(e[0]).precio_OF())          #BONO
+
+                                    gana += comproMEP - e[1]
+                                    limite -= e[1]
+                                    print(f'Total bonos:{gana}, total CCL: {saldoCCL}, total MEP {saldoMEP}')
+                                    continue
+
+                                else:
+                                    #vender(cclCI(e[0]),e[1],cclCI(e[0]).precio_BI())               #CCL
+                                    #comprar(cclCI(e[2]),comproCCL,cclCI(e[2]).precio_OF())         #CCL
+                                    #vender(mepCI(e[2]),comproCCL,mepCI(e[2]).precio_BI())          #MEP
+                                    #comprar(mepCI(e[0]),comproMEP,mepCI(e[0]).precio_OF())         #MEP
+
+                                    gana += comproMEP - e[1]
+                                    limite -= e[1]
+                                    print(f'Total bonos:{gana}, total CCL: {saldoCCL}, total MEP {saldoMEP}')
+                                    continue
                             else:
                                 print(f'Sin compradores/vendedores {e[0]}.ccl / {e[2]}.mep')
                         else:
@@ -135,10 +147,7 @@ while limite >0:
                 else:
                     print(f'Limite de {limite} agotado !')
                     break
-            else:
-                print(f'Corto cerrado {e[0]}.ccl / {e[2]}.mep')
 
-            if time.strftime("%H:%M:%S") <= '15:59:15':
                 if limite > 0:
                     mep_ccl(mepCI(e[0]).precio_BI(),mepCI(e[2]).precio_OF(),cclCI(e[2]).precio_BI(),cclCI(e[0]).precio_OF())
                     if comproCCL >= e[1]:
@@ -160,12 +169,11 @@ while limite >0:
                             print(f'Sin precios 48hs // {e[0]}.mep - {e[2]}.ccl')
                     else:
                         print(f'NO hay corto // {e[0]}.mep - {e[2]}.ccl __ LIM: {limite}')
-                        
                 else:
                     print(f'Limite de {limite} agotado !')
                     break
             else:
-                print(f'Corto cerrado {e[0]}.mep / {e[2]}.ccl ... continua largo')
+                print('Cierran cortos ... continuan solo largos')
             
             if limite > 0:
                 ccl_mep( ccl48(e[0]).precio_BI(),ccl48(e[2]).precio_OF(),mep48(e[2]).precio_BI(),mep48(e[0]).precio_OF())
@@ -216,8 +224,7 @@ while limite >0:
                         print(f'Sin precios {e[0]}.mep / {e[2]}.ccl')
                 else:
                     print(f'NO hay en largo // {e[0]}.mep - {e[2]}.ccl __ LIM: {limite}')
-                    if time.strftime("%H:%M:%S") >= '15:59:58':
-                        break
+                    break
             else:
                 print(f'Limite de {limite} agotado !')
                 break
