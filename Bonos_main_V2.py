@@ -41,7 +41,6 @@ def cclCI(bono):
         if tipo == bono:
             return valor
 
-
 def ccl_mep(t1,t2,t3,t4):
     global vendoCCL,comproCCL,vendoMEP,comproMEP,saldoCCL,saldoMEP
     vendoCCL = round(((t1/100) * (1 - costos)) * ins['1'][1],2)
@@ -100,7 +99,8 @@ peso = round(0,4)
 
 ins = {
     '1':['al30',100,'gd30'],'2':['0',100,'gd35'],'3':['0',100,'al35'],
-    '4':['gd30',100,'al30'],'5':['0',100,'gd35'],'6':['0',100,'al35'] }
+    '4':['gd30',100,'al30'],'5':['0',100,'gd35'],'6':['0',100,'al35']}
+
 
 while limite >0:
     if time.strftime("%H:%M:%S") >= '17:00:10':
@@ -160,7 +160,7 @@ while limite >0:
                             print(f'Sin precios 48hs // {e[0]}.mep - {e[2]}.ccl')
                     else:
                         print(f'NO hay corto // {e[0]}.mep - {e[2]}.ccl __ LIM: {limite}')
-                        break
+                        
                 else:
                     print(f'Limite de {limite} agotado !')
                     break

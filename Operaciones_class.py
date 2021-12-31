@@ -172,14 +172,39 @@ class GGAL(OPERACIONES):
 class YPFD(OPERACIONES):
     pass
 
+
 class AL30(OPERACIONES):
+    pass
+class AE38(OPERACIONES):
+    pass
+class AL29(OPERACIONES):
     pass
 class AL35(OPERACIONES):
     pass
+class AL41(OPERACIONES):
+    pass
+
+
 class GD30(OPERACIONES):
+    pass
+class GD29(OPERACIONES):
     pass
 class GD35(OPERACIONES):
     pass
+class GD38(OPERACIONES):
+    pass
+class GD41(OPERACIONES):
+    pass
+
+class S31E2(OPERACIONES):
+    pass
+class S28F2(OPERACIONES):
+    pass
+class S31M2(OPERACIONES):
+    pass
+class S29A2(OPERACIONES):
+    pass
+
 
 class KO(OPERACIONES):
     pass
@@ -286,33 +311,78 @@ ticker = {
         '48':{
             'peso':{
                 'al30':AL30('MERV - XMEV - AL30 - 48hs'),'gd30':GD30('MERV - XMEV - GD30 - 48hs'),
-                'al35':AL35('MERV - XMEV - AL35 - 48hs'),'gd35':GD35('MERV - XMEV - GD35 - 48hs')},
+                'al35':AL35('MERV - XMEV - AL35 - 48hs'),'gd35':GD35('MERV - XMEV - GD35 - 48hs'),
+                'ae38':AE38('MERV - XMEV - AE38 - 48hs'),'gd29':GD38('MERV - XMEV - GD38 - 48hs'),
+                'al29':AL29('MERV - XMEV - AL29 - 48hs'),'gd29':GD29('MERV - XMEV - GD29 - 48hs'),
+                'al41':AL41('MERV - XMEV - AL41 - 48hs'),'gd41':GD41('MERV - XMEV - GD41 - 48hs'),
+                's31e2':S31E2('MERV - XMEV - S31E2 - 48hs'),'s28f2':S28F2('MERV - XMEV - S28F2 - 48hs'),
+                's31m2':S31M2('MERV - XMEV - S31M2 - 48hs'),'s29a2':S29A2('MERV - XMEV - S29A2 - 48hs')},
             'mep':{
                 'al30':AL30('MERV - XMEV - AL30D - 48hs'),'gd30':GD30('MERV - XMEV - GD30D - 48hs'),
-                'al35':AL35('MERV - XMEV - AL35D - 48hs'),'gd35':GD35('MERV - XMEV - GD35D - 48hs')},
+                'al35':AL35('MERV - XMEV - AL35D - 48hs'),'gd35':GD35('MERV - XMEV - GD35D - 48hs'),
+                'ae38':AE38('MERV - XMEV - AE38D - 48hs'),'gd29':GD38('MERV - XMEV - GD38D - 48hs'),
+                'al29':AL29('MERV - XMEV - AL29D - 48hs'),'gd29':GD29('MERV - XMEV - GD29D - 48hs'),
+                'al41':AL41('MERV - XMEV - AL41D - 48hs'),'gd41':GD41('MERV - XMEV - GD41D - 48hs'),
+                's31e2':S31E2('MERV - XMEV - S31E2D - 48hs'),'s28f2':S28F2('MERV - XMEV - S28F2D - 48hs'),
+                's31m2':S31M2('MERV - XMEV - S31M2D - 48hs'),'s29a2':S29A2('MERV - XMEV - S29A2D - 48hs')},
             'ccl':{
                 'al30':AL30('MERV - XMEV - AL30C - 48hs'),'gd30':GD30('MERV - XMEV - GD30C - 48hs'),
-                'al35':AL35('MERV - XMEV - AL35C - 48hs'),'gd35':GD35('MERV - XMEV - GD35C - 48hs')}},
+                'al35':AL35('MERV - XMEV - AL35C - 48hs'),'gd35':GD35('MERV - XMEV - GD35C - 48hs'),
+                'ae38':AE38('MERV - XMEV - AE38C - 48hs'),'gd29':GD38('MERV - XMEV - GD38C - 48hs'),
+                'al29':AL29('MERV - XMEV - AL29C - 48hs'),'gd29':GD29('MERV - XMEV - GD29C - 48hs'),
+                'al41':AL41('MERV - XMEV - AL41C - 48hs'),'gd41':GD41('MERV - XMEV - GD41C - 48hs'),
+                's31e2':S31E2('MERV - XMEV - S31E2C - 48hs'),'s28f2':S28F2('MERV - XMEV - S28F2C - 48hs'),
+                's31m2':S31M2('MERV - XMEV - S31M2C - 48hs'),'s29a2':S29A2('MERV - XMEV - S29A2C - 48hs')}},
         '24':{
             'peso':{
                 'al30':AL30('MERV - XMEV - AL30 - 24hs'),'gd30':GD30('MERV - XMEV - GD30 - 24hs'),
-                'al35':AL35('MERV - XMEV - AL35 - 24hs'),'gd35':GD35('MERV - XMEV - GD35 - 24hs')},
+                'al35':AL35('MERV - XMEV - AL35 - 24hs'),'gd35':GD35('MERV - XMEV - GD35 - 24hs'),
+                'ae38':AE38('MERV - XMEV - AE38 - 24hs'),'gd29':GD38('MERV - XMEV - GD38 - 24hs'),
+                'al29':AL29('MERV - XMEV - AL29 - 24hs'),'gd29':GD29('MERV - XMEV - GD29 - 24hs'),
+                'al41':AL41('MERV - XMEV - AL41 - 24hs'),'gd41':GD41('MERV - XMEV - GD41 - 24hs'),
+                's31e2':S31E2('MERV - XMEV - S31E2 - 24hs'),'s28f2':S28F2('MERV - XMEV - S28F2 - 24hs'),
+                's31m2':S31M2('MERV - XMEV - S31M2 - 24hs'),'s29a2':S29A2('MERV - XMEV - S29A2 - 24hs')},
             'mep':{
                 'al30':AL30('MERV - XMEV - AL30D - 24hs'),'gd30':GD30('MERV - XMEV - GD30D - 24hs'),
-                'al35':AL35('MERV - XMEV - AL35D - 24hs'),'gd35':GD35('MERV - XMEV - GD35D - 24hs')},
+                'al35':AL35('MERV - XMEV - AL35D - 24hs'),'gd35':GD35('MERV - XMEV - GD35D - 24hs'),
+                'ae38':AE38('MERV - XMEV - AE38D - 24hs'),'gd29':GD38('MERV - XMEV - GD38D - 24hs'),
+                'al29':AL29('MERV - XMEV - AL29D - 24hs'),'gd29':GD29('MERV - XMEV - GD29D - 24hs'),
+                'al41':AL41('MERV - XMEV - AL41D - 24hs'),'gd41':GD41('MERV - XMEV - GD41D - 24hs'),
+                's31e2':S31E2('MERV - XMEV - S31E2D - 24hs'),'s28f2':S28F2('MERV - XMEV - S28F2D - 24hs'),
+                's31m2':S31M2('MERV - XMEV - S31M2D - 24hs'),'s29a2':S29A2('MERV - XMEV - S29A2D - 24hs')},
             'ccl':{
                 'al30':AL30('MERV - XMEV - AL30C - 24hs'),'gd30':GD30('MERV - XMEV - GD30C - 24hs'),
-                'al35':AL35('MERV - XMEV - AL35C - 24hs'),'gd35':GD35('MERV - XMEV - GD35C - 24hs')}},
+                'al35':AL35('MERV - XMEV - AL35C - 24hs'),'gd35':GD35('MERV - XMEV - GD35C - 24hs'),
+                'ae38':AE38('MERV - XMEV - AE38C - 24hs'),'gd29':GD38('MERV - XMEV - GD38C - 24hs'),
+                'al29':AL29('MERV - XMEV - AL29C - 24hs'),'gd29':GD29('MERV - XMEV - GD29C - 24hs'),
+                'al41':AL41('MERV - XMEV - AL41C - 24hs'),'gd41':GD41('MERV - XMEV - GD41C - 24hs'),
+                's31e2':S31E2('MERV - XMEV - S31E2C - 24hs'),'s28f2':S28F2('MERV - XMEV - S28F2C - 24hs'),
+                's31m2':S31M2('MERV - XMEV - S31M2C - 24hs'),'s29a2':S29A2('MERV - XMEV - S29A2C - 24hs')}},
         'CI':{
             'peso':{
                 'al30':AL30('MERV - XMEV - AL30 - CI'),'gd30':GD30('MERV - XMEV - GD30 - CI'),
-                'al35':AL35('MERV - XMEV - AL35 - CI'),'gd35':GD35('MERV - XMEV - GD35 - CI')},
+                'al35':AL35('MERV - XMEV - AL35 - CI'),'gd35':GD35('MERV - XMEV - GD35 - CI'),
+                'ae38':AE38('MERV - XMEV - AE38 - CI'),'gd29':GD38('MERV - XMEV - GD38 - CI'),
+                'al29':AL29('MERV - XMEV - AL29 - CI'),'gd29':GD29('MERV - XMEV - GD29 - CI'),
+                'al41':AL41('MERV - XMEV - AL41 - CI'),'gd41':GD41('MERV - XMEV - GD41 - CI'),
+                's31e2':S31E2('MERV - XMEV - S31E2 - CI'),'s28f2':S28F2('MERV - XMEV - S28F2 - CI'),
+                's31m2':S31M2('MERV - XMEV - S31M2 - CI'),'s29a2':S29A2('MERV - XMEV - S29A2 - CI')},
             'mep':{
                 'al30':AL30('MERV - XMEV - AL30D - CI'),'gd30':GD30('MERV - XMEV - GD30D - CI'),
-                'al35':AL35('MERV - XMEV - AL35D - CI'),'gd35':GD35('MERV - XMEV - GD35D - CI')},
+                'al35':AL35('MERV - XMEV - AL35D - CI'),'gd35':GD35('MERV - XMEV - GD35D - CI'),
+                'ae38':AE38('MERV - XMEV - AE38D - CI'),'gd29':GD38('MERV - XMEV - GD38D - CI'),
+                'al29':AL29('MERV - XMEV - AL29D - CI'),'gd29':GD29('MERV - XMEV - GD29D - CI'),
+                'al41':AL41('MERV - XMEV - AL41D - CI'),'gd41':GD41('MERV - XMEV - GD41D - CI'),
+                's31e2':S31E2('MERV - XMEV - S31E2D - CI'),'s28f2':S28F2('MERV - XMEV - S28F2D - CI'),
+                's31m2':S31M2('MERV - XMEV - S31M2D - CI'),'s29a2':S29A2('MERV - XMEV - S29A2D - CI')},
             'ccl':{
                 'al30':AL30('MERV - XMEV - AL30C - CI'),'gd30':GD30('MERV - XMEV - GD30C - CI'),
-                'al35':AL35('MERV - XMEV - AL35C - CI'),'gd35':GD35('MERV - XMEV - GD35C - CI')}}
+                'al35':AL35('MERV - XMEV - AL35C - CI'),'gd35':GD35('MERV - XMEV - GD35C - CI'),
+                'ae38':AE38('MERV - XMEV - AE38C - CI'),'gd29':GD38('MERV - XMEV - GD38C - CI'),
+                'al29':AL29('MERV - XMEV - AL29C - CI'),'gd29':GD29('MERV - XMEV - GD29C - CI'),
+                'al41':AL41('MERV - XMEV - AL41C - CI'),'gd41':GD41('MERV - XMEV - GD41C - CI'),
+                's31e2':S31E2('MERV - XMEV - S31E2C - CI'),'s28f2':S28F2('MERV - XMEV - S28F2C - CI'),
+                's31m2':S31M2('MERV - XMEV - S31M2C - CI'),'s29a2':S29A2('MERV - XMEV - S29A2C - CI')}}
             },
 
     'acciones':{
@@ -323,15 +393,13 @@ ticker = {
             'ggal': GGAL('MERV - XMEV - GGAL - CI'),
             'ypfd': YPFD('MERV - XMEV - YPFD - CI')}
             },
-
     'cedear':{
         'aapl_48':(
             AAPL('MERV - XMEV - AAPL - 48hs'),
             AAPL('MERV - XMEV - AAPL - CI')),
         'ko_48':(
             KO('MERV - XMEV - KO - 48hs'),
-            KO('MERV - XMEV - KO - CI'))
-            }
+            KO('MERV - XMEV - KO - CI'))}
     }
 
 
