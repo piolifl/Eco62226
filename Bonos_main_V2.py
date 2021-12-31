@@ -98,10 +98,10 @@ mep = round(0,4)
 peso = round(0,4)
 
 ins = {
-    '1':['al30',100,'gd30'],'2':['al30',100,'s31e2'],'3':['al30',100,'al35'],
-    '4':['0',100,'al30'],'5':['0',100,'gd35'],'6':['0',100,'al35']}
+    '1':['al30',100,'gd30'],'2':['al30',100,'s31e2'],'3':['0',100,'al35'],
+    '4':['gd30',100,'al30'],'5':['gd30',100,'s31e2'],'6':['0',100,'al35']}
 
-while limite >0:
+while limite > 0:
     if time.strftime("%H:%M:%S") >= '17:00:10':
         print('...................... MERCADO CERRADO 17HS .......................')
         break
@@ -116,7 +116,7 @@ while limite >0:
 
                             if cclCI(e[0]).cantidad_BI() > e[1] and cclCI(e[2]).cantidad_OF() >= comproCCL and mepCI(e[2]).cantidad_BI() >= comproCCL and mepCI(e[0]).cantidad_OF() >= comproMEP:
 
-                                if 's31e2' == e[2] == 's28f2' or 's31m2' == e[2] == 's29a2':
+                                if e[2] =='s31e2' or e[2] == 's28f2' or e[2] =='s31m2' or e[2] == 's29a2':
 
                                     #vender(cclCI(e[0]),e[1],cclCI(e[0]).precio_BI())                #BONO
                                     #comprar(cclCI(e[2]),comproCCL,cclCI(e[2]).precio_OF()/100)      #LETRA
