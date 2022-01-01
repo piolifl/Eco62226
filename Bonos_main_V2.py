@@ -91,7 +91,7 @@ def mep_pes(t1,t2,t3,t4):
     print(f'bon:{comproPES}',end="  __  ") 
 
 costos = 0.0052
-limite = 100000
+limite = 1000
 gana = round(0,0)
 ccl = round(0,4)
 mep = round(0,4)
@@ -116,28 +116,15 @@ while limite > 0:
 
                             if cclCI(e[0]).cantidad_BI() > e[1] and cclCI(e[2]).cantidad_OF() >= comproCCL and mepCI(e[2]).cantidad_BI() >= comproCCL and mepCI(e[0]).cantidad_OF() >= comproMEP:
 
-                                if e[2] =='s31e2' or e[2] == 's28f2' or e[2] =='s31m2' or e[2] == 's29a2':
+                                #vender(cclCI(e[0]),e[1],cclCI(e[0]).precio_BI())               #CCL
+                                #comprar(cclCI(e[2]),comproCCL,cclCI(e[2]).precio_OF())         #CCL
+                                #vender(mepCI(e[2]),comproCCL,mepCI(e[2]).precio_BI())          #MEP
+                                #comprar(mepCI(e[0]),comproMEP,mepCI(e[0]).precio_OF())         #MEP
 
-                                    #vender(cclCI(e[0]),e[1],cclCI(e[0]).precio_BI())                #BONO
-                                    #comprar(cclCI(e[2]),comproCCL,cclCI(e[2]).precio_OF()/100)      #LETRA
-                                    #vender(mepCI(e[2]),comproCCL,mepCI(e[2]).precio_BI()/100)       #LETRA
-                                    #comprar(mepCI(e[0]),comproMEP,mepCI(e[0]).precio_OF())          #BONO
-
-                                    gana += comproMEP - e[1]
-                                    limite -= e[1]
-                                    print(f'Total bonos:{gana}, total CCL: {saldoCCL}, total MEP {saldoMEP}')
-                                    continue
-
-                                else:
-                                    #vender(cclCI(e[0]),e[1],cclCI(e[0]).precio_BI())               #CCL
-                                    #comprar(cclCI(e[2]),comproCCL,cclCI(e[2]).precio_OF())         #CCL
-                                    #vender(mepCI(e[2]),comproCCL,mepCI(e[2]).precio_BI())          #MEP
-                                    #comprar(mepCI(e[0]),comproMEP,mepCI(e[0]).precio_OF())         #MEP
-
-                                    gana += comproMEP - e[1]
-                                    limite -= e[1]
-                                    print(f'Total bonos:{gana}, total CCL: {saldoCCL}, total MEP {saldoMEP}')
-                                    continue
+                                gana += comproMEP - e[1]
+                                limite -= e[1]
+                                print(f'Total bonos:{gana}, total CCL: {saldoCCL}, total MEP {saldoMEP}'),time.sleep(5)
+                                continue
                             else:
                                 print(f'Sin compradores/vendedores {e[0]}.ccl / {e[2]}.mep')
                         else:
