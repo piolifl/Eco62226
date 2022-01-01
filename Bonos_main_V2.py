@@ -103,12 +103,12 @@ ins = {
     '5':['0',100,'al30'],'6':['0',100,'gd30']}
 
 while limite > 0:
-    if time.strftime("%H:%M:%S") <= '17:00:10':
+    if time.strftime("%H:%M:%S") >= '17:00:10':
         print('...................... MERCADO CERRADO 17HS .......................')
         break
     for i, e in ins.items():
         while e[0] != '0':
-            if time.strftime("%H:%M:%S") >= '15:59:15':
+            if time.strftime("%H:%M:%S") <= '15:59:15':
                 if limite > 0 and cclCI(e[0]).precio_BI() != 1000 and cclCI(e[2]).precio_OF() != 1000 and mepCI(e[0]).precio_BI() != 1000 and mepCI(e[2]).precio_OF() != 1000:
                     while True:
                         ccl_mep(cclCI(e[0]).precio_BI(),cclCI(e[2]).precio_OF(),mepCI(e[2]).precio_BI(),mepCI(e[0]).precio_OF())
