@@ -110,52 +110,57 @@ while limite > 0:
 
             if time.strftime("%H:%M:%S") <= '15:59:15':
                 if limite > 0:
-                    ccl_mep(cclCI(e[0]).precio_BI(),cclCI(e[2]).precio_OF(),mepCI(e[2]).precio_BI(),mepCI(e[0]).precio_OF()) 
-                    if comproMEP >= e[1]:
-                        if cclCI(e[0]).precio_BI() != 1000 and cclCI(e[2]).precio_OF() != 1000 and mepCI(e[0]).precio_BI() != 1000 and mepCI(e[2]).precio_OF() != 1000:
+                    
+                    while True:
+                        ccl_mep(cclCI(e[0]).precio_BI(),cclCI(e[2]).precio_OF(),mepCI(e[2]).precio_BI(),mepCI(e[0]).precio_OF())
+                        if comproMEP >= e[1]:
+                            if cclCI(e[0]).precio_BI() != 1000 and cclCI(e[2]).precio_OF() != 1000 and mepCI(e[0]).precio_BI() != 1000 and mepCI(e[2]).precio_OF() != 1000:
 
-                            if cclCI(e[0]).cantidad_BI() > e[1] and cclCI(e[2]).cantidad_OF() >= comproCCL and mepCI(e[2]).cantidad_BI() >= comproCCL and mepCI(e[0]).cantidad_OF() >= comproMEP:
+                                if cclCI(e[0]).cantidad_BI() > e[1] and cclCI(e[2]).cantidad_OF() >= comproCCL and mepCI(e[2]).cantidad_BI() >= comproCCL and mepCI(e[0]).cantidad_OF() >= comproMEP:
 
-                                #vender(cclCI(e[0]),e[1],cclCI(e[0]).precio_BI())               #CCL
-                                #comprar(cclCI(e[2]),comproCCL,cclCI(e[2]).precio_OF())         #CCL
-                                #vender(mepCI(e[2]),comproCCL,mepCI(e[2]).precio_BI())          #MEP
-                                #comprar(mepCI(e[0]),comproMEP,mepCI(e[0]).precio_OF())         #MEP
+                                    #vender(cclCI(e[0]),e[1],cclCI(e[0]).precio_BI())               #CCL
+                                    #comprar(cclCI(e[2]),comproCCL,cclCI(e[2]).precio_OF())         #CCL
+                                    #vender(mepCI(e[2]),comproCCL,mepCI(e[2]).precio_BI())          #MEP
+                                    #comprar(mepCI(e[0]),comproMEP,mepCI(e[0]).precio_OF())         #MEP
 
-                                gana += comproMEP - e[1]
-                                limite -= e[1]
-                                print(f'Total bonos:{gana}, total CCL: {saldoCCL}, total MEP {saldoMEP}'),time.sleep(5)
-                                continue
+                                    gana += comproMEP - e[1]
+                                    limite -= e[1]
+                                    print(f'{e[0]}/{e[2]} Total bonos:{gana}, total CCL: {saldoCCL}, total MEP {saldoMEP}'),time.sleep(5)
+                                    continue
+                                else:
+                                    print(f'Sin compradores/vendedores {e[0]}.ccl / {e[2]}.mep')
                             else:
-                                print(f'Sin compradores/vendedores {e[0]}.ccl / {e[2]}.mep')
+                                print(f'Sin precios {e[0]}.ccl / {e[2]}.mep')
                         else:
-                            print(f'Sin precios {e[0]}.ccl / {e[2]}.mep')
-                    else:
-                        print(f'NO hay corto // {e[0]}.ccl - {e[2]}.mep __ LIM: {limite}')
+                            print(f'NO hay corto // {e[0]}.ccl - {e[2]}.mep __ LIM: {limite}')
+                            break
                 else:
                     print(f'Limite de {limite} agotado !')
                     break
 
                 if limite > 0:
-                    mep_ccl(mepCI(e[0]).precio_BI(),mepCI(e[2]).precio_OF(),cclCI(e[2]).precio_BI(),cclCI(e[0]).precio_OF())
-                    if comproCCL >= e[1]:
-                        if mepCI(e[0]).precio_BI() != 1000 and mepCI(e[2]).precio_OF() != 1000 and cclCI(e[0]).precio_BI() != 1000 and cclCI(e[2]).precio_OF() != 1000:
-                            if mepCI(e[0]).cantidad_BI() > e[1] and mepCI(e[2]).cantidad_OF() >= comproMEP and cclCI(e[2]).cantidad_BI() >= comproMEP and cclCI(e[0]).cantidad_OF() >= comproCCL:
+                    while True:
+                        mep_ccl(mepCI(e[0]).precio_BI(),mepCI(e[2]).precio_OF(),cclCI(e[2]).precio_BI(),cclCI(e[0]).precio_OF())
+                        if comproCCL >= e[1]:
+                            if mepCI(e[0]).precio_BI() != 1000 and mepCI(e[2]).precio_OF() != 1000 and cclCI(e[0]).precio_BI() != 1000 and cclCI(e[2]).precio_OF() != 1000:
+                                if mepCI(e[0]).cantidad_BI() > e[1] and mepCI(e[2]).cantidad_OF() >= comproMEP and cclCI(e[2]).cantidad_BI() >= comproMEP and cclCI(e[0]).cantidad_OF() >= comproCCL:
 
-                                #vender(mepCI(e[0]),e[1],mepCI(e[0]).precio_BI())
-                                #comprar(mepCI(e[2]),comproMEP,mepCI(e[2]).precio_OF())
-                                #vender(cclCI(e[2]),comproMEP,cclCI(e[2]).precio_BI())
-                                #comprar(cclCI(e[0]),comproCCL,cclCI(e[0]).precio_OF())
+                                    #vender(mepCI(e[0]),e[1],mepCI(e[0]).precio_BI())
+                                    #comprar(mepCI(e[2]),comproMEP,mepCI(e[2]).precio_OF())
+                                    #vender(cclCI(e[2]),comproMEP,cclCI(e[2]).precio_BI())
+                                    #comprar(cclCI(e[0]),comproCCL,cclCI(e[0]).precio_OF())
 
-                                gana += comproCCL - e[1]
-                                limite -= e[1]
-                                print(f'Total bonos:{gana}, total MEP: {saldoMEP}, total CCL {saldoCCL}')
-                                continue
+                                    gana += comproCCL - e[1]
+                                    limite -= e[1]
+                                    print(f'{e[0]}/{e[2]} Total bonos:{gana}, total MEP: {saldoMEP}, total CCL {saldoCCL}')
+                                    continue
+                                else:
+                                    print(f'Sin compradores/vendedores {e[0]}.mep / {e[2]}.ccl')
                             else:
-                                print(f'Sin compradores/vendedores {e[0]}.mep / {e[2]}.ccl')
+                                print(f'Sin precios 48hs // {e[0]}.mep - {e[2]}.ccl')
                         else:
-                            print(f'Sin precios 48hs // {e[0]}.mep - {e[2]}.ccl')
-                    else:
-                        print(f'NO hay corto // {e[0]}.mep - {e[2]}.ccl __ LIM: {limite}')
+                            print(f'NO hay corto // {e[0]}.mep - {e[2]}.ccl __ LIM: {limite}')
+                            break
                 else:
                     print(f'Limite de {limite} agotado !')
                     break
@@ -163,55 +168,56 @@ while limite > 0:
                 print('Cierran cortos ... continuan solo largos')
             
             if limite > 0:
-                ccl_mep( ccl48(e[0]).precio_BI(),ccl48(e[2]).precio_OF(),mep48(e[2]).precio_BI(),mep48(e[0]).precio_OF())
-                if comproMEP >= e[1]:
-                    if ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000 and mep48(e[0]).precio_BI() != 1000 and mep48(e[2]).precio_OF() != 1000:
+                while True:
+                    ccl_mep( ccl48(e[0]).precio_BI(),ccl48(e[2]).precio_OF(),mep48(e[2]).precio_BI(),mep48(e[0]).precio_OF())
+                    if comproMEP >= e[1]:
+                        if ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000 and mep48(e[0]).precio_BI() != 1000 and mep48(e[2]).precio_OF() != 1000:
 
-                        if ccl48(e[0]).cantidad_BI() > e[1] and ccl48(e[2]).cantidad_OF() >= comproCCL and mep48(e[2]).cantidad_BI() >= comproCCL and mep48(e[0]).cantidad_OF() >= comproMEP:
+                            if ccl48(e[0]).cantidad_BI() > e[1] and ccl48(e[2]).cantidad_OF() >= comproCCL and mep48(e[2]).cantidad_BI() >= comproCCL and mep48(e[0]).cantidad_OF() >= comproMEP:
 
-                            #vender(ccl48(e[0]),e[1],ccl48(e[0]).precio_BI())
-                            #comprar(ccl48(e[2]),comproCCL,ccl48(e[2]).precio_OF())
-                            #vender(mep48(e[2]),comproCCL,mep48(e[2]).precio_BI())
-                            #comprar(mep48(e[0]),comproMEP,mep48(e[0]).precio_OF())
+                                #vender(ccl48(e[0]),e[1],ccl48(e[0]).precio_BI())
+                                #comprar(ccl48(e[2]),comproCCL,ccl48(e[2]).precio_OF())
+                                #vender(mep48(e[2]),comproCCL,mep48(e[2]).precio_BI())
+                                #comprar(mep48(e[0]),comproMEP,mep48(e[0]).precio_OF())
 
-                            gana += comproMEP - e[1]
-                            limite -= e[1]
-                            ccl += saldoCCL
-                            mep += saldoMEP
-                            print(f'GANA bonos:{gana}, CCL: {ccl}, MEP {mep}')
-                            continue
+                                gana += comproMEP - e[1]
+                                limite -= e[1]
+                                print(f'{e[0]}/{e[2]} Total bonos:{gana}, total CCL: {saldoCCL}, total MEP {saldoMEP}'),time.sleep(5)
+                                continue
+                            else:
+                                print(f'Sin compradores/vendedores {e[0]}.ccl / {e[2]}.mep')
                         else:
-                            print(f'Sin compradores/vendedores {e[0]}.ccl / {e[2]}.mep')
+                            print(f'Sin precios 48hs // {e[0]}.ccl - {e[2]}.mep')
                     else:
-                        print(f'Sin precios 48hs // {e[0]}.ccl - {e[2]}.mep')
-                else:
-                    print(f'NO hay en largo // {e[0]}.ccl - {e[2]}.mep __ LIM: {limite}')
+                        print(f'NO hay en largo // {e[0]}.ccl - {e[2]}.mep __ LIM: {limite}')
+                        break
             else:
                 print(f'Limite de {limite} agotado !')
                 break
 
             if limite > 0:
-                mep_ccl(mep48(e[0]).precio_BI(),mep48(e[2]).precio_OF(),ccl48(e[2]).precio_BI(),ccl48(e[0]).precio_OF())
-                if comproCCL >= e[1]:
-                    if mep48(e[0]).precio_BI() != 1000 and mep48(e[2]).precio_OF() != 1000 and ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000:
-                        if mep48(e[0]).cantidad_BI() > e[1] and mep48(e[2]).cantidad_OF() >= comproMEP and ccl48(e[2]).cantidad_BI() >= comproMEP and ccl48(e[0]).cantidad_OF() >= comproCCL:
+                while True:
+                    mep_ccl(mep48(e[0]).precio_BI(),mep48(e[2]).precio_OF(),ccl48(e[2]).precio_BI(),ccl48(e[0]).precio_OF())
+                    if comproCCL >= e[1]:
+                        if mep48(e[0]).precio_BI() != 1000 and mep48(e[2]).precio_OF() != 1000 and ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000:
+                            if mep48(e[0]).cantidad_BI() > e[1] and mep48(e[2]).cantidad_OF() >= comproMEP and ccl48(e[2]).cantidad_BI() >= comproMEP and ccl48(e[0]).cantidad_OF() >= comproCCL:
 
-                            #vender(mep48(e[0]),e[1],mep48(e[0]).precio_BI())
-                            #comprar(mep48(e[2]),comproMEP,mep48(e[2]).precio_OF())
-                            #vender(ccl48(e[2]),comproMEP,ccl48(e[2]).precio_BI())
-                            #comprar(ccl48(e[0]),comproCCL,ccl48(e[0]).precio_OF())
+                                #vender(mep48(e[0]),e[1],mep48(e[0]).precio_BI())
+                                #comprar(mep48(e[2]),comproMEP,mep48(e[2]).precio_OF())
+                                #vender(ccl48(e[2]),comproMEP,ccl48(e[2]).precio_BI())
+                                #comprar(ccl48(e[0]),comproCCL,ccl48(e[0]).precio_OF())
 
-                            gana += comproCCL - e[1]
-                            limite -= e[1]
-                            print(f'Total bonos:{gana}, total MEP: {saldoMEP}, total CCL {saldoCCL}')
-                            continue
+                                gana += comproCCL - e[1]
+                                limite -= e[1]
+                                print(f'{e[0]}/{e[2]} Total bonos:{gana}, total MEP: {saldoMEP}, total CCL {saldoCCL}')
+                                continue
+                            else:
+                                print(f'Sin compradores/vendedores {e[0]}.mep / {e[2]}.ccl')
                         else:
-                            print(f'Sin compradores/vendedores {e[0]}.mep / {e[2]}.ccl')
+                            print(f'Sin precios {e[0]}.mep / {e[2]}.ccl')
                     else:
-                        print(f'Sin precios {e[0]}.mep / {e[2]}.ccl')
-                else:
-                    print(f'NO hay en largo // {e[0]}.mep - {e[2]}.ccl __ LIM: {limite}')
-                    break
+                        print(f'NO hay en largo // {e[0]}.mep - {e[2]}.ccl __ LIM: {limite}')
+                        break
             else:
                 print(f'Limite de {limite} agotado !')
                 break
