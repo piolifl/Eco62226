@@ -100,7 +100,7 @@ peso = round(0,4)
 ins = {
     '1':['al30',100,'gd30'],'2':['al30',100,'s31e2'],
     '3':['gd30',100,'al30'],'4':['gd30',100,'s31e2'],
-    '5':['0',100,'al30'],'6':['0',100,'gd30']}
+    '5':['s31e2',1000,'al30'],'6':['s31e2',1000,'gd30']}
 
 while limite > 0:
     if time.strftime("%H:%M:%S") >= '17:00:10':
@@ -108,7 +108,7 @@ while limite > 0:
         break
     for i, e in ins.items():
         while e[0] != '0':
-            if time.strftime("%H:%M:%S") <= '15:59:15':
+            if time.strftime("%H:%M:%S") >= '15:59:15':
                 if limite > 0 and cclCI(e[0]).precio_BI() != 1000 and cclCI(e[2]).precio_OF() != 1000 and mepCI(e[0]).precio_BI() != 1000 and mepCI(e[2]).precio_OF() != 1000:
                     while True:
                         ccl_mep(cclCI(e[0]).precio_BI(),cclCI(e[2]).precio_OF(),mepCI(e[2]).precio_BI(),mepCI(e[0]).precio_OF())
@@ -127,8 +127,7 @@ while limite > 0:
                             print(f'NO hay /CI/ {e[0]}.ccl _ {e[2]}.mep _ LIM: {limite}')
                             break
                 else:
-                    print(f'Limite actual:{limite}! Sin precios /CI/ {e[0]}.ccl _ {e[2]}.mep')
-
+                    print(f'Limite actual:{limite} Sin precios CI {e[0]}.ccl _ {e[2]}.mep')
 
                 if limite > 0 and mepCI(e[0]).precio_BI() != 1000 and mepCI(e[2]).precio_OF() != 1000 and cclCI(e[0]).precio_BI() != 1000 and cclCI(e[2]).precio_OF() != 1000:
                     while True:
@@ -148,9 +147,50 @@ while limite > 0:
                             print(f'NO hay /CI/ {e[0]}.mep _ {e[2]}.ccl _ LIM: {limite}')
                             break
                 else:
-                    print(f'Limite actual:{limite} Sin precios /CI/ {e[0]}.mep _ {e[2]}.ccl')
-            else:
-                print('Cierran cortos ... continuan solo largos')
+                    print(f'Limite actual:{limite} Sin precios CI {e[0]}.mep _ {e[2]}.ccl')
+                    
+                '''if limite > 0 and cclCI(e[0]).precio_BI() != 1000 and cclCI(e[2]).precio_OF() != 1000 and pesCI(e[0]).precio_BI() != 1000 and pesCI(e[2]).precio_OF() != 1000:
+                    while True:
+                        ccl_pes(cclCI(e[0]).precio_BI(),cclCI(e[2]).precio_OF(),pesCI(e[2]).precio_BI(),pesCI(e[0]).precio_OF())
+                        if comproPES >= e[1] and cclCI(e[0]).cantidad_BI() > e[1] and cclCI(e[2]).cantidad_OF() >= comproCCL and pesCI(e[2]).cantidad_BI() >= comproCCL and pesCI(e[0]).cantidad_OF() >= comproPES:
+
+                            #vender(cclCI(e[0]),e[1],cclCI(e[0]).precio_BI())
+                            #comprar(cclCI(e[2]),comproCCL,cclCI(e[2]).precio_OF())
+                            #vender(pesCI(e[2]),comproCCL,pesCI(e[2]).precio_BI())
+                            #comprar(pesCI(e[0]),comproPES,pesCI(e[0]).precio_OF())
+
+                            gana += comproPES - e[1]
+                            limite -= e[1]
+                            print(f'{e[0]}/{e[2]} /CI/ Total bonos:{gana}, total CCL: {saldoCCL}, total PESO {saldoPES}')
+                            continue
+                        else:
+                            print(f'NO hay /CI/ {e[0]}.ccl _ {e[2]}.peso _ LIM: {limite}')
+                            break
+                else:
+                    print(f'Limite actual:{limite} Sin precios CI {e[0]}.ccl _ {e[2]}.peso')
+                
+                if limite > 0 and mepCI(e[0]).precio_BI() != 1000 and mepCI(e[2]).precio_OF() != 1000 and pesCI(e[0]).precio_BI() != 1000 and pesCI(e[2]).precio_OF() != 1000:
+                    while True:
+                        mep_pes(mepCI(e[0]).precio_BI(),mepCI(e[2]).precio_OF(),pesCI(e[2]).precio_BI(),pesCI(e[0]).precio_OF())
+                        if comproPES >= e[1] and mepCI(e[0]).cantidad_BI() > e[1] and mepCI(e[2]).cantidad_OF() >= comproCCL and pesCI(e[2]).cantidad_BI() >= comproCCL and pesCI(e[0]).cantidad_OF() >= comproPES:
+
+                            #vender(mepCI(e[0]),e[1],mepCI(e[0]).precio_BI())
+                            #comprar(mepCI(e[2]),comproMEP,mepCI(e[2]).precio_OF())
+                            #vender(pesCI(e[2]),comproMEP,pesCI(e[2]).precio_BI())
+                            #comprar(pesCI(e[0]),comproPES,pesCI(e[0]).precio_OF())
+
+                            gana += comproPES - e[1]
+                            limite -= e[1]
+                            print(f'{e[0]}/{e[2]} /CI/ Total bonos:{gana}, total MEP: {saldoMEP}, total PESO {saldoPES}')
+                            continue
+                        else:
+                            print(f'NO hay /CI/ {e[0]}.mep _ {e[2]}.peso _ LIM: {limite}')
+                            break
+                else:
+                    print(f'Limite actual:{limite} Sin precios CI {e[0]}.mep _ {e[2]}.peso')'''
+            #else:
+                #print('Cierran cortos ... continuan solo largos')
+
             
             if limite > 0 and ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000 and mep48(e[0]).precio_BI() != 1000 and mep48(e[2]).precio_OF() != 1000:
                 while True:
@@ -170,8 +210,8 @@ while limite > 0:
                         print(f'NO hay /48/ {e[0]}.ccl _ {e[2]}.mep _ LIM: {limite}')
                         break
             else:
-                print(f'Limite actual:{limite} Sin precios /48/ {e[0]}.ccl _ {e[2]}.mep')
-                break
+                print(f'Limite actual:{limite} Sin precios 48 {e[0]}.ccl _ {e[2]}.mep')
+                
 
             if limite > 0 and mep48(e[0]).precio_BI() != 1000 and mep48(e[2]).precio_OF() != 1000 and ccl48(e[0]).precio_BI() != 1000 and ccl48(e[2]).precio_OF() != 1000:
                 while True:
@@ -192,5 +232,5 @@ while limite > 0:
                         break
                 break
             else:
-                print(f'Limite actual:{limite} Sin precios {e[0]}.mep / {e[2]}.ccl')
+                print(f'Limite actual:{limite} Sin precios 48 {e[0]}.mep _ {e[2]}.ccl')
                 break
