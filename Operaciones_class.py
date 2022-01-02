@@ -80,90 +80,9 @@ class OPERACIONES:
     def __str__(self):
         return self.ticker
 
-class C180(OPERACIONES):
+class CALL(OPERACIONES):
     pass
-class C185(OPERACIONES):
-    pass
-class C190(OPERACIONES):
-    pass
-class C195(OPERACIONES):
-    pass
-class C200(OPERACIONES):
-    pass
-class C210(OPERACIONES):
-    pass
-class C220(OPERACIONES):
-    pass
-class C230(OPERACIONES):
-    pass
-class C240(OPERACIONES):
-    pass
-class C250(OPERACIONES):
-    pass
-class C260(OPERACIONES):
-    pass
-class C270(OPERACIONES):
-    pass
-class C280(OPERACIONES):
-    pass
-class C290(OPERACIONES):
-    pass
-class C300(OPERACIONES):
-    pass
-class C310(OPERACIONES):
-    pass
-class C320(OPERACIONES):
-    pass
-class C330(OPERACIONES):
-    pass
-class C340(OPERACIONES):
-    pass
-class C350(OPERACIONES):
-    pass
-class C360(OPERACIONES):
-    pass
-
-class V180(OPERACIONES):
-    pass
-class V185(OPERACIONES):
-    pass
-class V190(OPERACIONES):
-    pass
-class V195(OPERACIONES):
-    pass
-class V200(OPERACIONES):
-    pass
-class V210(OPERACIONES):
-    pass
-class V220(OPERACIONES):
-    pass
-class V230(OPERACIONES):
-    pass
-class V240(OPERACIONES):
-    pass
-class V250(OPERACIONES):
-    pass
-class V260(OPERACIONES):
-    pass
-class V270(OPERACIONES):
-    pass
-class V280(OPERACIONES):
-    pass
-class V290(OPERACIONES):
-    pass
-class V300(OPERACIONES):
-    pass
-class V310(OPERACIONES):
-    pass
-class V320(OPERACIONES):
-    pass
-class V330(OPERACIONES):
-    pass
-class V340(OPERACIONES):
-    pass
-class V350(OPERACIONES):
-    pass
-class V360(OPERACIONES):
+class PUT(OPERACIONES):
     pass
 
 
@@ -214,95 +133,95 @@ ticker = {
     'opciones':{
         'call':{
             'FE':{
-                '180': C180('MERV - XMEV - GFGC180.FE - 24hs'),
-                '185': C185('MERV - XMEV - GFGC185.FE - 24hs'),
-                '190': C190('MERV - XMEV - GFGC190.FE - 24hs'),
-                '195': C195('MERV - XMEV - GFGC195.FE - 24hs'),
-                '200': C200('MERV - XMEV - GFGC200.FE - 24hs'),
-                '210': C210('MERV - XMEV - GFGC210.FE - 24hs'),
-                '220': C220('MERV - XMEV - GFGC220.FE - 24hs'),
-                '230': C230('MERV - XMEV - GFGC230.FE - 24hs'),
-                '240': C240('MERV - XMEV - GFGC240.FE - 24hs'),
-                '250': C250('MERV - XMEV - GFGC250.FE - 24hs'),
-                '260': C260('MERV - XMEV - GFGC260.FE - 24hs'),
-                '270': C270('MERV - XMEV - GFGC270.FE - 24hs'),
-                '280': C280('MERV - XMEV - GFGC280.FE - 24hs'),
-                '290': C290('MERV - XMEV - GFGC290.FE - 24hs'),
-                '300': C300('MERV - XMEV - GFGC300.FE - 24hs'),
-                '310': C310('MERV - XMEV - GFGC310.FE - 24hs'),
-                '320': C320('MERV - XMEV - GFGC320.FE - 24hs'),
-                '330': C330('MERV - XMEV - GFGC330.FE - 24hs'),
-                '340': C340('MERV - XMEV - GFGC340.FE - 24hs'),
-                '350': C350('MERV - XMEV - GFGC350.FE - 24hs'),
-                '360': C360('MERV - XMEV - GFGC360.FE - 24hs')},
+                '180': CALL('MERV - XMEV - GFGC180.FE - 24hs'),
+                '185': CALL('MERV - XMEV - GFGC185.FE - 24hs'),
+                '190': CALL('MERV - XMEV - GFGC190.FE - 24hs'),
+                '195': CALL('MERV - XMEV - GFGC195.FE - 24hs'),
+                '200': CALL('MERV - XMEV - GFGC200.FE - 24hs'),
+                '210': CALL('MERV - XMEV - GFGC210.FE - 24hs'),
+                '220': CALL('MERV - XMEV - GFGC220.FE - 24hs'),
+                '230': CALL('MERV - XMEV - GFGC230.FE - 24hs'),
+                '240': CALL('MERV - XMEV - GFGC240.FE - 24hs'),
+                '250': CALL('MERV - XMEV - GFGC250.FE - 24hs'),
+                '260': CALL('MERV - XMEV - GFGC260.FE - 24hs'),
+                '270': CALL('MERV - XMEV - GFGC270.FE - 24hs'),
+                '280': CALL('MERV - XMEV - GFGC280.FE - 24hs'),
+                '290': CALL('MERV - XMEV - GFGC290.FE - 24hs'),
+                '300': CALL('MERV - XMEV - GFGC300.FE - 24hs'),
+                '310': CALL('MERV - XMEV - GFGC310.FE - 24hs'),
+                '320': CALL('MERV - XMEV - GFGC320.FE - 24hs'),
+                '330': CALL('MERV - XMEV - GFGC330.FE - 24hs'),
+                '340': CALL('MERV - XMEV - GFGC340.FE - 24hs'),
+                '350': CALL('MERV - XMEV - GFGC350.FE - 24hs'),
+                '360': CALL('MERV - XMEV - GFGC360.FE - 24hs')},
             'AB':{
-                '180': C180('MERV - XMEV - GFGC180.AB - 24hs'),
-                '185': C185('MERV - XMEV - GFGC185.AB - 24hs'),
-                '190': C190('MERV - XMEV - GFGC190.AB - 24hs'),
-                '195': C195('MERV - XMEV - GFGC195.AB - 24hs'),
-                '200': C200('MERV - XMEV - GFGC200.AB - 24hs'),
-                '210': C210('MERV - XMEV - GFGC210.AB - 24hs'),
-                '220': C220('MERV - XMEV - GFGC220.AB - 24hs'),
-                '230': C230('MERV - XMEV - GFGC230.AB - 24hs'),
-                '240': C240('MERV - XMEV - GFGC240.AB - 24hs'),
-                '250': C250('MERV - XMEV - GFGC250.AB - 24hs'),
-                '260': C260('MERV - XMEV - GFGC260.AB - 24hs'),
-                '270': C270('MERV - XMEV - GFGC270.AB - 24hs'),
-                '280': C280('MERV - XMEV - GFGC280.AB - 24hs'),
-                '290': C290('MERV - XMEV - GFGC290.AB - 24hs'),
-                '300': C300('MERV - XMEV - GFGC300.AB - 24hs'),
-                '310': C310('MERV - XMEV - GFGC310.AB - 24hs'),
-                '320': C320('MERV - XMEV - GFGC320.AB - 24hs'),
-                '330': C330('MERV - XMEV - GFGC330.AB - 24hs'),
-                '340': C340('MERV - XMEV - GFGC340.AB - 24hs'),
-                '350': C350('MERV - XMEV - GFGC350.AB - 24hs'),
-                '360': C360('MERV - XMEV - GFGC360.AB - 24hs')}
+                '180': CALL('MERV - XMEV - GFGC180.AB - 24hs'),
+                '185': CALL('MERV - XMEV - GFGC185.AB - 24hs'),
+                '190': CALL('MERV - XMEV - GFGC190.AB - 24hs'),
+                '195': CALL('MERV - XMEV - GFGC195.AB - 24hs'),
+                '200': CALL('MERV - XMEV - GFGC200.AB - 24hs'),
+                '210': CALL('MERV - XMEV - GFGC210.AB - 24hs'),
+                '220': CALL('MERV - XMEV - GFGC220.AB - 24hs'),
+                '230': CALL('MERV - XMEV - GFGC230.AB - 24hs'),
+                '240': CALL('MERV - XMEV - GFGC240.AB - 24hs'),
+                '250': CALL('MERV - XMEV - GFGC250.AB - 24hs'),
+                '260': CALL('MERV - XMEV - GFGC260.AB - 24hs'),
+                '270': CALL('MERV - XMEV - GFGC270.AB - 24hs'),
+                '280': CALL('MERV - XMEV - GFGC280.AB - 24hs'),
+                '290': CALL('MERV - XMEV - GFGC290.AB - 24hs'),
+                '300': CALL('MERV - XMEV - GFGC300.AB - 24hs'),
+                '310': CALL('MERV - XMEV - GFGC310.AB - 24hs'),
+                '320': CALL('MERV - XMEV - GFGC320.AB - 24hs'),
+                '330': CALL('MERV - XMEV - GFGC330.AB - 24hs'),
+                '340': CALL('MERV - XMEV - GFGC340.AB - 24hs'),
+                '350': CALL('MERV - XMEV - GFGC350.AB - 24hs'),
+                '360': CALL('MERV - XMEV - GFGC360.AB - 24hs')}
             },
         'put':{
             'FE':{
-                '180': V180('MERV - XMEV - GFGV180.FE - 24hs'),
-                '185': V185('MERV - XMEV - GFGV185.FE - 24hs'),
-                '190': V190('MERV - XMEV - GFGV190.FE - 24hs'),
-                '195': V195('MERV - XMEV - GFGV195.FE - 24hs'),
-                '200': V200('MERV - XMEV - GFGV200.FE - 24hs'),
-                '210': V210('MERV - XMEV - GFGV210.FE - 24hs'),
-                '220': V220('MERV - XMEV - GFGV220.FE - 24hs'),
-                '230': V230('MERV - XMEV - GFGV230.FE - 24hs'),
-                '240': V240('MERV - XMEV - GFGV240.FE - 24hs'),
-                '250': V250('MERV - XMEV - GFGV250.FE - 24hs'),
-                '260': V260('MERV - XMEV - GFGV260.FE - 24hs'),
-                '270': V270('MERV - XMEV - GFGV270.FE - 24hs'),
-                '280': V280('MERV - XMEV - GFGV280.FE - 24hs'),
-                '290': V290('MERV - XMEV - GFGV290.FE - 24hs'),
-                '300': V300('MERV - XMEV - GFGV300.FE - 24hs'),
-                '310': V310('MERV - XMEV - GFGV310.FE - 24hs'),
-                '320': V320('MERV - XMEV - GFGV320.FE - 24hs'),
-                '330': V330('MERV - XMEV - GFGV330.FE - 24hs'),
-                '340': V340('MERV - XMEV - GFGV340.FE - 24hs'),
-                '350': V350('MERV - XMEV - GFGV350.FE - 24hs'),
-                '360': V360('MERV - XMEV - GFGV360.FE - 24hs')},
+                '180': PUT('MERV - XMEV - GFGV180.FE - 24hs'),
+                '185': PUT('MERV - XMEV - GFGV185.FE - 24hs'),
+                '190': PUT('MERV - XMEV - GFGV190.FE - 24hs'),
+                '195': PUT('MERV - XMEV - GFGV195.FE - 24hs'),
+                '200': PUT('MERV - XMEV - GFGV200.FE - 24hs'),
+                '210': PUT('MERV - XMEV - GFGV210.FE - 24hs'),
+                '220': PUT('MERV - XMEV - GFGV220.FE - 24hs'),
+                '230': PUT('MERV - XMEV - GFGV230.FE - 24hs'),
+                '240': PUT('MERV - XMEV - GFGV240.FE - 24hs'),
+                '250': PUT('MERV - XMEV - GFGV250.FE - 24hs'),
+                '260': PUT('MERV - XMEV - GFGV260.FE - 24hs'),
+                '270': PUT('MERV - XMEV - GFGV270.FE - 24hs'),
+                '280': PUT('MERV - XMEV - GFGV280.FE - 24hs'),
+                '290': PUT('MERV - XMEV - GFGV290.FE - 24hs'),
+                '300': PUT('MERV - XMEV - GFGV300.FE - 24hs'),
+                '310': PUT('MERV - XMEV - GFGV310.FE - 24hs'),
+                '320': PUT('MERV - XMEV - GFGV320.FE - 24hs'),
+                '330': PUT('MERV - XMEV - GFGV330.FE - 24hs'),
+                '340': PUT('MERV - XMEV - GFGV340.FE - 24hs'),
+                '350': PUT('MERV - XMEV - GFGV350.FE - 24hs'),
+                '360': PUT('MERV - XMEV - GFGV360.FE - 24hs')},
             'AB':{
-                '180': V180('MERV - XMEV - GFGV180.AB - 24hs'),
-                '185': V185('MERV - XMEV - GFGV185.AB - 24hs'),
-                '190': V190('MERV - XMEV - GFGV190.AB - 24hs'),
-                '195': V195('MERV - XMEV - GFGV195.AB - 24hs'),
-                '200': V200('MERV - XMEV - GFGV200.AB - 24hs'),
-                '210': V210('MERV - XMEV - GFGV210.AB - 24hs'),
-                '220': V220('MERV - XMEV - GFGV220.AB - 24hs'),
-                '230': V230('MERV - XMEV - GFGV230.AB - 24hs'),
-                '240': V240('MERV - XMEV - GFGV240.AB - 24hs'),
-                '250': V250('MERV - XMEV - GFGV250.AB - 24hs'),
-                '260': V260('MERV - XMEV - GFGV260.AB - 24hs'),
-                '270': V270('MERV - XMEV - GFGV270.AB - 24hs'),
-                '280': V280('MERV - XMEV - GFGV280.AB - 24hs'),
-                '290': V290('MERV - XMEV - GFGV290.AB - 24hs'),
-                '300': V300('MERV - XMEV - GFGV300.AB - 24hs'),
-                '310': V310('MERV - XMEV - GFGV310.AB - 24hs'),
-                '320': V320('MERV - XMEV - GFGV320.AB - 24hs'),
-                '330': V330('MERV - XMEV - GFGV330.AB - 24hs'),
-                '340': V340('MERV - XMEV - GFGV340.AB - 24hs'),
-                '350': V350('MERV - XMEV - GFGV350.AB - 24hs'),
-                '360': V360('MERV - XMEV - GFGV360.AB - 24hs')}
+                '180': PUT('MERV - XMEV - GFGV180.AB - 24hs'),
+                '185': PUT('MERV - XMEV - GFGV185.AB - 24hs'),
+                '190': PUT('MERV - XMEV - GFGV190.AB - 24hs'),
+                '195': PUT('MERV - XMEV - GFGV195.AB - 24hs'),
+                '200': PUT('MERV - XMEV - GFGV200.AB - 24hs'),
+                '210': PUT('MERV - XMEV - GFGV210.AB - 24hs'),
+                '220': PUT('MERV - XMEV - GFGV220.AB - 24hs'),
+                '230': PUT('MERV - XMEV - GFGV230.AB - 24hs'),
+                '240': PUT('MERV - XMEV - GFGV240.AB - 24hs'),
+                '250': PUT('MERV - XMEV - GFGV250.AB - 24hs'),
+                '260': PUT('MERV - XMEV - GFGV260.AB - 24hs'),
+                '270': PUT('MERV - XMEV - GFGV270.AB - 24hs'),
+                '280': PUT('MERV - XMEV - GFGV280.AB - 24hs'),
+                '290': PUT('MERV - XMEV - GFGV290.AB - 24hs'),
+                '300': PUT('MERV - XMEV - GFGV300.AB - 24hs'),
+                '310': PUT('MERV - XMEV - GFGV310.AB - 24hs'),
+                '320': PUT('MERV - XMEV - GFGV320.AB - 24hs'),
+                '330': PUT('MERV - XMEV - GFGV330.AB - 24hs'),
+                '340': PUT('MERV - XMEV - GFGV340.AB - 24hs'),
+                '350': PUT('MERV - XMEV - GFGV350.AB - 24hs'),
+                '360': PUT('MERV - XMEV - GFGV360.AB - 24hs')}
             }},
 
     'bonos':{
