@@ -17,27 +17,27 @@ def vender(vendo,cantidad, precio):
                         order_type=pyRofex.OrderType.LIMIT)
 
 def pes48(bono): 
-    for tipo, valor in ticker['bonos']['48']['peso'].items():
+    for tipo, valor in ticker['duales']['48']['peso'].items():
         if tipo == bono:
             return valor
 def pesCI(bono): 
-    for tipo, valor in ticker['bonos']['CI']['peso'].items():
+    for tipo, valor in ticker['duales']['CI']['peso'].items():
         if tipo == bono:
             return valor
 def mep48(bono): 
-    for tipo, valor in ticker['bonos']['48']['mep'].items():
+    for tipo, valor in ticker['duales']['48']['mep'].items():
         if tipo == bono:
             return valor
 def mepCI(bono): 
-    for tipo, valor in ticker['bonos']['CI']['mep'].items():
+    for tipo, valor in ticker['duales']['CI']['mep'].items():
         if tipo == bono:
             return valor
 def ccl48(bono): 
-    for tipo, valor in ticker['bonos']['48']['ccl'].items():
+    for tipo, valor in ticker['duales']['48']['ccl'].items():
         if tipo == bono:
             return valor
 def cclCI(bono): 
-    for tipo, valor in ticker['bonos']['CI']['ccl'].items():
+    for tipo, valor in ticker['duales']['CI']['ccl'].items():
         if tipo == bono:
             return valor
 

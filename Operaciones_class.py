@@ -224,7 +224,7 @@ ticker = {
                 '360': PUT('MERV - XMEV - GFGV360.AB - 24hs')}
             }},
 
-    'bonos':{
+    'duales':{
         '48':{
             'peso':{
                 'al30':AL30('MERV - XMEV - AL30 - 48hs'),'gd30':GD30('MERV - XMEV - GD30 - 48hs'),
