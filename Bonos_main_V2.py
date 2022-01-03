@@ -45,9 +45,8 @@ def ccl_mep(t1,t2,t3,t4):
     global vendoCCL,comproCCL,vendoMEP,comproMEP,saldoCCL,saldoMEP
     vendoCCL = round(((t1/100) * (1 - costos)) * ins['1'][1],2)
     comproCCL = round(vendoCCL / ((t2/100 )* (1 + costos)),0)
-    vendoMEP = round(comproCCL * ((t3/100) * (1-costos)),2)
+    vendoMEP = round(comproCCL * ((t3/100) * (1 - costos)),2)
     comproMEP = round(vendoMEP / ((t4/100) * (1 + costos)),0)
-
     saldoCCL = round(vendoCCL - comproCCL * (t2/100),2)
     saldoMEP = round(vendoMEP - comproMEP * (t4/100),2)
     print(time.strftime("%H:%M:%S"),f' _ CCL:{vendoCCL}',end="  ")
@@ -58,7 +57,7 @@ def mep_ccl(t1,t2,t3,t4):
     global vendoCCL,comproCCL,vendoMEP,comproMEP,saldoMEP,saldoCCL
     vendoMEP = round(((t1/100) * (1 - costos)) * ins['1'][1],2)
     comproMEP = round(vendoMEP / ((t2/100) * (1 + costos)),0)
-    vendoCCL = round(comproMEP * ((t3/100) * (1-costos)),2)
+    vendoCCL = round(comproMEP * ((t3/100) * (1 - costos)),2)
     comproCCL = round(vendoCCL / ((t4/100) * (1 + costos)),0)
     saldoMEP = round(vendoMEP - comproMEP * (t2/100),2)
     saldoCCL = round(vendoCCL - comproCCL * (t4/100),2)
@@ -70,7 +69,7 @@ def ccl_pes(t1,t2,t3,t4):
     global vendoCCL,comproCCL,vendoPES,comproPES,saldoCCL, saldoPES
     vendoCCL = round(((t1/100) * (1 - costos)) * ins['1'][1],2)
     comproCCL = round(vendoCCL / ((t2/100) * (1 + costos)),0)
-    vendoPES = round(comproCCL * ((t3/100) * (1-costos)),2)
+    vendoPES = round(comproCCL * ((t3/100) * (1 - costos)),2)
     comproPES = round(vendoPES / ((t4/100) * (1 + costos)),0)
     saldoCCL = round(vendoCCL - comproCCL * (t2/100),2)
     saldoPES = round(vendoPES - comproPES * (t4/100),2)
@@ -82,7 +81,7 @@ def mep_pes(t1,t2,t3,t4):
     global vendoPES,comproPES,vendoMEP,comproMEP,saldoMEP,saldoPES
     vendoMEP = round(((t1/100) * (1 - costos)) * ins['1'][1],2)
     comproMEP = round(vendoMEP / ((t2/100) * (1 + costos)),0)
-    vendoPES = round(comproMEP * ((t3/100) * (1-costos)),2)
+    vendoPES = round(comproMEP * ((t3/100) * (1 - costos)),2)
     comproPES = round(vendoPES / ((t4/100) * (1 + costos)),0)
     saldoMEP = round(vendoMEP - comproMEP * (t2/100),2)
     saldoPES = round(vendoPES - comproPES * (t4/100),2)
@@ -100,17 +99,17 @@ peso = round(0,4)
 
 ins = {
     '1':['al30',100,'gd30'],'2':['0',100,'s31e2'],
-    '3':['0',100,'al30'],'4':['0',100,'s31e2'],
+    '3':['gd30',100,'al30'],'4':['0',100,'s31e2'],
     '5':['0',5000,'al30'],'6':['0',5000,'gd30']}
 
 
 while limite > 0:
-    if time.strftime("%H:%M:%S") >= '17:00:10':
+    if time.strftime("%H:%M:%S") <= '17:00:10':
         print('...................... MERCADO CERRADO 17HS .......................')
         break
     for i, e in ins.items():
         while e[0] != '0':
-            if time.strftime("%H:%M:%S") <= '15:59:15':
+            if time.strftime("%H:%M:%S") >= '15:59:15':
 
                 t1 = cclCI(e[0]).precio_BI()
                 t2 = cclCI(e[2]).precio_OF()
@@ -119,7 +118,7 @@ while limite > 0:
                 if t1 != 1000 and t2 != 1000 and t3 != 1000 and t4 != 1000:
                     while limite > 0:
                         ccl_mep(t1,t2,t3,t4)
-                        if comproMEP >= e[1] and cclCI(e[0]).cantidad_BI() > e[1] and cclCI(e[2]).cantidad_OF() >= comproCCL and mepCI(e[2]).cantidad_BI() >= comproCCL and mepCI(e[0]).cantidad_OF() >= comproMEP:
+                        if comproMEP >= e[1]: # and cclCI(e[0]).cantidad_BI() > e[1] and cclCI(e[2]).cantidad_OF() >= comproCCL and mepCI(e[2]).cantidad_BI() >= comproCCL and mepCI(e[0]).cantidad_OF() >= comproMEP:
 
                             #vender(cclCI(e[0]),e[1],cclCI(e[0]).precio_BI())
                             #comprar(cclCI(e[2]),comproCCL,cclCI(e[2]).precio_OF())
@@ -136,9 +135,8 @@ while limite > 0:
                             print(f'NO hay /CI/ {e[0]}.ccl _ {e[2]}.mep _ LIM: {limite}')
                             break
                 else:
-                    print(f'Sin precios CI para {e[0]}.ccl _ {e[2]}.mep')
-                    break
-
+                    print(time.strftime("%H:%M:%S"),f' Sin precios CI para {e[0]}.ccl _ {e[2]}.mep')
+                    
                 t1 = mepCI(e[0]).precio_BI()
                 t2 = mepCI(e[2]).precio_OF()
                 t3 = cclCI(e[2]).precio_BI()
@@ -146,7 +144,7 @@ while limite > 0:
                 if t1 != 1000 and t2 != 1000 and t3 != 1000 and t4 != 1000:
                     while limite > 0:
                         mep_ccl(t1,t2,t3,t4)
-                        if comproCCL >= e[1] and mepCI(e[0]).cantidad_BI() > e[1] and mepCI(e[2]).cantidad_OF() > comproMEP and cclCI(e[2]).cantidad_BI() >= comproMEP and cclCI(e[0]).cantidad_OF() >= comproCCL:
+                        if comproCCL >= e[1]: # and mepCI(e[0]).cantidad_BI() > e[1] and mepCI(e[2]).cantidad_OF() > comproMEP and cclCI(e[2]).cantidad_BI() >= comproMEP and cclCI(e[0]).cantidad_OF() >= comproCCL:
 
                             #vender(mepCI(e[0]),e[1],mepCI(e[0]).precio_BI())
                             #comprar(mepCI(e[2]),comproMEP,mepCI(e[2]).precio_OF())
@@ -163,17 +161,16 @@ while limite > 0:
                             print(f'NO hay /CI/ {e[0]}.mep _ {e[2]}.ccl _ LIM: {limite}')
                             break
                 else:
-                    print(f'Sin precios CI para {e[0]}.mep _ {e[2]}.ccl')
-                    break
+                    print(time.strftime("%H:%M:%S"),f' Sin precios CI para {e[0]}.mep _ {e[2]}.ccl')
 
-                t1 = cclCI(e[0]).precio_BI()
+                '''t1 = cclCI(e[0]).precio_BI()
                 t2 = cclCI(e[2]).precio_OF()
                 t3 = pesCI(e[2]).precio_BI()
                 t4 = pesCI(e[0]).precio_OF()
                 if t1 != 1000 and t2 != 1000 and t3 != 1000 and t4 != 1000:
                     while limite > 0:
                         ccl_pes(t1,t2,t3,t4)
-                        if comproPES >= e[1] and cclCI(e[0]).cantidad_BI() > e[1] and cclCI(e[2]).cantidad_OF() > comproCCL and pesCI(e[2]).cantidad_BI() >= comproCCL and pesCI(e[0]).cantidad_OF() >= comproPES:
+                        if comproPES >= e[1]: # and cclCI(e[0]).cantidad_BI() > e[1] and cclCI(e[2]).cantidad_OF() > comproCCL and pesCI(e[2]).cantidad_BI() >= comproCCL and pesCI(e[0]).cantidad_OF() >= comproPES:
 
                             #vender(cclCI(e[0]),e[1],cclCI(e[0]).precio_BI())
                             #comprar(cclCI(e[2]),comproCCL,cclCI(e[2]).precio_OF())
@@ -190,8 +187,7 @@ while limite > 0:
                             print(f'NO hay /CI/ {e[0]}.ccl _ {e[2]}.peso _ LIM: {limite}')
                             break
                 else:
-                    print(f'Sin precios CI para {e[0]}.ccl _ {e[2]}.peso')
-                    break
+                    print(time.strftime("%H:%M:%S"),f' Sin precios CI para {e[0]}.ccl _ {e[2]}.peso')
 
                 t1 = mepCI(e[0]).precio_BI()
                 t2 = mepCI(e[2]).precio_OF()
@@ -200,7 +196,7 @@ while limite > 0:
                 if t1 != 1000 and t2 != 1000 and t3 != 1000 and t4 != 1000:
                     while limite > 0:
                         mep_pes(t1,t2,t3,t4)
-                        if comproPES >= e[1] and mepCI(e[0]).cantidad_BI() > e[1] and mepCI(e[2]).cantidad_OF() > comproCCL and pesCI(e[2]).cantidad_BI() >= comproCCL and pesCI(e[0]).cantidad_OF() >= comproPES:
+                        if comproPES >= e[1]: # and mepCI(e[0]).cantidad_BI() > e[1] and mepCI(e[2]).cantidad_OF() > comproCCL and pesCI(e[2]).cantidad_BI() >= comproCCL and pesCI(e[0]).cantidad_OF() >= comproPES:
 
                             #vender(mepCI(e[0]),e[1],mepCI(e[0]).precio_BI())
                             #comprar(mepCI(e[2]),comproMEP,mepCI(e[2]).precio_OF())
@@ -217,10 +213,9 @@ while limite > 0:
                             print(f'NO hay /CI/ {e[0]}.mep _ {e[2]}.peso _ LIM: {limite}')
                             break
                 else:
-                    print(f'Sin precios CI para {e[0]}.mep _ {e[2]}.peso')
-                    break
+                    print(time.strftime("%H:%M:%S"),f' Sin precios CI para {e[0]}.mep _ {e[2]}.peso')'''
 
-        # CCL contra MEP en 48 horas
+    # CCL contra MEP en 48 horas
             t1 = ccl48(e[0]).precio_BI()
             t2 = ccl48(e[2]).precio_OF()
             t3 = mep48(e[2]).precio_BI()
@@ -228,7 +223,7 @@ while limite > 0:
             if t1 != 1000 and t2 != 1000 and t3 != 1000 and t4 != 1000:
                 while limite > 0:
                     ccl_mep(t1,t2,t3,t4)
-                    if comproMEP >= e[1] and ccl48(e[0]).cantidad_BI() > e[1] and ccl48(e[2]).cantidad_OF() >= comproCCL and mep48(e[2]).cantidad_BI() >= comproCCL and mep48(e[0]).cantidad_OF() >= comproMEP:
+                    if comproMEP >= e[1]: #and ccl48(e[0]).cantidad_BI() > e[1] and ccl48(e[2]).cantidad_OF() >= comproCCL and mep48(e[2]).cantidad_BI() >= comproCCL and mep48(e[0]).cantidad_OF() >= comproMEP:
 
                         #vender(ccl48(e[0]),e[1],ccl48(e[0]).precio_BI())
                         #comprar(ccl48(e[2]),comproCCL,ccl48(e[2]).precio_OF())
@@ -245,10 +240,9 @@ while limite > 0:
                         print(f'NO hay /48/ {e[0]}.ccl _ {e[2]}.mep _ LIM: {limite}')
                         break
             else:
-                print(f'Sin precios 48 para {e[0]}.ccl _ {e[2]}.mep')
-                break
+                print(time.strftime("%H:%M:%S"),f' Sin precios 48 para {e[0]}.ccl _ {e[2]}.mep')
 
-        # MEP contra CCL en 48 horas
+    # MEP contra CCL en 48 horas
             t1 = mep48(e[0]).precio_BI()
             t2 = mep48(e[2]).precio_OF()
             t3 = ccl48(e[2]).precio_BI()
@@ -256,7 +250,7 @@ while limite > 0:
             if t1 != 1000 and t2 != 1000 and t3 != 1000 and t4 != 1000:
                 while limite > 0:
                     mep_ccl(t1,t2,t3,t4)
-                    if comproCCL >= e[1] and mep48(e[0]).cantidad_BI() > e[1] and mep48(e[2]).cantidad_OF() >= comproMEP and ccl48(e[2]).cantidad_BI() >= comproMEP and ccl48(e[0]).cantidad_OF() >= comproCCL:
+                    if comproCCL >= e[1]: # and mep48(e[0]).cantidad_BI() > e[1] and mep48(e[2]).cantidad_OF() >= comproMEP and ccl48(e[2]).cantidad_BI() >= comproMEP and ccl48(e[0]).cantidad_OF() >= comproCCL:
 
                         #vender(mep48(e[0]),e[1],mep48(e[0]).precio_BI())
                         #comprar(mep48(e[2]),comproMEP,mep48(e[2]).precio_OF())
@@ -272,10 +266,67 @@ while limite > 0:
                     else:
                         print(f'NO hay /48/ {e[0]}.mep _ {e[2]}.ccl _ LIM: {limite}')
                         break
-                break
+                #break
             else:
-                print(f'Sin precios 48 para {e[0]}.mep _ {e[2]}.ccl')
+                print(time.strftime("%H:%M:%S"),f' Sin precios 48 para {e[0]}.mep _ {e[2]}.ccl')
+
                 break
+                
+    '''# CCL contra PESOS en 48 horas
+            t1 = ccl48(e[0]).precio_BI()
+            t2 = ccl48(e[2]).precio_OF()
+            t3 = pes48(e[2]).precio_BI()
+            t4 = pes48(e[0]).precio_OF()
+            if t1 != 1000 and t2 != 1000 and t3 != 1000 and t4 != 1000:
+                while limite > 0:
+                    ccl_pes(t1,t2,t3,t4)
+                    if comproPES >= e[1]: # and ccl48(e[0]).cantidad_BI() > e[1] and ccl48(e[2]).cantidad_OF() >= comproCCL and pes48(e[2]).cantidad_BI() >= comproCCL and pes48(e[0]).cantidad_OF() >= comproPES:
+
+                        vender(ccl48(e[0]),e[1],ccl48(e[0]).precio_BI())
+                        comprar(ccl48(e[2]),comproCCL,ccl48(e[2]).precio_OF())
+                        vender(pes48(e[2]),comproCCL,pes48(e[2]).precio_BI())
+                        comprar(pes48(e[0]),comproPES,pes48(e[0]).precio_OF())
+
+                        gana += comproPES - e[1]
+                        limite -= e[1]
+                        ccl += saldoCCL
+                        peso += saldoPES
+                        print(f'48 {e[0]}/{e[2]}, ganados:{gana}, {ccl} CCL y {peso} PESOS _ limite: {limite}')
+                        continue
+                    else:
+                        print(f'NO hay /48/ {e[0]}.ccl _ {e[2]}.pesos _ LIM: {limite}')
+                        break
+            else:
+                print(time.strftime("%H:%M:%S"),f' Sin precios 48 para {e[0]}.ccl _ {e[2]}.pesos')
+                
+    # MEP contra PESOS en 48 horas
+            t1 = mep48(e[0]).precio_BI()
+            t2 = mep48(e[2]).precio_OF()
+            t3 = pes48(e[2]).precio_BI()
+            t4 = pes48(e[0]).precio_OF()
+            if t1 != 1000 and t2 != 1000 and t3 != 1000 and t4 != 1000:
+                while limite > 0:
+                    mep_pes(t1,t2,t3,t4)
+                    if comproPES >= e[1]: # and mep48(e[0]).cantidad_BI() > e[1] and mep48(e[2]).cantidad_OF() >= comproCCL and pes48(e[2]).cantidad_BI() >= comproCCL and pes48(e[0]).cantidad_OF() >= comproPES:
+
+                        vender(mep48(e[0]),e[1],mep48(e[0]).precio_BI())
+                        comprar(mep48(e[2]),comproCCL,mep48(e[2]).precio_OF())
+                        vender(pes48(e[2]),comproCCL,pes48(e[2]).precio_BI())
+                        comprar(pes48(e[0]),comproPES,pes48(e[0]).precio_OF())
+
+                        gana += comproPES - e[1]
+                        limite -= e[1]
+                        mep += saldoMEP
+                        peso += saldoPES
+                        print(f'48 {e[0]}/{e[2]}, ganados:{gana}, {mep} MEP y {peso} PESOS _ limite: {limite}')
+                        continue
+                    else:
+                        print(f'NO hay /48/ {e[0]}.mep _ {e[2]}.pesos _ LIM: {limite}')
+                        break
+            else:
+                print(time.strftime("%H:%M:%S"),f' Sin precios 48 para {e[0]}.mep _ {e[2]}.pesos')
+                break'''
+
 
 
 
