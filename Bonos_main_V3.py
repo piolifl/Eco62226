@@ -60,16 +60,6 @@ def cruce(t1,t2,t3,t4):
     print(f'$:{vendoB}',end="  ")
     print(f'bon:{comproA}',end=" _ ") 
 
-costos = 0.0026
-limite = 1000
-gana = round(0,0)
-moneda1 = round(0,4)
-moneda2 = round(0,4)
-
-ins = {
-    '1':['al30',100,'gd30'],    '2':['0',100,'al30'],
-    '3':['0',100,'0'],    '4':['0',100,'0'],
-    '5':['0',1000,'0'],  '6':['0',1000,'0']}
 
 def vuelta(a,b,c,d):
     global limite,gana,moneda1,moneda2
@@ -79,37 +69,68 @@ def vuelta(a,b,c,d):
             t2 = b(e[2]).precio_OF()
             t3 = c(e[2]).precio_BI()
             t4 = d(e[0]).precio_OF()
-            if limite > 0:#t1 != 1000 and t2 != 1000 and t3 != 1000 and t4 != 1000:
-                cruce(t1,t2,t3,t4)
-                if comproA < e[1]:# and cclCI(e[0]).cantidad_BI() > e[1] and cclCI(e[2]).cantidad_OF() >= comproCCL and mepCI(e[2]).cantidad_BI() >= comproCCL and mepCI(e[0]).cantidad_OF() >= comproMEP:
+            cruce(t1,t2,t3,t4)
 
-                    #vender(    a(e[0]),     e[1],       a(e[0]).precio_BI())
-                    #comprar(   b(e[2]),     comproB,    b(e[2]).precio_OF())
-                    #vender(    c(e[2]),     comproB,    c(e[2]).precio_BI())
-                    #comprar(   d(e[0]),     comproA,    d(e[0]).precio_OF())
+            if limite > 0:
 
-                    gana += comproA - e[1]
-                    limite -= e[1]
-                    moneda1 += saldoA
-                    moneda2 += saldoB
-                    print(f'{e[0]}/{e[2]}, bonos :{gana}, $ {moneda1} y $ {moneda2} _ limite:{limite}'),time.sleep(2)
-                    continue
+                if t1 != 1000 and t2 != 1000 and t3 != 1000 and t4 != 1000:
+
+                    if comproA >= e[1] + 2:
+
+                        if  a(e[0]).cantidad_BI() > e[1] and b(e[2]).cantidad_OF() >= comproB and c(e[2]).cantidad_BI() >= comproB and d(e[0]).cantidad_OF() >= comproA:
+
+                            #vender(    a(e[0]),     e[1],       a(e[0]).precio_BI())
+                            #comprar(   b(e[2]),     comproB,    b(e[2]).precio_OF())
+                            #vender(    c(e[2]),     comproB,    c(e[2]).precio_BI())
+                            #comprar(   d(e[0]),     comproA,    d(e[0]).precio_OF())
+
+                            gana += comproA - e[1]
+                            limite -= e[1]
+                            moneda1 += round(saldoA,2)
+                            moneda2 += round(saldoB,2)
+                            print(f'{e[0]}/{e[2]}, bonos :{gana}, $ {moneda1} y $ {moneda2} _ limite:{limite}'),time.sleep(0)
+                            continue
+                        else:
+                            print(f' Sin bid/ask en {e[0]} _ {e[2]} _ limite: {limite}')
+                            break
+                    else:
+                        print(f' NO hay cruce entre {e[0]} _ {e[2]} _ limite: {limite}')
+                        break
                 else:
-                    print(f'NO hay cruce entre {e[0]} _ {e[2]} _ limite: {limite}')
+                    print(f' Sin precios para {e[0]} _ {e[2]} _ limite: {limite}')
                     break
             else:
-                print(time.strftime("%H:%M:%S"),f' Sin precios para {e[0]} _ {e[2]}')
+                print(f' Limite = {limite} AGOTADO !!!')
                 break
 
 
+costos = 0.0026
+limite = 1000
+gana = round(0,0)
+moneda1 = round(0,4)
+moneda2 = round(0,4)
+
+ins = {
+    '1':['al30',100,'gd30'],    '2':['gd30',100,'al30'],
+    '3':['al30',100,'s31e2'],    '4':['s31e2',100,'al30'],
+    '5':['gd30',1000,'s31e2'],  '6':['s31e2',1000,'gd30']}
+
+
+
 while True:
-    if time.strftime("%H:%M:%S") <= '17:00:10':
+    if time.strftime("%H:%M:%S") >= '17:00:10':
         print('...................... MERCADO CERRADO 17HS .......................')
         break
-    if time.strftime("%H:%M:%S") <= '15:59:15':
-        print('CCL vs MEP_CI/', end ='  '), vuelta(cclCI,cclCI,mepCI,mepCI)
-        print('MEP vs CCL_CI/', end ='  '), vuelta(mepCI,mepCI,cclCI,cclCI)
+    if time.strftime("%H:%M:%S") <= '15:59:15' and limite > 0:
+        vuelta(cclCI,cclCI,mepCI,mepCI)
+        vuelta(mepCI,mepCI,cclCI,cclCI)
+        vuelta(cclCI,cclCI,pesCI,pesCI)
+        vuelta(mepCI,mepCI,pesCI,pesCI)
 
-    else:
-        print('CCL vs MEP_48/', end ='  '), vuelta(ccl48,ccl48,mep48,mep48)
-        print('MEP vs CCL_48/', end ='  '), vuelta(mep48,mep48,ccl48,ccl48)
+    if limite > 0:
+        vuelta(ccl48,ccl48,mep48,mep48)
+        vuelta(mep48,mep48,ccl48,ccl48)
+        vuelta(ccl48,ccl48,pes48,pes48)
+        vuelta(mep48,mep48,pes48,pes48)
+    else: break
+
