@@ -79,7 +79,7 @@ def vuelta(a,b,c,d):
             t2 = b(e[2]).precio_OF()
             t3 = c(e[2]).precio_BI()
             t4 = d(e[0]).precio_OF()
-            if 2>1:#t1 != 1000 and t2 != 1000 and t3 != 1000 and t4 != 1000:
+            if limite > 0:#t1 != 1000 and t2 != 1000 and t3 != 1000 and t4 != 1000:
                 cruce(t1,t2,t3,t4)
                 if comproA < e[1]:# and cclCI(e[0]).cantidad_BI() > e[1] and cclCI(e[2]).cantidad_OF() >= comproCCL and mepCI(e[2]).cantidad_BI() >= comproCCL and mepCI(e[0]).cantidad_OF() >= comproMEP:
 
@@ -92,7 +92,7 @@ def vuelta(a,b,c,d):
                     limite -= e[1]
                     moneda1 += saldoA
                     moneda2 += saldoB
-                    print(f'{e[0]}/{e[2]}, bonos :{gana}, $ {moneda1} y $ {moneda2} _ limite:{limite}'),time.sleep(5)
+                    print(f'{e[0]}/{e[2]}, bonos :{gana}, $ {moneda1} y $ {moneda2} _ limite:{limite}'),time.sleep(2)
                     continue
                 else:
                     print(f'NO hay cruce entre {e[0]} _ {e[2]} _ limite: {limite}')
@@ -102,7 +102,7 @@ def vuelta(a,b,c,d):
                 break
 
 
-while limite > 0:
+while True:
     if time.strftime("%H:%M:%S") <= '17:00:10':
         print('...................... MERCADO CERRADO 17HS .......................')
         break
@@ -112,4 +112,4 @@ while limite > 0:
 
     else:
         print('CCL vs MEP_48/', end ='  '), vuelta(ccl48,ccl48,mep48,mep48)
-        print('MEP vs CCL_48/', end ='  '), vuelta(mep48,mep48,ccl48,cclCI)
+        print('MEP vs CCL_48/', end ='  '), vuelta(mep48,mep48,ccl48,ccl48)
