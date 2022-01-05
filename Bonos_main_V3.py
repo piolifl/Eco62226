@@ -56,10 +56,7 @@ def cclCI(bono):
 
 def cruce(t1,t2,t3,t4):
     global vendoA,comproB,vendoB,comproA,saldoA,saldoB,liquidoB
-    if t1 == 's31e2':
-        cantidad = ins['5'][1]
-    else:
-        cantidad = ins['1'][1]
+    cantidad = ins['1'][1]
     vendoA = round(((t1/100) * (1 - costos)) * cantidad,2)
     comproB = round(vendoA / ((t2/100) * (1 + costos)),0)
     liquidoB = round(t2/100 * comproB,0)
@@ -68,7 +65,7 @@ def cruce(t1,t2,t3,t4):
 
     saldoA = round(vendoA - comproB * (t2/100),2)
     saldoB = round(vendoB - comproA * (t4/100),2)
-    print(time.strftime("%H:%M:%S"),f'  $:{vendoA}',end="  ")
+    print(time.strftime("%H:%M:%S"),f' $:{vendoA}',end="  ")
     print(f'bon:{comproB}',end="")
     print(f'(${liquidoB})',end="  ")
     print(f'$:{vendoB}',end="  ")
@@ -127,7 +124,7 @@ moneda2 = round(0,4)
 ins = {
     '1':['al30',100,'gd30'],    '2':['al30',100,'s31e2'],
     '3':['gd30',100,'s31e2'],    '4':['gd30',100,'al30'],
-    '5':['s31e2',1000,'al30'],  '6':['s31e2',1000,'gd30']}
+    '5':['0',1000,'al30'],  '6':['0',1000,'gd30']}
 
 
 while True:
@@ -137,8 +134,8 @@ while True:
     if time.strftime("%H:%M:%S") <= '15:59:15' and limite > 0:
         vuelta(cclCI,cclCI,mepCI,mepCI)
         vuelta(mepCI,mepCI,cclCI,cclCI)
-        vuelta(cclCI,cclCI,pesCI,pesCI)
-        vuelta(mepCI,mepCI,pesCI,pesCI)
+        #vuelta(cclCI,cclCI,pesCI,pesCI)
+        #vuelta(mepCI,mepCI,pesCI,pesCI)
 
 
     if limite > 0:
