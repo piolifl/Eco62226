@@ -20,6 +20,10 @@ def pes48(bono):
     for tipo, valor in ticker['duales']['48']['peso'].items():
         if tipo == bono:
             return valor
+def pes24(bono): 
+    for tipo, valor in ticker['duales']['24']['peso'].items():
+        if tipo == bono:
+            return valor
 def pesCI(bono): 
     for tipo, valor in ticker['duales']['CI']['peso'].items():
         if tipo == bono:
@@ -28,12 +32,20 @@ def mep48(bono):
     for tipo, valor in ticker['duales']['48']['mep'].items():
         if tipo == bono:
             return valor
+def mep24(bono): 
+    for tipo, valor in ticker['duales']['24']['mep'].items():
+        if tipo == bono:
+            return valor
 def mepCI(bono): 
     for tipo, valor in ticker['duales']['CI']['mep'].items():
         if tipo == bono:
             return valor
 def ccl48(bono): 
     for tipo, valor in ticker['duales']['48']['ccl'].items():
+        if tipo == bono:
+            return valor
+def ccl24(bono): 
+    for tipo, valor in ticker['duales']['24']['ccl'].items():
         if tipo == bono:
             return valor
 def cclCI(bono): 
@@ -130,6 +142,11 @@ while True:
 
 
     if limite > 0:
+        vuelta(ccl24,ccl24,mep24,mep24)
+        vuelta(mep24,mep24,ccl24,ccl24)
+        vuelta(ccl24,ccl24,pes24,pes24)
+        vuelta(mep24,mep24,pes24,pes24)
+
         vuelta(ccl48,ccl48,mep48,mep48)
         vuelta(mep48,mep48,ccl48,ccl48)
         vuelta(ccl48,ccl48,pes48,pes48)
