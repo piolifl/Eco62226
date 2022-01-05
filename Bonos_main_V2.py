@@ -114,9 +114,9 @@ mep = round(0,4)
 peso = round(0,4)
 
 ins = {
-    '1':['al30',100,'gd30'],'2':['al30',100,'s31e2'],
-    '3':['gd30',100,'al30'],'4':['gd30',100,'s31e2'],
-    '5':['s31e2',1000,'al30'],'6':['s31e2',1000,'gd30']}
+    '1':['al30',100,'gd30'],    '2':['al30',100,'s31e2'],
+    '3':['gd30',100,'al30'],    '4':['gd30',100,'s31e2'],
+    '5':['s31e2',1000,'al30'],  '6':['s31e2',1000,'gd30']}
 
 
 while True:
@@ -136,10 +136,10 @@ while True:
                         ccl_mep(t1,t2,t3,t4)
                         if comproMEP > e[1]:# and cclCI(e[0]).cantidad_BI() > e[1] and cclCI(e[2]).cantidad_OF() >= comproCCL and mepCI(e[2]).cantidad_BI() >= comproCCL and mepCI(e[0]).cantidad_OF() >= comproMEP:
 
-                            #vender(cclCI(e[0]),e[1],cclCI(e[0]).precio_BI())
-                            #comprar(cclCI(e[2]),comproCCL,cclCI(e[2]).precio_OF())
-                            #vender(mepCI(e[2]),comproCCL,mepCI(e[2]).precio_BI())
-                            #comprar(mepCI(e[0]),comproMEP,mepCI(e[0]).precio_OF())
+                            #vender(    cclCI(e[0]),e[1],cclCI(e[0]).precio_BI())
+                            #comprar(   cclCI(e[2]),comproCCL,cclCI(e[2]).precio_OF())
+                            #vender(    mepCI(e[2]),comproCCL,mepCI(e[2]).precio_BI())
+                            #comprar(   mepCI(e[0]),comproMEP,mepCI(e[0]).precio_OF())
 
                             gana += comproMEP - e[1]
                             limite -= e[1]
@@ -339,6 +339,7 @@ while True:
                     else:
                         print(f'NO hay /48/ {e[0]}d _ {e[2]} _ LIM: {limite}')
                         break
+                break
             else:
                 print(time.strftime("%H:%M:%S"),f' Sin precios 48 para {e[0]}d _ {e[2]}')
                 break'''
