@@ -68,7 +68,7 @@ def cruce(t1,t2,t3,t4):
     print(f'bon:{comproB}',end="")
     print(f'(${liquidoB})',end="  ")
     print(f'$:{vendoB}',end="  ")
-    print(f'bon:{comproA}',end=" _ ") 
+    print(f'FIN:{comproA}',end=" _ ") 
 def vuelta(a,b,c,d):
     global limite,gana,moneda1,moneda2,moneda3
     for i,e in ins.items():
@@ -78,15 +78,12 @@ def vuelta(a,b,c,d):
             t3 = c(e[2]).precio_BI()
             t4 = d(e[0]).precio_OF()
             cruce(t1,t2,t3,t4)
-
             if limite > 0:
-
                 if t1 != 1000 and t2 != 1000 and t3 != 1000 and t4 != 1000:
-
-                    if comproA > e[1]:
-
+                    if comproA > e[1] :
                         if a(e[0]).cantidad_BI() > e[1] and b(e[2]).cantidad_OF() >= comproB and c(e[2]).cantidad_BI() >= comproB and d(e[0]).cantidad_OF() >= comproA:
 
+                            #if saldoA > 0 and saldoB > 0:  
                             #vender(    a(e[0]),     e[1],       a(e[0]).precio_BI())
                             #comprar(   b(e[2]),     comproB,    b(e[2]).precio_OF())
                             #vender(    c(e[2]),     comproB,    c(e[2]).precio_BI())
@@ -95,22 +92,23 @@ def vuelta(a,b,c,d):
                             gana += comproA - e[1]
                             limite -= e[1]
                             moneda1 += round(saldoA,2)
-                            moneda2 += round(saldoB,2)
-                            moneda3 += round(saldoB,2)
+                                 
                             if len(str(t3)) >= 4:
-                                print(f'{e[0]}/{e[2]}, bonos:{gana}, u$d{moneda1}, u$d{moneda2} Ars{moneda3} _ limite:{limite}'),time.sleep(0)
+                                moneda3 += round(saldoB,2)
+                                print(f'{e[0]}/{e[2]}, bonos:{gana} / u$d{moneda1} / u$d{moneda2} / Ars{moneda3} _ lim:{limite}')
                                 continue
                             else:
-                                print(f'{e[0]}/{e[2]}, bonos:{gana}, u$d{moneda1}, u$s{moneda2} Ars{moneda3} _ limite:{limite}'),time.sleep(0)
+                                moneda2 += round(saldoB,2)
+                                print(f'{e[0]}/{e[2]}, bonos:{gana} / u$d{moneda1} / u$s{moneda2} / Ars{moneda3} _ lim:{limite}')
                                 continue
                         else:
-                            print(f' Sin bid/ask en {e[0]} _ {e[2]} _ limite: {limite}')
+                            print(f' Sin bid/ask en {e[0]} _ {e[2]} _ limite:{limite}')
                             break
                     else:
-                        print(f' NO hay cruce entre {e[0]} _ {e[2]} _ limite: {limite}')
+                        print(f' NO hay cruce {e[0]} _ {e[2]} _ limite:{limite}')
                         break
                 else:
-                    print(f' Sin precios para {e[0]} _ {e[2]} _ limite: {limite}')
+                    print(f' Sin precios para {e[0]} _ {e[2]} _ limite:{limite}')
                     break
             else:
                 print(f' Limite = {limite} AGOTADO !!!')
@@ -131,7 +129,7 @@ ins = {
 
 
 while True:
-    if time.strftime("%H:%M:%S") >= '17:00:10':
+    if time.strftime("%H:%M:%S") <= '17:00:10':
         print('...................... MERCADO CERRADO 17HS .......................')
         break
     if time.strftime("%H:%M:%S") <= '15:59:15' and limite > 0:
@@ -142,14 +140,15 @@ while True:
     #else: break
 
     if limite > 0:
+        '''vuelta(ccl48,ccl48,mep48,mep48)
+        vuelta(mep48,mep48,ccl48,ccl48)
+        vuelta(ccl48,ccl48,pes48,pes48)
+        vuelta(mep48,mep48,pes48,pes48)'''
+
         vuelta(ccl24,ccl24,mep24,mep24)
         vuelta(mep24,mep24,ccl24,ccl24)
         vuelta(ccl24,ccl24,pes24,pes24)
         vuelta(mep24,mep24,pes24,pes24)
 
-        vuelta(ccl48,ccl48,mep48,mep48)
-        vuelta(mep48,mep48,ccl48,ccl48)
-        vuelta(ccl48,ccl48,pes48,pes48)
-        vuelta(mep48,mep48,pes48,pes48)
     else: break
 
