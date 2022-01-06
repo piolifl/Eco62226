@@ -98,10 +98,10 @@ def vuelta(a,b,c,d):
                             moneda2 += round(saldoB,2)
                             moneda3 += round(saldoB,2)
                             if len(str(t3)) >= 4:
-                                print(f'{e[0]}/{e[2]}, bonos :{gana}, $ {moneda1} y $ {moneda3} _ limite:{limite}'),time.sleep(0)
+                                print(f'{e[0]}/{e[2]}, bonos:{gana}, u$d{moneda1}, u$d{moneda2} Ars{moneda3} _ limite:{limite}'),time.sleep(0)
                                 continue
                             else:
-                                print(f'{e[0]}/{e[2]}, bonos :{gana}, $ {moneda1} y $ {moneda2} _ limite:{limite}'),time.sleep(0)
+                                print(f'{e[0]}/{e[2]}, bonos:{gana}, u$d{moneda1}, u$s{moneda2} Ars{moneda3} _ limite:{limite}'),time.sleep(0)
                                 continue
                         else:
                             print(f' Sin bid/ask en {e[0]} _ {e[2]} _ limite: {limite}')
@@ -118,7 +118,7 @@ def vuelta(a,b,c,d):
 
 
 costos = 0.0026
-limite = 10000
+limite = 100000
 gana = round(0,0)
 moneda1 = round(0,2)
 moneda2 = round(0,2)
