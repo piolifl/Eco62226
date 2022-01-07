@@ -53,7 +53,7 @@ while True:
 
                     if strikeCall(e[0]).cantidad_BI() >= e[1] and strikeCall(e[0]).cantidad_OF() >= e[4]:
 
-                        print(f'CERRADO bull CALL: {e[0]} = {strikeCall(e[0]).precio_BI()}  // {e[3]} = {strikeCall(e[3]).precio_OF()} RESULT = {saldo} ')
+                        print(f'CERRADO _ {e[0]}: {strikeCall(e[0]).precio_BI()} // {e[3]}: {strikeCall(e[3]).precio_OF()} RESULTADO: {saldo} ')
 
                         vender(strikeCall(e[0]),e[1],strikeCall(e[0]).precio_BI())
                         comprar(strikeCall(e[3]),e[4],strikeCall(e[3]).precio_OF())
@@ -68,6 +68,6 @@ while True:
                     break
             else:
                 ggal = ticker['acciones']['48']['ggal'].precio_LA()
-                print(time.strftime("%H:%M:%S"),f' GGAL:{ggal}   {e[0]}:{strikeCall(e[0]).precio_BI()}  {e[3]}:{strikeCall(e[3]).precio_OF()}   ratioEntrada:{ratioEntrada} ratioActual:{ratioActual}   total:{saldo}')
+                print(time.strftime("%H:%M:%S"),f' GGAL:{ggal} _{e[0]}:{strikeCall(e[0]).precio_BI()} _{e[3]}:{strikeCall(e[3]).precio_OF()} _rEntrada:{ratioEntrada} _rActual:{ratioActual} //total:{saldo}')
                 break
        
