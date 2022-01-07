@@ -129,8 +129,8 @@ ins = {
 
 
 while True:
-    if time.strftime("%H:%M:%S") <= '17:00:10':
-        print('...................... MERCADO CERRADO 17HS .......................')
+    if time.strftime("%H:%M:%S") >= '17:00:10':
+        print(f'... MERCADO CERRADO 17HS ... {limite} ... {moneda1} ... {moneda2} ... {moneda3} ...')
         break
     if time.strftime("%H:%M:%S") <= '15:59:15' and limite > 0:
         vuelta(cclCI,cclCI,mepCI,mepCI)
@@ -140,10 +140,10 @@ while True:
     #else: break
 
     if limite > 0:
-        '''vuelta(ccl48,ccl48,mep48,mep48)
+        vuelta(ccl48,ccl48,mep48,mep48)
         vuelta(mep48,mep48,ccl48,ccl48)
         vuelta(ccl48,ccl48,pes48,pes48)
-        vuelta(mep48,mep48,pes48,pes48)'''
+        vuelta(mep48,mep48,pes48,pes48)
 
         vuelta(ccl24,ccl24,mep24,mep24)
         vuelta(mep24,mep24,ccl24,ccl24)
