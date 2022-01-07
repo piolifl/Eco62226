@@ -64,10 +64,9 @@ def cruce(t1,t2,t3,t4):
     saldoA = round(vendoA - comproB * (t2/100),2)
     saldoB = round(vendoB - comproA * (t4/100),2)
     print(time.strftime("%H:%M:%S"),f' $:{vendoA}',end="  ")
-    print(f'bon:{comproB}',end="")
-    print(f'(${liquidoB})',end="  ")
-    print(f'$:{vendoB}',end="  ")
-    print(f'FIN:{comproA}',end=" _ ") 
+    print(f'B:{comproB}',end=" ")
+    print(f'$:{vendoB}',end=" ")
+    print(f'FIN:{comproA}',end=" ") 
 
 def vuelta(a,b,c,d):
     global limite,gana,moneda1,moneda2,moneda3
@@ -102,16 +101,16 @@ def vuelta(a,b,c,d):
                                 print(f'{e[0]}/{e[2]}, bonos:{gana} / u$d{moneda1} / u$s{moneda2} / Ars{moneda3} _ lim:{limite}')
                                 continue
                         else:
-                            print(f' Sin bid/ask en {e[0]} _ {e[2]} _ limite:{limite}')
+                            print(f' Sin bid/ask {e[0]}/{e[2]} bonos:{gana} / u$d{moneda1} / u$d{moneda2} / Ars{moneda3} _ lim:{limite}')
                             break
                     else:
-                        print(f'//NO hay cruce {e[0]} _ {e[2]} _ limite:{limite}')
+                        print(f'//NO con {e[0]}/{e[2]} bonos:{gana} / u$d{moneda1} / u$d{moneda2} / Ars{moneda3} _ lim:{limite}')
                         break
                 else:
-                    print(f' Sin precios para {e[0]} _ {e[2]} _ limite:{limite}')
+                    print(f' Sin precios en {e[0]}/{e[2]} bonos:{gana} / u$d{moneda1} / u$d{moneda2} / Ars{moneda3} _ lim:{limite}')
                     break
             else:
-                print(f' Limite = {limite} AGOTADO !!!')
+                print(f' Limite {limite} AGOTADO !!! bonos:{gana} / u$d{moneda1} / u$d{moneda2} / Ars{moneda3}')
                 break
 
 
@@ -126,6 +125,7 @@ ins = {
     '1':['al30',100,'gd30'],    '2':['gd30',100,'al30'],
     '3':['al30',100,'s31e2'],    '4':['gd30',100,'s31e2'],
     '5':['s31e2',1000,'al30'],  '6':['s31e2',1000,'gd30'],
+    
     '7':['0',100,'gd29'],  '8':['0',100,'gd35'],
     '9':['0',100,'gd38'],  '10':['0',100,'gd41'],
 
@@ -142,8 +142,8 @@ while True:
     if time.strftime("%H:%M:%S") <= '11:00:05':
         print('Esperando apertura del mercado ... ',time.strftime("%H:%M:%S")),time.sleep(1)
         continue
-    if time.strftime("%H:%M:%S") >= '16:59:50':
-        print(f'... MERCADO CERRADO 17HS ... {limite} ... {moneda1} ... {moneda2} ... {moneda3} ...')
+    elif time.strftime("%H:%M:%S") >= '16:59:50':
+        print(f'... MERCADO CERRADO 17HS ... Limite {limite} bonos ganados:{gana} / u$d{moneda1} / u$d{moneda2} / Ars{moneda3}')
         break
     if time.strftime("%H:%M:%S") <= '15:59:15' and limite > 0:
         vuelta(cclCI,cclCI,mepCI,mepCI)
