@@ -29,10 +29,7 @@ costos = 0.0052
 
 call = {
         '1': ['0',1, 27.09,'200',2, 12.49],
-        '2': ['0',2, 26.55,'210',3, 15.65],
-        '3': ['0', 2,  21.55,'0',  3,  14],
-        '4': ['0', 2,  21.65,'0',  3,  12.2],
-        '5': ['0', 2,  4.5,'0',  3,  2.55]
+        '2': ['0',2, 26.55,'210',3, 15.65]
         }
 
 while True:
@@ -66,9 +63,9 @@ while True:
                     print(time.strftime("%H:%M:%S"),f' GGAL:{ggal} {e[0]}:{p1} {e[3]}:{p2} Entrada:{ratioEntrada} Actual:{ratioActual} // RESULTADO: {saldo}')
                     break
             else:
-                print(time.strftime("%H:%M:%S"),f' Sin precios para base:{e[0]} base:{e[3]} ')
+                print(time.strftime("%H:%M:%S"),f' Sin precios para las bases:{e[0]} y {e[3]} ')
                 break
-    break
+
         
 
 
