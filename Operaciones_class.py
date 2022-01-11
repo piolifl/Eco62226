@@ -85,12 +85,10 @@ class CALL(OPERACIONES):
 class PUT(OPERACIONES):
     pass
 
-
 class GGAL(OPERACIONES):
     pass
 class YPFD(OPERACIONES):
     pass
-
 
 class AL30(OPERACIONES):
     pass
@@ -102,7 +100,6 @@ class AL35(OPERACIONES):
     pass
 class AL41(OPERACIONES):
     pass
-
 
 class GD30(OPERACIONES):
     pass
@@ -233,7 +230,8 @@ ticker = {
                 'al29':AL29('MERV - XMEV - AL29 - 48hs'),'gd29':GD29('MERV - XMEV - GD29 - 48hs'),
                 'al41':AL41('MERV - XMEV - AL41 - 48hs'),'gd41':GD41('MERV - XMEV - GD41 - 48hs'),
                 's31e2':S31E2('MERV - XMEV - S31E2 - 48hs'),'s28f2':S28F2('MERV - XMEV - S28F2 - 48hs'),
-                's31m2':S31M2('MERV - XMEV - S31M2 - 48hs'),'s29a2':S29A2('MERV - XMEV - S29A2 - 48hs')},
+                's31m2':S31M2('MERV - XMEV - S31M2 - 48hs'),'s29a2':S29A2('MERV - XMEV - S29A2 - 48hs'),
+                'aapl':AAPL('MERV - XMEV - AAPL - 48hs'),'ko':KO('MERV - XMEV - KO - 48hs')},
             'mep':{
                 'al30':AL30('MERV - XMEV - AL30D - 48hs'),'gd30':GD30('MERV - XMEV - GD30D - 48hs'),
                 'al35':AL35('MERV - XMEV - AL35D - 48hs'),'gd35':GD35('MERV - XMEV - GD35D - 48hs'),
@@ -241,7 +239,8 @@ ticker = {
                 'al29':AL29('MERV - XMEV - AL29D - 48hs'),'gd29':GD29('MERV - XMEV - GD29D - 48hs'),
                 'al41':AL41('MERV - XMEV - AL41D - 48hs'),'gd41':GD41('MERV - XMEV - GD41D - 48hs'),
                 's31e2':S31E2('MERV - XMEV - SE2D - 48hs'),'s28f2':S28F2('MERV - XMEV - SF2D - 48hs'),
-                's31m2':S31M2('MERV - XMEV - SM2D - 48hs'),'s29a2':S29A2('MERV - XMEV - SA2D - 48hs')},
+                's31m2':S31M2('MERV - XMEV - SM2D - 48hs'),'s29a2':S29A2('MERV - XMEV - SA2D - 48hs'),
+                'aapl':AAPL('MERV - XMEV - AAPLD - 48hs'),'ko':KO('MERV - XMEV - KOD - 48hs')},
             'ccl':{
                 'al30':AL30('MERV - XMEV - AL30C - 48hs'),'gd30':GD30('MERV - XMEV - GD30C - 48hs'),
                 'al35':AL35('MERV - XMEV - AL35C - 48hs'),'gd35':GD35('MERV - XMEV - GD35C - 48hs'),
@@ -249,7 +248,8 @@ ticker = {
                 'al29':AL29('MERV - XMEV - AL29C - 48hs'),'gd29':GD29('MERV - XMEV - GD29C - 48hs'),
                 'al41':AL41('MERV - XMEV - AL41C - 48hs'),'gd41':GD41('MERV - XMEV - GD41C - 48hs'),
                 's31e2':S31E2('MERV - XMEV - SE2C - 48hs'),'s28f2':S28F2('MERV - XMEV - SF2C - 48hs'),
-                's31m2':S31M2('MERV - XMEV - SM2C - 48hs'),'s29a2':S29A2('MERV - XMEV - SA2C - 48hs')}},
+                's31m2':S31M2('MERV - XMEV - SM2C - 48hs'),'s29a2':S29A2('MERV - XMEV - SA2C - 48hs'),
+                'aapl':AAPL('MERV - XMEV - AAPLC - 48hs'),'ko':KO('MERV - XMEV - KOC - 48hs')}},
         '24':{
             'peso':{
                 'al30':AL30('MERV - XMEV - AL30 - 24hs'),'gd30':GD30('MERV - XMEV - GD30 - 24hs'),
@@ -258,7 +258,8 @@ ticker = {
                 'al29':AL29('MERV - XMEV - AL29 - 24hs'),'gd29':GD29('MERV - XMEV - GD29 - 24hs'),
                 'al41':AL41('MERV - XMEV - AL41 - 24hs'),'gd41':GD41('MERV - XMEV - GD41 - 24hs'),
                 's31e2':S31E2('MERV - XMEV - S31E2 - 24hs'),'s28f2':S28F2('MERV - XMEV - S28F2 - 24hs'),
-                's31m2':S31M2('MERV - XMEV - S31M2 - 24hs'),'s29a2':S29A2('MERV - XMEV - S29A2 - 24hs')},
+                's31m2':S31M2('MERV - XMEV - S31M2 - 24hs'),'s29a2':S29A2('MERV - XMEV - S29A2 - 24hs'),
+                'aapl':AAPL('MERV - XMEV - AAPL - 24hs'),'ko':KO('MERV - XMEV - KO - 24hs')},
             'mep':{
                 'al30':AL30('MERV - XMEV - AL30D - 24hs'),'gd30':GD30('MERV - XMEV - GD30D - 24hs'),
                 'al35':AL35('MERV - XMEV - AL35D - 24hs'),'gd35':GD35('MERV - XMEV - GD35D - 24hs'),
@@ -266,7 +267,8 @@ ticker = {
                 'al29':AL29('MERV - XMEV - AL29D - 24hs'),'gd29':GD29('MERV - XMEV - GD29D - 24hs'),
                 'al41':AL41('MERV - XMEV - AL41D - 24hs'),'gd41':GD41('MERV - XMEV - GD41D - 24hs'),
                 's31e2':S31E2('MERV - XMEV - SE2D - 24hs'),'s28f2':S28F2('MERV - XMEV - SF2D - 24hs'),
-                's31m2':S31M2('MERV - XMEV - SM2D - 24hs'),'s29a2':S29A2('MERV - XMEV - SA2D - 24hs')},
+                's31m2':S31M2('MERV - XMEV - SM2D - 24hs'),'s29a2':S29A2('MERV - XMEV - SA2D - 24hs'),
+                'aapl':AAPL('MERV - XMEV - AAPLD - 24hs'),'ko':KO('MERV - XMEV - KOD - 24hs')},
             'ccl':{
                 'al30':AL30('MERV - XMEV - AL30C - 24hs'),'gd30':GD30('MERV - XMEV - GD30C - 24hs'),
                 'al35':AL35('MERV - XMEV - AL35C - 24hs'),'gd35':GD35('MERV - XMEV - GD35C - 24hs'),
@@ -274,7 +276,8 @@ ticker = {
                 'al29':AL29('MERV - XMEV - AL29C - 24hs'),'gd29':GD29('MERV - XMEV - GD29C - 24hs'),
                 'al41':AL41('MERV - XMEV - AL41C - 24hs'),'gd41':GD41('MERV - XMEV - GD41C - 24hs'),
                 's31e2':S31E2('MERV - XMEV - SE2C - 24hs'),'s28f2':S28F2('MERV - XMEV - SF2C - 24hs'),
-                's31m2':S31M2('MERV - XMEV - SM2C - 24hs'),'s29a2':S29A2('MERV - XMEV - SA2C - 24hs')}},
+                's31m2':S31M2('MERV - XMEV - SM2C - 24hs'),'s29a2':S29A2('MERV - XMEV - SA2C - 24hs'),
+                'aapl':AAPL('MERV - XMEV - AAPLC - 24hs'),'ko':KO('MERV - XMEV - KOC - 24hs')}},
         'CI':{
             'peso':{
                 'al30':AL30('MERV - XMEV - AL30 - CI'),'gd30':GD30('MERV - XMEV - GD30 - CI'),
@@ -283,7 +286,8 @@ ticker = {
                 'al29':AL29('MERV - XMEV - AL29 - CI'),'gd29':GD29('MERV - XMEV - GD29 - CI'),
                 'al41':AL41('MERV - XMEV - AL41 - CI'),'gd41':GD41('MERV - XMEV - GD41 - CI'),
                 's31e2':S31E2('MERV - XMEV - S31E2 - CI'),'s28f2':S28F2('MERV - XMEV - S28F2 - CI'),
-                's31m2':S31M2('MERV - XMEV - S31M2 - CI'),'s29a2':S29A2('MERV - XMEV - S29A2 - CI')},
+                's31m2':S31M2('MERV - XMEV - S31M2 - CI'),'s29a2':S29A2('MERV - XMEV - S29A2 - CI'),
+                'aapl':AAPL('MERV - XMEV - AAPL - CI'),'ko':KO('MERV - XMEV - KO - CI')},
             'mep':{
                 'al30':AL30('MERV - XMEV - AL30D - CI'),'gd30':GD30('MERV - XMEV - GD30D - CI'),
                 'al35':AL35('MERV - XMEV - AL35D - CI'),'gd35':GD35('MERV - XMEV - GD35D - CI'),
@@ -291,7 +295,8 @@ ticker = {
                 'al29':AL29('MERV - XMEV - AL29D - CI'),'gd29':GD29('MERV - XMEV - GD29D - CI'),
                 'al41':AL41('MERV - XMEV - AL41D - CI'),'gd41':GD41('MERV - XMEV - GD41D - CI'),
                 's31e2':S31E2('MERV - XMEV - SE2D - CI'),'s28f2':S28F2('MERV - XMEV - SF2D - CI'),
-                's31m2':S31M2('MERV - XMEV - SM2D - CI'),'s29a2':S29A2('MERV - XMEV - SA2D - CI')},
+                's31m2':S31M2('MERV - XMEV - SM2D - CI'),'s29a2':S29A2('MERV - XMEV - SA2D - CI'),
+                'aapl':AAPL('MERV - XMEV - AAPLD - CI'),'ko':KO('MERV - XMEV - KOD - CI')},
             'ccl':{
                 'al30':AL30('MERV - XMEV - AL30C - CI'),'gd30':GD30('MERV - XMEV - GD30C - CI'),
                 'al35':AL35('MERV - XMEV - AL35C - CI'),'gd35':GD35('MERV - XMEV - GD35C - CI'),
@@ -299,7 +304,8 @@ ticker = {
                 'al29':AL29('MERV - XMEV - AL29C - CI'),'gd29':GD29('MERV - XMEV - GD29C - CI'),
                 'al41':AL41('MERV - XMEV - AL41C - CI'),'gd41':GD41('MERV - XMEV - GD41C - CI'),
                 's31e2':S31E2('MERV - XMEV - SE2C - CI'),'s28f2':S28F2('MERV - XMEV - SF2C - CI'),
-                's31m2':S31M2('MERV - XMEV - SM2C - CI'),'s29a2':S29A2('MERV - XMEV - SA2C - CI')}}
+                's31m2':S31M2('MERV - XMEV - SM2C - CI'),'s29a2':S29A2('MERV - XMEV - SA2C - CI'),
+                'aapl':AAPL('MERV - XMEV - AAPLC - CI'),'ko':KO('MERV - XMEV - KOC - CI')}}
             },
 
     'acciones':{
@@ -310,13 +316,6 @@ ticker = {
             'ggal': GGAL('MERV - XMEV - GGAL - CI'),
             'ypfd': YPFD('MERV - XMEV - YPFD - CI')}
             },
-    'cedear':{
-        'aapl_48':(
-            AAPL('MERV - XMEV - AAPL - 48hs'),
-            AAPL('MERV - XMEV - AAPL - CI')),
-        'ko_48':(
-            KO('MERV - XMEV - KO - 48hs'),
-            KO('MERV - XMEV - KO - CI'))}
     }
 
 

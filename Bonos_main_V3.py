@@ -55,18 +55,41 @@ def cclCI(bono):
 
 
 def cruce(t1,t2,t3,t4):
-    global vendoA,comproB,vendoB,comproA,saldoA,saldoB,liquidoB, cant
-    vendoA = round(((t1/100) * (1 - costos)) * cant,2)
-    comproB = round(vendoA / ((t2/100) * (1 + costos)),0)
-    liquidoB = round(t2/100 * comproB,0)
-    vendoB = round(comproB * ((t3/100) * (1 - costos)),2)
-    comproA = round(vendoB / ((t4/100) * (1 + costos)),0)
-    saldoA = round(vendoA - comproB * (t2/100),2)
-    saldoB = round(vendoB - comproA * (t4/100),2)
-    print(time.strftime("%H:%M:%S"),f' $:{vendoA}',end="  ")
-    print(f'B:{comproB}',end=" ")
-    print(f'$:{vendoB}',end=" ")
-    print(f'FIN:{comproA}',end=" ") 
+    global vendoA,comproB,vendoB,comproA,saldoA,saldoB, cant
+
+    if t1 == 'aapl' or t1 == 'ko':
+        vendoA = round(((t1) * (1 - costos)) * cant,2)
+        comproB = round(vendoA / ((t2/100) * (1 + costos)),0)
+        vendoB = round(comproB * ((t3/100) * (1 - costos)),2)
+        comproA = round(vendoB / ((t4) * (1 + costos)),0)
+        saldoA = round(vendoA - comproB * (t2/100),2)
+        saldoB = round(vendoB - comproA * (t4),2)
+        print(time.strftime("%H:%M:%S"),f' $:{vendoA}',end="  ")
+        print(f'B:{comproB}',end=" ")
+        print(f'$:{vendoB}',end=" ")
+        print(f'FIN:{comproA}',end=" ")
+    elif t2 == 'aapl' or t2 == 'ko':
+        vendoA = round(((t1/100) * (1 - costos)) * cant,2)
+        comproB = round(vendoA / ((t2) * (1 + costos)),0)
+        vendoB = round(comproB * ((t3) * (1 - costos)),2)
+        comproA = round(vendoB / ((t4/100) * (1 + costos)),0)
+        saldoA = round(vendoA - comproB * (t2),2)
+        saldoB = round(vendoB - comproA * (t4/100),2)
+        print(time.strftime("%H:%M:%S"),f' $:{vendoA}',end="  ")
+        print(f'B:{comproB}',end=" ")
+        print(f'$:{vendoB}',end=" ")
+        print(f'FIN:{comproA}',end=" ") 
+    else:
+        vendoA = round(((t1/100) * (1 - costos)) * cant,2)
+        comproB = round(vendoA / ((t2/100) * (1 + costos)),0)
+        vendoB = round(comproB * ((t3/100) * (1 - costos)),2)
+        comproA = round(vendoB / ((t4/100) * (1 + costos)),0)
+        saldoA = round(vendoA - comproB * (t2/100),2)
+        saldoB = round(vendoB - comproA * (t4/100),2)
+        print(time.strftime("%H:%M:%S"),f' $:{vendoA}',end="  ")
+        print(f'B:{comproB}',end=" ")
+        print(f'$:{vendoB}',end=" ")
+        print(f'FIN:{comproA}',end=" ") 
 
 def vuelta(a,b,c,d):
     global limite,gana,moneda1,moneda2,moneda3
@@ -122,9 +145,8 @@ moneda2 = round(0,2)
 moneda3 = round(0,2)
 
 ins = {
-    '1':['al30',100,'gd30'],    '2':['gd30',100,'al30'],
-    '3':['al30',100,'s31e2'],    '4':['gd30',100,'s31e2'],
-    '5':['s31e2',1000,'al30'],  '6':['s31e2',1000,'gd30']
+    '1':['al30',100,'gd30'],'2':['al30',100,'gd35'],'3':['al30',100,'gd38'],'4':['al30',100,'s31e2'],'5':['al30',100,'s28f2'],'6':['al30',1000,'aapl'],'6':['aapl',10,'al30'], 
+    '10':['gd30',100,'al30'],'11':['gd30',100,'gd35'],'12':['gd30',100,'gd38'],'13':['gd30',100,'s31e2'],'14':['gd30',100,'s28f2'],'15':['gd30',1000,'aapl'],'16':['aapl',10,'gd30']
     }
 
 cant = ins['1'][1]
@@ -141,7 +163,7 @@ while True:
         vuelta(mepCI,mepCI,cclCI,cclCI)
         vuelta(cclCI,cclCI,pesCI,pesCI)
         vuelta(mepCI,mepCI,pesCI,pesCI)
-    #else: break
+    else: break
 
     if limite > 0:
         vuelta(ccl48,ccl48,mep48,mep48)
