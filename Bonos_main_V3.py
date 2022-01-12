@@ -160,18 +160,20 @@ ins = {
 
     '20':['aapl',10,'al30'], '21':['aapl',10,'gd30'],'22':['aapl',10,'ko'],'22':['aapl',10,'s31e2'],
 
-    '30':['s31e2',10000,'al30'], '31':['s31e2',10000,'gd30'],'32':['s31e2',10000,'aapl']
+    '30':['s31e2',10000,'al30'], '31':['s31e2',10000,'gd30'],'32':['s31e2',10000,'aapl'],
+
+    '40':['ko',100,'al30'], '41':['ko',100,'gd30'],'42':['ko',100,'s31e2']
     }
 
 
 while True:
-    if time.strftime("%H:%M:%S") <= '11:00:05':
+    if time.strftime("%H:%M:%S") < '11:00:05':
         print('Esperando apertura del mercado ... ',time.strftime("%H:%M:%S")),time.sleep(1)
         continue
-    elif time.strftime("%H:%M:%S") >= '16:59:45':
-        print(f'... MERCADO CERRADO 17HS ... Limite {limite} bonos ganados:{ganaAL30} / u$d{round(moneda1,2)} / u$d{round(moneda2,2)} / Ars{round(moneda3,2)}')
+    elif time.strftime("%H:%M:%S") > '16:59:45':
+        print(f'... MERCADO CERRADO 17HS ... Limite {limite} bonos ganados:{ganaAL30} / u$d:{round(moneda1,2)} / u$d:{round(moneda2,2)} / Ars:{round(moneda3,2)}')
         break
-    if time.strftime("%H:%M:%S") <= '15:59:30' and limite > 0:
+    if time.strftime("%H:%M:%S") < '15:59:30' and limite > 0:
         vuelta(cclCI,cclCI,mepCI,mepCI)
         vuelta(mepCI,mepCI,cclCI,cclCI)
         vuelta(cclCI,cclCI,pesCI,pesCI)
