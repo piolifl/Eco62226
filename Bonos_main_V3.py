@@ -98,10 +98,13 @@ def vuelta(a,b,c,d):
             t2 = b(e[2]).precio_OF()
             t3 = c(e[2]).precio_BI()
             t4 = d(e[0]).precio_OF()
-            cruce(t1,t2,t3,t4)
-            if limite > 0:
-                if t1 != 1000 and t2 != 1000 and t3 != 1000 and t4 != 1000:
 
+            if t1 == 1000 and t2 == 1000 and t3 == 1000 and t4 == 1000:
+                print(time.strftime("%H:%M:%S"),f'Faltan precios para {e[0]} {e[2]} [AL30:{ganaAL30} / GD30:{ganaGD30} / AAPL:{ganaAAPL} / S31E2:{ganaS31E2}] / u$d {round(moneda1,2)} / u$d {round(moneda2,2)} / Ars {round(moneda3,2)}')
+                break
+            else:
+                cruce(t1,t2,t3,t4)
+                if limite > 0:
                     if comproA > e[1] :
                         if a(e[0]).cantidad_BI() > e[1] and b(e[2]).cantidad_OF() >= comproB and c(e[2]).cantidad_BI() >= comproB and d(e[0]).cantidad_OF() >= comproA:
 
@@ -119,7 +122,7 @@ def vuelta(a,b,c,d):
                                 ganaAAPL += comproA - e[1]
                             elif e[0] == 's31e2':
                                 ganaS31E2 += comproA - e[1]
-                                 
+                                    
                             moneda1 += saldoA
 
                             if len(str(t3)) >= 4:
@@ -137,11 +140,8 @@ def vuelta(a,b,c,d):
                         print(f'no {e[0].upper()}__{e[2].upper()},  [AL30:{ganaAL30} / GD30:{ganaGD30} / AAPL:{ganaAAPL} / S31E2:{ganaS31E2}] / u$d {round(moneda1,2)} / u$d {round(moneda2,2)} / Ars {round(moneda3,2)} _ L:{limite}')
                         break
                 else:
-                    print(f'sin {e[0].upper()}__{e[2].upper()},  [AL30:{ganaAL30} / GD30:{ganaGD30} / AAPL:{ganaAAPL} / S31E2:{ganaS31E2}] / u$d {round(moneda1,2)} / u$d {round(moneda2,2)} / Ars {round(moneda3,2)} _ L:{limite}')
+                    print(f'Limite {limite} AGOTADO!!! [AL30:{ganaAL30} / GD30:{ganaGD30} / AAPL:{ganaAAPL} / S31E2:{ganaS31E2}] / u$d {round(moneda1,2)} / u$d {round(moneda2,2)} / Ars {round(moneda3,2)}')
                     break
-            else:
-                print(f'Limite {limite} AGOTADO!!! [AL30:{ganaAL30} / GD30:{ganaGD30} / AAPL:{ganaAAPL} / S31E2:{ganaS31E2}] / u$d {round(moneda1,2)} / u$d {round(moneda2,2)} / Ars {round(moneda3,2)}')
-                break
 
 costos = 0.0026
 limite = 10000
