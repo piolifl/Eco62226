@@ -144,7 +144,7 @@ def vuelta(a,b,c,d):
                 break
 
 costos = 0.0026
-limite = 1000000
+limite = 10000
 ganaAL30 = 0
 ganaGD30 = 0
 ganaAAPL = 0
