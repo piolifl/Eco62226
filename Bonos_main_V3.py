@@ -63,9 +63,8 @@ def cruce(t1,t2,t3,t4):
         comproA = vendoB // ((t4) * (1 + costos))
         saldoA = round(vendoA - comproB * (t2/100),2)
         saldoB = round(vendoB - comproA * (t4),2)
-        #print(time.strftime("%H:%M:%S"),f'[$:{vendoA} / Bo:{comproB}_ $:{vendoB}_ FIN:{comproA}]',end="  ")
         #print(time.strftime("%H:%M:%S"),f'[I gana:{comproA}]',end="  ")
-        print(time.strftime("%H:%M:%S"),'I',end="  ")
+        print(time.strftime("%H:%M:%S"),'  I',end="  ")
     elif name2 == 'aapl' or name2 == 'ko':
         vendoA = round(((t1/100) * (1 - costos)) * cant,2)
         comproB = vendoA // ((t2) * (1 + costos))
@@ -73,9 +72,8 @@ def cruce(t1,t2,t3,t4):
         comproA = vendoB // ((t4/100) * (1 + costos))
         saldoA = round(vendoA - comproB * (t2),2)
         saldoB = round(vendoB - comproA * (t4/100),2)
-        #print(time.strftime("%H:%M:%S"),f'[$:{vendoA} // Bo:{comproB}_ $:{vendoB}_ FIN:{comproA}]',end="  ")
         #print(time.strftime("%H:%M:%S"),f'[II gana:{comproA}]',end="  ")
-        print(time.strftime("%H:%M:%S"),'II',end="  ")
+        print(time.strftime("%H:%M:%S"),' II',end="  ")
     else:
         vendoA = round(((t1/100) * (1 - costos)) * cant,2)
         comproB = vendoA // ((t2/100) * (1 + costos))
@@ -83,7 +81,6 @@ def cruce(t1,t2,t3,t4):
         comproA = vendoB // ((t4/100) * (1 + costos))
         saldoA = round(vendoA - comproB * (t2/100),2)
         saldoB = round(vendoB - comproA * (t4/100),2)
-        #print(time.strftime("%H:%M:%S"),f'[$:{vendoA} /// Bo:{comproB}_ $:{vendoB}_ FIN:{comproA}]',end="  ")
         #print(time.strftime("%H:%M:%S"),f'[III gana:{comproA}]',end="  ")
         print(time.strftime("%H:%M:%S"),'III',end="  ")
 
@@ -144,7 +141,7 @@ def vuelta(a,b,c,d):
                     break
 
 costos = 0.0026
-limite = 10000
+limite = 100000
 ganaAL30 = 0
 ganaGD30 = 0
 ganaAAPL = 0
@@ -154,15 +151,17 @@ moneda2 = 0
 moneda3 = 0
 
 ins = {
-    '1':['al30',100,'gd30'],'2':['al30',100,'gd35'],'3':['al30',100,'gd38'],'4':['al30',100,'s31e2'],'5':['al30',100,'s28f2'],'6':['al30',1000,'aapl'],'7':['al30',1000,'ko'],
+    '1':['al30',175,'gd30'],'2':['al30',175,'gd35'],'3':['al30',175,'gd38'],'4':['al30',175,'s31e2'],'5':['al30',175,'s28f2'],'6':['al30',175,'aapl'],'7':['al30',175,'ko'],
 
-    '10':['gd30',100,'al30'],'11':['gd30',100,'gd35'],'12':['gd30',100,'gd38'],'13':['gd30',100,'s31e2'],'14':['gd30',100,'s28f2'],'15':['gd30',1000,'aapl'],'16':['gd30',1000,'ko'],
+    '10':['gd30',160,'al30'],'11':['gd30',160,'gd35'],'12':['gd30',160,'gd38'],'13':['gd30',160,'s31e2'],'14':['gd30',160,'s28f2'],'15':['gd30',160,'aapl'],'16':['gd30',160,'ko'],
 
-    '20':['aapl',10,'al30'], '21':['aapl',10,'gd30'],'22':['aapl',10,'ko'],'22':['aapl',10,'s31e2'],
+    '20':['s31e2',6500,'al30'], '21':['s31e2',6500,'gd30'],'22':['s31e2',6500,'s28f2'],'23':['s31e2',6500,'aapl'],'24':['s31e2',6500,'ko'],
 
-    '30':['s31e2',10000,'al30'], '31':['s31e2',10000,'gd30'],'32':['s31e2',10000,'aapl'],
+    '30':['s28f2',7650,'al30'], '31':['s28f2',7650,'gd30'],'32':['s28f2',7650,'s31e2'],'33':['s28f2',7650,'aapl'],'34':['s28f2',7650,'ko'],
 
-    '40':['ko',100,'al30'], '41':['ko',100,'gd30'],'42':['ko',100,'s31e2']
+    '40':['aapl',2,'al30'], '41':['aapl',2,'gd30'],'42':['aapl',2,'ko'],'43':['aapl',2,'s31e2'],'44':['aapl',2,'s28f2'],
+
+    '50':['ko',3,'al30'], '51':['ko',3,'gd30'],'52':['ko',3,'aapl'],'53':['ko',3,'s31e2'],'54':['ko',3,'s28f2']
     }
 
 
@@ -178,14 +177,14 @@ while True:
         vuelta(mepCI,mepCI,cclCI,cclCI)
         vuelta(cclCI,cclCI,pesCI,pesCI)
         vuelta(mepCI,mepCI,pesCI,pesCI)
-    #else: break
+    else: break
 
     if limite > 0:
         vuelta(ccl48,ccl48,mep48,mep48)
         vuelta(mep48,mep48,ccl48,ccl48)
         vuelta(ccl48,ccl48,pes48,pes48)
         vuelta(mep48,mep48,pes48,pes48)
-    #else: break
+    else: break
 
     if limite > 0:
         vuelta(ccl24,ccl24,mep24,mep24)
