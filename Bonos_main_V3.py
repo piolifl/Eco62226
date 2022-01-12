@@ -60,18 +60,20 @@ def cruce(t1,t2,t3,t4):
         vendoA = round(((t1) * (1 - costos)) * cant,2)
         comproB = round(vendoA / ((t2/100) * (1 + costos)),0)
         vendoB = round(comproB * ((t3/100) * (1 - costos)),2)
-        comproA = round(vendoB // ((t4) * (1 + costos)),0)
+        comproA = round(vendoB / ((t4) * (1 + costos)),0)
         saldoA = round(vendoA - comproB * (t2/100),2)
         saldoB = round(vendoB - comproA * (t4),2)
-        print(time.strftime("%H:%M:%S"),f' [$:{vendoA}_ B:{comproB}_ $:{vendoB}_ FIN:{comproA}]',end="  ")
+        #print(time.strftime("%H:%M:%S"),f'[$:{vendoA} / Bo:{comproB}_ $:{vendoB}_ FIN:{comproA}]',end="  ")
+        print(time.strftime("%H:%M:%S"),f'[I gana:{comproA}]',end="  ")
     elif name2 == 'aapl' or name2 == 'ko':
         vendoA = round(((t1/100) * (1 - costos)) * cant,2)
         comproB = round(vendoA / ((t2) * (1 + costos)),0)
         vendoB = round(comproB * ((t3) * (1 - costos)),2)
-        comproA = round(vendoB // ((t4/100) * (1 + costos)),0)
+        comproA = round(vendoB / ((t4/100) * (1 + costos)),0)
         saldoA = round(vendoA - comproB * (t2),2)
         saldoB = round(vendoB - comproA * (t4/100),2)
-        print(time.strftime("%H:%M:%S"),f' [$:{vendoA}_ B:{comproB}_ $:{vendoB}_ FIN:{comproA}]',end="  ")
+        #print(time.strftime("%H:%M:%S"),f'[$:{vendoA} // Bo:{comproB}_ $:{vendoB}_ FIN:{comproA}]',end="  ")
+        print(time.strftime("%H:%M:%S"),f'[II gana:{comproA}]',end="  ")
     else:
         vendoA = round(((t1/100) * (1 - costos)) * cant,2)
         comproB = round(vendoA / ((t2/100) * (1 + costos)),0)
@@ -79,10 +81,11 @@ def cruce(t1,t2,t3,t4):
         comproA = round(vendoB / ((t4/100) * (1 + costos)),0)
         saldoA = round(vendoA - comproB * (t2/100),2)
         saldoB = round(vendoB - comproA * (t4/100),2)
-        print(time.strftime("%H:%M:%S"),f' [$:{vendoA}_ B:{comproB}_ $:{vendoB}_ FIN:{comproA}]',end="  ")
+        #print(time.strftime("%H:%M:%S"),f'[$:{vendoA} /// Bo:{comproB}_ $:{vendoB}_ FIN:{comproA}]',end="  ")
+        print(time.strftime("%H:%M:%S"),f'[III gana:{comproA}]',end="  ")
 
 def vuelta(a,b,c,d):
-    global limite,ganaAL30,moneda1,moneda2,moneda3,name1,name2,cant
+    global limite,ganaAL30,ganaGD30,ganaAAPL,ganaS31E2,moneda1,moneda2,moneda3,name1,name2,cant
     for i,e in ins.items():
         cant = e[1]
         name1 = e[0]
@@ -107,41 +110,54 @@ def vuelta(a,b,c,d):
                             if e[0] == 'al30' or e[2] == 'al30':
                                 ganaAL30 += comproA - e[1]
                                 limite -= e[1]
-
-                            moneda1 += round(saldoA,2)
+                            elif e[0] == 'gd30':
+                                ganaGD30 += comproA - e[1]
+                            elif e[0] == 'aapl':
+                                ganaAAPL += comproA - e[1]
+                            elif e[0] == 's31e2':
+                                ganaS31E2 += comproA - e[1]
                                  
+                            moneda1 += saldoA
+
                             if len(str(t3)) >= 4:
-                                moneda3 += round(saldoB,2)
-                                print(f'{e[0]} /{e[2]}, bonos:{ganaAL30} / u$d {moneda1} / u$d {moneda2} / Ars {moneda3} _ lim:{limite}')
+                                moneda3 += saldoB
+                                print(f'{e[0].upper()} / {e[2].upper()}, _ AL30:{ganaAL30} / GD30:{ganaGD30} / AAPL:{ganaAAPL} / S31E2:{ganaS31E2} / u$d {round(moneda1,2)} / u$d {round(moneda2,2)} / Ars {round(moneda3,2)} _ L:{limite}')
                                 continue
                             else:
-                                moneda2 += round(saldoB,2)
-                                print(f'{e[0]}/{e[2]}, bonos: {ganaAL30} / u$d {moneda1} / u$s {moneda2} / Ars {moneda3} _ lim:{limite}')
+                                moneda2 += saldoB
+                                print(f'{e[0].upper()} / {e[2].upper()}, _ AL30:{ganaAL30} / GD30:{ganaGD30} / AAPL:{ganaAAPL} / S31E2:{ganaS31E2} / u$d:{round(moneda1,2)} / u$s:{round(moneda2,2)} / Ars:{round(moneda3,2)} _ L:{limite}')
                                 continue
                         else:
-                            print(f' Sin bid/ask {e[0]} /{e[2]} bonos: {ganaAL30} / u$d {moneda1} / u$d {moneda2} / Ars {moneda3} _ lim:{limite}')
+                            print(f'sin bid_ask {e[0].upper()} / {e[2]} _ AL30:{ganaAL30} / GD30:{ganaGD30} / AAPL:{ganaAAPL} / S31E2:{ganaS31E2} / u$d {round(moneda1,2)} / u$d {round(moneda2,2)} / Ars {round(moneda3,2)} _ L:{limite}')
                             break
                     else:
-                        print(f'// NO {e[0]} /{e[2]} bonos: {ganaAL30} / u$d {moneda1} / u$d {moneda2} / Ars {moneda3} _ lim:{limite}')
+                        print(f'no {e[0].upper()} / {e[2].upper()} _ AL30:{ganaAL30} / GD30:{ganaGD30} / AAPL:{ganaAAPL} / S31E2:{ganaS31E2} / u$d {round(moneda1,2)} / u$d {round(moneda2,2)} / Ars {round(moneda3,2)} _ L:{limite}')
                         break
                 else:
-                    print(f' Sin precios {e[0]} /{e[2]} bonos: {ganaAL30} / u$d {moneda1} / u$d {moneda2} / Ars {moneda3} _ lim:{limite}')
+                    print(f'sin {e[0].upper()} / {e[2].upper()} _ AL30:{ganaAL30} / GD30:{ganaGD30} / AAPL:{ganaAAPL} / S31E2:{ganaS31E2} / u$d {round(moneda1,2)} / u$d {round(moneda2,2)} / Ars {round(moneda3,2)} _ L:{limite}')
                     break
             else:
-                print(f' Limite {limite} AGOTADO !!! bonos: {ganaAL30} / u$d {moneda1} / u$d {moneda2} / Ars {moneda3}')
+                print(f'Limite {limite} AGOTADO!!! AL30:{ganaAL30} / GD30:{ganaGD30} / AAPL:{ganaAAPL} / S31E2:{ganaS31E2} / u$d {round(moneda1,2)} / u$d {round(moneda2,2)} / Ars {round(moneda3,2)}')
                 break
 
 costos = 0.0026
-limite = 100000
-ganaAL30 = round(0,0)
-moneda1 = round(0,2)
-moneda2 = round(0,2)
-moneda3 = round(0,2)
+limite = 1000000
+ganaAL30 = 0
+ganaGD30 = 0
+ganaAAPL = 0
+ganaS31E2 = 0
+moneda1 = 0
+moneda2 = 0
+moneda3 = 0
 
 ins = {
-    '1':['al30',100,'gd30'],'2':['al30',100,'gd35'],'3':['al30',100,'gd38'],'4':['al30',100,'s31e2'],'5':['al30',100,'s28f2'],'6':['al30',1000,'aapl'],'6':['aapl',10,'al30'], 
+    '1':['al30',100,'gd30'],'2':['al30',100,'gd35'],'3':['al30',100,'gd38'],'4':['al30',100,'s31e2'],'5':['al30',100,'s28f2'],'6':['al30',1000,'aapl'],'7':['al30',1000,'ko'],
 
-    '10':['gd30',100,'al30'],'11':['gd30',100,'gd35'],'12':['gd30',100,'gd38'],'13':['gd30',100,'s31e2'],'14':['gd30',100,'s28f2'],'15':['gd30',1000,'aapl'],'16':['aapl',10,'gd30']
+    '10':['gd30',100,'al30'],'11':['gd30',100,'gd35'],'12':['gd30',100,'gd38'],'13':['gd30',100,'s31e2'],'14':['gd30',100,'s28f2'],'15':['gd30',1000,'aapl'],'16':['gd30',1000,'ko'],
+
+    '20':['aapl',10,'al30'], '21':['aapl',10,'gd30'],'22':['aapl',10,'ko'],'22':['aapl',10,'s31e2'],
+
+    '30':['s31e2',10000,'al30'], '31':['s31e2',10000,'gd30'],'32':['0',10000,'aapl']
     }
 
 
@@ -150,7 +166,7 @@ while True:
         print('Esperando apertura del mercado ... ',time.strftime("%H:%M:%S")),time.sleep(1)
         continue
     elif time.strftime("%H:%M:%S") >= '16:59:45':
-        print(f'... MERCADO CERRADO 17HS ... Limite {limite} bonos ganados:{ganaAL30} / u$d{moneda1} / u$d{moneda2} / Ars{moneda3}')
+        print(f'... MERCADO CERRADO 17HS ... Limite {limite} bonos ganados:{ganaAL30} / u$d{round(moneda1,2)} / u$d{round(moneda2,2)} / Ars{round(moneda3,2)}')
         break
     if time.strftime("%H:%M:%S") <= '15:59:30' and limite > 0:
         vuelta(cclCI,cclCI,mepCI,mepCI)
