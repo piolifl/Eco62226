@@ -76,9 +76,9 @@ def cruce(t1,t2,t3,t4):
         print(time.strftime("%H:%M:%S"),' II',end="  ")
     else:
         vendoA = round(((t1/100) * (1 - costos)) * cant,2)
-        comproB = vendoA // ((t2/100) * (1 + costos))
+        comproB = round(vendoA / ((t2/100) * (1 + costos)),0)
         vendoB = round(comproB * ((t3/100) * (1 - costos)),2)
-        comproA = vendoB // ((t4/100) * (1 + costos))
+        comproA = round(vendoB / ((t4/100) * (1 + costos)),0)
         saldoA = round(vendoA - comproB * (t2/100),2)
         saldoB = round(vendoB - comproA * (t4/100),2)
         #print(time.strftime("%H:%M:%S"),f'[III gana:{comproA}]',end="  ")
