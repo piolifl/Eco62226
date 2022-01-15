@@ -85,7 +85,7 @@ def cruce(t1,t2,t3,t4):
         print(time.strftime("%H:%M:%S"),'III',end="  ")
 
 def vuelta(pl,a,b,c,d):
-    global limite,ganaAL30,ganaGD30,ganaAAPL,ganaS31E2,moneda1,moneda2,moneda3,name1,name2,cant
+    global limite,ganaAL30,ganaGD30,ganaAAPL,ganaS31E2,ganaKO,moneda1,moneda2,moneda3,name1,name2,cant
     for i,e in ins.items():
         cant = e[1]
         name1 = e[0]
@@ -97,7 +97,7 @@ def vuelta(pl,a,b,c,d):
             t4 = d(e[0]).precio_OF()
 
             if t1 == 1000 and t2 == 1000 and t3 == 1000 and t4 == 1000:
-                print(time.strftime("%H:%M:%S"),f'Faltan precios {e[0]}/{e[2]} en {pl}, [AL30:{ganaAL30} / GD30:{ganaGD30} / AAPL:{ganaAAPL} / S31E2:{ganaS31E2}] / u$d {round(moneda1,2)} / u$d {round(moneda2,2)} / Ars {round(moneda3,2)}')
+                print(time.strftime("%H:%M:%S"),f'Faltan precios {e[0]}/{e[2]} en {pl}, [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] / u$d {round(moneda1,2)} / u$d {round(moneda2,2)} / Ars {round(moneda3,2)} _ L:{limite}')
                 break
             else:
                 cruce(t1,t2,t3,t4)
@@ -124,44 +124,43 @@ def vuelta(pl,a,b,c,d):
 
                             if len(str(t3)) >= 4:
                                 moneda3 += saldoB
-                                print(f'{e[0].upper()}__{e[2].upper()} en {pl}, [AL30:{ganaAL30} / GD30:{ganaGD30} / AAPL:{ganaAAPL} / S31E2:{ganaS31E2}] / u$d {round(moneda1,2)} / u$d {round(moneda2,2)} / Ars {round(moneda3,2)} _ L:{limite}')
+                                print(f'{e[0].upper()}__{e[2].upper()} en {pl}, [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] / u$d {round(moneda1,2)} / u$d {round(moneda2,2)} / Ars {round(moneda3,2)} _ L:{limite}')
                                 continue
                             else:
                                 moneda2 += saldoB
-                                print(f'{e[0].upper()}__{e[2].upper()} en {pl}, [AL30:{ganaAL30} / GD30:{ganaGD30} / AAPL:{ganaAAPL} / S31E2:{ganaS31E2}] / u$d:{round(moneda1,2)} / u$s:{round(moneda2,2)} / Ars:{round(moneda3,2)} _ L:{limite}')
+                                print(f'{e[0].upper()}__{e[2].upper()} en {pl}, [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] / u$d:{round(moneda1,2)} / u$s:{round(moneda2,2)} / Ars:{round(moneda3,2)} _ L:{limite}')
                                 continue
                         else:
-                            print(f'Faltan bid_ask {e[0].upper()}__{e[2].upper()} en {pl}, [AL30:{ganaAL30} / GD30:{ganaGD30} / AAPL:{ganaAAPL} / S31E2:{ganaS31E2}] / u$d {round(moneda1,2)} / u$d {round(moneda2,2)} / Ars {round(moneda3,2)} _ L:{limite}')
+                            print(f'Faltan bid_ask {e[0].upper()}__{e[2].upper()} en {pl}, [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] / u$d {round(moneda1,2)} / u$d {round(moneda2,2)} / Ars {round(moneda3,2)} _ L:{limite}')
                             break
                     else:
-                        print(f'no {e[0].upper()}__{e[2].upper()} en {pl}, [AL30:{ganaAL30} / GD30:{ganaGD30} / AAPL:{ganaAAPL} / S31E2:{ganaS31E2}] / u$d {round(moneda1,2)} / u$d {round(moneda2,2)} / Ars {round(moneda3,2)} _ L:{limite}')
+                        print(f'no {e[0].upper()}__{e[2].upper()} en {pl}, [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] / u$d {round(moneda1,2)} / u$d {round(moneda2,2)} / Ars {round(moneda3,2)} _ L:{limite}')
                         break
                 else:
-                    print(f'Limite {limite} AGOTADO!!! [AL30:{ganaAL30} / GD30:{ganaGD30} / AAPL:{ganaAAPL} / S31E2:{ganaS31E2}] / u$d {round(moneda1,2)} / u$d {round(moneda2,2)} / Ars {round(moneda3,2)}')
+                    print(f'Limite {limite} AGOTADO!!! [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] / u$d {round(moneda1,2)} / u$d {round(moneda2,2)} / Ars {round(moneda3,2)}')
                     break
 
 costos = 0.0026
-limite = 100000
+limite = 1000
 ganaAL30 = 0
 ganaGD30 = 0
 ganaAAPL = 0
 ganaS31E2 = 0
+ganaKO = 0
 moneda1 = 0
 moneda2 = 0
 moneda3 = 0
 
 ins = {
-    '1':['al30',175,'gd30'],'2':['al30',175,'gd35'],'3':['al30',175,'gd38'],'4':['al30',175,'s31e2'],'5':['al30',175,'s28f2'],'6':['al30',175,'aapl'],'7':['al30',175,'ko'],
 
-    '10':['gd30',160,'al30'],'11':['gd30',160,'gd35'],'12':['gd30',160,'gd38'],'13':['gd30',160,'s31e2'],'14':['gd30',160,'s28f2'],'15':['gd30',160,'aapl'],'16':['gd30',160,'ko'],
+    '1':['al30',175,'gd30'],'2':['gd30',175,'al30'],'3':['al30',175,'s31e2'],'4':['s31e2',175,'al30'],'5':['gd30',175,'s31e2'],'6':['s31e2',175,'gd30'],
 
-    '20':['s31e2',6500,'al30'], '21':['s31e2',6500,'gd30'],'22':['s31e2',6500,'s28f2'],'23':['s31e2',6500,'aapl'],'24':['s31e2',6500,'ko'],
-
-    '30':['s28f2',7650,'al30'], '31':['s28f2',7650,'gd30'],'32':['s28f2',7650,'s31e2'],'33':['s28f2',7650,'aapl'],'34':['s28f2',7650,'ko'],
-
-    '40':['aapl',2,'al30'], '41':['aapl',2,'gd30'],'42':['aapl',2,'ko'],'43':['aapl',2,'s31e2'],'44':['aapl',2,'s28f2'],
-
-    '50':['ko',3,'al30'], '51':['ko',3,'gd30'],'52':['ko',3,'aapl'],'53':['ko',3,'s31e2'],'54':['ko',3,'s28f2']
+    #'1':['al30',175,'gd30'],'2':['al30',175,'gd35'],'3':['al30',175,'gd38'],'4':['al30',175,'s31e2'],'5':['al30',175,'s28f2'],'6':['al30',175,'aapl'],'7':['al30',175,'ko'],
+    #'10':['gd30',160,'al30'],'11':['gd30',160,'gd35'],'12':['gd30',160,'gd38'],'13':['gd30',160,'s31e2'],'14':['gd30',160,'s28f2'],'15':['gd30',160,'aapl'],'16':['gd30',160,'ko'],
+    #'20':['s31e2',6500,'al30'], '21':['s31e2',6500,'gd30'],'22':['s31e2',6500,'s28f2'],'23':['s31e2',6500,'aapl'],'24':['s31e2',6500,'ko'],
+    #'30':['s28f2',7650,'al30'], '31':['s28f2',7650,'gd30'],'32':['s28f2',7650,'s31e2'],'33':['s28f2',7650,'aapl'],'34':['s28f2',7650,'ko'],
+    #'40':['aapl',2,'al30'], '41':['aapl',2,'gd30'],'42':['aapl',2,'ko'],'43':['aapl',2,'s31e2'],'44':['aapl',2,'s28f2'],
+    #'50':['ko',3,'al30'], '51':['ko',3,'gd30'],'52':['ko',3,'aapl'],'53':['ko',3,'s31e2'],'54':['ko',3,'s28f2']
     }
 
 while True:
@@ -183,7 +182,7 @@ while True:
         vuelta('48',mep48,mep48,ccl48,ccl48)
         vuelta('48',ccl48,ccl48,pes48,pes48)
         vuelta('48',mep48,mep48,pes48,pes48)
-    #else: break
+    else: break
 
     if limite > 0:
         vuelta('24',ccl24,ccl24,mep24,mep24)
