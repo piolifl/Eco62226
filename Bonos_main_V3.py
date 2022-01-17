@@ -97,7 +97,7 @@ def vuelta(pl,a,b,c,d):
             t4 = d(e[0]).precio_OF()
 
             if t1 == 1000 and t2 == 1000 and t3 == 1000 and t4 == 1000:
-                print(time.strftime("%H:%M:%S"),f'Faltan precios {e[0]}/{e[2]} en {pl}, [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] / u$d {round(moneda1,2)} / u$d {round(moneda2,2)} / Ars {round(moneda3,2)} _ L:{limite}')
+                print(time.strftime("%H:%M:%S"),f'Faltan precios {e[0]}/{e[2]} {pl} [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] u$d {round(moneda1,2)} u$d {round(moneda2,2)} Ars {round(moneda3,2)} _ L:{limite}')
                 break
             else:
                 cruce(t1,t2,t3,t4)
@@ -124,24 +124,24 @@ def vuelta(pl,a,b,c,d):
 
                             if len(str(t3)) >= 4:
                                 moneda3 += saldoB
-                                print(f'{e[0].upper()}__{e[2].upper()} en {pl}, [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] / u$d {round(moneda1,2)} / u$d {round(moneda2,2)} / Ars {round(moneda3,2)} _ L:{limite}')
+                                print(f'{e[0].upper()}/{e[2].upper()} {pl} [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] u$d {round(moneda1,2)} u$d {round(moneda2,2)} Ars {round(moneda3,2)} _ L:{limite}')
                                 continue
                             else:
                                 moneda2 += saldoB
-                                print(f'{e[0].upper()}__{e[2].upper()} en {pl}, [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] / u$d:{round(moneda1,2)} / u$s:{round(moneda2,2)} / Ars:{round(moneda3,2)} _ L:{limite}')
+                                print(f'{e[0].upper()}/{e[2].upper()} {pl} [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] u$d:{round(moneda1,2)} u$s:{round(moneda2,2)} Ars:{round(moneda3,2)} _ L:{limite}')
                                 continue
                         else:
-                            print(f'Faltan bid_ask {e[0].upper()}__{e[2].upper()} en {pl}, [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] / u$d {round(moneda1,2)} / u$d {round(moneda2,2)} / Ars {round(moneda3,2)} _ L:{limite}')
+                            print(f'Faltan bid_ask {e[0].upper()}/{e[2].upper()} {pl} [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] u$d {round(moneda1,2)} u$d {round(moneda2,2)} Ars {round(moneda3,2)} _ L:{limite}')
                             break
                     else:
-                        print(f'no {e[0].upper()}__{e[2].upper()} en {pl}, [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] / u$d {round(moneda1,2)} / u$d {round(moneda2,2)} / Ars {round(moneda3,2)} _ L:{limite}')
+                        print(f'no {e[0].upper()}/{e[2].upper()} {pl} [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] u$d {round(moneda1,2)} u$d {round(moneda2,2)} Ars {round(moneda3,2)} _ L:{limite}')
                         break
                 else:
-                    print(f'Limite {limite} AGOTADO!!! [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] / u$d {round(moneda1,2)} / u$d {round(moneda2,2)} / Ars {round(moneda3,2)}')
+                    print(f'Limite {limite} AGOTADO!!! [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] u$d {round(moneda1,2)} u$d {round(moneda2,2)} Ars {round(moneda3,2)}')
                     break
 
 costos = 0.0026
-limite = 1000
+limite = 100000
 ganaAL30 = 0
 ganaGD30 = 0
 ganaAAPL = 0
@@ -171,23 +171,23 @@ while True:
         print(f'... MERCADO CERRADO 17HS ... Limite {limite} bonos ganados:{ganaAL30} / u$d:{round(moneda1,2)} / u$d:{round(moneda2,2)} / Ars:{round(moneda3,2)}')
         break
     if time.strftime("%H:%M:%S") < '15:59:30' and limite > 0:
-        vuelta('CI',cclCI,cclCI,mepCI,mepCI)
-        vuelta('CI',mepCI,mepCI,cclCI,cclCI)
-        vuelta('CI',cclCI,cclCI,pesCI,pesCI)
-        vuelta('CI',mepCI,mepCI,pesCI,pesCI)
+        vuelta('CI.c/m',cclCI,cclCI,mepCI,mepCI)
+        vuelta('CI.m/c',mepCI,mepCI,cclCI,cclCI)
+        vuelta('CI.c/p',cclCI,cclCI,pesCI,pesCI)
+        vuelta('CI.m/p',mepCI,mepCI,pesCI,pesCI)
     #else: break
 
     if limite > 0:
-        vuelta('48',ccl48,ccl48,mep48,mep48)
-        vuelta('48',mep48,mep48,ccl48,ccl48)
-        vuelta('48',ccl48,ccl48,pes48,pes48)
-        vuelta('48',mep48,mep48,pes48,pes48)
+        vuelta('48.c/m',ccl48,ccl48,mep48,mep48)
+        vuelta('48.m/c',mep48,mep48,ccl48,ccl48)
+        vuelta('48.c/p',ccl48,ccl48,pes48,pes48)
+        vuelta('48.m/p',mep48,mep48,pes48,pes48)
     else: break
 
     if limite > 0:
-        vuelta('24',ccl24,ccl24,mep24,mep24)
-        vuelta('24',mep24,mep24,ccl24,ccl24)
-        vuelta('24',ccl24,ccl24,pes24,pes24)
-        vuelta('24',mep24,mep24,pes24,pes24)
+        vuelta('24.c/m',ccl24,ccl24,mep24,mep24)
+        vuelta('24.m/c',mep24,mep24,ccl24,ccl24)
+        vuelta('24.c/p',ccl24,ccl24,pes24,pes24)
+        vuelta('24.m/p',mep24,mep24,pes24,pes24)
     else: break
 
