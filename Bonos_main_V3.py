@@ -63,7 +63,6 @@ def cruce(t1,t2,t3,t4):
         comproA = vendoB // ((t4) * (1 + costos))
         saldoA = round(vendoA - comproB * (t2/100),2)
         saldoB = round(vendoB - comproA * (t4),2)
-        #print(time.strftime("%H:%M:%S"),f'[I gana:{comproA}]',end="  ")
         print(time.strftime("%H:%M:%S"),'  I',end="  ")
     elif name2 == 'aapl' or name2 == 'ko':
         vendoA = round(((t1/100) * (1 - costos)) * cant,2)
@@ -72,7 +71,6 @@ def cruce(t1,t2,t3,t4):
         comproA = vendoB // ((t4/100) * (1 + costos))
         saldoA = round(vendoA - comproB * (t2),2)
         saldoB = round(vendoB - comproA * (t4/100),2)
-        #print(time.strftime("%H:%M:%S"),f'[II gana:{comproA}]',end="  ")
         print(time.strftime("%H:%M:%S"),' II',end="  ")
     else:
         vendoA = round(((t1/100) * (1 - costos)) * cant,2)
@@ -81,8 +79,8 @@ def cruce(t1,t2,t3,t4):
         comproA = round(vendoB / ((t4/100) * (1 + costos)),0)
         saldoA = round(vendoA - comproB * (t2/100),2)
         saldoB = round(vendoB - comproA * (t4/100),2)
-        #print(time.strftime("%H:%M:%S"),f'[III gana:{comproA}]',end="  ")
         print(time.strftime("%H:%M:%S"),'III',end="  ")
+
 
 def vuelta(pl,a,b,c,d):
     global limite,ganaAL30,ganaGD30,ganaAAPL,ganaS31E2,ganaKO,moneda1,moneda2,moneda3,name1,name2,cant
@@ -90,7 +88,7 @@ def vuelta(pl,a,b,c,d):
         cant = e[1]
         name1 = e[0]
         name2 = e[2]
-        while e[0] != '0' and time.strftime("%H:%M:%S") < '16:59:59':
+        while e[0] != '0':# and time.strftime("%H:%M:%S") < '16:59:59':
             t1 = a(e[0]).precio_BI()
             t2 = b(e[2]).precio_OF()
             t3 = c(e[2]).precio_BI()
@@ -100,17 +98,19 @@ def vuelta(pl,a,b,c,d):
                 print(time.strftime("%H:%M:%S"),f'Faltan precios {e[0]}/{e[2]} {pl} [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] u$d {round(moneda1,2)} u$d {round(moneda2,2)} Ars {round(moneda3,2)} _ L:{limite}')
                 break
             else:
+                
                 cruce(t1,t2,t3,t4)
+                
                 if limite > 0:
                     if comproA > e[1] :
-                        if a(e[0]).cantidad_BI() > e[1] and b(e[2]).cantidad_OF() >= comproB and c(e[2]).cantidad_BI() >= comproB and d(e[0]).cantidad_OF() >= comproA:
+                        if 2>1 :# a(e[0]).cantidad_BI() > e[1] and b(e[2]).cantidad_OF() >= comproB and c(e[2]).cantidad_BI() >= comproB and d(e[0]).cantidad_OF() >= comproA:
 
                             #vender(    a(e[0]),     e[1],       a(e[0]).precio_BI())
                             #comprar(   b(e[2]),     comproB,    b(e[2]).precio_OF())
                             #vender(    c(e[2]),     comproB,    c(e[2]).precio_BI())
                             #comprar(   d(e[0]),     comproA,    d(e[0]).precio_OF())
 
-                            if e[0] == 'al30' or e[2] == 'al30':
+                            if e[0] == 'al30':
                                 ganaAL30 += comproA - e[1]
                                 limite -= e[1]
                             elif e[0] == 'gd30':
@@ -119,9 +119,11 @@ def vuelta(pl,a,b,c,d):
                                 ganaAAPL += comproA - e[1]
                             elif e[0] == 's31e2':
                                 ganaS31E2 += comproA - e[1]
-                                    
+                            elif e[0] == 'ko':
+                                ganaKO += comproA - e[1]
+                            
                             moneda1 += saldoA
-
+                            
                             if len(str(t3)) >= 4:
                                 moneda3 += saldoB
                                 print(f'{e[0].upper()}/{e[2].upper()} {pl} [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] u$d {round(moneda1,2)} u$d {round(moneda2,2)} Ars {round(moneda3,2)} _ L:{limite}')
@@ -153,21 +155,21 @@ moneda3 = 0
 
 ins = {
 
-    '1':['al30',175,'gd30'],'2':['gd30',175,'al30'],'3':['al30',175,'s31e2'],'4':['s31e2',175,'al30'],'5':['gd30',175,'s31e2'],'6':['s31e2',175,'gd30'],
+    '1':['al30',200,'gd30'],'2':['gd30',200,'al30'],'3':['al30',200,'s31e2'],'4':['s31e2',7000,'al30'],'5':['gd30',200,'s31e2'],'6':['s31e2',7000,'gd30'],
 
-    #'1':['al30',175,'gd30'],'2':['al30',175,'gd35'],'3':['al30',175,'gd38'],'4':['al30',175,'s31e2'],'5':['al30',175,'s28f2'],'6':['al30',175,'aapl'],'7':['al30',175,'ko'],
-    #'10':['gd30',160,'al30'],'11':['gd30',160,'gd35'],'12':['gd30',160,'gd38'],'13':['gd30',160,'s31e2'],'14':['gd30',160,'s28f2'],'15':['gd30',160,'aapl'],'16':['gd30',160,'ko'],
-    #'20':['s31e2',6500,'al30'], '21':['s31e2',6500,'gd30'],'22':['s31e2',6500,'s28f2'],'23':['s31e2',6500,'aapl'],'24':['s31e2',6500,'ko'],
-    #'30':['s28f2',7650,'al30'], '31':['s28f2',7650,'gd30'],'32':['s28f2',7650,'s31e2'],'33':['s28f2',7650,'aapl'],'34':['s28f2',7650,'ko'],
-    #'40':['aapl',2,'al30'], '41':['aapl',2,'gd30'],'42':['aapl',2,'ko'],'43':['aapl',2,'s31e2'],'44':['aapl',2,'s28f2'],
-    #'50':['ko',3,'al30'], '51':['ko',3,'gd30'],'52':['ko',3,'aapl'],'53':['ko',3,'s31e2'],'54':['ko',3,'s28f2']
+    #'1':['al30',200,'gd30'],'2':['al30',200,'gd35'],'3':['al30',200,'gd38'],'4':['al30',200,'s31e2'],'5':['al30',200,'s28f2'],'6':['al30',200,'aapl'],'7':['al30',200,'ko'],
+    #'10':['gd30',200,'al30'],'11':['gd30',200,'gd35'],'12':['gd30',200,'gd38'],'13':['gd30',200,'s31e2'],'14':['gd30',200,'s28f2'],'15':['gd30',200,'aapl'],'16':['gd30',200,'ko'],
+    #'20':['s31e2',7000,'al30'], '21':['s31e2',7000,'gd30'],'22':['s31e2',7000,'s28f2'],'23':['s31e2',7000,'aapl'],'24':['s31e2',7000,'ko'],
+    #'30':['s28f2',8000,'al30'], '31':['s28f2',8000,'gd30'],'32':['s28f2',8000,'s31e2'],'33':['s28f2',8000,'aapl'],'34':['s28f2',8000,'ko'],
+    #'40':['aapl',5,'al30'], '41':['aapl',5,'gd30'],'42':['aapl',5,'ko'],'43':['aapl',5,'s31e2'],'44':['aapl',5,'s28f2'],
+    #'50':['ko',5,'al30'], '51':['ko',5,'gd30'],'52':['ko',5,'aapl'],'53':['ko',5,'s31e2'],'54':['ko',5,'s28f2']
     }
 
 while True:
     if time.strftime("%H:%M:%S") < '11:00:05':
         print('Esperando apertura del mercado ... ',time.strftime("%H:%M:%S")),time.sleep(1)
         continue
-    elif time.strftime("%H:%M:%S") > '16:59:45':
+    elif time.strftime("%H:%M:%S") >  '16:59:45':
         print(f'... MERCADO CERRADO 17HS ... Limite {limite} bonos ganados:{ganaAL30} / u$d:{round(moneda1,2)} / u$d:{round(moneda2,2)} / Ars:{round(moneda3,2)}')
         break
     if time.strftime("%H:%M:%S") < '15:59:30' and limite > 0:
@@ -182,7 +184,7 @@ while True:
         vuelta('48.m/c',mep48,mep48,ccl48,ccl48)
         vuelta('48.c/p',ccl48,ccl48,pes48,pes48)
         vuelta('48.m/p',mep48,mep48,pes48,pes48)
-    else: break
+    #else: break
 
     if limite > 0:
         vuelta('24.c/m',ccl24,ccl24,mep24,mep24)
