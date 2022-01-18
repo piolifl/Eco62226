@@ -1,3 +1,4 @@
+from binascii import crc_hqx
 from Operaciones_class import ticker
 import pyRofex
 import math
@@ -53,7 +54,6 @@ def cclCI(bono):
         if tipo == bono:
             return valor
 
-
 def cruce(t1,t2,t3,t4):
     global vendoA,comproB,vendoB,comproA,saldoA,saldoB
     if name1 == 'aapl' or name1 == 'ko':
@@ -81,8 +81,7 @@ def cruce(t1,t2,t3,t4):
         saldoB = round(vendoB - comproA * (t4/100),2)
         print(time.strftime("%H:%M:%S"),'III',end="  ")
 
-
-def vuelta(pl,a,b,c,d):
+def vuelta(pl,cr,a,b,c,d):
     global limite,ganaAL30,ganaGD30,ganaAAPL,ganaS31E2,ganaKO,moneda1,moneda2,moneda3,name1,name2,cant
     for i,e in ins.items():
         cant = e[1]
@@ -93,23 +92,22 @@ def vuelta(pl,a,b,c,d):
             t2 = b(e[2]).precio_OF()
             t3 = c(e[2]).precio_BI()
             t4 = d(e[0]).precio_OF()
-
             if t1 == 1000 and t2 == 1000 and t3 == 1000 and t4 == 1000:
-                print(time.strftime("%H:%M:%S"),f'Faltan precios {e[0]}/{e[2]} {pl} [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] u$d {round(moneda1,2)} u$d {round(moneda2,2)} Ars {round(moneda3,2)} _ L:{limite}')
+                print(time.strftime("%H:%M:%S"),f'Faltan precios {e[0]}/{e[2]} {pl}{cr} [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] u$d {round(moneda1,2)} u$d {round(moneda2,2)} Ars {round(moneda3,2)} _ L:{limite}')
                 break
             else:
-                
                 cruce(t1,t2,t3,t4)
-                
                 if limite > 0:
                     if comproA > e[1] :
-                        if 2>1 :# a(e[0]).cantidad_BI() > e[1] and b(e[2]).cantidad_OF() >= comproB and c(e[2]).cantidad_BI() >= comproB and d(e[0]).cantidad_OF() >= comproA:
+                        if a(e[0]).cantidad_BI() > e[1] and b(e[2]).cantidad_OF() >= comproB and c(e[2]).cantidad_BI() >= comproB and d(e[0]).cantidad_OF() >= comproA:
 
                             #vender(    a(e[0]),     e[1],       a(e[0]).precio_BI())
                             #comprar(   b(e[2]),     comproB,    b(e[2]).precio_OF())
                             #vender(    c(e[2]),     comproB,    c(e[2]).precio_BI())
                             #comprar(   d(e[0]),     comproA,    d(e[0]).precio_OF())
 
+                            if e[2] == 'al30':
+                                limite -= e[1]
                             if e[0] == 'al30':
                                 ganaAL30 += comproA - e[1]
                                 limite -= e[1]
@@ -122,21 +120,32 @@ def vuelta(pl,a,b,c,d):
                             elif e[0] == 'ko':
                                 ganaKO += comproA - e[1]
                             
-                            moneda1 += saldoA
-                            
-                            if len(str(t3)) >= 4:
+                            if cr == '.m/c':
+                                moneda1 += saldoA
+                                moneda2 += saldoB
+                                print(f'SI {e[0].upper()}/{e[2].upper()} {pl}{cr} [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] u$d {round(moneda1,2)} u$d {round(moneda2,2)} Ars {round(moneda3,2)} _ L:{limite}')
+                                continue
+                            elif cr == '.c/m':
+                                moneda2 += saldoA
+                                moneda1 += saldoB
+                                print(f'SI {e[0].upper()}/{e[2].upper()} {pl}{cr} [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] u$d {round(moneda1,2)} u$d {round(moneda2,2)} Ars {round(moneda3,2)} _ L:{limite}')
+                                continue
+                            elif cr == '.c/p':
+                                moneda2 += saldoA
                                 moneda3 += saldoB
-                                print(f'{e[0].upper()}/{e[2].upper()} {pl} [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] u$d {round(moneda1,2)} u$d {round(moneda2,2)} Ars {round(moneda3,2)} _ L:{limite}')
+                                print(f'SI {e[0].upper()}/{e[2].upper()} {pl}{cr} [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] u$d {round(moneda1,2)} u$d {round(moneda2,2)} Ars {round(moneda3,2)} _ L:{limite}')
                                 continue
                             else:
-                                moneda2 += saldoB
-                                print(f'{e[0].upper()}/{e[2].upper()} {pl} [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] u$d:{round(moneda1,2)} u$s:{round(moneda2,2)} Ars:{round(moneda3,2)} _ L:{limite}')
+                                moneda1 += saldoA
+                                moneda3 += saldoB
+                                print(f'SI {e[0].upper()}/{e[2].upper()} {pl}{cr} [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] u$d {round(moneda1,2)} u$d {round(moneda2,2)} Ars {round(moneda3,2)} _ L:{limite}')
                                 continue
+
                         else:
-                            print(f'Faltan bid_ask {e[0].upper()}/{e[2].upper()} {pl} [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] u$d {round(moneda1,2)} u$d {round(moneda2,2)} Ars {round(moneda3,2)} _ L:{limite}')
+                            print(f'Faltan bid_ask {e[0]}/{e[2]} {pl}{cr} [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] u$d {round(moneda1,2)} u$d {round(moneda2,2)} Ars {round(moneda3,2)} _ L:{limite}')
                             break
                     else:
-                        print(f'no {e[0].upper()}/{e[2].upper()} {pl} [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] u$d {round(moneda1,2)} u$d {round(moneda2,2)} Ars {round(moneda3,2)} _ L:{limite}')
+                        print(f'no {e[0]}/{e[2]} {pl}{cr} [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] u$d {round(moneda1,2)} u$d {round(moneda2,2)} Ars {round(moneda3,2)} _ L:{limite}')
                         break
                 else:
                     print(f'Limite {limite} AGOTADO!!! [AL30:{ganaAL30}/GD30:{ganaGD30}/AAPL:{ganaAAPL}/S31E2:{ganaS31E2}/KO:{ganaKO}] u$d {round(moneda1,2)} u$d {round(moneda2,2)} Ars {round(moneda3,2)}')
@@ -155,14 +164,14 @@ moneda3 = 0
 
 ins = {
 
-    '1':['al30',200,'gd30'],'2':['gd30',200,'al30'],'3':['al30',200,'s31e2'],'4':['s31e2',7000,'al30'],'5':['gd30',200,'s31e2'],'6':['s31e2',7000,'gd30'],
+    #'1':['al30',200,'gd30'],'2':['gd30',200,'al30'],'3':['al30',200,'s31e2'],'4':['s31e2',7000,'al30'],'5':['gd30',200,'s31e2'],'6':['s31e2',7000,'gd30'],
 
-    #'1':['al30',200,'gd30'],'2':['al30',200,'gd35'],'3':['al30',200,'gd38'],'4':['al30',200,'s31e2'],'5':['al30',200,'s28f2'],'6':['al30',200,'aapl'],'7':['al30',200,'ko'],
-    #'10':['gd30',200,'al30'],'11':['gd30',200,'gd35'],'12':['gd30',200,'gd38'],'13':['gd30',200,'s31e2'],'14':['gd30',200,'s28f2'],'15':['gd30',200,'aapl'],'16':['gd30',200,'ko'],
-    #'20':['s31e2',7000,'al30'], '21':['s31e2',7000,'gd30'],'22':['s31e2',7000,'s28f2'],'23':['s31e2',7000,'aapl'],'24':['s31e2',7000,'ko'],
-    #'30':['s28f2',8000,'al30'], '31':['s28f2',8000,'gd30'],'32':['s28f2',8000,'s31e2'],'33':['s28f2',8000,'aapl'],'34':['s28f2',8000,'ko'],
-    #'40':['aapl',5,'al30'], '41':['aapl',5,'gd30'],'42':['aapl',5,'ko'],'43':['aapl',5,'s31e2'],'44':['aapl',5,'s28f2'],
-    #'50':['ko',5,'al30'], '51':['ko',5,'gd30'],'52':['ko',5,'aapl'],'53':['ko',5,'s31e2'],'54':['ko',5,'s28f2']
+    '1':['al30',200,'gd30'],'2':['al30',200,'gd35'],'3':['al30',200,'gd38'],'4':['al30',200,'s31e2'],'5':['al30',200,'s28f2'],'6':['al30',200,'aapl'],'7':['al30',200,'ko'],
+    '10':['gd30',200,'al30'],'11':['gd30',200,'gd35'],'12':['gd30',200,'gd38'],'13':['gd30',200,'s31e2'],'14':['gd30',200,'s28f2'],'15':['gd30',200,'aapl'],'16':['gd30',200,'ko'],
+    '20':['s31e2',7000,'al30'], '21':['s31e2',7000,'gd30'],'22':['s31e2',7000,'s28f2'],'23':['s31e2',7000,'aapl'],'24':['s31e2',7000,'ko'],
+    '30':['s28f2',8000,'al30'], '31':['s28f2',8000,'gd30'],'32':['s28f2',8000,'s31e2'],'33':['s28f2',8000,'aapl'],'34':['s28f2',8000,'ko'],
+    '40':['aapl',5,'al30'], '41':['aapl',5,'gd30'],'42':['aapl',5,'ko'],'43':['aapl',5,'s31e2'],'44':['aapl',5,'s28f2'],
+    '50':['ko',5,'al30'], '51':['ko',5,'gd30'],'52':['ko',5,'aapl'],'53':['ko',5,'s31e2'],'54':['ko',5,'s28f2']
     }
 
 while True:
@@ -173,23 +182,23 @@ while True:
         print(f'... MERCADO CERRADO 17HS ... Limite {limite} bonos ganados:{ganaAL30} / u$d:{round(moneda1,2)} / u$d:{round(moneda2,2)} / Ars:{round(moneda3,2)}')
         break
     if time.strftime("%H:%M:%S") < '15:59:30' and limite > 0:
-        vuelta('CI.c/m',cclCI,cclCI,mepCI,mepCI)
-        vuelta('CI.m/c',mepCI,mepCI,cclCI,cclCI)
-        vuelta('CI.c/p',cclCI,cclCI,pesCI,pesCI)
-        vuelta('CI.m/p',mepCI,mepCI,pesCI,pesCI)
+        vuelta('CI','.c/m',cclCI,cclCI,mepCI,mepCI)
+        vuelta('CI','.m/c',mepCI,mepCI,cclCI,cclCI)
+        vuelta('CI','.c/p',cclCI,cclCI,pesCI,pesCI)
+        vuelta('CI','.m/p',mepCI,mepCI,pesCI,pesCI)
     #else: break
 
     if limite > 0:
-        vuelta('48.c/m',ccl48,ccl48,mep48,mep48)
-        vuelta('48.m/c',mep48,mep48,ccl48,ccl48)
-        vuelta('48.c/p',ccl48,ccl48,pes48,pes48)
-        vuelta('48.m/p',mep48,mep48,pes48,pes48)
+        vuelta('48','.c/m',ccl48,ccl48,mep48,mep48)
+        vuelta('48','.m/c',mep48,mep48,ccl48,ccl48)
+        vuelta('48','.c/p',ccl48,ccl48,pes48,pes48)
+        vuelta('48','.m/p',mep48,mep48,pes48,pes48)
     #else: break
 
     if limite > 0:
-        vuelta('24.c/m',ccl24,ccl24,mep24,mep24)
-        vuelta('24.m/c',mep24,mep24,ccl24,ccl24)
-        vuelta('24.c/p',ccl24,ccl24,pes24,pes24)
-        vuelta('24.m/p',mep24,mep24,pes24,pes24)
+        vuelta('24','.c/m',ccl24,ccl24,mep24,mep24)
+        vuelta('24','.m/c',mep24,mep24,ccl24,ccl24)
+        vuelta('24','.c/p',ccl24,ccl24,pes24,pes24)
+        vuelta('24','.m/p',mep24,mep24,pes24,pes24)
     else: break
 
