@@ -22,5 +22,7 @@ class Operar(Ecovalores):
             price=precio,            
             order_type=pyRofex.OrderType.LIMIT)
         return
+        
+
 
 

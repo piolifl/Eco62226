@@ -1,4 +1,6 @@
 from Ecovalores import Ecovalores
+from datetime import datetime
+
 import pyRofex
 
 class Consultar(Ecovalores):
@@ -25,4 +27,10 @@ class Consultar(Ecovalores):
             return var['marketData']['OF'][0]['price']
         except:
             return 1000
+    
+    def log(self, texto:str):
+        f = open('rulos.log','a')
+        f.write( datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ' | ' + texto + '\n' )
+        f.close()
+        
 

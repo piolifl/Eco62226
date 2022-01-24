@@ -1,3 +1,4 @@
+
 from Consultar import Consultar
 from Operar import Operar
 import math
@@ -13,9 +14,9 @@ gGD30 = 0
 gAAPL = 0
 gS31E2 = 0
 gKO = 0
-pesos = 0
-mep = 0
-ccl = 0
+pesos = round(0,2)
+mep = round(0,2)
+ccl = round(0,2)
 
 moneda = {'ccl-mep':['C','C','D','D'] ,'mep-ccl':['D','D','C','C'],'ccl-pes':['C','C','',''],'mep-pes':['D','D','','']}
 
@@ -29,24 +30,24 @@ par = { '1':['al30',200,'gd30'],'2':['al30',200,'s31e2'],'3':['al30',200,'aapl']
 
 def ganaBonos(bono):
     global gAL30,gGD30,gAAPL,gS31E2
-    if      bono == 'al30':     gAL30  += comproA - e[1]
-    elif    bono == 'gd30':     gGD30  += comproA - e[1]
-    elif    bono == 'aapl':     gAAPL  += comproA - e[1]
-    elif    bono == 's31e2':    gS31E2 += comproA - e[1]
+    if      bono == 'al30':     gAL30  += round(comproA - e[1],0)
+    elif    bono == 'gd30':     gGD30  += round(comproA - e[1],0)
+    elif    bono == 'aapl':     gAAPL  += round(comproA - e[1],0)
+    elif    bono == 's31e2':    gS31E2 += round(comproA - e[1],0)
 def ganaMoneda(moneda):
     global pesos,mep,ccl
     if moneda == 'ccl-mep':
-        ccl   += (vendoA - (comproB / (pr.precioOF('MERV - XMEV - ' + e[0].upper() + u[3] + ' - ' + o +''))   *   (1 + costos) ))
-        mep   += (vendoB - (comproA / (pr.precioOF('MERV - XMEV - ' + e[0].upper() + u[3] + ' - ' + o +''))   *   (1 + costos) ))
+        ccl   += round((vendoA - (comproB / (pr.precioOF('MERV - XMEV - ' + e[0].upper() + u[3] + ' - ' + o +''))   *   (1 + costos) )),2)
+        mep   += round((vendoB - (comproA / (pr.precioOF('MERV - XMEV - ' + e[0].upper() + u[3] + ' - ' + o +''))   *   (1 + costos) )),2)
     elif moneda == 'mep-ccl':
-        mep   += (vendoA - (comproB / (pr.precioOF('MERV - XMEV - ' + e[0].upper() + u[3] + ' - ' + o +''))   *   (1 + costos) ))
-        ccl   += (vendoB - (comproA / (pr.precioOF('MERV - XMEV - ' + e[0].upper() + u[3] + ' - ' + o +''))   *   (1 + costos) ))
+        mep   += round((vendoA - (comproB / (pr.precioOF('MERV - XMEV - ' + e[0].upper() + u[3] + ' - ' + o +''))   *   (1 + costos) )),2)
+        ccl   += round((vendoB - (comproA / (pr.precioOF('MERV - XMEV - ' + e[0].upper() + u[3] + ' - ' + o +''))   *   (1 + costos) )),2)
     elif moneda == 'ccl-pes':
-        ccl     += (vendoA - (comproB / (pr.precioOF('MERV - XMEV - ' + e[0].upper() + u[3] + ' - ' + o +''))   *   (1 + costos) ))
-        pesos   += (vendoB - (comproA / (pr.precioOF('MERV - XMEV - ' + e[0].upper() + u[3] + ' - ' + o +''))   *   (1 + costos) ))
+        ccl     += round((vendoA - (comproB / (pr.precioOF('MERV - XMEV - ' + e[0].upper() + u[3] + ' - ' + o +''))   *   (1 + costos) )),2)
+        pesos   += round((vendoB - (comproA / (pr.precioOF('MERV - XMEV - ' + e[0].upper() + u[3] + ' - ' + o +''))   *   (1 + costos) )),2)
     elif moneda == 'mep-pes':
-        mep     += (vendoA - (comproB / (pr.precioOF('MERV - XMEV - ' + e[0].upper() + u[3] + ' - ' + o +''))   *   (1 + costos) ))
-        pesos   += (vendoB - (comproA / (pr.precioOF('MERV - XMEV - ' + e[0].upper() + u[3] + ' - ' + o +''))   *   (1 + costos) ))
+        mep     += round((vendoA - (comproB / (pr.precioOF('MERV - XMEV - ' + e[0].upper() + u[3] + ' - ' + o +''))   *   (1 + costos) )),2)
+        pesos   += round((vendoB - (comproA / (pr.precioOF('MERV - XMEV - ' + e[0].upper() + u[3] + ' - ' + o +''))   *   (1 + costos) )),2)
 
 if time.strftime("%H:%M:%S") > '15:59:45':
     plazo = ['48hs','24hs']
@@ -61,39 +62,55 @@ while True:
 
                 if e[0] == 'aapl' or e[0] == 'ko': 
                     precio = pr.precioBI('MERV - XMEV - ' + e[0].upper() + u[0] + ' - ' + o +'')
-                    if precio == 1000: break
+                    if precio == 1000: 
+                        print(time.strftime("%H:%M:%S"),f'| Sin precios para: {e[0].upper()}{u[0]} {o}')
+                        continue
                     else: vendoA = round( (  precio  *   (1 - costos))  *  e[1], 2)
                 else: 
                     precio = pr.precioBI('MERV - XMEV - ' + e[0].upper() + u[0] + ' - ' + o +'')
-                    if precio == 1000: break
+                    if precio == 1000: 
+                        print(time.strftime("%H:%M:%S"),f'| Sin precios para: {e[0].upper()}{u[0]} {o}')
+                        continue
                     else: vendoA = round( (  ( precio / 100)  *   (1 - costos))  *  e[1], 2)
 
                 if e[2] == 'aapl' or e[2] == 'ko':
                     precio = pr.precioOF('MERV - XMEV - ' + e[2].upper() + u[1] + ' - ' + o +'')
-                    if precio == 1000: break
+                    if precio == 1000: 
+                        print(time.strftime("%H:%M:%S"),f'| Sin precios para: {e[0].upper()}{u[0]} {o}')
+                        continue
                     else: comproB = round( vendoA   /  precio   *   (1 + costos), 0)
                 else: 
                     precio = pr.precioOF('MERV - XMEV - ' + e[2].upper() + u[1] + ' - ' + o +'')
-                    if precio == 1000: break
+                    if precio == 1000: 
+                        print(time.strftime("%H:%M:%S"),f'| Sin precios para: {e[0].upper()}{u[0]} {o}')
+                        continue
                     else: comproB = round( vendoA   /  (precio  / 100)   *   (1 + costos), 0)
 
                 if e[2] == 'aapl' or e[2] == 'ko':
                     precio = pr.precioBI('MERV - XMEV - ' + e[2].upper() + u[2] + ' - ' + o +'')
-                    if precio == 1000: break
+                    if precio == 1000: 
+                        print(time.strftime("%H:%M:%S"),f'| Sin precios para: {e[0].upper()}{u[0]} {o}')
+                        continue
                     else: vendoB = round( comproB  *  precio   *   (1 - costos), 2)
                 else: 
                     precio = pr.precioBI('MERV - XMEV - ' + e[2].upper() + u[2] + ' - ' + o +'')
-                    if precio == 1000: break
+                    if precio == 1000: 
+                        print(time.strftime("%H:%M:%S"),f'| Sin precios para: {e[0].upper()}{u[0]} {o}')
+                        continue
                     else: vendoB = round( comproB  *  (precio  / 100)   *   (1 - costos), 2)
 
                 if e[0] == 'aapl' or e[0] == 'ko':
                     precio = pr.precioOF('MERV - XMEV - ' + e[0].upper() + u[3] + ' - ' + o +'')
-                    if precio == 1000: break
-                    comproA = round( vendoB   /  precio   *   (1 + costos), 0)
+                    if precio == 1000: 
+                        print(time.strftime("%H:%M:%S"),f'| Sin precios para: {e[0].upper()}{u[0]} {o}')
+                        continue
+                    else: comproA = round( vendoB   /  precio   *   (1 + costos), 0)
                 else: 
                     precio = pr.precioOF('MERV - XMEV - ' + e[0].upper() + u[3] + ' - ' + o +'')
-                    if precio == 1000: break
-                    comproA = round( vendoB   /  (precio  / 100)   *   (1 + costos), 0)
+                    if precio == 1000: 
+                        print(time.strftime("%H:%M:%S"),f'| Sin precios para: {e[0].upper()}{u[0]} {o}')
+                        continue
+                    else: comproA = round( vendoB   /  (precio  / 100)   *   (1 + costos), 0)
 
                 if comproA > e[1]:
                     
@@ -103,11 +120,12 @@ while True:
                     #op.comprar  ( ('MERV - XMEV - ' + e[0].upper() + u[3] + ' - ' + o +''), comproA,    pr.precioOF('MERV - XMEV - ' + e[0].upper() + u[3] + ' - ' + o +'') )
 
                     print(f'SI GANA | limite {limite} | al30 {gAL30} | gd30 {gGD30} | s31e2 {gS31E2} | aapl {gAAPL} | ccl {ccl} | mep {mep} | pesos {pesos}')
+                    pr.log('AL30:' + str(gAL30) + ' |GD30:' + str(gGD30) + ' |S31E2:' + str(gS31E2) + ' |AAPL:' + str(gAAPL) + ' |MEP:' + str(mep) + ' |CCL:' + str(ccl) + ' |PESOS:' + str(pesos)    )
 
                     ganaBonos(e[0])
                     ganaMoneda(i)
 
-                    if e[0] == 'al30' or e[2] == 'al30': 
+                    if e[0] == 'al30' or e[2] == 'al30':
                         limite -= comproA - e[1]
                         continue
                 else: print(time.strftime("%H:%M:%S"),f' NO | {i} | {e[0].upper()} / {e[2].upper()} {o} | limite {limite} | al30 {gAL30} | gd30 {gGD30} | s31e2 {gS31E2} | aapl {gAAPL} | ccl {ccl} | mep {mep} | pesos {pesos}')

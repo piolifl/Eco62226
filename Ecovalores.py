@@ -1,6 +1,7 @@
 import config
 import pyRofex
 
+
 class Ecovalores:
     user = ""
     password = ""
@@ -14,6 +15,5 @@ class Ecovalores:
         pyRofex._set_environment_parameter( "ws", "wss://api.eco.xoms.com.ar/", pyRofex.Environment.LIVE)
         pyRofex.initialize(self.user,self.password,self.account,environment=pyRofex.Environment.LIVE)
 
-        
-        
+
 
