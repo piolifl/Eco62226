@@ -1,4 +1,4 @@
-import Configuracion
+import config
 import pyRofex
 
 class Ecovalores:
@@ -7,9 +7,9 @@ class Ecovalores:
     account = ""
 
     def __init__(self):
-        self.user = Configuracion.user
-        self.password = Configuracion.password
-        self.account = Configuracion.account
+        self.user = config.user
+        self.password = config.password
+        self.account = config.account
         pyRofex._set_environment_parameter("url", "https://api.eco.xoms.com.ar/", pyRofex.Environment.LIVE)
         pyRofex._set_environment_parameter( "ws", "wss://api.eco.xoms.com.ar/", pyRofex.Environment.LIVE)
         pyRofex.initialize(self.user,self.password,self.account,environment=pyRofex.Environment.LIVE)
