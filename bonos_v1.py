@@ -18,7 +18,7 @@ pesos = round(0,2)
 mep = round(0,2)
 ccl = round(0,2)
 
-moneda = {'ccl-mep':['C','C','D','D'] ,'mep-ccl':['D','D','C','C'],'ccl-pes':['C','C','',''],'mep-pes':['D','D','','']}
+moneda = {'mep-ccl':['D','D','C','C'] , 'ccl-mep':['C','C','D','D'] , 'mep-pes':['D','D','',''] , 'ccl-pes':['C','C','','']}
 
 plazo = ['CI','48hs','24hs']
 
@@ -64,52 +64,52 @@ while True:
                     precio = pr.precioBI('MERV - XMEV - ' + e[0].upper() + u[0] + ' - ' + o +'')
                     if precio == 1000: 
                         print(time.strftime("%H:%M:%S"),f'| Sin precios para: {e[0].upper()}{u[0]} {o}')
-                        continue
+                        break
                     else: vendoA = round( (  precio  *   (1 - costos))  *  e[1], 2)
                 else: 
                     precio = pr.precioBI('MERV - XMEV - ' + e[0].upper() + u[0] + ' - ' + o +'')
                     if precio == 1000: 
                         print(time.strftime("%H:%M:%S"),f'| Sin precios para: {e[0].upper()}{u[0]} {o}')
-                        continue
+                        break
                     else: vendoA = round( (  ( precio / 100)  *   (1 - costos))  *  e[1], 2)
 
                 if e[2] == 'aapl' or e[2] == 'ko':
                     precio = pr.precioOF('MERV - XMEV - ' + e[2].upper() + u[1] + ' - ' + o +'')
                     if precio == 1000: 
                         print(time.strftime("%H:%M:%S"),f'| Sin precios para: {e[0].upper()}{u[0]} {o}')
-                        continue
+                        break
                     else: comproB = round( vendoA   /  precio   *   (1 + costos), 0)
                 else: 
                     precio = pr.precioOF('MERV - XMEV - ' + e[2].upper() + u[1] + ' - ' + o +'')
                     if precio == 1000: 
                         print(time.strftime("%H:%M:%S"),f'| Sin precios para: {e[0].upper()}{u[0]} {o}')
-                        continue
+                        break
                     else: comproB = round( vendoA   /  (precio  / 100)   *   (1 + costos), 0)
 
                 if e[2] == 'aapl' or e[2] == 'ko':
                     precio = pr.precioBI('MERV - XMEV - ' + e[2].upper() + u[2] + ' - ' + o +'')
                     if precio == 1000: 
                         print(time.strftime("%H:%M:%S"),f'| Sin precios para: {e[0].upper()}{u[0]} {o}')
-                        continue
+                        break
                     else: vendoB = round( comproB  *  precio   *   (1 - costos), 2)
                 else: 
                     precio = pr.precioBI('MERV - XMEV - ' + e[2].upper() + u[2] + ' - ' + o +'')
                     if precio == 1000: 
                         print(time.strftime("%H:%M:%S"),f'| Sin precios para: {e[0].upper()}{u[0]} {o}')
-                        continue
+                        break
                     else: vendoB = round( comproB  *  (precio  / 100)   *   (1 - costos), 2)
 
                 if e[0] == 'aapl' or e[0] == 'ko':
                     precio = pr.precioOF('MERV - XMEV - ' + e[0].upper() + u[3] + ' - ' + o +'')
                     if precio == 1000: 
                         print(time.strftime("%H:%M:%S"),f'| Sin precios para: {e[0].upper()}{u[0]} {o}')
-                        continue
+                        break
                     else: comproA = round( vendoB   /  precio   *   (1 + costos), 0)
                 else: 
                     precio = pr.precioOF('MERV - XMEV - ' + e[0].upper() + u[3] + ' - ' + o +'')
                     if precio == 1000: 
                         print(time.strftime("%H:%M:%S"),f'| Sin precios para: {e[0].upper()}{u[0]} {o}')
-                        continue
+                        break
                     else: comproA = round( vendoB   /  (precio  / 100)   *   (1 + costos), 0)
 
                 if comproA > e[1]:
