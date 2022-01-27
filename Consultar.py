@@ -28,8 +28,13 @@ class Consultar(Ecovalores):
         except:
             return 1000
     
-    def log(self, texto:str):
+    def logRulos(self, texto:str):
         f = open('rulos.log','a')
+        f.write( datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ' | ' + texto + '\n' )
+        f.close()
+
+    def logRatios(self, texto:str):
+        f = open('ratios.log','a')
         f.write( datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ' | ' + texto + '\n' )
         f.close()
         
