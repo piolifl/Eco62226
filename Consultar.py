@@ -1,11 +1,11 @@
-from Ecovalores import Ecovalores
+from Broker import EV_62226
 from datetime import datetime
 
 import pyRofex
 
-class Consultar(Ecovalores):
+class Consultar(EV_62226):
     def __init__(self):
-        Ecovalores.__init__(self)
+        EV_62226.__init__(self)
 
     def precioLA(self,ticker=str):
         var = pyRofex.get_market_data(ticker,entries=[pyRofex.MarketDataEntry.LAST])

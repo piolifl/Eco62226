@@ -2,7 +2,7 @@ import config
 import pyRofex
 
 
-class Ecovalores:
+class EV_62226:
     user = ""
     password = ""
     account = ""

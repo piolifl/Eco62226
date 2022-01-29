@@ -1,9 +1,9 @@
-from Ecovalores import Ecovalores
+from Broker import EV_62226
 import pyRofex
 
-class Operar(Ecovalores):
+class Operar(EV_62226):
     def __init__(self):
-        Ecovalores.__init__(self)
+        EV_62226.__init__(self)
 
     def comprar(self,ticker=str,cantidad=float,precio=float):
         pyRofex.send_order(
