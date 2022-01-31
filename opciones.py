@@ -29,7 +29,8 @@ while True:
         ratioE = round(valor[5] / valor[8],3) 
         ratioA = round(vendo / compro,2)
         res = round(    (((valor[4] * valor[5])*(1+costo)) - ((vendo * valor[4])*(1-costo)))    -   (   ((valor[7] * valor[8])*(1-costo)) - ((compro * valor[7]) * (1+costo) ) )   ,2)
-        if  ratioA > ratioE * (1 + 0.25):
+
+        if  ratioA > ratioE * (1 + 0.35):
 
             if   pr.bidsBI(  'MERV - XMEV - ' + valor[0] + valor[1] + valor[2] + valor[3] +' - ' + '24hs') == 0: continue
             elif pr.offersOF('MERV - XMEV - ' + valor[0] + valor[1] + valor[6] + valor[3] +' - ' + '24hs') == 0: continue

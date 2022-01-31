@@ -93,6 +93,11 @@ while True:
                 else: comproA = vendoB // round((pr_comproA/100) * (1+costos),2)
 
                 if comproA > valor[1]: 
+
+                    if   pr.bidsBI(   'MERV - XMEV - ' + valor[0].upper() + i[0] + ' - ' + u ) < valor[1]: continue
+                    elif pr.offersOF( 'MERV - XMEV - ' + valor[2].upper() + i[0] + ' - ' + u ) < comproB:  continue
+                    elif pr.bidsBI(   'MERV - XMEV - ' + valor[2].upper() + i[0] + ' - ' + u ) < comproB:  continue
+                    elif pr.offersOF( 'MERV - XMEV - ' + valor[0].upper() + i[0] + ' - ' + u ) < comproA:  continue
                     
                     #CUENTA EN ECO_62226
                     #op.vender   ( ( 'MERV - XMEV - ' + valor[0].upper() + i[0] + ' - ' + u )   , e[1],       pr_vendoA )
