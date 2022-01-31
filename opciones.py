@@ -6,34 +6,40 @@ import time
 pr = Consultar()
 op = Operar()
 
+costo = 0.005
 
-ratio = {'1':['180',1,27,'200',2,13.59,'.FE'], '2':['0',1,20,'220',2,10.59,'.FE']}
+ratio = {
+    '1':['GFG','C','180','.FE',1,27, '200',2,13.59 ],
+    '2':['GFG','C','250','.AB',10,5.7, '270',15,3.89 ],
+    '3':['GFG','V','210','.AB',10,8, '195',15,5.5 ]
+}
 
 while True:
     if time.strftime("%H:%M:%S") < '11:00:00':
         print(time.strftime("%H:%M:%S"),'Esperando la apertura a las 11hs ... '),time.sleep(10)
         continue
-    if time.strftime("%H:%M:%S") > '26:59:50':
+    if time.strftime("%H:%M:%S") > '16:59:50':
         print(f'FIN 17hs CERRADO |')
         break
     for item, valor in ratio.items():
-        if valor[0] == '0': continue
-        vendo  = pr.precioBI('MERV - XMEV - ' + 'GFGC' + valor[0] + valor[6] + ' - ' + '24hs')
-        compro = pr.precioOF('MERV - XMEV - ' + 'GFGC' + valor[3] + valor[6] + ' - ' + '24hs')
+        if valor[2] == '0': continue
+        vendo  = pr.precioBI('MERV - XMEV - ' + valor[0] + valor[1] + valor[2] + valor[3] +' - ' + '24hs')
+        compro = pr.precioOF('MERV - XMEV - ' + valor[0] + valor[1] + valor[6] + valor[3] +' - ' + '24hs')
         if vendo == 1000 or compro == 1000:
-            print(time.strftime("%H:%M:%S"),f' | SIN PRECIOS | {valor[0]} a {vendo} x {valor[1]} contra {valor[3]} a {compro} x {valor[4]} '),time.sleep(1)
+            print(time.strftime("%H:%M:%S"),f' | SIN PRECIOS | {valor[0]}{valor[1]}{valor[2]}{valor[3]} a {vendo} | {valor[0]}{valor[1]}{valor[6]}{valor[3]} a {compro} '),time.sleep(1)
             continue
-        ratioE = round(valor[2] / valor[5],3) 
+        ratioE = round(valor[5] / valor[8],3) 
         ratioA = round(vendo / compro,2)
-        res = round(    ((valor[2] * valor[1]) - (vendo * valor[1])) - ((valor[4] * valor[5]) - (compro * valor[4]))    ,2)
+        res = round(    (((valor[4] * valor[5])*(1+costo)) - ((vendo * valor[4])*(1-costo)))    -   (   ((valor[7] * valor[8])*(1-costo)) - ((compro * valor[7]) * (1+costo) ) )   ,2)
         if  ratioA > ratioE * (1 + 0.25):
 
-            #op.vender   (('MERV - XMEV - ' + 'GFGC' + valor[0] + valor[6] + ' - ' + '24HS'),  valor[1],   vendo)
-            #op.comprar  (('MERV - XMEV - ' + 'GFGC' + valor[3] + valor[6] + ' - ' + '24HS'),  valor[4],   compro)
+            #op.vender   (('MERV - XMEV - ' + valor[0] + valor[1] + valor[2] + valor[3] +' - ' + '24hs'),  valor[4],   vendo)
+            #op.comprar  (('MERV - XMEV - ' + valor[0] + valor[1] + valor[6] + valor[3] +' - ' + '24hs'),  valor[7],   compro)
 
-            pr.logRatios('CERRADO: ' + str(valor[0]) + ' a ' + str(vendo) + ' x ' + str(valor[1]) + ' contra ' + str(valor[3]) + ' a ' + str(compro) + ' x ' + str(valor[4]) + ' resultado ' + str(res))
-            print(time.strftime("%H:%M:%S"),f' | CERRADO | {valor[0]} a {vendo} x {valor[1]} contra {valor[3]} a {compro} x {valor[4]} resultado {res}')
+            pr.logRatios('CERRADO: ' + str(valor[2]) + ' a ' + str(vendo) + ' x ' + str(valor[4]) + ' contra ' + str(valor[6]) + ' a ' + str(compro) + ' x ' + str(valor[7]) + ' resultado ' + str(res))
+            pr.logRatios('CERRADO: ' + str(valor[0],valor[1],valor[2],valor[3]) + ' | '  + str(valor[0],valor[1],valor[6],valor[3]) + ' | ' + ' Resultado ' + str(res)   )
 
-            ratio[item][0] = '0'
+            print(time.strftime("%H:%M:%S"),f' | CERRADO | {valor[0]}{valor[1]}{valor[2]}{valor[3]} a {vendo} | {valor[0]}{valor[1]}{valor[6]}{valor[3]} a {compro} resultado {res}')
+            ratio[item][2] = '0'
 
-        else: print(time.strftime("%H:%M:%S"),f' | BUSCANDO | {valor[0]} a {vendo} x {valor[1]} contra {valor[3]} a {compro} x {valor[4]} resultado {res}')
+        else: print(time.strftime("%H:%M:%S"),f' | BUSCANDO | {valor[0]}{valor[1]}{valor[2]}{valor[3]} a {vendo} | {valor[0]}{valor[1]}{valor[6]}{valor[3]} a {compro} resultado {res}')
