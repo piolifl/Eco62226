@@ -67,7 +67,7 @@ while True:
     if time.strftime("%H:%M:%S") < '11:00:00':
         print(time.strftime("%H:%M:%S"),'Esperando la apertura a las 11hs ... '),time.sleep(10)
         continue
-    if time.strftime("%H:%M:%S") > '26:59:50':
+    if time.strftime("%H:%M:%S") > '16:59:50':
         print(f'FIN 17hs CERRADO | lim{limite} | al30 {al30} | gd30 {gd30} | s31e2 {s31e2} | aapl {aapl} | ko {ko} | >>> ccl {ccl} mep {mep} pesos {peso} ')
         break
     if limite < 200: 
@@ -93,7 +93,8 @@ while True:
                 else: comproA = vendoB // round((pr_comproA/100) * (1+costos),2)
 
                 if comproA > valor[1]: 
-
+                    
+                    #CUENTA EN ECO_62226
                     #op.vender   ( ( 'MERV - XMEV - ' + valor[0].upper() + i[0] + ' - ' + u )   , e[1],       pr_vendoA )
                     #op.comprar  ( ( 'MERV - XMEV - ' + valor[2].upper() + i[0] + ' - ' + u )   , comproB,    pr_comproB )
                     #op.vender   ( ( 'MERV - XMEV - ' + valor[2].upper() + i[1] + ' - ' + u )   , comproB,    pr_vendoB )

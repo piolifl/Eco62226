@@ -2,7 +2,7 @@ import config
 import pyRofex
 
 
-class EV_62226:
+class ECO_62226:
     user = ""
     password = ""
     account = ""
@@ -16,4 +16,17 @@ class EV_62226:
         pyRofex.initialize(self.user,self.password,self.account,environment=pyRofex.Environment.LIVE)
 
 
+class BCCH_2474:
+    user = ""
+    password = ""
+    account = ""
 
+    def __init__(self):
+        self.user = config.user_BCCH2447
+        self.password = config.password_BCCH2447
+        self.account = config.account_BCCH2447
+        pyRofex._set_environment_parameter("url", "https://api.bcch.xoms.com.ar/", pyRofex.Environment.LIVE)
+        pyRofex._set_environment_parameter( "ws", "wss://api.bcch.xoms.com.ar/", pyRofex.Environment.LIVE)
+        pyRofex.initialize(self.user,self.password,self.account,environment=pyRofex.Environment.LIVE)
+
+#DzLmCrhw2ZcH2a3
