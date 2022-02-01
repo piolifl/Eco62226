@@ -1,7 +1,6 @@
 from Broker import ECO_62226
 from Broker import BCCH_2474
 from datetime import datetime
-
 import pyRofex
 
 class Consultar(ECO_62226):
@@ -33,11 +32,6 @@ class Consultar(ECO_62226):
         try: return var['marketData']['OF'][0]['size']
         except: return 0
 
-    def lastLA(self,ticker=str):
-        var = pyRofex.get_market_data(ticker,entries=[pyRofex.MarketDataEntry.LAST])
-        try: return var['marketData']['LA'][0]['size']
-        except: return 0
-
     def logRulos(self, texto:str):
         f = open('rulos.log','a')
         f.write( datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ' | ' + texto + '\n' )
@@ -48,7 +42,6 @@ class Consultar(ECO_62226):
         f.write( datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ' | ' + texto + '\n' )
         f.close()
         
-
 class Consultar2(BCCH_2474):
     def __init__(self):
         BCCH_2474.__init__(self)
@@ -76,11 +69,6 @@ class Consultar2(BCCH_2474):
     def offersOF(self,ticker=str):
         var = pyRofex.get_market_data(ticker,entries=[pyRofex.MarketDataEntry.OFFERS])
         try: return var['marketData']['OF'][0]['size']
-        except: return 0.0
-
-    def lastLA(self,ticker=str):
-        var = pyRofex.get_market_data(ticker,entries=[pyRofex.MarketDataEntry.LAST])
-        try: return var['marketData']['LA'][0]['size']
         except: return 0.0
     
     def logRulos(self, texto:str):
