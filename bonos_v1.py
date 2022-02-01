@@ -19,24 +19,24 @@ peso = 0
 
 moneda = {'ccl-mep':['C','D'],  'mep-ccl':['D','C'],  'mep-pes':['D',''] , 'ccl-pes':['C','']}
 
-plazo = ['CI  ','48hs','24hs']
+plazo = ['CI','48hs','24hs']
 
 par = { 
         #'0':['al30',200,'gd30'],'01':['gd30',200,'al30'],
         '1':['al30',200,'gd30'],'2':['al30',200,'ae38'],'3':['al30',200,'al29'],'4':['al30',200,'al35'],'5':['al30',200,'al41'],
         '10':['al30',200,'gd29'],'11':['al30',200,'gd35'],'12':['al30',200,'gd38'],'13':['al30',200,'gd41'],'14':['al30',200,'gd46'],
-        '20':['al30',200,'s28f2'],
+        '20':['al30',200,'s28f2'],'20':['al30',200,'s31m2'],
         '30':['al30',200,'aapl'],'31':['al30',200,'ko'],
 
         '100':['gd30',200,'gd29'],'101':['gd30',200,'gd35'],'102':['gd30',200,'gd38'],'103':['gd30',200,'gd41'],'104':['gd30',200,'gd46'],
         '110':['gd30',200,'al30'],'111':['gd30',200,'ae38'],'112':['gd30',200,'al29'],'113':['gd30',200,'al35'],'114':['gd30',200,'al41'],
-        '120':['gd30',200,'s28f2'],
+        '120':['gd30',200,'s28f2'],'121':['gd30',200,'s31m2'],
         '130':['gd30',200,'aapl'],'131':['gd30',200,'ko'],
 
-        '200':['s28f2',8000,'al30'], '201':['s28f2',8000,'gd30'],'202':['s28f2',8000,'aapl'],'203':['s28f2',8000,'ko'],
+        '200':['s28f2',8000,'al30'], '201':['s28f2',8000,'gd30'],'202':['s28f2',8000,'aapl'],'203':['s28f2',8000,'ko'],'204':['s28f2',8000,'s31m2'],
 
-        '300':['aapl',5,'al30'],'301':['aapl',5,'gd30'],'302':['aapl',5,'ko'],'303':['aapl',5,'s28f2'],
-        '400':['ko',5,'al30'],'401':['ko',5,'gd30'],'402':['ko',5,'aapl'],'403':['ko',5,'s28f2']
+        '300':['aapl',5,'al30'],'301':['aapl',5,'gd30'],'302':['aapl',5,'ko'],'303':['aapl',5,'s28f2'],'304':['aapl',5,'s31m2'],
+        '400':['ko',5,'al30'],'401':['ko',5,'gd30'],'402':['ko',5,'aapl'],'403':['ko',5,'s28f2'],'404':['ko',5,'s31m2']
 
         }
 
@@ -68,10 +68,10 @@ while True:
         print(time.strftime("%H:%M:%S"),'Esperando la apertura a las 11hs ... '),time.sleep(10)
         continue
     if time.strftime("%H:%M:%S") > '16:59:50':
-        print(f'FIN 17hs CERRADO | lim{limite} | al30 {al30} | gd30 {gd30} | s28f2 {s28f2} | aapl {aapl} | ko {ko} | >>> ccl {ccl} mep {mep} pesos {peso} ')
+        print(f'FIN 17hs CERRADO | lim{limite} | al30 {al30} | gd30 {gd30} | s28f2 {s28f2} | aapl {aapl} | ko {ko} | > ccl {ccl} mep {mep} pesos {peso} ')
         break
     if limite < 200: 
-        print(f'FIN LIMITE AGOTADO | lim{limite} | al30 {al30} | gd30 {gd30} | s28f2 {s28f2} | aapl {aapl} | ko {ko} | >>> ccl {ccl} mep {mep} pesos {peso}  ')
+        print(f'FIN LIMITE AGOTADO | lim{limite} | al30 {al30} | gd30 {gd30} | s28f2 {s28f2} | aapl {aapl} | ko {ko} | > ccl {ccl} mep {mep} pesos {peso}  ')
         break 
     if time.strftime("%H:%M:%S") > '15:59:45': plazo = ['48hs','24hs']
     for clave,valor in par.items():
@@ -108,10 +108,12 @@ while True:
                     ganaBonos(valor[0])
                     ganaMoneda(i)
 
-                    print(time.strftime("%H:%M:%S"),f' | SI | {e} {valor[0]} {valor[2]} {u} |  limite {limite} | al30 {al30} | gd30 {gd30} | s28f2 {s28f2} | aapl {aapl} | ko {ko} | >>> ccl {ccl} mep {mep} pesos {peso}  ')
+                    print(time.strftime("%H:%M:%S"),f' | SI | {e} {valor[0]} {valor[2]} {u} |  limite {limite} | al30 {al30} | gd30 {gd30} | s28f2 {s28f2} | aapl {aapl} | ko {ko} | > ccl {ccl} mep {mep} pesos {peso}  ')
 
-                    pr.logRulos('Entre: ' + str(e) + 'AL30: ' + str(al30) + ' | GD30: ' + str(gd30) + ' | S28F2: ' + str(s28f2) + ' | AAPL: ' + str(aapl) + ' | KO: ' + str(ko) + '| >>> ccl ' + str(ccl) + ' mep ' + str(mep) + ' pesos ' + str(peso) )
+                    pr.logRulos('Entre: ' + str(e) + 'AL30: ' + str(al30) + ' | GD30: ' + str(gd30) + ' | S28F2: ' + str(s28f2) + ' | AAPL: ' + str(aapl) + ' | KO: ' + str(ko) + '| > ccl ' + str(ccl) + ' mep ' + str(mep) + ' pesos ' + str(peso) )
+
+                    if valor[0] == 'al30' or valor[2] == 'al30': limite -= valor[1]
 
                     continue
                         
-                else: print(time.strftime("%H:%M:%S"),f' | NO | {comproA} | {e} {valor[0]} {valor[2]} {u} | limite {limite} | al30 {al30} | gd30 {gd30} | s28f2 {s28f2} | aapl {aapl} | ko {ko} | >>> ccl {ccl} mep {mep} pesos {peso}  ')
+                else: print(time.strftime("%H:%M:%S"),f'| NO | {comproA} | {e} {valor[0]} {valor[2]} {u} | limite {limite} | al30 {al30} | gd30 {gd30} | s28f2 {s28f2} | aapl {aapl} | ko {ko} | > ccl {ccl} mep {mep} pesos {peso}  ')
