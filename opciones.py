@@ -40,11 +40,11 @@ while True:
 
             pr.logRatios('CERRADO: ' + str(valor[0],valor[1],valor[2],valor[3]) + ' | '  + str(valor[0],valor[1],valor[6],valor[3]) + ' | ' + ' Resultado ' + str(res)   )
 
-            print(time.strftime("%H:%M:%S"),f' | CERRADO | {valor[0]}{valor[1]}{valor[2]}{valor[3]} a {vendo} | {valor[0]}{valor[1]}{valor[6]}{valor[3]} a {compro} |  resultado {res}')
+            print(time.strftime("%H:%M:%S"),f' | CERRADO | {valor[0]}{valor[1]}{valor[2]}{valor[3]}: {vendo} | {valor[0]}{valor[1]}{valor[6]}{valor[3]}: {compro} | resultado: {res}')
 
             ratio[item][2] = '0'
 
-        else: print(time.strftime("%H:%M:%S"),f' | BUSCANDO | {valor[0]}{valor[1]}{valor[2]}{valor[3]} a {vendo} | {valor[0]}{valor[1]}{valor[6]}{valor[3]} a {compro} | resultado {res}')
+        else: print(time.strftime("%H:%M:%S"),f' | BUSCANDO | {valor[0]}{valor[1]}{valor[2]}{valor[3]}: {vendo} | {valor[0]}{valor[1]}{valor[6]}{valor[3]}: {compro} | resultado: {res}')
         time.sleep(5)
 
         
