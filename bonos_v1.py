@@ -77,36 +77,34 @@ while True:
         print(f'FIN LIMITE AGOTADO | lim{limite} | al30 {al30} | gd30 {gd30} | s28f2 {s28f2} | aapl {aapl} | ko {ko} | > ccl {ccl} mep {mep} pesos {peso}  ')
         break 
     if time.strftime("%H:%M:%S") > '15:59:45': plazo = ['48hs','24hs']
-    for clave,valor in par.items():
-        if limite < 199: break
-        for e,i in moneda.items():
-            if limite < 199: break
-            for u in plazo:
-                if limite < 199: break
-                pr_vendoA =   pr.precioBI( 'MERV - XMEV - ' + valor[0].upper() + i[0] + ' - ' + u )
-                pr_comproB =  pr.precioOF( 'MERV - XMEV - ' + valor[2].upper() + i[0] + ' - ' + u )
-                pr_vendoB =   pr.precioBI( 'MERV - XMEV - ' + valor[2].upper() + i[1] + ' - ' + u )
-                pr_comproA =  pr.precioOF( 'MERV - XMEV - ' + valor[0].upper() + i[1] + ' - ' + u )
-                if pr_vendoA == 1000 or pr_comproB == 1000 or pr_vendoB == 1000 or pr_comproA == 1000: continue
 
-                if valor[0] == 'aapl' or valor[0] == 'ko': vendoA = round(pr_vendoA * (1-costos),2) * valor[1]
-                else: vendoA = round((pr_vendoA/100) * (1-costos),2) * valor[1]
-                if valor[2] == 'aapl' or valor[2] == 'ko': comproB = vendoA // round(pr_comproB * (1+costos),2)
-                else: comproB = vendoA // round((pr_comproB/100) * (1+costos),2)
-                if valor[2] == 'aapl' or valor[2] == 'ko': vendoB = round(pr_vendoB * (1-costos),2) * comproB
-                else: vendoB = comproB * round((pr_vendoB/100) * (1-costos),2)
-                if valor[0] == 'aapl' or valor[0] == 'ko': comproA = vendoB // round(pr_comproA * (1+costos),2)
-                else: comproA = vendoB // round((pr_comproA/100) * (1+costos),2)
-                
+    for clave,valor in par.items():
+        for e,i in moneda.items():
+            for u in plazo:
                 while True:
                     if limite < 199: break
+                    pr_vendoA =   pr.precioBI( 'MERV - XMEV - ' + valor[0].upper() + i[0] + ' - ' + u )
+                    pr_comproB =  pr.precioOF( 'MERV - XMEV - ' + valor[2].upper() + i[0] + ' - ' + u )
+                    pr_vendoB =   pr.precioBI( 'MERV - XMEV - ' + valor[2].upper() + i[1] + ' - ' + u )
+                    pr_comproA =  pr.precioOF( 'MERV - XMEV - ' + valor[0].upper() + i[1] + ' - ' + u )
+                    if pr_vendoA == 1000 or pr_comproB == 1000 or pr_vendoB == 1000 or pr_comproA == 1000: break
+
+                    if valor[0] == 'aapl' or valor[0] == 'ko': vendoA = round(pr_vendoA * (1-costos),2) * valor[1]
+                    else: vendoA = round((pr_vendoA/100) * (1-costos),2) * valor[1]
+                    if valor[2] == 'aapl' or valor[2] == 'ko': comproB = vendoA // round(pr_comproB * (1+costos),2)
+                    else: comproB = vendoA // round((pr_comproB/100) * (1+costos),2)
+                    if valor[2] == 'aapl' or valor[2] == 'ko': vendoB = round(pr_vendoB * (1-costos),2) * comproB
+                    else: vendoB = comproB * round((pr_vendoB/100) * (1-costos),2)
+                    if valor[0] == 'aapl' or valor[0] == 'ko': comproA = vendoB // round(pr_comproA * (1+costos),2)
+                    else: comproA = vendoB // round((pr_comproA/100) * (1+costos),2)
+
                     if comproA > valor[1]: 
 
                         if   pr.bidsBI(   'MERV - XMEV - ' + valor[0].upper() + i[0] + ' - ' + u ) < valor[1]: continue
                         elif pr.offersOF( 'MERV - XMEV - ' + valor[2].upper() + i[0] + ' - ' + u ) < comproB:  continue
                         elif pr.bidsBI(   'MERV - XMEV - ' + valor[2].upper() + i[0] + ' - ' + u ) < comproB:  continue
                         elif pr.offersOF( 'MERV - XMEV - ' + valor[0].upper() + i[0] + ' - ' + u ) < comproA:  continue
-                        
+                            
                         #CUENTA EN ECO_62226
                         #op.vender   ( ( 'MERV - XMEV - ' + valor[0].upper() + i[0] + ' - ' + u )   , e[1],       pr_vendoA )
                         #op.comprar  ( ( 'MERV - XMEV - ' + valor[2].upper() + i[0] + ' - ' + u )   , comproB,    pr_comproB )
@@ -120,11 +118,8 @@ while True:
 
                         pr.logRulos(str(e) + ' AL30: ' + str(al30) + ' | GD30: ' + str(gd30) + ' | S28F2: ' + str(s28f2) + ' | AAPL: ' + str(aapl) + ' | KO: ' + str(ko) + '| > ccl ' + str(ccl) + ' mep ' + str(mep) + ' pesos ' + str(peso) )
 
-                        if valor[0] == 'al30' or valor[2] == 'al30': limite -= valor[1]
-                        
-                        continue
-                            
+                        if valor[0] == 'al30' or valor[2] == 'al30': limite -= valor[1]    
+                        continue                         
                     else: 
                         print(time.strftime("%H:%M:%S"),f'| NO | {comproA} | {e} {valor[0]} {valor[2]} {u} | limite {limite} |al30 {al30}|gd30 {gd30}|s28f2 {s28f2}|aapl {aapl}|ko {ko}| > ccl {ccl} mep {mep} pesos {peso}')
-                        break
-                    
+                        break                 
