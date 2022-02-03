@@ -7,7 +7,7 @@ pr = Consultar()
 op = Operar()
 
 costos = 0.0026
-limite = 1000
+limite = 10000
 al30 = 0
 gd30 = 0
 aapl = 0
@@ -17,7 +17,8 @@ ccl = 0
 mep = 0
 peso = 0
 
-moneda = {'ccl-mep':['C','D'],  'mep-ccl':['D','C'],  #'mep-pes':['D',''] , 'ccl-pes':['C','']
+moneda = {
+    'ccl-mep':['C','D'],  'mep-ccl':['D','C'],  #'mep-pes':['D',''] , 'ccl-pes':['C','']
 }
 
 plazo = ['CI','48hs','24hs'
@@ -51,20 +52,48 @@ def ganaBonos(tipo):
     elif tipo == 'aapl':   aapl += int(comproA - valor[1])
     elif tipo == 'ko':       ko += int(comproA - valor[1])
     elif tipo == 's28f2': s28f2 += int(comproA - valor[1])
-def ganaMoneda(tipo):
+def ganaMoneda(mon,a,b):
     global ccl, mep, peso
-    if tipo == 'ccl-mep': 
-        ccl += vendoA - round(comproB * pr_comproB,2)
-        mep += vendoB - round(comproA * pr_comproA,2)
-    elif tipo == 'mep-ccl': 
-        mep += vendoA - round(comproB * pr_comproB,2)
-        ccl += vendoB - round(comproA * pr_comproA,2)
-    elif tipo == 'ccl-pes': 
-        ccl  += vendoA - round(comproB * pr_comproB,2)
-        peso += vendoB - round(comproA * pr_comproA,2)
-    elif tipo == 'mep-pes': 
-        mep  += vendoA - round(comproB * pr_comproB,2)
-        peso += vendoB - round(comproA * pr_comproA,2)
+    if mon == 'ccl-mep':
+        if a == 'aapl' or a == 'ok':
+            ccl += round(vendoA - comproB * pr_comproB/100,2)
+            mep += round(vendoB - comproA * pr_comproA,2)
+        elif b == 'aapl' or b == 'ok':
+            ccl += round(vendoA - comproB * pr_comproB,2)
+            mep += round(vendoB - comproA * pr_comproA/100,2)
+        else:
+            ccl += round(vendoA - comproB * pr_comproB/100,2)
+            mep += round(vendoB - comproA * pr_comproA/100,2)
+    elif mon == 'mep-ccl':
+        if a == 'aapl' or a == 'ok':
+            mep += round(vendoA - comproB * pr_comproB/100,2)
+            ccl += round(vendoB - comproA * pr_comproA,2)
+        elif b == 'aapl' or b == 'ok':
+            mep += round(vendoA - comproB * pr_comproB,2)
+            ccl += round(vendoB - comproA * pr_comproA/100,2)
+        else:
+            mep += round(vendoA - comproB * pr_comproB/100,2)
+            ccl += round(vendoB - comproA * pr_comproA/100,2)
+    elif mon == 'ccl-pes':
+        if a == 'aapl' or a == 'ok':
+            ccl  += round(vendoA - comproB * pr_comproB/100,2)
+            peso += round(vendoB - comproA * pr_comproA,2)
+        elif b == 'aapl' or b == 'ok':
+            ccl  += round(vendoA - comproB * pr_comproB,2)
+            peso += round(vendoB - comproA * pr_comproA/100,2)
+        else:
+            ccl  += round(vendoA - comproB * pr_comproB/100,2)
+            peso += round(vendoB - comproA * pr_comproA/100,2)
+    elif mon == 'mep-pes':
+        if a == 'aapl' or a == 'ok':
+            mep  += round(vendoA - comproB * pr_comproB/100,2)
+            peso += round(vendoB - comproA * pr_comproA,2)
+        elif b == 'aapl' or b == 'ok':
+            mep  += round(vendoA - comproB * pr_comproB,2)
+            peso += round(vendoB - comproA * pr_comproA/100,2)
+        else:
+            mep  += round(vendoA - comproB * pr_comproB/100,2)
+            peso += round(vendoB - comproA * pr_comproA/100,2)
 
 while True:
     if time.strftime("%H:%M:%S") < '11:00:00':
@@ -97,6 +126,7 @@ while True:
                     else: vendoB = comproB * round((pr_vendoB/100) * (1-costos),2)
                     if valor[0] == 'aapl' or valor[0] == 'ko': comproA = vendoB // round(pr_comproA * (1+costos),2)
                     else: comproA = vendoB // round((pr_comproA/100) * (1+costos),2)
+                    gana = comproA - valor[1]
 
                     if comproA > valor[1]: 
 
@@ -112,14 +142,21 @@ while True:
                         #op.comprar  ( ( 'MERV - XMEV - ' + valor[0].upper() + i[1] + ' - ' + u )   , comproA,    pr_comproA )
 
                         ganaBonos(valor[0])
-                        ganaMoneda(i)
+                        ganaMoneda(e,valor[0],valor[2])
 
                         print(time.strftime("%H:%M:%S"),f' | SI | {e} {valor[0]} {valor[2]} {u} |  limite {limite} | al30 {al30} | gd30 {gd30} | s28f2 {s28f2} | aapl {aapl} | ko {ko} | > ccl {ccl} mep {mep} pesos {peso}  ')
+
+                        print(
+                            f'pr_vendoA {pr_vendoA}, pr_comproB {pr_comproB}, pr_vendoB {pr_vendoB}, pr_comproA {pr_comproA}'
+                        )
+                        print(
+                            f'vendoA  {vendoA}, comproB {comproB}, vendoB {vendoB}, comproA {comproA} '
+                        )
 
                         pr.logRulos(str(e) + ' AL30: ' + str(al30) + ' | GD30: ' + str(gd30) + ' | S28F2: ' + str(s28f2) + ' | AAPL: ' + str(aapl) + ' | KO: ' + str(ko) + '| > ccl ' + str(ccl) + ' mep ' + str(mep) + ' pesos ' + str(peso) )
 
                         if valor[0] == 'al30' or valor[2] == 'al30': limite -= valor[1]    
                         continue                         
                     else: 
-                        print(time.strftime("%H:%M:%S"),f'| NO | {comproA} | {e} {valor[0]} {valor[2]} {u} | limite {limite} |al30 {al30}|gd30 {gd30}|s28f2 {s28f2}|aapl {aapl}|ko {ko}| > ccl {ccl} mep {mep} pesos {peso}')
+                        print(time.strftime("%H:%M:%S"),f'| NO | {gana} | {e} {valor[0]} {valor[2]} {u} | limite {limite} |al30 {al30}|gd30 {gd30}|s28f2 {s28f2}|aapl {aapl}|ko {ko}| > ccl {ccl} mep {mep} pesos {peso}')
                         break                 
