@@ -1,5 +1,6 @@
 from Consultar import Consultar
 from Operar import Operar
+from datetime import datetime
 import math
 import time
 
@@ -97,7 +98,7 @@ def ganaMoneda(mon,a,b):
 
 while True:
     if time.strftime("%H:%M:%S") < '11:00:00':
-        print(time.strftime("%H:%M:%S"),'Esperando la apertura a las 11hs ... '),time.sleep(10)
+        print('Esperando la apertura ...', datetime.now().strftime("%Y-%m-%d %H:%M:%S")),time.sleep(10)
         continue
     if time.strftime("%H:%M:%S") > '16:59:50':
         print(f'FIN 17hs CERRADO | lim{limite} | al30 {al30} | gd30 {gd30} | s28f2 {s28f2} | aapl {aapl} | ko {ko} | > ccl {ccl} mep {mep} pesos {peso} ')
@@ -144,14 +145,8 @@ while True:
                         ganaBonos(valor[0])
                         ganaMoneda(e,valor[0],valor[2])
 
-                        print(time.strftime("%H:%M:%S"),f' | SI | {e} {valor[0]} {valor[2]} {u} |  limite {limite} | al30 {al30} | gd30 {gd30} | s28f2 {s28f2} | aapl {aapl} | ko {ko} | > ccl {ccl} mep {mep} pesos {peso}  ')
 
-                        print(
-                            f'pr_vendoA {pr_vendoA}, pr_comproB {pr_comproB}, pr_vendoB {pr_vendoB}, pr_comproA {pr_comproA}'
-                        )
-                        print(
-                            f'vendoA  {vendoA}, comproB {comproB}, vendoB {vendoB}, comproA {comproA} '
-                        )
+                        print(time.strftime("%H:%M:%S"),f' | SI | {e} {valor[0]} {valor[2]} {u} |  limite {limite} | al30 {al30} | gd30 {gd30} | s28f2 {s28f2} | aapl {aapl} | ko {ko} | > ccl {ccl} mep {mep} pesos {peso}  ')
 
                         pr.logRulos(str(e) + ' AL30: ' + str(al30) + ' | GD30: ' + str(gd30) + ' | S28F2: ' + str(s28f2) + ' | AAPL: ' + str(aapl) + ' | KO: ' + str(ko) + '| > ccl ' + str(ccl) + ' mep ' + str(mep) + ' pesos ' + str(peso) )
 
