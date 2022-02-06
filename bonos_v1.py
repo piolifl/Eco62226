@@ -103,16 +103,20 @@ while True:
     if time.strftime("%H:%M:%S") > '16:59:50':
         print(f'FIN 17hs CERRADO | lim{limite} | al30 {al30} | gd30 {gd30} | s28f2 {s28f2} | aapl {aapl} | ko {ko} | > ccl {ccl} mep {mep} pesos {peso} ')
         break
-    if limite < 199: 
-        print(f'FIN LIMITE AGOTADO | lim{limite} | al30 {al30} | gd30 {gd30} | s28f2 {s28f2} | aapl {aapl} | ko {ko} | > ccl {ccl} mep {mep} pesos {peso}  ')
-        break 
     if time.strftime("%H:%M:%S") > '15:59:45': plazo = ['48hs','24hs']
 
     for clave,valor in par.items():
+        if limite < 200:
+            if par[clave][0] == 'al30':  
+                par[clave][0] = 'gd30'
+                continue
+            elif par[clave][2] == 'al30':  
+                par[clave][2] = 'gd30'
+                continue
         for e,i in moneda.items():
             for u in plazo:
                 while True:
-                    if limite < 199: break
+
                     pr_vendoA =   pr.precioBI( 'MERV - XMEV - ' + valor[0].upper() + i[0] + ' - ' + u )
                     pr_comproB =  pr.precioOF( 'MERV - XMEV - ' + valor[2].upper() + i[0] + ' - ' + u )
                     pr_vendoB =   pr.precioBI( 'MERV - XMEV - ' + valor[2].upper() + i[1] + ' - ' + u )
@@ -145,12 +149,11 @@ while True:
                         ganaBonos(valor[0])
                         ganaMoneda(e,valor[0],valor[2])
 
-
                         print(time.strftime("%H:%M:%S"),f' | SI | {e} {valor[0]} {valor[2]} {u} |  limite {limite} | al30 {al30} | gd30 {gd30} | s28f2 {s28f2} | aapl {aapl} | ko {ko} | > ccl {ccl} mep {mep} pesos {peso}  ')
 
                         pr.logRulos(str(e) + ' AL30: ' + str(al30) + ' | GD30: ' + str(gd30) + ' | S28F2: ' + str(s28f2) + ' | AAPL: ' + str(aapl) + ' | KO: ' + str(ko) + '| > ccl ' + str(ccl) + ' mep ' + str(mep) + ' pesos ' + str(peso) )
 
-                        if valor[0] == 'al30' or valor[2] == 'al30': limite -= valor[1]    
+                        if valor[0] == 'al30' or valor[2] == 'al30': limite -= valor[1] 
                         continue                         
                     else: 
                         print(time.strftime("%H:%M:%S"),f'| NO | {gana} | {e} {valor[0]} {valor[2]} {u} | limite {limite} |al30 {al30}|gd30 {gd30}|s28f2 {s28f2}|aapl {aapl}|ko {ko}| > ccl {ccl} mep {mep} pesos {peso}')
