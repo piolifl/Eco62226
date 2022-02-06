@@ -8,7 +8,7 @@ pr = Consultar()
 op = Operar()
 
 costos = 0.0026
-limite = 10000
+limite = 400
 al30 = 0
 gd30 = 0
 aapl = 0
@@ -26,11 +26,24 @@ plazo = ['CI','48hs','24hs'
 ]
 
 par = { 
-    #'0':['al30',200,'gd30'],'01':['gd30',200,'al30'],
-    '1':['al30',200,'gd30'],'2':['al30',200,'ae38'],'3':['al30',200,'al29'],'4':['al30',200,'al35'],'5':['al30',200,'al41'],'6':['ae38',200,'al30'],'7':['al29',200,'al30'],'8':['al35',200,'al30'],'9':['al41',200,'al30'],
-    '10':['al30',200,'gd29'],'11':['al30',200,'gd35'],'12':['al30',200,'gd38'],'13':['al30',200,'gd41'],'14':['al30',200,'gd46'],'15':['gd29',200,'al30'],'16':['gd35',200,'al30'],'17':['gd38',200,'al30'],'18':['gd41',200,'al30'],'19':['gd46',200,'al30'],
+    '1 ':['al30',200,'gd30'],'2 ':['gd30',200,'al30'],
+    '10':['al30',200,'ae38'],'12':['al30',200,'al29'],'13':['al30',200,'al35'],'14':['al30',200,'al41'],
+    '40':['ae38',200,'al30'],'41':['ae38',200,'al29'],'42':['ae38',200,'al35'],'43':['ae38',200,'al41'],
+    '50':['al29',200,'al30'],'51':['al29',200,'ae38'],'52':['al29',200,'al35'],'53':['al29',200,'al41'],
+    '60':['al35',200,'al30'],'61':['al35',200,'ae38'],'62':['al35',200,'al29'],'63':['al35',200,'al41'],
+    '70':['al41',200,'al30'],'71':['al41',200,'ae38'],'72':['al41',200,'al29'],'73':['al41',200,'al35'],
+
     '20':['al30',200,'s28f2'],'20':['al30',200,'s31m2'],
     '30':['al30',200,'aapl'],'31':['al30',200,'ko'],
+
+    '90':['al30',200,'gd29'],'91':['al30',200,'gd35'],'92':['al30',200,'gd38'],'93':['al30',200,'gd41'],'94':['al30',200,'gd46'],
+    '95':['gd29',200,'al30'],
+    '96':['gd35',200,'al30'],
+    '97':['gd38',200,'al30'],
+    '98':['gd41',200,'al30'],
+    '99':['gd46',200,'al30'],
+
+
 
     '100':['gd30',200,'gd29'],'101':['gd30',200,'gd35'],'102':['gd30',200,'gd38'],'103':['gd30',200,'gd41'],'104':['gd30',200,'gd46'],'105':['gd29',200,'gd30'],'106':['gd35',200,'gd30'],'107':['gd38',200,'gd30'],'108':['gd41',200,'gd30'],'109':['gd46',200,'gd30'],
 
@@ -108,7 +121,7 @@ while True:
     for clave,valor in par.items():
         if limite < 200:
             if par[clave][0] == 'al30':  
-                par[clave][0] = 'gd30'
+                par[clave][0] = 'GD30'
                 continue
             elif par[clave][2] == 'al30':  
                 par[clave][2] = 'gd30'
@@ -149,12 +162,12 @@ while True:
                         ganaBonos(valor[0])
                         ganaMoneda(e,valor[0],valor[2])
 
-                        print(time.strftime("%H:%M:%S"),f' | SI | {e} {valor[0]} {valor[2]} {u} |  limite {limite} | al30 {al30} | gd30 {gd30} | s28f2 {s28f2} | aapl {aapl} | ko {ko} | > ccl {ccl} mep {mep} pesos {peso}  ')
+                        print(time.strftime("%H:%M:%S"),f' | SI | {e} {valor[0].upper()} {valor[2].upper()} {u} |  limite {limite} | al30 {al30} | gd30 {gd30} | s28f2 {s28f2} | aapl {aapl} | ko {ko} | > ccl {ccl} mep {mep} pesos {peso}  ')
 
                         pr.logRulos(str(e) + ' AL30: ' + str(al30) + ' | GD30: ' + str(gd30) + ' | S28F2: ' + str(s28f2) + ' | AAPL: ' + str(aapl) + ' | KO: ' + str(ko) + '| > ccl ' + str(ccl) + ' mep ' + str(mep) + ' pesos ' + str(peso) )
 
                         if valor[0] == 'al30' or valor[2] == 'al30': limite -= valor[1] 
                         continue                         
                     else: 
-                        print(time.strftime("%H:%M:%S"),f'| NO | {gana} | {e} {valor[0]} {valor[2]} {u} | limite {limite} |al30 {al30}|gd30 {gd30}|s28f2 {s28f2}|aapl {aapl}|ko {ko}| > ccl {ccl} mep {mep} pesos {peso}')
+                        print(time.strftime("%H:%M:%S"),f'| NO | {gana} | {e} {valor[0].upper()} {valor[2].upper()} {u} | limite {limite} |al30 {al30}|gd30 {gd30}|s28f2 {s28f2}|aapl {aapl}|ko {ko}| > ccl {ccl} mep {mep} pesos {peso}')
                         break                 
