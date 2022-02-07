@@ -8,7 +8,7 @@ pr = Consultar()
 op = Operar()
 
 costos = 0.0026
-limite = 400
+limite = 1000
 al30 = 0
 gd30 = 0
 aapl = 0
@@ -19,14 +19,14 @@ mep = 0
 peso = 0
 
 moneda = {
-    'ccl-mep':['C','D'],  'mep-ccl':['D','C'],  #'mep-pes':['D',''] , 'ccl-pes':['C','']
+    'ccl-mep':['C','D'],  'mep-ccl':['D','C'], 'mep-pes':['D',''] , 'ccl-pes':['C','']
 }
 
 plazo = ['CI','48hs','24hs'
 ]
 
 par = { 
-    '1 ':['al30',200,'gd30'],'2 ':['gd30',200,'al30'],
+    '1':['al30',200,'gd30'],'2':['gd30',200,'al30'],
 
     '10':['al30',200,'ae38'],   '11':['al30',200,'al29'],   '12':['al30',200,'al35'],   '13':['al30',200,'al41'],
     '14':['ae38',200,'al30'],   '15':['ae38',200,'al29'],   '16':['ae38',200,'al35'],   '17':['ae38',200,'al41'],
@@ -132,13 +132,8 @@ while True:
     if time.strftime("%H:%M:%S") > '15:59:45': plazo = ['48hs','24hs']
 
     for clave,valor in par.items():
-        if limite < 200:
-            if par[clave][0] == 'al30':  
-                par[clave][0] = 'GD30'
-                continue
-            elif par[clave][2] == 'al30':  
-                par[clave][2] = 'gd30'
-                continue
+        if limite < 200: 
+            if valor[0] == 'al30' or valor[2] == 'al30': continue
         for e,i in moneda.items():
             for u in plazo:
                 while True:
@@ -183,4 +178,4 @@ while True:
                         continue                         
                     else: 
                         print(time.strftime("%H:%M:%S"),f'| NO | {gana} | {e} {valor[0].upper()} {valor[2].upper()} {u} | limite {limite} |al30 {al30}|gd30 {gd30}|s28f2 {s28f2}|aapl {aapl}|ko {ko}| > ccl {ccl} mep {mep} pesos {peso}')
-                        break                 
+                        break       
