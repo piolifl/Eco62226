@@ -38,7 +38,7 @@ while True:
             #op.vender   (('MERV - XMEV - ' + valor[0] + valor[1] + valor[2] + valor[3] +' - ' + '24hs'),  valor[4],   vendo)
             #op.comprar  (('MERV - XMEV - ' + valor[0] + valor[1] + valor[6] + valor[3] +' - ' + '24hs'),  valor[7],   compro)
 
-            pr.logRatios('CERRADO: ' + str(valor[0],valor[1],valor[2],valor[3]) + ' | '  + str(valor[0],valor[1],valor[6],valor[3]) + ' | ' + ' Resultado ' + str(res)   )
+            pr.logRatios('CERRADO: ' + str(valor[0]) + ' | '  + str(valor[0]) + ' | ' + ' Resultado ' + str(res)   )
 
             print(time.strftime("%H:%M:%S"),f' | CERRADO | {valor[0]}{valor[1]}{valor[2]}{valor[3]}: {vendo} | {valor[0]}{valor[1]}{valor[6]}{valor[3]}: {compro} | resultado: {res}')
 

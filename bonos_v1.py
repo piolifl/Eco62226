@@ -10,15 +10,16 @@ op = Operar()
 costos = 0.0026
 limite = 1000
 gana = 0
+bono = 0
 ccl = 0
 mep = 0
 peso = 0
 
 moneda = {
-    'ccl-mep':['C','D'],  'mep-ccl':['D','C'], 'mep-pes':['D',''] , 'ccl-pes':['C','']
+    'ccl-mep':['C','D'],  'mep-ccl':['D','C'], #'mep-pes':['D',''] , 'ccl-pes':['C','']
 }
 
-plazo = ['CI','48hs','24hs'
+plazo = ['CI','48hs',#'24hs'
 ]
 
 par = { 
@@ -115,7 +116,7 @@ while True:
     if time.strftime("%H:%M:%S") < '11:00:00':
         print('Esperando la apertura ...', datetime.now().strftime("%Y-%m-%d %H:%M:%S")),time.sleep(10)
         continue
-    if time.strftime("%H:%M:%S") > '26:59:50':
+    if time.strftime("%H:%M:%S") > '16:59:50':
         print(f'FIN 17hs CERRADO | lim{limite} | {valor[0].upper()}: {gana} | >>> ccl {ccl} mep {mep} pesos {peso}')
         break
     if time.strftime("%H:%M:%S") > '15:59:45': plazo = ['48hs','24hs']
@@ -141,7 +142,7 @@ while True:
                     else: vendoB = comproB * round((pr_vendoB/100) * (1-costos),2)
                     if valor[0] == 'aapl' or valor[0] == 'ko': comproA = vendoB // round(pr_comproA * (1+costos),2)
                     else: comproA = vendoB // round((pr_comproA/100) * (1+costos),2)
-
+                    gana = comproA - valor[1]
                     if comproA > valor[1]: 
 
                         if   pr.bidsBI(   'MERV - XMEV - ' + valor[0].upper() + i[0] + ' - ' + u ) < valor[1]: continue
@@ -157,14 +158,14 @@ while True:
 
                         ganaMoneda(e,valor[0],valor[2])
 
-                        gana += comproA - valor[1]
+                        bono += comproA - valor[1]
 
-                        print(time.strftime("%H:%M:%S"),f' | SI | {e} {valor[0].upper()} {valor[2].upper()} {u} |  limite {limite} | {valor[0].upper()}: {gana} | >>> ccl {ccl} mep {mep} pesos {peso}')
+                        print(time.strftime("%H:%M:%S"),f' | SI | {e} {valor[0].upper()} {valor[2].upper()} {u} |  limite {limite} | {valor[0].upper()}: {bono} | >>> ccl {ccl} mep {mep} pesos {peso}')
 
-                        pr.logRulos(str(e)+ ' | ' + str(valor[0].upper())+ ': ' + str(gana) + ' | >>> ccl: ' + str(ccl) + ' mep: ' + str(mep) + ' pesos: ' + str(peso))
+                        pr.logRulos(str(e)+ ' | ' + str(valor[0].upper())+ ': ' + str(bono) + ' | >>> ccl: ' + str(ccl) + ' mep: ' + str(mep) + ' pesos: ' + str(peso))
 
                         if valor[0] == 'al30' or valor[2] == 'al30': limite -= valor[1] 
                         continue                         
                     else: 
-                        print(time.strftime("%H:%M:%S"),f'| NO | {gana} | {e} {valor[0].upper()} {valor[2].upper()} {u} | limite: {limite} | {valor[0].upper()}: {gana} | >>> ccl: {ccl} mep: {mep} pesos: {peso}')
+                        print(time.strftime("%H:%M:%S"),f'| NO | {gana} | {e} {valor[0].upper()} {valor[2].upper()} {u} | limite: {limite} | {valor[0].upper()}: {bono} | >>> ccl: {ccl} mep: {mep} pesos: {peso}')
                         break       
