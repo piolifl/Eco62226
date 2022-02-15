@@ -19,8 +19,10 @@ moneda = {
     'ccl-mep':['C','D'],  'mep-ccl':['D','C'], #'mep-pes':['D',''] , 'ccl-pes':['C','']
 }
 
-plazo = ['CI','48hs',#'24hs'
+plazo = ['CI','48hs','24hs'
 ]
+par2 = { 
+    '1':['al30',200,'gd30'],'2':['gd30',200,'al30']}
 
 par = { 
     '1':['al30',200,'gd30'],'2':['gd30',200,'al30'],
@@ -162,7 +164,7 @@ while True:
 
                         print(time.strftime("%H:%M:%S"),f' | SI | {e} {valor[0].upper()} {valor[2].upper()} {u} |  limite {limite} | {valor[0].upper()}: {bono} | >>> ccl {ccl} mep {mep} pesos {peso}')
 
-                        pr.logRulos(str(e)+ ' | ' + str(valor[0].upper())+ ': ' + str(bono) + ' | >>> ccl: ' + str(ccl) + ' mep: ' + str(mep) + ' pesos: ' + str(peso))
+                        #pr.logRulos(str(e)+ ' | ' + str(valor[0].upper())+ ': ' + str(bono) + ' | >>> ccl: ' + str(ccl) + ' mep: ' + str(mep) + ' pesos: ' + str(peso))
 
                         if valor[0] == 'al30' or valor[2] == 'al30': limite -= valor[1] 
                         continue                         

@@ -9,9 +9,9 @@ op = Operar()
 costo = 0.005
 
 ratio = {
-    '1':['GFG','C','180','.FE',1,27, '200',2,13.59 ],
-    '2':['GFG','C','250','.AB',10,5.7, '270',15,3.89 ],
-    '3':['GFG','V','210','.AB',10,8, '195',15,5.5 ]
+    '1':['GFG','V','200','.AB',1,9.1, '190',2,5.26 ],
+    '2':['GFG','V','0','.AB',10,5.7, '270',15,3.89 ],
+    '3':['GFG','V','0','.AB',10,8, '195',15,5.5 ]
 }
 
 while True:
@@ -30,7 +30,7 @@ while True:
         ratioA = round(vendo / compro,2)
         res = round(    (((valor[4] * valor[5])*(1+costo)) - ((vendo * valor[4])*(1-costo)))    -   (   ((valor[7] * valor[8])*(1-costo)) - ((compro * valor[7]) * (1+costo) ) )   ,2)
 
-        if  ratioA > ratioE * (1 + 0.45):
+        if  ratioA > ratioE * (1 + 0.5):
 
             if   pr.bidsBI(  'MERV - XMEV - ' + valor[0] + valor[1] + valor[2] + valor[3] +' - ' + '24hs') == 0: continue
             elif pr.offersOF('MERV - XMEV - ' + valor[0] + valor[1] + valor[6] + valor[3] +' - ' + '24hs') == 0: continue
