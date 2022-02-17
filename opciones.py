@@ -10,7 +10,7 @@ costo = 0.005
 
 ratio = {
     '1':['GFG','V','200','.AB',1,9.1, '190',2,5.26 ],
-    '2':['GFG','V','0','.AB',10,5.7, '270',15,3.89 ],
+    '2':['GFG','C','200','.AB' ,1,22.6, '220',2,13.1 ],
     '3':['GFG','V','0','.AB',10,8, '195',15,5.5 ]
 }
 
@@ -28,7 +28,7 @@ while True:
         if vendo == 1000 or compro == 1000: continue
         ratioE = round(valor[5] / valor[8],3) 
         ratioA = round(vendo / compro,2)
-        res = round(    (((valor[4] * valor[5])*(1+costo)) - ((vendo * valor[4])*(1-costo)))    -   (   ((valor[7] * valor[8])*(1-costo)) - ((compro * valor[7]) * (1+costo) ) )   ,2)
+        res = round(    ((((valor[4] * valor[5])*(1+costo)) - ((vendo * valor[4])*(1-costo)))    -   (   ((valor[7] * valor[8])*(1-costo)) - ((compro * valor[7]) * (1+costo) ) )) *100  ,2)
 
         if  ratioA > ratioE * (1 + 0.5):
 
@@ -40,11 +40,11 @@ while True:
 
             pr.logRatios('CERRADO: ' + str(valor[0]) + ' | '  + str(valor[0]) + ' | ' + ' Resultado ' + str(res)   )
 
-            print(time.strftime("%H:%M:%S"),f' | CERRADO | {valor[0]}{valor[1]}{valor[2]}{valor[3]}: {vendo} | {valor[0]}{valor[1]}{valor[6]}{valor[3]}: {compro} | resultado: {res}')
+            print(time.strftime("%H:%M:%S"),f' | CERRADO | {valor[0]}{valor[1]}{valor[2]}{valor[3]}: {vendo} | {valor[0]}{valor[1]}{valor[6]}{valor[3]}: {compro} | ratioE {ratioE} ratioA {ratioA} | resultado: {res}')
 
             ratio[item][2] = '0'
 
-        else: print(time.strftime("%H:%M:%S"),f' | BUSCANDO | {valor[0]}{valor[1]}{valor[2]}{valor[3]}: {vendo} | {valor[0]}{valor[1]}{valor[6]}{valor[3]}: {compro} | resultado: {res}')
+        else: print(time.strftime("%H:%M:%S"),f' || {valor[0]}{valor[1]}{valor[2]}{valor[3]}: {vendo} | {valor[0]}{valor[1]}{valor[6]}{valor[3]}: {compro} | ratioE {ratioE} ratioA {ratioA} | resultado: {res}')
         time.sleep(5)
 
         
