@@ -11,7 +11,7 @@ costo = 0.005
 ratio = {
     '1':['GFG','V','200','.AB',1,9.1, '190',2,5.26 ],
     '2':['GFG','C','200','.AB' ,1,22.6, '220',2,13.1 ],
-    '3':['GFG','V','0','.AB',10,8, '195',15,5.5 ]
+    '3':['GFG','C','200','.AB',1,20.3, '220',2,11.15 ]
 }
 
 while True:
@@ -36,8 +36,8 @@ while True:
             if   pr.bidsBI(  'MERV - XMEV - ' + valor[0] + valor[1] + valor[2] + valor[3] +' - ' + '24hs') == 0: continue
             elif pr.offersOF('MERV - XMEV - ' + valor[0] + valor[1] + valor[6] + valor[3] +' - ' + '24hs') == 0: continue
 
-            op.vender   (('MERV - XMEV - ' + valor[0] + valor[1] + valor[2] + valor[3] +' - ' + '24hs'),  valor[4],   round(vendo,3))
-            op.comprar  (('MERV - XMEV - ' + valor[0] + valor[1] + valor[6] + valor[3] +' - ' + '24hs'),  valor[7],   round(compro,3))
+            #op.vender   (('MERV - XMEV - ' + valor[0] + valor[1] + valor[2] + valor[3] +' - ' + '24hs'),  valor[4],   round(vendo,3))
+            #op.comprar  (('MERV - XMEV - ' + valor[0] + valor[1] + valor[6] + valor[3] +' - ' + '24hs'),  valor[7],   round(compro,3))
 
             pr.logRatios('CERRADO: ' + str(valor[0]) + ' | '  + str(valor[0]) + ' | ' + ' Resultado ' + str(res)   )
 
