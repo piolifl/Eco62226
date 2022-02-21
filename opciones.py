@@ -11,7 +11,8 @@ costo = 0.005
 ratio = {
     '1':['GFG','V','200','.AB',1,9.1, '190',2,5.26 ],
     '2':['GFG','C','200','.AB' ,1,22.6, '220',2,13.1 ],
-    '3':['GFG','C','200','.AB',1,20.3, '220',2,11.15 ]
+    '3':['GFG','C','200','.AB',1,20.3, '220',2,11.15 ],
+    '4':['GFG','C','210','.AB',1,15.95, '230',1,8.49 ]
 }
 
 while True:
@@ -46,7 +47,7 @@ while True:
             ratio[item][2] = '0'
 
         else: 
-            print(time.strftime("%H:%M:%S"),f'|| {valor[0]}{valor[1]}{valor[2]}{valor[3]}: {vendo} | {valor[0]}{valor[1]}{valor[6]}{valor[3]}: {compro} | IN {ratioE} actual {ratioA} OUT {dif} | resultado: {res}')
+            print(time.strftime("%H:%M:%S"),f'||{item} {valor[0]}{valor[1]}{valor[2]}{valor[3]}: {vendo} | {valor[0]}{valor[1]}{valor[6]}{valor[3]}: {compro} | IN {ratioE} actual {ratioA} OUT {dif} | resultado: {res}')
             print()
         time.sleep(5)
 
