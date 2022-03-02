@@ -21,10 +21,10 @@ moneda = {
 
 plazo = ['CI','48hs','24hs'
 ]
-par = { 
+par2 = { 
     '1':['al30',200,'gd30'],'2':['gd30',200,'al30']}
 
-par2 = { 
+par = { 
     '1':['al30',200,'gd30'],'2':['gd30',200,'al30'],
 
     '10':['al30',200,'ae38'],   '11':['al30',200,'al29'],   '12':['al30',200,'al35'],   '13':['al30',200,'al41'],
@@ -39,10 +39,10 @@ par2 = {
     '48':['al35',200,'gd29'],   '49':['al35',200,'gd30'],   '50':['al35',200,'gd35'],   '51':['al35',200,'gd38'],   '52':['al35',200,'gd41'],   '53':['al35',200,'gd46'],
     '54':['al41',200,'gd29'],   '55':['al41',200,'gd30'],   '56':['al41',200,'gd35'],   '57':['al41',200,'gd38'],   '58':['al41',200,'gd41'],   '59':['al41',200,'gd46'],
 
-    '60':['al30',200,'s28f2'],  '61':['al30',200,'s31m2'],
+    #'60':['al30',200,'s28f2'],  '61':['al30',200,'s31m2'],
     
     '70':['al30',200,'aapl'],'71':['al30',200,'ko'],
-    '80':['al30',200,'s28f2'],'81':['al30',200,'s31m2'],
+    #'80':['al30',200,'s28f2'],'81':['al30',200,'s31m2'],
 
     '100.1':['al30',200,'gd30'],'101.1':['gd30',200,'al30'],
  
@@ -61,10 +61,10 @@ par2 = {
     '155':['gd46',200,'ae38'],  '156':['gd46',200,'al29'],  '157':['gd46',200,'al30'],  '158':['gd46',200,'al35'],  '159':['gd46',200,'al41'],
 
     '170':['gd30',200,'aapl'],'171':['gd30',200,'ko'],
-    '180':['gd30',200,'s28f2'],'181':['gd30',200,'s31m2'],
+    #'180':['gd30',200,'s28f2'],'181':['gd30',200,'s31m2'],
 
 
-    '200':['s28f2',8000,'al30'], '201':['s28f2',8000,'gd30'],'202':['s28f2',8000,'aapl'],'203':['s28f2',8000,'ko'],'204':['s28f2',8000,'s31m2'],
+    #'200':['s28f2',8000,'al30'], '201':['s28f2',8000,'gd30'],'202':['s28f2',8000,'aapl'],'203':['s28f2',8000,'ko'],'204':['s28f2',8000,'s31m2'],
 
     '300':['aapl',5,'al30'],'301':['aapl',5,'gd30'],'302':['aapl',5,'ko'],'303':['aapl',5,'s28f2'],'304':['aapl',5,'s31m2'],
     '400':['ko',5,'al30'],'401':['ko',5,'gd30'],'402':['ko',5,'aapl'],'403':['ko',5,'s28f2'],'404':['ko',5,'s31m2']
@@ -145,15 +145,16 @@ while True:
                     if valor[0] == 'aapl' or valor[0] == 'ko': comproA = vendoB // round(pr_comproA * (1+costos),2)
                     else: comproA = vendoB // round((pr_comproA/100) * (1+costos),2)
                     gana = comproA - valor[1]
+
                     if comproA > valor[1]: 
 
                         if   pr.bidsBI(   'MERV - XMEV - ' + valor[0].upper() + i[0] + ' - ' + u ) < valor[1]: continue
                         elif pr.offersOF( 'MERV - XMEV - ' + valor[2].upper() + i[0] + ' - ' + u ) < comproB:  continue
-                        elif pr.bidsBI(   'MERV - XMEV - ' + valor[2].upper() + i[0] + ' - ' + u ) < comproB:  continue
-                        elif pr.offersOF( 'MERV - XMEV - ' + valor[0].upper() + i[0] + ' - ' + u ) < comproA:  continue
+                        elif pr.bidsBI(   'MERV - XMEV - ' + valor[2].upper() + i[1] + ' - ' + u ) < comproB:  continue
+                        elif pr.offersOF( 'MERV - XMEV - ' + valor[0].upper() + i[1] + ' - ' + u ) < comproA:  continue
                             
                         #CUENTA EN ECO_62226
-                        #op.vender   ( ( 'MERV - XMEV - ' + valor[0].upper() + i[0] + ' - ' + u )   , e[1],       pr_vendoA )
+                        #op.vender   ( ( 'MERV - XMEV - ' + valor[0].upper() + i[0] + ' - ' + u )   , valor[1],   pr_vendoA )
                         #op.comprar  ( ( 'MERV - XMEV - ' + valor[2].upper() + i[0] + ' - ' + u )   , comproB,    pr_comproB )
                         #op.vender   ( ( 'MERV - XMEV - ' + valor[2].upper() + i[1] + ' - ' + u )   , comproB,    pr_vendoB )
                         #op.comprar  ( ( 'MERV - XMEV - ' + valor[0].upper() + i[1] + ' - ' + u )   , comproA,    pr_comproA )
