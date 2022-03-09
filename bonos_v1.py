@@ -16,13 +16,12 @@ mep = 0
 peso = 0
 
 moneda = {
-    'ccl-mep':['C','D'],  'mep-ccl':['D','C'], #'mep-pes':['D',''] , 'ccl-pes':['C','']
+    'ccl-mep':['C','D'],  'mep-ccl':['D','C'], 'mep-pes':['D',''] , 'ccl-pes':['C','']
 }
-
 plazo = ['CI','48hs','24hs'
 ]
 par2 = { 
-    '1':['al30',200,'gd30'],'2':['gd30',200,'al30']}
+    '1':['al30',200,'aapl'],'2':['aapl',5,'al30']}
 
 par = { 
     '1':['al30',200,'gd30'],'2':['gd30',200,'al30'],
@@ -38,11 +37,8 @@ par = {
     '42':['al29',200,'gd29'],   '43':['al29',200,'gd30'],   '44':['al29',200,'gd35'],   '45':['al29',200,'gd38'],   '46':['al29',200,'gd41'],   '47':['al29',200,'gd46'],
     '48':['al35',200,'gd29'],   '49':['al35',200,'gd30'],   '50':['al35',200,'gd35'],   '51':['al35',200,'gd38'],   '52':['al35',200,'gd41'],   '53':['al35',200,'gd46'],
     '54':['al41',200,'gd29'],   '55':['al41',200,'gd30'],   '56':['al41',200,'gd35'],   '57':['al41',200,'gd38'],   '58':['al41',200,'gd41'],   '59':['al41',200,'gd46'],
-
-    #'60':['al30',200,'s28f2'],  '61':['al30',200,'s31m2'],
     
     '70':['al30',200,'aapl'],'71':['al30',200,'ko'],
-    #'80':['al30',200,'s28f2'],'81':['al30',200,'s31m2'],
 
     '100.1':['al30',200,'gd30'],'101.1':['gd30',200,'al30'],
  
@@ -61,14 +57,9 @@ par = {
     '155':['gd46',200,'ae38'],  '156':['gd46',200,'al29'],  '157':['gd46',200,'al30'],  '158':['gd46',200,'al35'],  '159':['gd46',200,'al41'],
 
     '170':['gd30',200,'aapl'],'171':['gd30',200,'ko'],
-    #'180':['gd30',200,'s28f2'],'181':['gd30',200,'s31m2'],
 
-
-    #'200':['s28f2',8000,'al30'], '201':['s28f2',8000,'gd30'],'202':['s28f2',8000,'aapl'],'203':['s28f2',8000,'ko'],'204':['s28f2',8000,'s31m2'],
-
-    '300':['aapl',5,'al30'],'301':['aapl',5,'gd30'],'302':['aapl',5,'ko'],'303':['aapl',5,'s28f2'],'304':['aapl',5,'s31m2'],
-    '400':['ko',5,'al30'],'401':['ko',5,'gd30'],'402':['ko',5,'aapl'],'403':['ko',5,'s28f2'],'404':['ko',5,'s31m2']
-
+    '300':['aapl',5,'al30'],'301':['aapl',5,'gd30'],'302':['aapl',5,'ko'],
+    '400':['ko',5,'al30'],'401':['ko',5,'gd30'],'402':['ko',5,'aapl']
         }
 
 def ganaMoneda(mon,a,b):
@@ -126,27 +117,28 @@ while True:
     for clave,valor in par.items():
         if limite < 200: 
             if valor[0] == 'al30' or valor[2] == 'al30': continue
-
         for e,i in moneda.items():
             for u in plazo:
                 while True:
-                    pr_vendoA =   pr.precioBI( 'MERV - XMEV - ' + valor[0].upper() + i[0] + ' - ' + u )
-                    pr_comproB =  pr.precioOF( 'MERV - XMEV - ' + valor[2].upper() + i[0] + ' - ' + u )
-                    pr_vendoB =   pr.precioBI( 'MERV - XMEV - ' + valor[2].upper() + i[1] + ' - ' + u )
-                    pr_comproA =  pr.precioOF( 'MERV - XMEV - ' + valor[0].upper() + i[1] + ' - ' + u )
+
+                    pr_vendoA=pr.precioBI('MERV - XMEV - '+valor[0].upper()+i[0]+' - '+u)
+                    pr_comproB=pr.precioOF('MERV - XMEV - '+valor[2].upper()+i[0]+' - '+u)
+                    pr_vendoB=pr.precioBI('MERV - XMEV - '+valor[2].upper()+i[1]+' - ' + u)
+                    pr_comproA=pr.precioOF('MERV - XMEV - '+valor[0].upper()+i[1]+' - '+u)
+                    
                     if pr_vendoA == 1000 or pr_comproB == 1000 or pr_vendoB == 1000 or pr_comproA == 1000: break
 
-                    if valor[0] == 'aapl' or valor[0] == 'ko': vendoA = round(pr_vendoA * (1-costos),2) * valor[1]
-                    else: vendoA = round((pr_vendoA/100) * (1-costos),2) * valor[1]
-                    if valor[2] == 'aapl' or valor[2] == 'ko': comproB = vendoA // round(pr_comproB * (1+costos),2)
-                    else: comproB = vendoA // round((pr_comproB/100) * (1+costos),2)
-                    if valor[2] == 'aapl' or valor[2] == 'ko': vendoB = round(pr_vendoB * (1-costos),2) * comproB
-                    else: vendoB = comproB * round((pr_vendoB/100) * (1-costos),2)
-                    if valor[0] == 'aapl' or valor[0] == 'ko': comproA = vendoB // round(pr_comproA * (1+costos),2)
-                    else: comproA = vendoB // round((pr_comproA/100) * (1+costos),2)
+                    if valor[0] == 'aapl' or valor[0] == 'ko':vendoA = round(pr_vendoA * (1-costos) * valor[1],3)
+                    else: vendoA = round((pr_vendoA/100) * ( 1 - costos) * valor[1],3)
+                    if valor[2] == 'aapl' or valor[2] == 'ko':comproB = round(vendoA // round(pr_comproB * (1+costos),4),0)
+                    else: comproB = round(vendoA // round((pr_comproB/100) * (1+costos),4),0)
+                    if valor[2] == 'aapl' or valor[2] == 'ko':vendoB = round(pr_vendoB * (1-costos) * comproB,3)
+                    else: vendoB = round((pr_vendoB/100) * comproB * (1-costos),3)
+                    if valor[0] == 'aapl' or valor[0] == 'ko':comproA = round(vendoB // round(pr_comproA * (1+costos),4),0)
+                    else: comproA = round(vendoB // round((pr_comproA/100) * (1+costos),4),0)
                     gana = comproA - valor[1]
 
-                    if comproA > valor[1]: 
+                    if comproA > valor[1] + 1: 
 
                         if   pr.bidsBI(   'MERV - XMEV - ' + valor[0].upper() + i[0] + ' - ' + u ) < valor[1]: continue
                         elif pr.offersOF( 'MERV - XMEV - ' + valor[2].upper() + i[0] + ' - ' + u ) < comproB:  continue
@@ -163,12 +155,13 @@ while True:
 
                         bono += comproA - valor[1]
 
-                        print(time.strftime("%H:%M:%S"),f' | SI | {e} {valor[0].upper()} {valor[2].upper()} {u} |  limite {limite} | {valor[0].upper()}: {bono} | >>> ccl {ccl} mep {mep} pesos {peso}')
+                        print(time.strftime("%H:%M:%S"),f' | SI {gana} | {e} {valor[0].upper()} {valor[2].upper()} {u} |  limite {limite} | {valor[0].upper()} | {bono} | >>> ccl {ccl} mep {mep} pesos {peso}')
+
 
                         #pr.logRulos(str(e)+ ' | ' + str(valor[0].upper())+ ': ' + str(bono) + ' | >>> ccl: ' + str(ccl) + ' mep: ' + str(mep) + ' pesos: ' + str(peso))
 
                         if valor[0] == 'al30' or valor[2] == 'al30': limite -= valor[1] 
                         continue                         
                     else: 
-                        print(time.strftime("%H:%M:%S"),f'| NO | {gana} | {e} {valor[0].upper()} {valor[2].upper()} {u} | limite: {limite} | {valor[0].upper()}: {bono} | >>> ccl: {ccl} mep: {mep} pesos: {peso}')
+                        print(time.strftime("%H:%M:%S"),f'| NO {gana} | {e} {valor[0].upper()} {valor[2].upper()} {u} | limite: {limite} | {valor[0].upper()} | {bono} | >>> ccl: {ccl} mep: {mep} pesos: {peso}')
                         break       
