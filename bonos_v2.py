@@ -8,15 +8,17 @@ pr = Consultar()
 op = Operar()
 
 costos = 0.0026
-limite = 1000
+limite = 100000
 gana = 0
 ccl = 0
 mep = 0
-peso = 0
+pes = 0
 
-tipo = {'al':['30','29','35','41'],'ae':['38'],'gd':['30','29','35','38','41','46'],'aap':['L'],'k':['O']}
-plazo = ['CI' ,'48hs','24hs']
-moneda = {'ccl|mep':['C','D'],'mep|ccl':['D','C'] }# ,'mep|pes':['D',''],'ccl|pes':['C','']}
+tipo = {'al':['30'],'gd':['30'],'al':['30','29','35','41'],'ae':['38'],'gd':['30','29','35','38','41','46'],'aap':['L'],'k':['O']}
+plazo = ['CI','48hs','24hs'
+]
+moneda = {'ccl|mep':['C','D'],'mep|ccl':['D','C'] # ,'mep|pes':['D',''],'ccl|pes':['C','']
+}
 nominal = [200,2]
 
 def cruzar(tickerA,tickerB,vendo1,compro2,vendo2,compro1):
@@ -29,7 +31,49 @@ def cruzar(tickerA,tickerB,vendo1,compro2,vendo2,compro1):
     else: venB = round( comB * (vendo2/100) * (1-costos),3)
     if tickerA == 'aap' or tickerA == 'k': comA = venB // (compro1 * (1+costos))
     else:comA = venB // ((compro1/100) * (1+costos))
-    return comA
+
+def resultado(tipo,tickerA,tickerB):
+    global ccl,mep,pes
+    if tipo == 'ccl|mep':
+        if tickerA == 'aap' or tickerA == 'k':
+            ccl += round(venA - comB * comproB/100,2)
+            mep += round(venB - comA * comproA,2)
+        elif tickerB == 'aap' or tickerB == 'k':
+            ccl += round(venA - comB * comproB,2)
+            mep += round(venB - comA * comproA/100,2)
+        else:
+            ccl += round(venA - comB * comproB/100,2)
+            mep += round(venB - comA * comproA/100,2)
+    elif tipo == 'mep|ccl':
+        if tickerA == 'aap' or tickerA == 'k':
+            mep += round(venA - comB * comproB/100,2)
+            ccl += round(venB - comA * comproA,2)
+        elif tickerB == 'aap' or tickerB == 'k':
+            mep += round(venA - comB * comproB,2)
+            ccl += round(venB - comA * comproA/100,2)
+        else:
+            mep += round(venA - comB * comproB/100,2)
+            ccl += round(venB - comA * comproA/100,2)
+    elif tipo == 'ccl|pes':
+        if tickerA == 'aap' or tickerA == 'k':
+            ccl  += round(venA - comB * comproB/100,2)
+            pes += round(venB - comA * comproA,2)
+        elif tickerB == 'aap' or tickerB == 'k':
+            ccl  += round(venA - comB * comproB,2)
+            pes += round(venB - comA * comproA/100,2)
+        else:
+            ccl  += round(venA - comB * comproB/100,2)
+            pes += round(venB - comA * comproA/100,2)
+    elif tipo == 'mep|pes':
+        if tickerA == 'aap' or tickerA == 'k':
+            mep  += round(venA - comB * comproB/100,2)
+            pes += round(venB - comA * comproA,2)
+        elif tickerB == 'aap' or tickerB == 'k':
+            mep  += round(venA - comB * comproB,2)
+            pes += round(venB - comA * comproA/100,2)
+        else:
+            mep  += round(venA - comB * comproB/100,2)
+            pes += round(venB - comA * comproA/100,2)
 
 while True:
     if time.strftime("%H:%M:%S") < '11:00:00':
@@ -53,7 +97,7 @@ while True:
                                 comproB =  pr.precioOF( 'MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u )
                                 vendoB =   pr.precioBI( 'MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u )
                                 comproA =  pr.precioOF( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' + u )
-                                print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+                                #print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
                                 if vendoA == 1000 or comproB == 1000 or vendoB == 1000 or comproA == 1000: break
 
                                 cruzar(clave,cla,vendoA,comproB,vendoB,comproA)
@@ -86,10 +130,10 @@ while True:
                                     if cla == 'aap' or cla == 'k': print(cla.upper() + aa + i[1] + '-' + u + ' ' + str( round(vendoB * comB ,3 ))+ '|', end=' ')
                                     else: print(cla.upper() + aa + i[1] + '-' + u + ' ' + str( round((vendoB/100) * comB ,3 ))+ '|', end=' ')
 
-                                    if clave == 'aap' or clave == 'k': print(clave.upper() + a + i[1] + '-' + u + ' '+ str( venB // comproA ) + ' | limite: '+ str(limite) + ' | RESULTA:' + str(res)+' || ' +str(gana))
-                                    else: print(clave.upper() + a + i[1] + '-' + u + ' '+ str( venB // (comproA/100) ) + ' | limite: '+ str(limite) + ' | RESULTA: ' + str(res)+' || ' +str(gana))
+                                    if clave == 'aap' or clave == 'k': print(clave.upper() + a + i[1] + '-' + u + ' '+ str( venB // comproA ) + ' | lim: '+ str(limite) + ' | RES:' + str(res)+' || ' +str(gana))
+                                    else: print(clave.upper() + a + i[1] + '-' + u + ' '+ str( venB // (comproA/100) ) + ' | lim: '+ str(limite) + ' | RES: ' + str(res)+' || ' +str(gana) + ' | '+ str(ccl)+' | '+str(mep)+' | '+str(pes))
 
-
+                                    resultado(e,clave,cla)
                                     if (clave + a) == 'al30' or (cla + aa) == 'al30': limite -= nominal[0]
                                     gana += res
                                     continue
@@ -104,8 +148,8 @@ while True:
                                     if cla == 'aap' or cla == 'k': print(cla.upper() + aa + i[1] + '-' + u + ' ' + str( round(vendoB * comB ,3 ))+ '|', end=' ')
                                     else: print(cla.upper() + aa + i[1] + '-' + u + ' ' + str( round((vendoB/100) * comB ,3 ))+ '|', end=' ')
 
-                                    if clave == 'aap' or clave == 'k': print(clave.upper() + a + i[1] + '-' + u + ' '+ str( venB // comproA ) + ' | limite: '+ str(limite) + ' | RESULTA:' + str(res)+' || ' +str(gana))
-                                    else: print(clave.upper() + a + i[1] + '-' + u + ' '+ str( venB // (comproA/100) ) + ' | limite: '+ str(limite) + ' | RESULTA: ' + str(res)+' || ' +str(gana))
+                                    if clave == 'aap' or clave == 'k': print(clave.upper() + a + i[1] + '-' + u + ' '+ str( venB // comproA ) + ' | lim: '+ str(limite) + ' | RES:' + str(res)+' || ' +str(gana))
+                                    else: print(clave.upper() + a + i[1] + '-' + u + ' '+ str( venB // (comproA/100) ) + ' | lim: '+ str(limite) + ' | RES: ' + str(res)+' || ' +str(gana) + ' | '+ str(ccl)+' | '+str(mep)+' | '+str(pes))
 
                                     break
 
