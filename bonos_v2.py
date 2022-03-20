@@ -14,12 +14,13 @@ ccl = 0
 mep = 0
 pes = 0
 
-tipo = {'al':['30','29'],'gd':['30','29'],
-'al':['30','29','35','41'],'ae':['38'],'gd':['30','29','35','38','41','46'],'aap':['L'],'k':['O']
+tipo = {'al':['30'],'gd':['30'],
+#'al':['30','29','35','41'],'ae':['38'],'gd':['30','29','35','38','41','46'],'aap':['L'],'k':['O']
 }
 plazo = ['CI'#,'48hs','24hs'
 ]
-moneda = {'ccl|mep':['C','D'],'mep|ccl':['D','C']#,'mep|pes':['D',''],'ccl|pes':['C','']
+moneda = {#'ccl|mep':['C','D'],'mep|ccl':['D','C'],
+'mep|pes':['D',''],'ccl|pes':['C','']
 }
 nominal = [200,2]
 
@@ -99,7 +100,7 @@ while True:
                                 comproB =  pr.precioOF( 'MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u )
                                 vendoB =   pr.precioBI( 'MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u )
                                 comproA =  pr.precioOF( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' + u )
-                                print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+                                #print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
                                 if vendoA == 1000 or comproB == 1000 or vendoB == 1000 or comproA == 1000: break
 
                                 cruzar(clave,cla,vendoA,comproB,vendoB,comproA)
@@ -111,7 +112,7 @@ while True:
                                     uso = nominal[0]
                                     res = comA - nominal[0]
 
-                                if comA > uso + 1:
+                                if comA > uso:
 
                                     if pr.bidsBI('MERV - XMEV - ' + clave.upper() + a + i[0] + ' - ' + u ) < uso: continue
                                     elif pr.offersOF('MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u ) < comproB:  continue
