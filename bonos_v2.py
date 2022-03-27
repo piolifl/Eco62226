@@ -17,10 +17,10 @@ pes = 0
 tipo = {'al':['30'],'gd':['30'],
 #'al':['30','29','35','41'],'ae':['38'],'gd':['30','29','35','38','41','46'],'aap':['L'],'k':['O']
 }
-plazo = ['CI'#,'48hs','24hs'
+plazo = ['CI','48hs','24hs'
 ]
-moneda = {#'ccl|mep':['C','D'],'mep|ccl':['D','C'],
-'mep|pes':['D',''],'ccl|pes':['C','']
+moneda = {'ccl|mep':['C','D'],'mep|ccl':['D','C'],
+#'mep|pes':['D',''],'ccl|pes':['C','']
 }
 nominal = [200,2]
 
