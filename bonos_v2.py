@@ -112,7 +112,7 @@ while True:
                                     uso = nominal[0]
                                     res = comA - nominal[0]
 
-                                if comA > uso:
+                                if comA >= uso:
 
                                     if pr.bidsBI('MERV - XMEV - ' + clave.upper() + a + i[0] + ' - ' + u ) < uso: continue
                                     elif pr.offersOF('MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u ) < comproB:  continue

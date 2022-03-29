@@ -8,7 +8,7 @@ pr = Consultar()
 op = Operar()
 
 costos = 0.0052
-ganancia = 0.25
+ganancia = 0.5
 
 tipo = {'AL':['30'],'GD':['30'],'AE':['38'],'GGA':['L'],'PAM':['P'],'AL':['30','29','35','41'],'AE':['38'],'GD':['30','29','35','38','41','46'],#'AAP':['L'],'K':['O']
 }
@@ -82,10 +82,10 @@ while True:
                         continue
                         
                     else: 
-                        print('| no | ' + clave + e + i + '-' + plazo[0] + ' | '+ str(cont_of * nominal) + ' | ' + clave + e + i + '-' + plazo[1] + ' | '+ str(larg_bi * nominal) + ' = ' + str(ci_48))
-                        print('| no | ' + clave + e + i + '-' + plazo[0] + ' | '+ str(cont_of * nominal) + ' | ' + clave + e + i + '-' + plazo[2] + ' | '+ str(medi_bi * nominal) + ' = ' + str(ci_24))
-                        print('| no | ' + clave + e + i + '-' + plazo[2] + ' | '+ str(medi_of * nominal) + ' | ' + clave + e + i + '-' + plazo[1] + ' | '+ str(larg_bi * nominal) + ' = ' + str(ve_cu))
+                        print('| no | '+clave+ e+i+'-'+plazo[0] + ' | '+ str(round(cont_of/100,2) * nominal) + ' | ' + clave + e + i + '-' + plazo[1] + ' | '+ str(round(larg_bi/100,2) * nominal) + ' = ' + str(ci_48))
+                        print('| no | '+clave+ e+i+'-'+plazo[0] + ' | '+ str(round(cont_of/100,2) * nominal) + ' | ' + clave + e + i + '-' + plazo[2] + ' | '+ str(round(medi_bi/100,2) * nominal) + ' = ' + str(ci_24))
+                        print('| no | '+clave+ e+i+'-'+plazo[2] + ' | '+ str(round(medi_of/100,2) * nominal) + ' | ' + clave + e + i + '-' + plazo[1] + ' | '+ str(round(larg_bi/100,2) * nominal) + ' = ' + str(ve_cu))
                         
 
-#| no | AL30 - CI | 5730 | AL30 - 48hs | 5750 || -2.47
+
 
