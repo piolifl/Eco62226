@@ -8,16 +8,16 @@ pr = Consultar()
 op = Operar()
 
 costos = 0.0026
-limite = 1000
+limite = 400
 gana = 0
 ccl = 0
 mep = 0
 pes = 0
 
 tipo = {'al':['30'],'gd':['30'],
-#'al':['30','29','35','41'],'ae':['38'],'gd':['30','29','35','38','41','46'],'aap':['L'],'k':['O']
+'al':['30','29','35','41'],'ae':['38'],'gd':['30','29','35','38','41','46'],'aap':['L'],'k':['O']
 }
-plazo = ['CI','48hs','24hs'
+plazo = ['CI'#,'48hs','24hs'
 ]
 moneda = {'ccl|mep':['C','D'],'mep|ccl':['D','C'],
 #'mep|pes':['D',''],'ccl|pes':['C','']
@@ -94,8 +94,8 @@ while True:
                         for aa in val:
                             if (clave + a) == (cla + aa): continue
                             while True:
-                                if limite < 200: 
-                                    if (clave + a) == 'al30' or (cla + aa) == 'al30': break
+                                if (clave + a) == 'al30' or (cla + aa) == 'al30':
+                                    if limite < 200: break
                                 vendoA =   pr.precioBI( 'MERV - XMEV - ' + clave.upper() + a + i[0] + ' - ' + u )
                                 comproB =  pr.precioOF( 'MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u )
                                 vendoB =   pr.precioBI( 'MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u )
@@ -112,12 +112,12 @@ while True:
                                     uso = nominal[0]
                                     res = comA - nominal[0]
 
-                                if comA >= uso:
+                                if comA > uso:
 
-                                    if pr.bidsBI('MERV - XMEV - ' + clave.upper() + a + i[0] + ' - ' + u ) < uso: continue
-                                    elif pr.offersOF('MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u ) < comproB:  continue
-                                    elif pr.bidsBI('MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u ) < comproB:  continue
-                                    elif pr.offersOF('MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' + u ) < comproA:  continue
+                                    if pr.bidsBI('MERV - XMEV - ' + clave.upper() + a + i[0] + ' - ' + u ) < uso: break
+                                    elif pr.offersOF('MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u ) < comproB:  break
+                                    elif pr.bidsBI('MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u ) < comproB:  break
+                                    elif pr.offersOF('MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' + u ) < comproA:  break
 
                                     #op.vender   ( ( 'MERV - XMEV - ' + clave.upper() + a + i[0] + ' - ' + u ) , uso , vendoA )
                                     #op.comprar  ( ( 'MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u)   , comB, comproB )
@@ -125,7 +125,7 @@ while True:
                                     #op.comprar  ( ( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' + u ) , comA, comproA )
 
                                     if clave == 'aap' or clave == 'k': print('| SI |' + clave.upper() + a + i[0] + '-' + u + ' '+ str(round((vendoA)  * nominal[1],3)) + '|', end=' ')
-                                    else:  print('| no |' + clave.upper() + a + i[0] + '-' + u + ' '+ str(round((vendoA/100)  * nominal[0],3)) + '|', end=' ')
+                                    else:  print('| SI |' + clave.upper() + a + i[0] + '-' + u + ' '+ str(round((vendoA/100)  * nominal[0],3)) + '|', end=' ')
 
                                     if cla == 'aap' or cla == 'k': print(cla.upper() + aa + i[0] + '-' + u + ' ' + str( venA // comproB )+ '|', end=' ')
                                     else: print(cla.upper() + aa + i[0] + '-' + u + ' ' + str( venA // (comproB/100) )+ '|', end=' ')
@@ -133,8 +133,8 @@ while True:
                                     if cla == 'aap' or cla == 'k': print(cla.upper() + aa + i[1] + '-' + u + ' ' + str( round(vendoB * comB ,3 ))+ '|', end=' ')
                                     else: print(cla.upper() + aa + i[1] + '-' + u + ' ' + str( round((vendoB/100) * comB ,3 ))+ '|', end=' ')
 
-                                    if clave == 'aap' or clave == 'k': print(clave.upper() + a + i[1] + '-' + u + ' '+ str( venB // comproA ) + ' | lim: '+ str(limite) + ' | RES:' + str(res)+' || ' +str(gana))
-                                    else: print(clave.upper() + a + i[1] + '-' + u + ' '+ str( venB // (comproA/100) ) + ' | lim: '+ str(limite) + ' | RES: ' + str(round(res,2))+' || ' +str(gana) + ' | '+ str(round(ccl,2))+' | '+str(round(mep,2))+' | '+ str(round(pes,2)))
+                                    if clave == 'aap' or clave == 'k': print(clave.upper() + a + i[1] + '-' + u + ' || '+ str( venB // comproA ) + ' | lim: '+ str(limite) + ' | RES:' + str(res)+' | ' +str(gana))
+                                    else: print(clave.upper() + a + i[1] + '-' + u + ' || '+ str( venB // (comproA/100) ) + ' | lim: '+ str(limite) + ' | RES: ' + str(round(res,2))+' | ' +str(gana) + ' | '+ str(round(ccl,2))+' | '+str(round(mep,2))+' | '+ str(round(pes,2)))
 
                                     resultado(e,clave,cla)
                                     if (clave + a) == 'al30' or (cla + aa) == 'al30': limite -= nominal[0]
@@ -151,8 +151,8 @@ while True:
                                     if cla == 'aap' or cla == 'k': print(cla.upper() + aa + i[1] + '-' + u + ' ' + str( round(vendoB * comB ,3 ))+ '|', end=' ')
                                     else: print(cla.upper() + aa + i[1] + '-' + u + ' ' + str( round((vendoB/100) * comB ,3 ))+ '|', end=' ')
 
-                                    if clave == 'aap' or clave == 'k': print(clave.upper() + a + i[1] + '-' + u + ' '+ str( venB // comproA ) + ' | lim: '+ str(limite) + ' | RES:' + str(res)+' || ' +str(gana))
-                                    else: print(clave.upper() + a + i[1] + '-' + u + ' '+ str( venB // (comproA/100) ) + ' | lim: '+ str(limite) + ' | RES: ' + str(round(res,2)) +' || ' +str(gana) + ' | '+ str(round(ccl,2))+' | '+str(round(mep,2))+' | '+str(round(pes,2)))
+                                    if clave == 'aap' or clave == 'k': print(clave.upper() + a + i[1] + '-' + u + ' || '+ str( venB // comproA ) + ' | lim: '+ str(limite) + ' | RES:' + str(res)+' | ' +str(gana))
+                                    else: print(clave.upper() + a + i[1] + '-' + u + ' || '+ str( venB // (comproA/100) ) + ' | lim: '+ str(limite) + ' | RES: ' + str(round(res,2)) +' | ' +str(gana) + ' | '+ str(round(ccl,2))+' | '+str(round(mep,2))+' | '+str(round(pes,2)))
 
                                     break
 
