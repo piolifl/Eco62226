@@ -8,14 +8,14 @@ pr = Consultar()
 op = Operar()
 
 costos = 0.0026
-limite = 400
+limite = 1000
 gana = 0
 ccl = 0
 mep = 0
 pes = 0
 
 tipo = {'al':['30'],'gd':['30'],
-'al':['30','29','35','41'],'ae':['38'],'gd':['30','29','35','38','41','46'],'aap':['L'],'k':['O']
+#'al':['30','29','35','41'],'ae':['38'],'gd':['30','29','35','38','41','46'],'aap':['L'],'k':['O']
 }
 plazo = ['CI'#,'48hs','24hs'
 ]
@@ -26,15 +26,14 @@ nominal = [200,2]
 
 def cruzar(tickerA,tickerB,vendo1,compro2,vendo2,compro1):
     global comA,comB,venA,venB
-    if tickerA == 'aap' or tickerA == 'k': venA = round(vendo1 * nominal[1] * (1-costos),3)
-    else: venA = round((vendo1/100) * nominal[0] * (1-costos),3)
+    if tickerA == 'aap' or tickerA == 'k': venA = round(vendo1 * nominal[1] * (1-costos),2)
+    else: venA = round((vendo1/100) * nominal[0] * (1-costos),2)
     if tickerB == 'aap' or tickerB == 'k': comB = venA // (compro2 * (1+costos))
     else: comB = venA // ((compro2/100) * (1+costos))
-    if tickerB == 'aap' or tickerB == 'k': venB = round( comB * vendo2 * (1-costos),3)
-    else: venB = round( comB * (vendo2/100) * (1-costos),3)
+    if tickerB == 'aap' or tickerB == 'k': venB = round( comB * vendo2 * (1-costos),2)
+    else: venB = round( comB * (vendo2/100) * (1-costos),2)
     if tickerA == 'aap' or tickerA == 'k': comA = venB // (compro1 * (1+costos))
     else:comA = venB // ((compro1/100) * (1+costos))
-
 def resultado(tipo,tickerA,tickerB):
     global ccl,mep,pes
     if tipo == 'ccl|mep':
@@ -124,17 +123,10 @@ while True:
                                     #op.vender   ( ( 'MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u )  , comB, vendoB )
                                     #op.comprar  ( ( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' + u ) , comA, comproA )
 
-                                    if clave == 'aap' or clave == 'k': print('| SI |' + clave.upper() + a + i[0] + '-' + u + ' '+ str(round((vendoA)  * nominal[1],3)) + '|', end=' ')
-                                    else:  print('| SI |' + clave.upper() + a + i[0] + '-' + u + ' '+ str(round((vendoA/100)  * nominal[0],3)) + '|', end=' ')
-
-                                    if cla == 'aap' or cla == 'k': print(cla.upper() + aa + i[0] + '-' + u + ' ' + str( venA // comproB )+ '|', end=' ')
-                                    else: print(cla.upper() + aa + i[0] + '-' + u + ' ' + str( venA // (comproB/100) )+ '|', end=' ')
-
-                                    if cla == 'aap' or cla == 'k': print(cla.upper() + aa + i[1] + '-' + u + ' ' + str( round(vendoB * comB ,3 ))+ '|', end=' ')
-                                    else: print(cla.upper() + aa + i[1] + '-' + u + ' ' + str( round((vendoB/100) * comB ,3 ))+ '|', end=' ')
-
-                                    if clave == 'aap' or clave == 'k': print(clave.upper() + a + i[1] + '-' + u + ' || '+ str( venB // comproA ) + ' | lim: '+ str(limite) + ' | RES:' + str(res)+' | ' +str(gana))
-                                    else: print(clave.upper() + a + i[1] + '-' + u + ' || '+ str( venB // (comproA/100) ) + ' | lim: '+ str(limite) + ' | RES: ' + str(round(res,2))+' | ' +str(gana) + ' | '+ str(round(ccl,2))+' | '+str(round(mep,2))+' | '+ str(round(pes,2)))
+                                    print('| SI |' + clave.upper() + a + i[0] + '-' + u + ' '+ str(venA) + '|', end=' ')
+                                    print(cla.upper() + aa + i[0] + '-' + u + ' ' + str(comB )+ '|', end=' ')
+                                    print(cla.upper() + aa + i[1] + '-' + u + ' ' + str(venB)+ '|', end=' ')
+                                    print(clave.upper() + a + i[1] + '-' + u + ' || '+ str(comA) + ' | lim: '+ str(limite) + ' | RES: ' + str(round(res,2))+' | ' +str(gana) + ' | '+ str(ccl)+' | '+str(mep)+' | '+ str(pes))
 
                                     resultado(e,clave,cla)
                                     if (clave + a) == 'al30' or (cla + aa) == 'al30': limite -= nominal[0]
@@ -142,17 +134,10 @@ while True:
                                     continue
 
                                 else:
-                                    if clave == 'aap' or clave == 'k': print('| NO |' + clave.upper() + a + i[0] + '-' + u + ' '+ str(round((vendoA)  * nominal[1],3)) + '|', end=' ')
-                                    else:  print('| no |' + clave.upper() + a + i[0] + '-' + u + ' '+ str(round((vendoA/100)  * nominal[0],3)) + '|', end=' ')
-
-                                    if cla == 'aap' or cla == 'k': print(cla.upper() + aa + i[0] + '-' + u + ' ' + str( venA // comproB )+ '|', end=' ')
-                                    else: print(cla.upper() + aa + i[0] + '-' + u + ' ' + str( venA // (comproB/100) )+ '|', end=' ')
-
-                                    if cla == 'aap' or cla == 'k': print(cla.upper() + aa + i[1] + '-' + u + ' ' + str( round(vendoB * comB ,3 ))+ '|', end=' ')
-                                    else: print(cla.upper() + aa + i[1] + '-' + u + ' ' + str( round((vendoB/100) * comB ,3 ))+ '|', end=' ')
-
-                                    if clave == 'aap' or clave == 'k': print(clave.upper() + a + i[1] + '-' + u + ' || '+ str( venB // comproA ) + ' | lim: '+ str(limite) + ' | RES:' + str(res)+' | ' +str(gana))
-                                    else: print(clave.upper() + a + i[1] + '-' + u + ' || '+ str( venB // (comproA/100) ) + ' | lim: '+ str(limite) + ' | RES: ' + str(round(res,2)) +' | ' +str(gana) + ' | '+ str(round(ccl,2))+' | '+str(round(mep,2))+' | '+str(round(pes,2)))
+                                    print('| no |' + clave.upper() + a + i[0] + '-' + u + ' '+ str(venA) + '|', end=' ')
+                                    print(cla.upper() + aa + i[0] + '-' + u + ' ' + str(comB )+ '|', end=' ')
+                                    print(cla.upper() + aa + i[1] + '-' + u + ' ' + str(venB)+ '|', end=' ')
+                                    print(clave.upper() + a + i[1] + '-' + u + ' || '+ str(comA) + ' | lim: '+ str(limite) + ' | RES: ' + str(round(res,2))+' | ' +str(gana) + ' | '+ str(ccl)+' | '+str(mep)+' | '+ str(pes))
 
                                     break
 
