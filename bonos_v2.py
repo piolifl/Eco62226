@@ -17,9 +17,11 @@ pes = 0
 tipo = {'al':['30'],'gd':['30'],
 #'al':['30','29','35','41'],'ae':['38'],'gd':['30','29','35','38','41','46'],'aap':['L'],'k':['O']
 }
-plazo = ['CI'#,'48hs','24hs'
+plazo = ['CI',
+'48hs','24hs'
 ]
-moneda = {'ccl|mep':['C','D'],'mep|ccl':['D','C'],
+moneda = {'ccl|mep':['C','D'],
+'mep|ccl':['D','C'],
 #'mep|pes':['D',''],'ccl|pes':['C','']
 }
 nominal = [200,2]
@@ -95,6 +97,12 @@ while True:
                             while True:
                                 if (clave + a) == 'al30' or (cla + aa) == 'al30':
                                     if limite < 200: break
+                                #LAST
+                                '''vendoA =   pr.precioLA( 'MERV - XMEV - ' + clave.upper() + a + i[0] + ' - ' + u )
+                                comproB =  pr.precioLA( 'MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u )
+                                vendoB =   pr.precioLA( 'MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u )
+                                comproA =  pr.precioLA( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' + u )'''
+                                #BID-OFFER
                                 vendoA =   pr.precioBI( 'MERV - XMEV - ' + clave.upper() + a + i[0] + ' - ' + u )
                                 comproB =  pr.precioOF( 'MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u )
                                 vendoB =   pr.precioBI( 'MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u )
@@ -126,7 +134,7 @@ while True:
                                     print('| SI |' + clave.upper() + a + i[0] + '-' + u + ' '+ str(venA) + '|', end=' ')
                                     print(cla.upper() + aa + i[0] + '-' + u + ' ' + str(comB )+ '|', end=' ')
                                     print(cla.upper() + aa + i[1] + '-' + u + ' ' + str(venB)+ '|', end=' ')
-                                    print(clave.upper() + a + i[1] + '-' + u + ' || '+ str(comA) + ' | lim: '+ str(limite) + ' | RES: ' + str(round(res,2))+' | ' +str(gana) + ' | '+ str(ccl)+' | '+str(mep)+' | '+ str(pes))
+                                    print(clave.upper() + a + i[1] + '-' + u + ' '+ str(comA) + '| lim: '+ str(limite) + '| RES: ' + str(round(res,2))+' | ' +str(gana) + ' | '+ str(ccl)+' | '+str(mep)+' | '+ str(pes))
 
                                     resultado(e,clave,cla)
                                     if (clave + a) == 'al30' or (cla + aa) == 'al30': limite -= nominal[0]
@@ -134,10 +142,13 @@ while True:
                                     continue
 
                                 else:
-                                    print('| no |' + clave.upper() + a + i[0] + '-' + u + ' '+ str(venA) + '|', end=' ')
-                                    print(cla.upper() + aa + i[0] + '-' + u + ' ' + str(comB )+ '|', end=' ')
-                                    print(cla.upper() + aa + i[1] + '-' + u + ' ' + str(venB)+ '|', end=' ')
-                                    print(clave.upper() + a + i[1] + '-' + u + ' || '+ str(comA) + ' | lim: '+ str(limite) + ' | RES: ' + str(round(res,2))+' | ' +str(gana) + ' | '+ str(ccl)+' | '+str(mep)+' | '+ str(pes))
+                                    print('|'+clave.upper()+a+i[0]+u.lower()+''+str(vendoA)+'x'+str(uso)+'= $'+str(venA)+'|',end=' ')   #|al30Cci27x200= $53.86
+                                    print(cla.upper()+aa+i[0]+u.lower()+''+str(comproB)+'/$'+str(venA)+'= '+str(comB)+'|',end=' ')      #| gd30Cci31/$53.86= 173.0
+                                    print(cla.upper()+aa+i[1]+u.lower()+''+str(vendoB)+'x'+str(comB)+'= $'+str(round(venB*(comB/100),2) )+'|', end=' ') #| gd30Dci31.14x173.0= $92.95
+                                    print(clave.upper()+a+i[1]+u.lower()+' '+str(comA)+'|'+str(limite)+'|'+str(round(gana,2))+'|'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))) #| al30Dci 195.0|1000|RES: -5.0|0|0|0|0
 
                                     break
+
+
+
 

@@ -10,7 +10,7 @@ costo = 0.005
 
 ratio = {
     '1':['GFG','C','210','.JU',1,22.5,  '230',2,   12.3,  0.15 ],
-    '2':['GFG','C','200','.JU',1,24.93, '220',2,   14,    0.15 ],
+    '2':['GFG','C','0','.JU',1,24.93, '220',2,   14,    0.15 ],
     '3':['GFG','C','0','.AB',1,20.3,   '220',2,   11.15,  0.15 ],
     '4':['GFG','C','0','.AB',1,15.95,  '230',2,   8.61,   0.15 ]
 }
@@ -39,8 +39,8 @@ while True:
             elif pr.offersOF('MERV - XMEV - ' + valor[0] + valor[1] + valor[6] + valor[3] +' - ' + '24hs') == 0: continue
 
             #git SIN gatillo - ratios actuales
-            op.vender   (('MERV - XMEV - ' + valor[0] + valor[1] + valor[2] + valor[3] +' - ' + '24hs'),  valor[4],   round(vendo,3))
-            op.comprar  (('MERV - XMEV - ' + valor[0] + valor[1] + valor[6] + valor[3] +' - ' + '24hs'),  valor[7],   round(compro,3))
+            #op.vender   (('MERV - XMEV - ' + valor[0] + valor[1] + valor[2] + valor[3] +' - ' + '24hs'),  valor[4],   round(vendo,3))
+            #op.comprar  (('MERV - XMEV - ' + valor[0] + valor[1] + valor[6] + valor[3] +' - ' + '24hs'),  valor[7],   round(compro,3))
 
             pr.logRatios('CERRADO: ' + str(valor[0]) + ' | '  + str(valor[0]) + ' | ' + ' Resultado ' + str(res)   )
 
