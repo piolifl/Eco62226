@@ -10,27 +10,27 @@ class Consultar(ECO_62226):
     def precioLA(self,ticker=str):
         var = pyRofex.get_market_data(ticker,entries=[pyRofex.MarketDataEntry.LAST])
         try: return var['marketData']['LA']['price']
-        except: return 1000
+        except: return 10000
 
     def precioBI(self,ticker=str):
         var = pyRofex.get_market_data(ticker,entries=[pyRofex.MarketDataEntry.BIDS])
         try: return var['marketData']['BI'][0]['price']
-        except: return 1000
+        except: return 10000
 
     def precioOF(self,ticker=str):
         var = pyRofex.get_market_data(ticker,entries=[pyRofex.MarketDataEntry.OFFERS])
         try: return var['marketData']['OF'][0]['price']
-        except: return 1000
+        except: return 10000
     
     def bidsBI(self,ticker=str):
         var = pyRofex.get_market_data(ticker,entries=[pyRofex.MarketDataEntry.BIDS])
         try: return var['marketData']['BI'][0]['size']
-        except: return 0
+        except: return 10000
 
     def offersOF(self,ticker=str):
         var = pyRofex.get_market_data(ticker,entries=[pyRofex.MarketDataEntry.OFFERS])
         try: return var['marketData']['OF'][0]['size']
-        except: return 0
+        except: return 10000
 
     def logRulos(self, texto:str):
         f = open('rulos.log','a')
