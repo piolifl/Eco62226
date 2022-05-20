@@ -9,7 +9,7 @@ pr = Consultar()
 op = Operar()
 
 costos = 0.0026
-limite = 2000
+limite = 400
 gana = 0
 ccl = 0
 mep = 0
@@ -23,9 +23,9 @@ plazo = ['CI',
 ]
 moneda = {
 'ccl|mep':['C','D'],'mep|ccl':['D','C'],
-'mep|pes':['D',''],'ccl|pes':['C','']
+#'mep|pes':['D',''],'ccl|pes':['C','']
 }
-nominal = [1000,2]
+nominal = [200,2]
 
 def cruzar(tickerA,tickerB,vendo1,compro2,vendo2,compro1):
     global comA,comB,venA,venB
