@@ -9,7 +9,7 @@ pr = Consultar()
 op = Operar()
 
 costos = 0.0026
-limite = 400
+limite = 1000
 gana = 0
 ccl = 0
 mep = 0
@@ -19,7 +19,7 @@ tipo = {'al':['30'],'gd':['30','35'],
 #'al':['30','29','35','41'],'ae':['38'],'gd':['30','29','35','38','41','46'],'aap':['L'],'k':['O'],'amz':['N']
 }
 plazo = ['CI',
-'48hs',#'24hs'
+'48hs','24hs'
 ]
 moneda = {
 'ccl|mep':['C','D'],'mep|ccl':['D','C'],
@@ -140,6 +140,9 @@ while True:
                                     if (clave + a) == 'al30' or (cla + aa) == 'al30': limite -= nominal[0]
                                     gana += res
                                     if time.strftime("%H:%M:%S") > '15:59:45': plazo = ['48hs','24hs']
+                                    if time.strftime("%H:%M:%S") > '16:59:50':
+                                        print(f'FIN 17hs CERRADO |')
+                                        break
                                     continue
 
                                 else:
