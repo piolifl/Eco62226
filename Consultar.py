@@ -9,28 +9,42 @@ class Consultar(ECO_62226):
 
     def precioLA(self,ticker=str):
         var = pyRofex.get_market_data(ticker,entries=[pyRofex.MarketDataEntry.LAST])
-        try: return var['marketData']['LA']['price']
-        except: return 10000
+        try: pr = var['marketData']['LA']['price'] 
+        except: pr = 10000
+        la = 1000
+        return pr, la
 
     def precioBI(self,ticker=str):
         var = pyRofex.get_market_data(ticker,entries=[pyRofex.MarketDataEntry.BIDS])
-        try: return var['marketData']['BI'][0]['price']
-        except: return 10000
+        try: pr = var['marketData']['BI'][0]['price']
+        except: pr = 10000
+        try: bi = var['marketData']['BI'][0]['size']
+        except: bi = 0
+        return pr, bi
+        '''try: return var['marketData']['BI'][0]['price']
+        except: return 10000'''
 
     def precioOF(self,ticker=str):
         var = pyRofex.get_market_data(ticker,entries=[pyRofex.MarketDataEntry.OFFERS])
-        try: return var['marketData']['OF'][0]['price']
-        except: return 10000
-    
-    def bidsBI(self,ticker=str):
+        try: pr = var['marketData']['OF'][0]['price']
+        except: pr = 10000
+        try: of = var['marketData']['OF'][0]['size']
+        except: of = 0
+        return pr, of
+
+
+
+
+
+    '''def bidsBI(self,ticker=str):
         var = pyRofex.get_market_data(ticker,entries=[pyRofex.MarketDataEntry.BIDS])
         try: return var['marketData']['BI'][0]['size']
-        except: return 10000
+        except: return 0
 
     def offersOF(self,ticker=str):
         var = pyRofex.get_market_data(ticker,entries=[pyRofex.MarketDataEntry.OFFERS])
         try: return var['marketData']['OF'][0]['size']
-        except: return 10000
+        except: return 0
 
     def logRulos(self, texto:str):
         f = open('rulos.log','a')
@@ -79,5 +93,5 @@ class Consultar2(BCCH_2474):
     def logRatios(self, texto:str):
         f = open('ratios.log','a')
         f.write( datetime.now().strftime("%Y-%m-%d %H:%M:%S") + ' | ' + texto + '\n' )
-        f.close()
+        f.close()'''
 
