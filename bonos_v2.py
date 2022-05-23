@@ -9,7 +9,7 @@ pr = Consultar()
 op = Operar()
 
 costos = 0.0026
-limite = 1000
+limite = 100000
 gana = 0
 ccl = 0
 mep = 0
@@ -41,44 +41,44 @@ def resultado(tipo,tickerA,tickerB):
     global ccl,mep,pes
     if tipo == 'ccl|mep':
         if tickerA == 'aap' or tickerA == 'k' or tickerA == 'amz':
-            ccl += round(venA - comB * comproB/100,2)
-            mep += round(venB - comA * comproA,2)
+            ccl += round(venA - comB * comproB[0]/100,2)
+            mep += round(venB - comA * comproA[0],2)
         elif tickerB == 'aap' or tickerB == 'k' or tickerB == 'amz':
-            ccl += round(venA - comB * comproB,2)
-            mep += round(venB - comA * comproA/100,2)
+            ccl += round(venA - comB * comproB[0],2)
+            mep += round(venB - comA * comproA[0]/100,2)
         else:
-            ccl += round(venA - comB * comproB/100,2)
-            mep += round(venB - comA * comproA/100,2)
+            ccl += round(venA - comB * comproB[0]/100,2)
+            mep += round(venB - comA * comproA[0]/100,2)
     elif tipo == 'mep|ccl':
         if tickerA == 'aap' or tickerA == 'k' or tickerA == 'amz':
-            mep += round(venA - comB * comproB/100,2)
-            ccl += round(venB - comA * comproA,2)
+            mep += round(venA - comB * comproB[0]/100,2)
+            ccl += round(venB - comA * comproA[0],2)
         elif tickerB == 'aap' or tickerB == 'k' or tickerB == 'amz':
-            mep += round(venA - comB * comproB,2)
-            ccl += round(venB - comA * comproA/100,2)
+            mep += round(venA - comB * comproB[0],2)
+            ccl += round(venB - comA * comproA[0]/100,2)
         else:
-            mep += round(venA - comB * comproB/100,2)
-            ccl += round(venB - comA * comproA/100,2)
+            mep += round(venA - comB * comproB[0]/100,2)
+            ccl += round(venB - comA * comproA[0]/100,2)
     elif tipo == 'ccl|pes':
         if tickerA == 'aap' or tickerA == 'k' or tickerA == 'amz':
-            ccl  += round(venA - comB * comproB/100,2)
-            pes += round(venB - comA * comproA,2)
+            ccl  += round(venA - comB * comproB[0]/100,2)
+            pes += round(venB - comA * comproA[0],2)
         elif tickerB == 'aap' or tickerB == 'k' or tickerB == 'amz':
-            ccl  += round(venA - comB * comproB,2)
-            pes += round(venB - comA * comproA/100,2)
+            ccl  += round(venA - comB * comproB[0],2)
+            pes += round(venB - comA * comproA[0]/100,2)
         else:
-            ccl  += round(venA - comB * comproB/100,2)
-            pes += round(venB - comA * comproA/100,2)
+            ccl  += round(venA - comB * comproB[0]/100,2)
+            pes += round(venB - comA * comproA[0]/100,2)
     elif tipo == 'mep|pes':
         if tickerA == 'aap' or tickerA == 'k' or tickerA == 'amz':
-            mep  += round(venA - comB * comproB/100,2)
-            pes += round(venB - comA * comproA,2)
+            mep  += round(venA - comB * comproB[0]/100,2)
+            pes += round(venB - comA * comproA[0],2)
         elif tickerB == 'aap' or tickerB == 'k' or tickerB == 'amz':
-            mep  += round(venA - comB * comproB,2)
-            pes += round(venB - comA * comproA/100,2)
+            mep  += round(venA - comB * comproB[0],2)
+            pes += round(venB - comA * comproA[0]/100,2)
         else:
-            mep  += round(venA - comB * comproB/100,2)
-            pes += round(venB - comA * comproA/100,2)
+            mep  += round(venA - comB * comproB[0]/100,2)
+            pes += round(venB - comA * comproA[0]/100,2)
 
 while True:
     if time.strftime("%H:%M:%S") < '11:00:00':
@@ -108,7 +108,7 @@ while True:
                                 vendoB =   pr.precioBI( 'MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u )
                                 comproA =  pr.precioOF( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' + u )'''
                                 #print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-                                if vendoA == 10000 or comproB == 10000 or vendoB == 10000 or comproA == 10000: break
+                                if vendoA[0] == 10000 or comproB[0] == 10000 or vendoB[0] == 10000 or comproA[0] == 10000: break
 
                                 cruzar(clave,cla,vendoA[0],comproB[0],vendoB[0],comproA[0])
                                 
@@ -126,10 +126,10 @@ while True:
                                     elif vendoB[1] < comB:  break
                                     elif comproA[1] < comA:  break
 
-                                    #op.vender   ( ( 'MERV - XMEV - ' + clave.upper() + a + i[0] + ' - ' + u ) , uso , vendoA )
-                                    #op.comprar  ( ( 'MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u)   , comB, comproB )
-                                    #op.vender   ( ( 'MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u )  , comB, vendoB )
-                                    #op.comprar  ( ( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' + u ) , comA, comproA )
+                                    #op.vender   ( ( 'MERV - XMEV - ' + clave.upper() + a + i[0] + ' - ' + u ) , uso , vendoA[0] )
+                                    #op.comprar  ( ( 'MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u)   , comB, comproB[0] )
+                                    #op.vender   ( ( 'MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u )  , comB, vendoB[0] )
+                                    #op.comprar  ( ( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' + u ) , comA, comproA[0] )
 
                                     print('| SI |' + clave.upper() + a + i[0] + '-' + u + ' '+ str(vendoA[0]) + '|', end=' ')
                                     print(cla.upper() + aa + i[0] + '-' + u + ' ' + str(comproB[0] )+ '|', end=' ')
