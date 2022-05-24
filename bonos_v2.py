@@ -9,7 +9,7 @@ pr = Consultar()
 op = Operar()
 
 costos = 0.0026
-limite = 100000
+limite = 1000
 gana = 0
 ccl = 0
 mep = 0
@@ -146,9 +146,9 @@ while True:
                                     continue
 
                                 else:
-                                    print('|'+clave.upper()+a+i[0]+u.lower()+''+str(vendoA[0])+'x'+str(uso)+'= $'+str(venA)+'|',end=' ')
-                                    print(cla.upper()+aa+i[0]+u.lower()+''+str(comproB[0])+'/$'+str(venA)+'= '+str(comB)+'|',end=' ') 
-                                    print(cla.upper()+aa+i[1]+u.lower()+''+str(vendoB[0])+'x'+str(comB)+'= $'+str(round(venB*(comB/100),2) )+'|', end=' ') 
+                                    print('|'+clave.upper()+a+i[0]+u.lower()+''+str(vendoA[0])+'x'+str(uso)+'=$'+str(venA)+'|',end='')
+                                    print(cla.upper()+aa+i[0]+u.lower()+''+str(comproB[0])+'/$'+str(venA)+'='+str(comB)+'|',end='') 
+                                    print(cla.upper()+aa+i[1]+u.lower()+''+str(vendoB[0])+'x'+str(comB)+'=$'+str(round(venB*(comB/100),2) )+'|', end='') 
                                     print(clave.upper()+a+i[1]+u.lower()+' '+str(comA)+'|'+str(limite)+'|'+str(round(gana,2))+'|'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2)))
 
                                     break
