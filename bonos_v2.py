@@ -19,13 +19,13 @@ tipo = {'al':['30'],'gd':['30','35'],
 #'al':['30','29','35','41'],'ae':['38'],'gd':['30','29','35','38','41','46'],'aap':['L'],'k':['O'],'amz':['N']
 }
 plazo = ['CI',
-'48hs','24hs'
+#'48hs','24hs'
 ]
 moneda = {
 'ccl|mep':['C','D'],'mep|ccl':['D','C'],
 #'mep|pes':['D',''],'ccl|pes':['C','']
 }
-nominal = [200,2]
+nominal = [25,2]
 
 def cruzar(tickerA,tickerB,vendo1,compro2,vendo2,compro1):
     global comA,comB,venA,venB
@@ -131,10 +131,10 @@ while True:
                                     #op.vender   ( ( 'MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u )  , comB, vendoB[0] )
                                     #op.comprar  ( ( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' + u ) , comA, comproA[0] )
 
-                                    print('| SI |' + clave.upper() + a + i[0] + '-' + u + ' '+ str(vendoA[0]) + '|', end=' ')
-                                    print(cla.upper() + aa + i[0] + '-' + u + ' ' + str(comproB[0] )+ '|', end=' ')
-                                    print(cla.upper() + aa + i[1] + '-' + u + ' ' + str(vendoB[0])+ '|', end=' ')
-                                    print(clave.upper() + a + i[1] + '-' + u + ' '+ str(comproA[0]) + '| lim: '+ str(limite) + '| RES: ' + str(round(res,2))+' | ' +str(gana) + ' | '+ str(ccl)+' | '+str(mep)+' | '+ str(pes))
+                                    print('|SI|' + clave.upper() + a + i[0] + '-' + u + ' '+ str(vendoA[0])+'|', end='')
+                                    print(cla.upper() + aa + i[0] + '-' + u + ' ' + str(comproB[0] )+ '|', end='')
+                                    print(cla.upper() + aa + i[1] + '-' + u + ' ' + str(vendoB[0])+ '|', end='')
+                                    print(clave.upper() + a + i[1] + '-' + u + ' '+ str(comproA[0])+'|lim:'+ str(limite)+'|RES:'+str(round(res,2))+'|' +str(gana)+'|ccl:'+str(round(ccl,2))+'|usd:'+str(round(mep,2))+'|ars:'+str(round(pes,2)))
 
                                     resultado(e,clave,cla)
                                     if (clave + a) == 'al30' or (cla + aa) == 'al30': limite -= nominal[0]
