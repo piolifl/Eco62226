@@ -122,12 +122,12 @@ while True:
                                     res = comA - nominal[0]
                                 
                                 if comA >= uso:
-
+                                    #last - bid/off    
                                     if vendoA[1] <= uso: break
                                     elif comproB[2] <= comB: break
                                     elif vendoB[1] <= comB:  break
                                     elif comproA[2] <= comA:  break
-
+                                    #bid/off
                                     '''if vendoA[1] <= uso: break
                                     elif comproB[1] <= comB: break
                                     elif vendoB[1] <= comB:  break
