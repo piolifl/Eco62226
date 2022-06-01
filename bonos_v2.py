@@ -15,7 +15,7 @@ ccl = 0
 mep = 0
 pes = 0
 
-tipo = {'al':['30'],'gd':['30','35'],
+tipo = {'al':['30'],'gd':['35','30'],
 #'al':['30','29','35','41'],'ae':['38'],'gd':['30','29','35','38','41','46'],'aap':['L'],'k':['O'],'amz':['N']
 }
 plazo = ['CI',
@@ -109,7 +109,7 @@ while True:
                                 comproB =  pr.precioOF( 'MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u )
                                 vendoB =   pr.precioBI( 'MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u )
                                 comproA =  pr.precioOF( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' + u )'''
-                                #print(datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+                                print(f'Buscando...{u} | {clave.upper()}{a} | {cla.upper()}{aa} |',datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
                                 if vendoA[0] == 10000 or comproB[0] == 10000 or vendoB[0] == 10000 or comproA[0] == 10000: break
 
                                 cruzar(clave,cla,vendoA[0],comproB[0],vendoB[0],comproA[0])
@@ -123,17 +123,22 @@ while True:
                                 
                                 if comA >= uso:
 
-                                    if vendoA[1] < uso: break
-                                    elif comproB[1] < comB: break
-                                    elif vendoB[1] < comB:  break
-                                    elif comproA[1] < comA:  break
+                                    if vendoA[1] <= uso: break
+                                    elif comproB[2] <= comB: break
+                                    elif vendoB[1] <= comB:  break
+                                    elif comproA[2] <= comA:  break
+
+                                    '''if vendoA[1] <= uso: break
+                                    elif comproB[1] <= comB: break
+                                    elif vendoB[1] <= comB:  break
+                                    elif comproA[1] <= comA:  break'''
 
                                     #op.vender   ( ( 'MERV - XMEV - ' + clave.upper() + a + i[0] + ' - ' + u ) , uso , vendoA[0] )
                                     #op.comprar  ( ( 'MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u)   , comB, comproB[0] )
                                     #op.vender   ( ( 'MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u )  , comB, vendoB[0] )
                                     #op.comprar  ( ( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' + u ) , comA, comproA[0] )
 
-                                    print('|SI|' + clave.upper() + a + i[0] + '-' + u + ' '+ str(vendoA[0])+'|', end='')
+                                    print(' SI ' + clave.upper() + a + i[0] + '-' + u + ' '+ str(vendoA[0])+'|', end='')
                                     print(cla.upper() + aa + i[0] + '-' + u + ' ' + str(comproB[0] )+ '|', end='')
                                     print(cla.upper() + aa + i[1] + '-' + u + ' ' + str(vendoB[0])+ '|', end='')
                                     print(clave.upper() + a + i[1] + '-' + u + ' '+ str(comproA[0])+'|lim:'+ str(limite)+'|RES:'+str(round(res,2))+'|' +str(gana)+'|ccl:'+str(round(ccl,2))+'|usd:'+str(round(mep,2))+'|ars:'+str(round(pes,2)))
@@ -150,4 +155,5 @@ while True:
                                     print(clave.upper()+a+i[1]+u.lower()+' '+str(comA)+'|'+str(limite)+'|'+str(round(gana,2))+'|'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2)))
 
                                     break
+
 
