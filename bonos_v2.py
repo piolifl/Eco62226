@@ -20,10 +20,10 @@ tipo = {'al':['30'],'gd':['35','30'],
 #'al':['30','29','35','41'],'ae':['38'],'gd':['30','29','35','38','41','46'],'aap':['L'],'k':['O'],'amz':['N']
 }
 plazo = ['CI',
-#'48hs','24hs'
+#'48hs',#'24hs'
 ]
 moneda = {
-'ccl|mep':['C','D'],'mep|ccl':['D','C'],
+'ccl|mep':['C','D'],#'mep|ccl':['D','C'],
 #'mep|pes':['D',''],'ccl|pes':['C','']
 }
 nominal = [25,2]
@@ -111,7 +111,7 @@ while True:
                                 comproB =  pr.precioOF( 'MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u )
                                 vendoB =   pr.precioBI( 'MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u )
                                 comproA =  pr.precioOF( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' + u )'''
-                                print(f'Buscando...{u} | {clave.upper()}{a} | {cla.upper()}{aa} |',datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+                                #print(f'Buscando...{u} | {clave.upper()}{a} | {cla.upper()}{aa} |',datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
                                 #Salgo sin falta algun precio
                                 if vendoA[0] == 10000 or comproB[0] == 10000 or vendoB[0] == 10000 or comproA[0] == 10000: break
 
@@ -145,7 +145,7 @@ while True:
                                     if clave+a in bonos: 
                                         for bonos_clave in bonos.keys():
                                             if bonos_clave == clave+a: bonos[bonos_clave] += res
-                                    else: bonos[clave+a]=0
+                                    else: bonos[clave+a] +=res
                                     print(' SI ' + clave.upper() + a + i[0] + '-' + u + ' '+ str(vendoA[0])+'|', end='')
                                     print(cla.upper() + aa + i[0] + '-' + u + ' ' + str(comproB[0] )+ '|', end='')
                                     print(cla.upper() + aa + i[1] + '-' + u + ' ' + str(vendoB[0])+ '|', end='')
@@ -156,10 +156,13 @@ while True:
                                     gana += res
                                     break #continue
                                 else:
-                                    print('|'+clave.upper()+a+i[0]+u.lower()+''+str(vendoA[0])+'x'+str(uso)+'=$'+str(venA)+'|',end='')
-                                    print(cla.upper()+aa+i[0]+u.lower()+''+str(comproB[0])+'/$'+str(venA)+'='+str(comB)+'|',end='') 
-                                    print(cla.upper()+aa+i[1]+u.lower()+''+str(vendoB[0])+'x'+str(comB)+'=$'+str(round(venB*(comB/100),2) )+'|', end='') 
-                                    print(clave.upper()+a+i[1]+u.lower()+' '+str(comA)+'|'+str(limite)+'|'+str(round(gana,2))+'|'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+str(bonos))
+                                    print('|'+clave.upper()+a+i[0]+u.lower()+''+str(vendoA[0])+'x'+str(uso)+'|',end='')
+                                    print(cla.upper()+aa+i[0]+u.lower()+''+str(comproB[0])+'|',end='') 
+                                    print(cla.upper()+aa+i[1]+u.lower()+''+str(vendoB[0])+'|', end='') 
+                                    print(clave.upper()+a+i[1]+u.lower()+str(comproA[0])+'|'+str(comA)+'|'+str(limite)+'|'+str(gana,2)+'|'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+str(bonos))
                                     break
 
-
+'''                                 print('|'+clave.upper()+a+i[0]+u.lower()+''+str(vendoA[0])+'x'+str(uso)+'=$'+str(venA)+'|',end='')
+                                    print(cla.upper()+aa+i[0]+u.lower()+''+str(comproB[0])+'/$'+str(venA)+'='+str(comB)+'|',end='') 
+                                    print(cla.upper()+aa+i[1]+u.lower()+''+str(vendoB[0])+'x'+str(comB)+'=$'+str(round(venB*(comB/100),2) )+'|', end='') 
+                                    print(clave.upper()+a+i[1]+u.lower()+' '+str(comA)+'|'+str(limite)+'|'+str(round(gana,2))+'|'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+str(bonos))'''
