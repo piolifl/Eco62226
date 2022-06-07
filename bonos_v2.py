@@ -149,7 +149,7 @@ while True:
                                     print(' SI ' + clave.upper() + a + i[0] + '-' + u + ' '+ str(vendoA[0])+'|', end='')
                                     print(cla.upper() + aa + i[0] + '-' + u + ' ' + str(comproB[0] )+ '|', end='')
                                     print(cla.upper() + aa + i[1] + '-' + u + ' ' + str(vendoB[0])+ '|', end='')
-                                    print(clave.upper()+a+i[1]+'-'+u+' '+str(comproA[0])+'|lim:'+str(limite)+'|RES:'+str(round(res,2))+'|'+str(gana)+'|ccl:'+str(round(ccl,2))+'|usd:'+str(round(mep,2))+'|ars:'+str(round(pes,2))+str(bonos))
+                                    print(clave.upper()+a+i[1]+'-'+u+' '+str(comproA[0])+'|lim:'+str(limite)+'|RES:'+str(round(res,2))+'|'+str(gana)+'|ccl:'+str(round(ccl,2))+'|usd:'+str(round(mep,2))+'|ars:'+str(round(pes,2))+'|'+str(bonos))
                                     #Muestra tipo y catidad dinero
                                     resultado(e,clave,cla)
                                     if (clave + a) == 'al30' or (cla + aa) == 'al30': limite -= nominal[0]
@@ -159,7 +159,7 @@ while True:
                                     print('|'+clave.upper()+a+i[0]+u.lower()+''+str(vendoA[0])+'x'+str(uso)+'|',end='')
                                     print(cla.upper()+aa+i[0]+u.lower()+''+str(comproB[0])+'|',end='') 
                                     print(cla.upper()+aa+i[1]+u.lower()+''+str(vendoB[0])+'|', end='') 
-                                    print(clave.upper()+a+i[1]+u.lower()+str(comproA[0])+'|'+str(comA)+'|'+str(limite)+'|'+str(gana,2)+'|'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+str(bonos))
+                                    print(clave.upper()+a+i[1]+u.lower()+''+str(comproA[0])+'|'+str(comA)+'|'+str(limite)+'|'+str(gana)+'|'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'|'+str(bonos))
                                     break
 
 '''                                 print('|'+clave.upper()+a+i[0]+u.lower()+''+str(vendoA[0])+'x'+str(uso)+'=$'+str(venA)+'|',end='')
