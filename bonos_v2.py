@@ -1,4 +1,3 @@
-
 from Consultar import Consultar
 from Operar import Operar
 from datetime import datetime
@@ -88,6 +87,7 @@ def resultado(tipo,tA,tB):
 
 #Ajuste para letras
 def precio_letra(letra,year,money,punta):
+    
     if punta == 'bid':
         if (money == 'C' or money == 'D'): 
             letra = letra[:1]+letra[3:]
@@ -115,7 +115,7 @@ def precio_letra(letra,year,money,punta):
 
 
 while True:
-    if time.strftime("%H:%M:%S") < '10:00:00':
+    if time.strftime("%H:%M:%S") < '11:00:00':
         print('Esperando la apertura ...', datetime.now().strftime("%Y-%m-%d %H:%M:%S")),time.sleep(10)
         continue
     if time.strftime("%H:%M:%S") > '16:59:50':
@@ -177,9 +177,22 @@ while True:
                                     elif vendoB[1] <= comB: break
                                     elif comproA[1] <= comA: break'''
 
-                                    #op.vender   ( ( 'MERV - XMEV - ' + clave.upper() + a + i[0] + ' - ' + u ) , uso , vendoA[0] )
+                                    #    ****    ENVIO DE OPERACIONES AL BROKER    ****
+                                    #if (clave=='s30j' or clave=='s29g') and (i[0]== 'C' or i[0]== 'D') : 
+                                        #clave=clave[:1]+clave[3:]
+                                        #op.vender   ( ( 'MERV - XMEV - ' + clave.upper() + a + i[0] + ' - ' + u ) , uso , vendoA[0] )
+                                    #else: op.vender   ( ( 'MERV - XMEV - ' + clave.upper() + a + i[0] + ' - ' + u ) , uso , vendoA[0] )
+                                    #if (cla=='s30j' or cla=='s29g') and (i[0]== 'C' or i[0]== 'D') : 
+                                        #cla=cla[:1]+cla[3:]
+                                        #op.comprar  ( ( 'MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u)   , comB, comproB[0] )
                                     #op.comprar  ( ( 'MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u)   , comB, comproB[0] )
+                                    #if (cla=='s30j' or cla=='s29g') and (i[1]== 'C' or i[1]== 'D') : 
+                                        #cla=cla[:1]+cla[3:]
+                                        #op.vender   ( ( 'MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u )  , comB, vendoB[0] )
                                     #op.vender   ( ( 'MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u )  , comB, vendoB[0] )
+                                    #if (clave=='s30j' or clave=='s29g') and (i[1]== 'C' or i[1]== 'D') : 
+                                        #clave=clave[:1]+clave[3:]
+                                        #op.comprar  ( ( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' + u ) , comA, comproA[0] )
                                     #op.comprar  ( ( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' + u ) , comA, comproA[0] )
 
                                     #Muestra candad de nominales ganados
