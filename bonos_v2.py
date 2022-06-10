@@ -4,6 +4,12 @@ from datetime import datetime
 import math
 import time
 
+while True:
+    if time.strftime("%H:%M:%S") < '11:00:00':
+        print('Esperando la apertura ...', datetime.now().strftime("%Y-%m-%d %H:%M:%S")),time.sleep(10)
+        continue
+    else: break
+
 pr = Consultar()
 op = Operar()
 
@@ -16,7 +22,7 @@ pes = 0
 bonos = {}
 
 tipo = {'al':['30'],'gd':['35','30'], 
-'s30j':['2'], #'s29g':['2'],
+'s30j':['2'], #'s31j':['2'],
 #'aap':['L'],
 #'al':['30','29','35','41'],'ae':['38'],'gd':['30','29','35','38','41','46'],'aap':['L'],'k':['O'],'amz':['N']
 }
@@ -34,7 +40,7 @@ nominal = [25,2,1500]
 def cruzar(tA,tB,vendo1,compro2,vendo2,compro1):
     global comA,comB,venA,venB
     if tA=='aap' or tA=='k' or tA=='amz': venA = round(vendo1 * nominal[1] * (1-costos),2)
-    elif tA=='s30j' or tA=='s29g': venA = round((vendo1/100) * nominal[2] * (1-costos),2)
+    elif tA=='s30j' or tA=='s31j': venA = round((vendo1/100) * nominal[2] * (1-costos),2)
     else: venA = round((vendo1/100) * nominal[0] * (1-costos),2)
     if tB=='aap' or tB=='k' or tB=='amz': comB = venA // (compro2 * (1+costos))
     else: comB = venA // ((compro2/100) * (1+costos))
@@ -45,40 +51,40 @@ def cruzar(tA,tB,vendo1,compro2,vendo2,compro1):
 def resultado(tipo,tA,tB):
     global ccl,mep,pes
     if tipo == 'ccl|mep':
-        if tA=='aap' or tA=='k' or tA=='amz' or tA=='s30j' or tA=='s29g':
+        if tA=='aap' or tA=='k' or tA=='amz' or tA=='s30j' or tA=='s31j':
             ccl += round(venA - comB * comproB[0]/100,2)
             mep += round(venB - comA * comproA[0],2)
-        elif tB=='aap' or tB=='k' or tB=='amz' or tB=='s30j' or tB=='s29g':
+        elif tB=='aap' or tB=='k' or tB=='amz' or tB=='s30j' or tB=='s31j':
             ccl += round(venA - comB * comproB[0],2)
             mep += round(venB - comA * comproA[0]/100,2)
         else:
             ccl += round(venA - comB * comproB[0]/100,2)
             mep += round(venB - comA * comproA[0]/100,2)
     elif tipo == 'mep|ccl':
-        if tA=='aap' or tA=='k' or tA=='amz' or tA=='s30j' or tA=='s29g':
+        if tA=='aap' or tA=='k' or tA=='amz' or tA=='s30j' or tA=='s31j':
             mep += round(venA - comB * comproB[0]/100,2)
             ccl += round(venB - comA * comproA[0],2)
-        elif tB=='aap' or tB=='k' or tB=='amz' or tB=='s30j' or tB=='s29g':
+        elif tB=='aap' or tB=='k' or tB=='amz' or tB=='s30j' or tB=='s31j':
             mep += round(venA - comB * comproB[0],2)
             ccl += round(venB - comA * comproA[0]/100,2)
         else:
             mep += round(venA - comB * comproB[0]/100,2)
             ccl += round(venB - comA * comproA[0]/100,2)
     elif tipo == 'ccl|pes':
-        if tA=='aap' or tA=='k' or tA=='amz' or tA=='s30j' or tA=='s29g':
+        if tA=='aap' or tA=='k' or tA=='amz' or tA=='s30j' or tA=='s31j':
             ccl  += round(venA - comB * comproB[0]/100,2)
             pes += round(venB - comA * comproA[0],2)
-        elif tB=='aap' or tB=='k' or tB=='amz' or tB=='s30j' or tB=='s29g':
+        elif tB=='aap' or tB=='k' or tB=='amz' or tB=='s30j' or tB=='s31j':
             ccl  += round(venA - comB * comproB[0],2)
             pes += round(venB - comA * comproA[0]/100,2)
         else:
             ccl  += round(venA - comB * comproB[0]/100,2)
             pes += round(venB - comA * comproA[0]/100,2)
     elif tipo == 'mep|pes':
-        if tA=='aap' or tA=='k' or tA=='amz' or tA=='s30j' or tA=='s29g':
+        if tA=='aap' or tA=='k' or tA=='amz' or tA=='s30j' or tA=='s31j':
             mep  += round(venA - comB * comproB[0]/100,2)
             pes += round(venB - comA * comproA[0],2)
-        elif tB=='aap' or tB=='k' or tB=='amz' or tB=='s30j' or tB=='s29g':
+        elif tB=='aap' or tB=='k' or tB=='amz' or tB=='s30j' or tB=='s31j':
             mep  += round(venA - comB * comproB[0],2)
             pes += round(venB - comA * comproA[0]/100,2)
         else:
@@ -113,12 +119,8 @@ def precio_letra(letra,year,money,punta):
             pr_letra = pr.precioLA( 'MERV - XMEV - ' + letra.upper() + year + money + ' - ' +u)
             return pr_letra     
 
-
 while True:
-    if time.strftime("%H:%M:%S") < '11:00:00':
-        print('Esperando la apertura ...', datetime.now().strftime("%Y-%m-%d %H:%M:%S")),time.sleep(10)
-        continue
-    if time.strftime("%H:%M:%S") > '16:59:50':
+    if time.strftime("%H:%M:%S") > '18:59:50':
         print(f'FIN 17hs CERRADO |')
         break
     if time.strftime("%H:%M:%S") > '15:59:45': plazo = ['48hs','24hs']
@@ -160,7 +162,7 @@ while True:
 
                                 #Cantidad de nominal a usar
                                 if clave=='aap' or clave=='k' or clave=='amz': uso,res = nominal[1] , comA - nominal[1]
-                                elif clave=='s30j' or clave=='s29g': uso,res = nominal[2] , comA - nominal[2]
+                                elif clave=='s30j' or clave=='s31j': uso,res = nominal[2] , comA - nominal[2]
                                 else:  uso,res = nominal[0], comA - nominal[0]
 
                                 #Evaluar el resultado 
@@ -178,19 +180,19 @@ while True:
                                     elif comproA[1] <= comA: break'''
 
                                     #    ****    ENVIO DE OPERACIONES AL BROKER    ****
-                                    #if (clave=='s30j' or clave=='s29g') and (i[0]== 'C' or i[0]== 'D') : 
+                                    #if (clave=='s30j' or clave=='s31j') and (i[0]== 'C' or i[0]== 'D') : 
                                         #clave=clave[:1]+clave[3:]
                                         #op.vender   ( ( 'MERV - XMEV - ' + clave.upper() + a + i[0] + ' - ' + u ) , uso , vendoA[0] )
                                     #else: op.vender   ( ( 'MERV - XMEV - ' + clave.upper() + a + i[0] + ' - ' + u ) , uso , vendoA[0] )
-                                    #if (cla=='s30j' or cla=='s29g') and (i[0]== 'C' or i[0]== 'D') : 
+                                    #if (cla=='s30j' or cla=='s31j') and (i[0]== 'C' or i[0]== 'D') : 
                                         #cla=cla[:1]+cla[3:]
                                         #op.comprar  ( ( 'MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u)   , comB, comproB[0] )
                                     #op.comprar  ( ( 'MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u)   , comB, comproB[0] )
-                                    #if (cla=='s30j' or cla=='s29g') and (i[1]== 'C' or i[1]== 'D') : 
+                                    #if (cla=='s30j' or cla=='s31j') and (i[1]== 'C' or i[1]== 'D') : 
                                         #cla=cla[:1]+cla[3:]
                                         #op.vender   ( ( 'MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u )  , comB, vendoB[0] )
                                     #op.vender   ( ( 'MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u )  , comB, vendoB[0] )
-                                    #if (clave=='s30j' or clave=='s29g') and (i[1]== 'C' or i[1]== 'D') : 
+                                    #if (clave=='s30j' or clave=='s31j') and (i[1]== 'C' or i[1]== 'D') : 
                                         #clave=clave[:1]+clave[3:]
                                         #op.comprar  ( ( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' + u ) , comA, comproA[0] )
                                     #op.comprar  ( ( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' + u ) , comA, comproA[0] )
