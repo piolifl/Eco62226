@@ -93,7 +93,6 @@ def resultado(tipo,tA,tB):
 
 #Ajuste para letras
 def precio_letra(letra,year,money,punta):
-    
     if punta == 'bid':
         if (money == 'C' or money == 'D'): 
             letra = letra[:1]+letra[3:]
@@ -120,13 +119,11 @@ def precio_letra(letra,year,money,punta):
             return pr_letra     
 
 while True:
-    if time.strftime("%H:%M:%S") > '18:59:50':
+    if time.strftime("%H:%M:%S") > '17:59:50':
         print(f'FIN 17hs CERRADO |')
         break
     if time.strftime("%H:%M:%S") > '15:59:45': plazo = ['48hs','24hs']
     for clave, valor in tipo.items():
-        if time.strftime("%H:%M:%S") > '16:59:50': break
-        if time.strftime("%H:%M:%S") > '15:59:45': plazo = ['48hs','24hs']
         for a in valor:
             for e,i in moneda.items():
                 for u in plazo:
@@ -138,20 +135,25 @@ while True:
                                 if limite < 25 and ((clave + a) == 'al30' or (cla + aa) == 'al30') : break
 
                                 #Consulto precios LAST
-                                if clave=='s30j': vendoA = precio_letra(clave,a,i[0],'last')
+                                if clave=='s30j' or clave=='s31j': vendoA = precio_letra(clave,a,i[0],'last')
                                 else: vendoA = pr.precioLA( 'MERV - XMEV - ' + clave.upper() + a + i[0] + ' - ' +u)
-                                if cla=='s30j': comproB = precio_letra(cla,aa,i[0],'last')
+                                if cla=='s30j' or cla=='s31j': comproB = precio_letra(cla,aa,i[0],'last')
                                 else: comproB= pr.precioLA( 'MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u)
-                                if cla=='s30j': vendoB = precio_letra(cla,aa,i[1],'last')
+                                if cla=='s30j' or cla=='s31j': vendoB = precio_letra(cla,aa,i[1],'last')
                                 else: vendoB = pr.precioLA( 'MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u)
-                                if clave=='s30j': comproA = precio_letra(clave,a,i[1],'last')
+                                if clave=='s30j' or clave=='s31j': comproA = precio_letra(clave,a,i[1],'last')
                                 else: comproA= pr.precioLA( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' +u)
 
                                 #Consulto precios PUNTAS 
-                                '''vendoA =   pr.precioBI( 'MERV - XMEV - ' + clave.upper() + a + i[0] + ' - ' + u)
-                                comproB =  pr.precioOF( 'MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u )
-                                vendoB =   pr.precioBI( 'MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u )
-                                comproA =  pr.precioOF( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' + u )'''
+                                '''if clave=='s30j' or clave=='s31j': vendoA = precio_letra(clave,a,i[0],'bid')
+                                else: vendoA = pr.precioBI( 'MERV - XMEV - ' + clave.upper() + a + i[0] + ' - ' +u)
+                                if cla=='s30j' or cla=='s31j': comproB = precio_letra(cla,aa,i[0],'off')
+                                else: comproB= pr.precioOF( 'MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u)
+                                if cla=='s30j' or cla=='s31j': vendoB = precio_letra(cla,aa,i[1],'bid')
+                                else: vendoB = pr.precioBI( 'MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u)
+                                if clave=='s30j' or clave=='s31j': comproA = precio_letra(clave,a,i[1],'off')
+                                else: comproA= pr.precioOF( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' +u)'''
+
                                 #print(f'Buscando...{u} | {clave.upper()}{a} | {cla.upper()}{aa} | {bonos} |',datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
                                 #Salgo si falta algun precio
@@ -201,13 +203,13 @@ while True:
                                     if clave+a in bonos: 
                                         for bonos_clave in bonos.keys():
                                             if bonos_clave == clave+a: bonos[bonos_clave] += res
-                                    else: bonos[clave+a] +=res
+                                    else: bonos[clave+a]=res
 
                                     #Muestra resultado positivo
                                     print(' SI ' + clave.upper() + a + i[0] + '-' + u + ' '+ str(vendoA[0])+'|', end='')
                                     print(cla.upper() + aa + i[0] + '-' + u + ' ' + str(comproB[0] )+ '| |', end='')
                                     print(cla.upper() + aa + i[1] + '-' + u + ' ' + str(vendoB[0])+ '|', end='')
-                                    print(clave.upper()+a+i[1]+'-'+u+' '+str(comproA[0])+'|lim:'+str(limite)+'| |RES:'+str(round(res,2))+'|'+str(gana)+'|ccl:'+str(round(ccl,2))+'|usd:'+str(round(mep,2))+'|ars:'+str(round(pes,2))+'|'+str(bonos))
+                                    print(clave.upper()+a+i[1]+'-'+u+' '+str(comproA[0])+'|lim:'+str(limite)+'| ccl:'+str(round(ccl,2))+' usd:'+str(round(mep,2))+' ars:'+str(round(pes,2))+' | '+str(bonos))
 
                                     #Muestra tipo y catidad dinero
                                     resultado(e,clave,cla)
