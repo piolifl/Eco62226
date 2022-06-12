@@ -161,8 +161,8 @@ while True:
                                 #if clave=='s30j' or clave=='s31j': comproA = precio_letra(clave,a,i[1],'off')
                                 if (clave=='s30j' or clave=='s31j') and (i[1]=='C' or i[1]=='D'): comproA= pr.precioOF('MERV - XMEV - '+(clave[:1]+clave[3:]).upper()+a+i[1]+' - '+u)
                                 else: comproA= pr.precioOF( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' +u)'''
-
-                                #print(f'Buscando...{u} | {clave.upper()}{a} | {cla.upper()}{aa} | {bonos} |',datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+                                
+                                #print(f'Buscando...{u} | {clave.upper()}{a}{i[0]} | {cla.upper()}{aa}{i[0]} || {cla.upper()}{aa}{i[1]} | {clave.upper()}{a}{i[1]} || ',datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
                                 #Salgo si falta algun precio
                                 if vendoA[0] == 10000 or comproB[0] == 10000 or vendoB[0] == 10000 or comproA[0] == 10000: break
