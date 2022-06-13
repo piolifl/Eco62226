@@ -14,7 +14,7 @@ pr = Consultar()
 op = Operar()
 
 costos = 0.0026
-limite = 1000
+limite = 100000
 gana = 0
 ccl = 0
 mep = 0
@@ -22,7 +22,7 @@ pes = 0
 bonos = {}
 
 tipo = {'al':['30'],'gd':['35','30'], 
-'s30j':['2'], #'s31j':['2'],
+'s30j':['2'], 's31j':['2'],
 #'aap':['L'],
 #'al':['30','29','35','41'],'ae':['38'],'gd':['30','29','35','38','41','46'],'aap':['L'],'k':['O'],'amz':['N']
 }
@@ -51,40 +51,40 @@ def cruzar(tA,tB,vendo1,compro2,vendo2,compro1):
 def resultado(tipo,tA,tB):
     global ccl,mep,pes
     if tipo == 'ccl|mep':
-        if tA=='aap' or tA=='k' or tA=='amz' or tA=='s30j' or tA=='s31j':
+        if tA=='aap' or tA=='k' or tA=='amz':# or tA=='s30j' or tA=='s31j':
             ccl += round(venA - comB * comproB[0]/100,2)
             mep += round(venB - comA * comproA[0],2)
-        elif tB=='aap' or tB=='k' or tB=='amz' or tB=='s30j' or tB=='s31j':
+        elif tB=='aap' or tB=='k' or tB=='amz':# or tB=='s30j' or tB=='s31j':
             ccl += round(venA - comB * comproB[0],2)
             mep += round(venB - comA * comproA[0]/100,2)
         else:
             ccl += round(venA - comB * comproB[0]/100,2)
             mep += round(venB - comA * comproA[0]/100,2)
     elif tipo == 'mep|ccl':
-        if tA=='aap' or tA=='k' or tA=='amz' or tA=='s30j' or tA=='s31j':
+        if tA=='aap' or tA=='k' or tA=='amz':# or tA=='s30j' or tA=='s31j':
             mep += round(venA - comB * comproB[0]/100,2)
             ccl += round(venB - comA * comproA[0],2)
-        elif tB=='aap' or tB=='k' or tB=='amz' or tB=='s30j' or tB=='s31j':
+        elif tB=='aap' or tB=='k' or tB=='amz':# or tB=='s30j' or tB=='s31j':
             mep += round(venA - comB * comproB[0],2)
             ccl += round(venB - comA * comproA[0]/100,2)
         else:
             mep += round(venA - comB * comproB[0]/100,2)
             ccl += round(venB - comA * comproA[0]/100,2)
     elif tipo == 'ccl|pes':
-        if tA=='aap' or tA=='k' or tA=='amz' or tA=='s30j' or tA=='s31j':
+        if tA=='aap' or tA=='k' or tA=='amz':# or tA=='s30j' or tA=='s31j':
             ccl  += round(venA - comB * comproB[0]/100,2)
             pes += round(venB - comA * comproA[0],2)
-        elif tB=='aap' or tB=='k' or tB=='amz' or tB=='s30j' or tB=='s31j':
+        elif tB=='aap' or tB=='k' or tB=='amz':# or tB=='s30j' or tB=='s31j':
             ccl  += round(venA - comB * comproB[0],2)
             pes += round(venB - comA * comproA[0]/100,2)
         else:
             ccl  += round(venA - comB * comproB[0]/100,2)
             pes += round(venB - comA * comproA[0]/100,2)
     elif tipo == 'mep|pes':
-        if tA=='aap' or tA=='k' or tA=='amz' or tA=='s30j' or tA=='s31j':
+        if tA=='aap' or tA=='k' or tA=='amz':# or tA=='s30j' or tA=='s31j':
             mep  += round(venA - comB * comproB[0]/100,2)
             pes += round(venB - comA * comproA[0],2)
-        elif tB=='aap' or tB=='k' or tB=='amz' or tB=='s30j' or tB=='s31j':
+        elif tB=='aap' or tB=='k' or tB=='amz':# or tB=='s30j' or tB=='s31j':
             mep  += round(venA - comB * comproB[0],2)
             pes += round(venB - comA * comproA[0]/100,2)
         else:
@@ -152,10 +152,10 @@ while True:
                                 if comA >= uso:
 
                                     #Cantidad LAST - uso puntas de bid/off    
-                                    if vendoA[1] <= uso: break
+                                    '''if vendoA[1] <= uso: break
                                     elif comproB[2] <= comB: break
                                     elif vendoB[1] <= comB:  break
-                                    elif comproA[2] <= comA:  break
+                                    elif comproA[2] <= comA:  break'''
                                     #Cantidad en las PUNTAS: bid/off
                                     '''if vendoA[1] <= uso: break
                                     elif comproB[1] <= comB: break
@@ -190,8 +190,8 @@ while True:
                                     if (cla=='s30j' or cla=='s31j') and (i[1]=='C' or i[1]=='D'): print((cla[:1]+cla[3:]).upper()+aa+i[1]+u.lower()+''+str(vendoB[0])+'|', end='')
                                     else: print(cla.upper()+aa+i[1]+u.lower()+''+str(vendoB[0])+'|', end='') 
                                     if (clave=='s30j' or clave=='s31j') and (i[1]=='C' or i[1]=='D'): print((clave[:1]+clave[3:]).upper()+a+i[1]+u.lower()+''+str(comproA[0])+
-                                    '| |'+str(comA)+'|'+str(limite)+'|'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'| '+str(bonos))
-                                    else: print(clave.upper()+a+i[1]+u.lower()+''+str(comproA[0])+'| |'+str(comA)+'|'+str(limite)+'|'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'| '+str(bonos))
+                                    '| |'+str(comA)+'|'+str(limite)+'| |'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'| '+str(bonos))
+                                    else: print(clave.upper()+a+i[1]+u.lower()+''+str(comproA[0])+'| |'+str(comA)+'|'+str(limite)+'| |'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'| '+str(bonos))
 
                                     #Muestra tipo y catidad dinero
                                     resultado(e,clave,cla)
@@ -208,8 +208,8 @@ while True:
                                     if (cla=='s30j' or cla=='s31j') and (i[1]=='C' or i[1]=='D'): print((cla[:1]+cla[3:]).upper()+aa+i[1]+u.lower()+''+str(vendoB[0])+'|', end='')
                                     else: print(cla.upper()+aa+i[1]+u.lower()+''+str(vendoB[0])+'|', end='') 
                                     if (clave=='s30j' or clave=='s31j') and (i[1]=='C' or i[1]=='D'): print((clave[:1]+clave[3:]).upper()+a+i[1]+u.lower()+''+str(comproA[0])+
-                                    '| |'+str(comA)+'|'+str(limite)+'|'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'| '+str(bonos))
-                                    else: print(clave.upper()+a+i[1]+u.lower()+''+str(comproA[0])+'| |'+str(comA)+'|'+str(limite)+'|'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'| '+str(bonos))
+                                    '| |'+str(comA)+'|'+str(limite)+'| |'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'| '+str(bonos))
+                                    else: print(clave.upper()+a+i[1]+u.lower()+''+str(comproA[0])+'| |'+str(comA)+'|'+str(limite)+'| |'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'| '+str(bonos))
                                 
                                     break
                                     
