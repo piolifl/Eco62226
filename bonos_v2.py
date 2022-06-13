@@ -22,7 +22,7 @@ pes = 0
 bonos = {}
 
 tipo = {'al':['30'],'gd':['35','30'], 
-'s30j':['2'], 's31j':['2'],
+'s30j':['2'], 's31g':['2'],
 #'aap':['L'],
 #'al':['30','29','35','41'],'ae':['38'],'gd':['30','29','35','38','41','46'],'aap':['L'],'k':['O'],'amz':['N']
 }
@@ -40,7 +40,7 @@ nominal = [25,2,1500]
 def cruzar(tA,tB,vendo1,compro2,vendo2,compro1):
     global comA,comB,venA,venB
     if tA=='aap' or tA=='k' or tA=='amz': venA = round(vendo1 * nominal[1] * (1-costos),2)
-    elif tA=='s30j' or tA=='s31j': venA = round((vendo1/100) * nominal[2] * (1-costos),2)
+    elif tA=='s30j' or tA=='s31g': venA = round((vendo1/100) * nominal[2] * (1-costos),2)
     else: venA = round((vendo1/100) * nominal[0] * (1-costos),2)
     if tB=='aap' or tB=='k' or tB=='amz': comB = venA // (compro2 * (1+costos))
     else: comB = venA // ((compro2/100) * (1+costos))
@@ -51,40 +51,40 @@ def cruzar(tA,tB,vendo1,compro2,vendo2,compro1):
 def resultado(tipo,tA,tB):
     global ccl,mep,pes
     if tipo == 'ccl|mep':
-        if tA=='aap' or tA=='k' or tA=='amz':# or tA=='s30j' or tA=='s31j':
+        if tA=='aap' or tA=='k' or tA=='amz':# or tA=='s30j' or tA=='s31g':
             ccl += round(venA - comB * comproB[0]/100,2)
             mep += round(venB - comA * comproA[0],2)
-        elif tB=='aap' or tB=='k' or tB=='amz':# or tB=='s30j' or tB=='s31j':
+        elif tB=='aap' or tB=='k' or tB=='amz':# or tB=='s30j' or tB=='s31g':
             ccl += round(venA - comB * comproB[0],2)
             mep += round(venB - comA * comproA[0]/100,2)
         else:
             ccl += round(venA - comB * comproB[0]/100,2)
             mep += round(venB - comA * comproA[0]/100,2)
     elif tipo == 'mep|ccl':
-        if tA=='aap' or tA=='k' or tA=='amz':# or tA=='s30j' or tA=='s31j':
+        if tA=='aap' or tA=='k' or tA=='amz':# or tA=='s30j' or tA=='s31g':
             mep += round(venA - comB * comproB[0]/100,2)
             ccl += round(venB - comA * comproA[0],2)
-        elif tB=='aap' or tB=='k' or tB=='amz':# or tB=='s30j' or tB=='s31j':
+        elif tB=='aap' or tB=='k' or tB=='amz':# or tB=='s30j' or tB=='s31g':
             mep += round(venA - comB * comproB[0],2)
             ccl += round(venB - comA * comproA[0]/100,2)
         else:
             mep += round(venA - comB * comproB[0]/100,2)
             ccl += round(venB - comA * comproA[0]/100,2)
     elif tipo == 'ccl|pes':
-        if tA=='aap' or tA=='k' or tA=='amz':# or tA=='s30j' or tA=='s31j':
+        if tA=='aap' or tA=='k' or tA=='amz':# or tA=='s30j' or tA=='s31g':
             ccl  += round(venA - comB * comproB[0]/100,2)
             pes += round(venB - comA * comproA[0],2)
-        elif tB=='aap' or tB=='k' or tB=='amz':# or tB=='s30j' or tB=='s31j':
+        elif tB=='aap' or tB=='k' or tB=='amz':# or tB=='s30j' or tB=='s31g':
             ccl  += round(venA - comB * comproB[0],2)
             pes += round(venB - comA * comproA[0]/100,2)
         else:
             ccl  += round(venA - comB * comproB[0]/100,2)
             pes += round(venB - comA * comproA[0]/100,2)
     elif tipo == 'mep|pes':
-        if tA=='aap' or tA=='k' or tA=='amz':# or tA=='s30j' or tA=='s31j':
+        if tA=='aap' or tA=='k' or tA=='amz':# or tA=='s30j' or tA=='s31g':
             mep  += round(venA - comB * comproB[0]/100,2)
             pes += round(venB - comA * comproA[0],2)
-        elif tB=='aap' or tB=='k' or tB=='amz':# or tB=='s30j' or tB=='s31j':
+        elif tB=='aap' or tB=='k' or tB=='amz':# or tB=='s30j' or tB=='s31g':
             mep  += round(venA - comB * comproB[0],2)
             pes += round(venB - comA * comproA[0]/100,2)
         else:
@@ -108,31 +108,31 @@ while True:
                                 if limite < 25 and ((clave + a) == 'al30' or (cla + aa) == 'al30') : break
 
                                 #Consulto precios LAST
-                                #if clave=='s30j' or clave=='s31j': vendoA = precio_letra(clave,a,i[0],'last')
-                                if (clave=='s30j' or clave=='s31j') and (i[0]=='C' or i[0]=='D'): vendoA = pr.precioLA('MERV - XMEV - '+(clave[:1]+clave[3:]).upper()+a+i[0]+' - '+u)
+                                #if clave=='s30j' or clave=='s31g': vendoA = precio_letra(clave,a,i[0],'last')
+                                if (clave=='s30j' or clave=='s31g') and (i[0]=='C' or i[0]=='D'): vendoA = pr.precioLA('MERV - XMEV - '+(clave[:1]+clave[3:]).upper()+a+i[0]+' - '+u)
                                 else: vendoA = pr.precioLA( 'MERV - XMEV - ' + clave.upper() + a + i[0] + ' - ' +u)
-                                #if cla=='s30j' or cla=='s31j': comproB = precio_letra(cla,aa,i[0],'last')
-                                if (cla=='s30j' or cla=='s31j') and (i[0]=='C' or i[0]=='D'): comproB= pr.precioLA('MERV - XMEV - '+(cla[:1]+cla[3:]).upper()+aa+i[0]+' - '+u)
+                                #if cla=='s30j' or cla=='s31g': comproB = precio_letra(cla,aa,i[0],'last')
+                                if (cla=='s30j' or cla=='s31g') and (i[0]=='C' or i[0]=='D'): comproB= pr.precioLA('MERV - XMEV - '+(cla[:1]+cla[3:]).upper()+aa+i[0]+' - '+u)
                                 else: comproB= pr.precioLA( 'MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u)
-                                #if cla=='s30j' or cla=='s31j': vendoB = precio_letra(cla,aa,i[1],'last')
-                                if (cla=='s30j' or cla=='s31j') and (i[1]=='C' or i[1]=='D'): vendoB = pr.precioLA('MERV - XMEV - '+(cla[:1]+cla[3:]).upper()+aa+i[1]+' - '+u)
+                                #if cla=='s30j' or cla=='s31g': vendoB = precio_letra(cla,aa,i[1],'last')
+                                if (cla=='s30j' or cla=='s31g') and (i[1]=='C' or i[1]=='D'): vendoB = pr.precioLA('MERV - XMEV - '+(cla[:1]+cla[3:]).upper()+aa+i[1]+' - '+u)
                                 else: vendoB = pr.precioLA( 'MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u)
-                                #if clave=='s30j' or clave=='s31j': comproA = precio_letra(clave,a,i[1],'last')
-                                if (clave=='s30j' or clave=='s31j') and (i[1]=='C' or i[1]=='D'): comproA= pr.precioLA('MERV - XMEV - '+(clave[:1]+clave[3:]).upper()+a+i[1]+' - '+u)
+                                #if clave=='s30j' or clave=='s31g': comproA = precio_letra(clave,a,i[1],'last')
+                                if (clave=='s30j' or clave=='s31g') and (i[1]=='C' or i[1]=='D'): comproA= pr.precioLA('MERV - XMEV - '+(clave[:1]+clave[3:]).upper()+a+i[1]+' - '+u)
                                 else: comproA= pr.precioLA( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' +u)
 
                                 #Consulto precios PUNTAS 
-                                '''#if clave=='s30j' or clave=='s31j': vendoA = precio_letra(clave,a,i[0],'bid')
-                                if (clave=='s30j' or clave=='s31j') and (i[0]=='C' or i[0]=='D'): vendoA = pr.precioBI('MERV - XMEV - '+(clave[:1]+clave[3:]).upper()+a+i[0]+' - '+u)
+                                '''#if clave=='s30j' or clave=='s31g': vendoA = precio_letra(clave,a,i[0],'bid')
+                                if (clave=='s30j' or clave=='s31g') and (i[0]=='C' or i[0]=='D'): vendoA = pr.precioBI('MERV - XMEV - '+(clave[:1]+clave[3:]).upper()+a+i[0]+' - '+u)
                                 else: vendoA = pr.precioBI( 'MERV - XMEV - ' + clave.upper() + a + i[0] + ' - ' +u)
-                                #if cla=='s30j' or cla=='s31j': comproB = precio_letra(cla,aa,i[0],'off')
-                                if (cla=='s30j' or cla=='s31j') and (i[0]=='C' or i[0]=='D'): comproB= pr.precioOF('MERV - XMEV - '+(cla[:1]+cla[3:]).upper()+aa+i[0]+' - '+u)
+                                #if cla=='s30j' or cla=='s31g': comproB = precio_letra(cla,aa,i[0],'off')
+                                if (cla=='s30j' or cla=='s31g') and (i[0]=='C' or i[0]=='D'): comproB= pr.precioOF('MERV - XMEV - '+(cla[:1]+cla[3:]).upper()+aa+i[0]+' - '+u)
                                 else: comproB= pr.precioOF( 'MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u)
-                                #if cla=='s30j' or cla=='s31j': vendoB = precio_letra(cla,aa,i[1],'bid')
-                                if (cla=='s30j' or cla=='s31j') and (i[1]=='C' or i[1]=='D'): vendoB = pr.precioBI('MERV - XMEV - '+(cla[:1]+cla[3:]).upper()+aa+i[1]+' - '+u)
+                                #if cla=='s30j' or cla=='s31g': vendoB = precio_letra(cla,aa,i[1],'bid')
+                                if (cla=='s30j' or cla=='s31g') and (i[1]=='C' or i[1]=='D'): vendoB = pr.precioBI('MERV - XMEV - '+(cla[:1]+cla[3:]).upper()+aa+i[1]+' - '+u)
                                 else: vendoB = pr.precioBI( 'MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u)
-                                #if clave=='s30j' or clave=='s31j': comproA = precio_letra(clave,a,i[1],'off')
-                                if (clave=='s30j' or clave=='s31j') and (i[1]=='C' or i[1]=='D'): comproA= pr.precioOF('MERV - XMEV - '+(clave[:1]+clave[3:]).upper()+a+i[1]+' - '+u)
+                                #if clave=='s30j' or clave=='s31g': comproA = precio_letra(clave,a,i[1],'off')
+                                if (clave=='s30j' or clave=='s31g') and (i[1]=='C' or i[1]=='D'): comproA= pr.precioOF('MERV - XMEV - '+(clave[:1]+clave[3:]).upper()+a+i[1]+' - '+u)
                                 else: comproA= pr.precioOF( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' +u)'''
                                 
                                 print(f'Buscando...{u} | {clave.upper()}{a}{i[0]} | {cla.upper()}{aa}{i[0]} || {cla.upper()}{aa}{i[1]} | {clave.upper()}{a}{i[1]} || ',datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
@@ -145,17 +145,17 @@ while True:
 
                                 #Cantidad de nominal a usar
                                 if clave=='aap' or clave=='k' or clave=='amz': uso,res = nominal[1] , comA - nominal[1]
-                                elif clave=='s30j' or clave=='s31j': uso,res = nominal[2] , comA - nominal[2]
+                                elif clave=='s30j' or clave=='s31g': uso,res = nominal[2] , comA - nominal[2]
                                 else:  uso,res = nominal[0], comA - nominal[0]
 
                                 #Evaluar el resultado 
                                 if comA >= uso:
 
                                     #Cantidad LAST - uso puntas de bid/off    
-                                    '''if vendoA[1] <= uso: break
+                                    if vendoA[1] <= uso: break
                                     elif comproB[2] <= comB: break
                                     elif vendoB[1] <= comB:  break
-                                    elif comproA[2] <= comA:  break'''
+                                    elif comproA[2] <= comA:  break
                                     #Cantidad en las PUNTAS: bid/off
                                     '''if vendoA[1] <= uso: break
                                     elif comproB[1] <= comB: break
@@ -163,16 +163,16 @@ while True:
                                     elif comproA[1] <= comA: break'''
 
                                     #    ****    ENVIO DE OPERACIONES AL BROKER    ****
-                                    '''if (clave=='s30j' or clave=='s31j') and (i[0]=='C' or i[0]=='D'): op.vender(('MERV - XMEV - '+(clave[:1]+clave[3:]).upper()+a+i[0]+' - '+u), uso, vendoA[0])
+                                    '''if (clave=='s30j' or clave=='s31g') and (i[0]=='C' or i[0]=='D'): op.vender(('MERV - XMEV - '+(clave[:1]+clave[3:]).upper()+a+i[0]+' - '+u), uso, vendoA[0])
                                     else: op.vender(('MERV - XMEV - '+clave.upper() + a + i[0] + ' - ' +u ) , uso , vendoA[0] )
                                     ##########################################################
-                                    if (cla=='s30j' or cla=='s31j') and (i[0]=='C' or i[0]=='D') : op.comprar(('MERV - XMEV - '+(cla[:1]+cla[3:]).upper()+aa+i[0]+' - '+u), comB, comproB[0])
+                                    if (cla=='s30j' or cla=='s31g') and (i[0]=='C' or i[0]=='D') : op.comprar(('MERV - XMEV - '+(cla[:1]+cla[3:]).upper()+aa+i[0]+' - '+u), comB, comproB[0])
                                     op.comprar(('MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' +u), comB, comproB[0])
                                     ##########################################################
-                                    if (cla=='s30j' or cla=='s31j') and (i[1]=='C' or i[1]=='D') : op.vender(('MERV - XMEV - '+(cla[:1]+cla[3:]).upper()+aa+i[1]+' - '+u), comB, vendoB[0])
+                                    if (cla=='s30j' or cla=='s31g') and (i[1]=='C' or i[1]=='D') : op.vender(('MERV - XMEV - '+(cla[:1]+cla[3:]).upper()+aa+i[1]+' - '+u), comB, vendoB[0])
                                     op.vender(('MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' +u), comB, vendoB[0])
                                     ##########################################################
-                                    if (clave=='s30j' or clave=='s31j') and (i[1]=='C' or i[1]=='D'): op.comprar(('MERV - XMEV - '+(clave[:1]+clave[3:]).upper()+a+i[1]+' - '+u), comA, comproA[0])
+                                    if (clave=='s30j' or clave=='s31g') and (i[1]=='C' or i[1]=='D'): op.comprar(('MERV - XMEV - '+(clave[:1]+clave[3:]).upper()+a+i[1]+' - '+u), comA, comproA[0])
                                     op.comprar  ( ( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - '+u), comA, comproA[0])
                                     ##########################################################'''
 
@@ -183,13 +183,13 @@ while True:
                                     else: bonos[clave+a]=res
 
                                     #Muestra resultado positivo
-                                    if (clave=='s30j' or clave=='s31j') and (i[0]=='C' or i[0]=='D'): print('| SI |'+(clave[:1]+clave[3:]).upper()+a+i[0]+u.lower()+''+str(vendoA[0])+'|',end='')
+                                    if (clave=='s30j' or clave=='s31g') and (i[0]=='C' or i[0]=='D'): print('| SI |'+(clave[:1]+clave[3:]).upper()+a+i[0]+u.lower()+''+str(vendoA[0])+'|',end='')
                                     else: print('| SI |'+clave.upper()+a+i[0]+u.lower()+''+str(vendoA[0])+'|',end='')
-                                    if (cla=='s30j' or cla=='s31j') and (i[0]=='C' or i[0]=='D'): print((cla[:1]+cla[3:]).upper()+aa+i[0]+u.lower()+''+str(comproB[0])+'| |',end='')
+                                    if (cla=='s30j' or cla=='s31g') and (i[0]=='C' or i[0]=='D'): print((cla[:1]+cla[3:]).upper()+aa+i[0]+u.lower()+''+str(comproB[0])+'| |',end='')
                                     else: print(cla.upper()+aa+i[0]+u.lower()+''+str(comproB[0])+'| |',end='') 
-                                    if (cla=='s30j' or cla=='s31j') and (i[1]=='C' or i[1]=='D'): print((cla[:1]+cla[3:]).upper()+aa+i[1]+u.lower()+''+str(vendoB[0])+'|', end='')
+                                    if (cla=='s30j' or cla=='s31g') and (i[1]=='C' or i[1]=='D'): print((cla[:1]+cla[3:]).upper()+aa+i[1]+u.lower()+''+str(vendoB[0])+'|', end='')
                                     else: print(cla.upper()+aa+i[1]+u.lower()+''+str(vendoB[0])+'|', end='') 
-                                    if (clave=='s30j' or clave=='s31j') and (i[1]=='C' or i[1]=='D'): print((clave[:1]+clave[3:]).upper()+a+i[1]+u.lower()+''+str(comproA[0])+
+                                    if (clave=='s30j' or clave=='s31g') and (i[1]=='C' or i[1]=='D'): print((clave[:1]+clave[3:]).upper()+a+i[1]+u.lower()+''+str(comproA[0])+
                                     '| |'+str(comA)+'|'+str(limite)+'| |'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'| '+str(bonos))
                                     else: print(clave.upper()+a+i[1]+u.lower()+''+str(comproA[0])+'| |'+str(comA)+'|'+str(limite)+'| |'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'| '+str(bonos))
 
@@ -197,17 +197,17 @@ while True:
                                     resultado(e,clave,cla)
                                     if (clave + a) == 'al30' or (cla + aa) == 'al30': limite -= nominal[0]
                                     gana += res
-                                    break #continue
+                                    continue
 
                                 #Muestra resultado negativo
                                 else:
-                                    if (clave=='s30j' or clave=='s31j') and (i[0]=='C' or i[0]=='D'): print('|   |'+(clave[:1]+clave[3:]).upper()+a+i[0]+u.lower()+''+str(vendoA[0])+'x'+str(uso)+'|',end='')
+                                    if (clave=='s30j' or clave=='s31g') and (i[0]=='C' or i[0]=='D'): print('|   |'+(clave[:1]+clave[3:]).upper()+a+i[0]+u.lower()+''+str(vendoA[0])+'x'+str(uso)+'|',end='')
                                     else: print('|   |'+clave.upper()+a+i[0]+u.lower()+''+str(vendoA[0])+'x'+str(uso)+'|',end='')
-                                    if (cla=='s30j' or cla=='s31j') and (i[0]=='C' or i[0]=='D'): print((cla[:1]+cla[3:]).upper()+aa+i[0]+u.lower()+''+str(comproB[0])+'| |',end='')
+                                    if (cla=='s30j' or cla=='s31g') and (i[0]=='C' or i[0]=='D'): print((cla[:1]+cla[3:]).upper()+aa+i[0]+u.lower()+''+str(comproB[0])+'| |',end='')
                                     else: print(cla.upper()+aa+i[0]+u.lower()+''+str(comproB[0])+'| |',end='') 
-                                    if (cla=='s30j' or cla=='s31j') and (i[1]=='C' or i[1]=='D'): print((cla[:1]+cla[3:]).upper()+aa+i[1]+u.lower()+''+str(vendoB[0])+'|', end='')
+                                    if (cla=='s30j' or cla=='s31g') and (i[1]=='C' or i[1]=='D'): print((cla[:1]+cla[3:]).upper()+aa+i[1]+u.lower()+''+str(vendoB[0])+'|', end='')
                                     else: print(cla.upper()+aa+i[1]+u.lower()+''+str(vendoB[0])+'|', end='') 
-                                    if (clave=='s30j' or clave=='s31j') and (i[1]=='C' or i[1]=='D'): print((clave[:1]+clave[3:]).upper()+a+i[1]+u.lower()+''+str(comproA[0])+
+                                    if (clave=='s30j' or clave=='s31g') and (i[1]=='C' or i[1]=='D'): print((clave[:1]+clave[3:]).upper()+a+i[1]+u.lower()+''+str(comproA[0])+
                                     '| |'+str(comA)+'|'+str(limite)+'| |'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'| '+str(bonos))
                                     else: print(clave.upper()+a+i[1]+u.lower()+''+str(comproA[0])+'| |'+str(comA)+'|'+str(limite)+'| |'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'| '+str(bonos))
                                 
