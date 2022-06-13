@@ -91,33 +91,6 @@ def resultado(tipo,tA,tB):
             mep  += round(venA - comB * comproB[0]/100,2)
             pes += round(venB - comA * comproA[0]/100,2)
 
-'''#Ajuste para letras
-def precio_letra(letra,year,money,punta):
-    if punta == 'bid':
-        if (money == 'C' or money == 'D'): 
-            letra = letra[:1]+letra[3:]
-            pr_letra = pr.precioBI( 'MERV - XMEV - ' + letra.upper() + year + money + ' - ' +u)
-            return pr_letra
-        else:
-            pr_letra = pr.precioBI( 'MERV - XMEV - ' + letra.upper() + year + money + ' - ' +u)
-            return pr_letra
-    elif punta == 'off':
-        if (money == 'C' or money == 'D'): 
-            letra = letra[:1]+letra[3:]
-            pr_letra = pr.precioOF( 'MERV - XMEV - ' + letra.upper() + year + money + ' - ' +u)
-            return pr_letra
-        else:
-            pr_letra = pr.precioOF( 'MERV - XMEV - ' + letra.upper() + year + money + ' - ' +u)
-            return pr_letra 
-    else:
-        if (money == 'C' or money == 'D'): 
-            letra = letra[:1]+letra[3:]
-            pr_letra = pr.precioLA( 'MERV - XMEV - ' + letra.upper() + year + money + ' - ' +u)
-            return pr_letra
-        else:
-            pr_letra = pr.precioLA( 'MERV - XMEV - ' + letra.upper() + year + money + ' - ' +u)
-            return pr_letra     '''
-
 while True:
     if time.strftime("%H:%M:%S") > '17:59:50':
         print(f'FIN 17hs CERRADO |')
@@ -162,7 +135,7 @@ while True:
                                 if (clave=='s30j' or clave=='s31j') and (i[1]=='C' or i[1]=='D'): comproA= pr.precioOF('MERV - XMEV - '+(clave[:1]+clave[3:]).upper()+a+i[1]+' - '+u)
                                 else: comproA= pr.precioOF( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' +u)'''
                                 
-                                #print(f'Buscando...{u} | {clave.upper()}{a}{i[0]} | {cla.upper()}{aa}{i[0]} || {cla.upper()}{aa}{i[1]} | {clave.upper()}{a}{i[1]} || ',datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+                                print(f'Buscando...{u} | {clave.upper()}{a}{i[0]} | {cla.upper()}{aa}{i[0]} || {cla.upper()}{aa}{i[1]} | {clave.upper()}{a}{i[1]} || ',datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
                                 #Salgo si falta algun precio
                                 if vendoA[0] == 10000 or comproB[0] == 10000 or vendoB[0] == 10000 or comproA[0] == 10000: break
@@ -200,8 +173,8 @@ while True:
                                     op.vender(('MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' +u), comB, vendoB[0])
                                     ##########################################################
                                     if (clave=='s30j' or clave=='s31j') and (i[1]=='C' or i[1]=='D'): op.comprar(('MERV - XMEV - '+(clave[:1]+clave[3:]).upper()+a+i[1]+' - '+u), comA, comproA[0])
-                                    op.comprar  ( ( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - '+u), comA, comproA[0])'''
-                                    ##########################################################
+                                    op.comprar  ( ( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - '+u), comA, comproA[0])
+                                    ##########################################################'''
 
                                     #Muestra candad de nominales ganados
                                     if clave+a in bonos: 
@@ -217,8 +190,8 @@ while True:
                                     if (cla=='s30j' or cla=='s31j') and (i[1]=='C' or i[1]=='D'): print((cla[:1]+cla[3:]).upper()+aa+i[1]+u.lower()+''+str(vendoB[0])+'|', end='')
                                     else: print(cla.upper()+aa+i[1]+u.lower()+''+str(vendoB[0])+'|', end='') 
                                     if (clave=='s30j' or clave=='s31j') and (i[1]=='C' or i[1]=='D'): print((clave[:1]+clave[3:]).upper()+a+i[1]+u.lower()+''+str(comproA[0])+
-                                    '| |'+str(comA)+'|'+str(limite)+'|'+str(gana)+'|'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'|'+str(bonos))
-                                    else: print(clave.upper()+a+i[1]+u.lower()+''+str(comproA[0])+'| |'+str(comA)+'|'+str(limite)+'|'+str(gana)+'|'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'|'+str(bonos))
+                                    '| |'+str(comA)+'|'+str(limite)+'|'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'| '+str(bonos))
+                                    else: print(clave.upper()+a+i[1]+u.lower()+''+str(comproA[0])+'| |'+str(comA)+'|'+str(limite)+'|'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'| '+str(bonos))
 
                                     #Muestra tipo y catidad dinero
                                     resultado(e,clave,cla)
@@ -235,13 +208,15 @@ while True:
                                     if (cla=='s30j' or cla=='s31j') and (i[1]=='C' or i[1]=='D'): print((cla[:1]+cla[3:]).upper()+aa+i[1]+u.lower()+''+str(vendoB[0])+'|', end='')
                                     else: print(cla.upper()+aa+i[1]+u.lower()+''+str(vendoB[0])+'|', end='') 
                                     if (clave=='s30j' or clave=='s31j') and (i[1]=='C' or i[1]=='D'): print((clave[:1]+clave[3:]).upper()+a+i[1]+u.lower()+''+str(comproA[0])+
-                                    '| |'+str(comA)+'|'+str(limite)+'|'+str(gana)+'|'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'|'+str(bonos))
-                                    else: print(clave.upper()+a+i[1]+u.lower()+''+str(comproA[0])+'| |'+str(comA)+'|'+str(limite)+'|'+str(gana)+'|'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'|'+str(bonos))
-                                    
+                                    '| |'+str(comA)+'|'+str(limite)+'|'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'| '+str(bonos))
+                                    else: print(clave.upper()+a+i[1]+u.lower()+''+str(comproA[0])+'| |'+str(comA)+'|'+str(limite)+'|'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'| '+str(bonos))
+                                
                                     break
+                                    
 
                                     '''print('|'+clave.upper()+a+i[0]+u.lower()+''+str(vendoA[0])+'x'+str(uso)+'=$'+str(venA)+'|',end='')
                                     print(cla.upper()+aa+i[0]+u.lower()+''+str(comproB[0])+'/$'+str(venA)+'='+str(comB)+'|',end='') 
                                     print(cla.upper()+aa+i[1]+u.lower()+''+str(vendoB[0])+'x'+str(comB)+'=$'+str(round(comB*(vendoB[0]/100),2) )+'|', end='') 
                                     print(clave.upper()+a+i[1]+u.lower()+' '+str(comA)+'|'+str(limite)+'|'+str(round(gana,2))+'|'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+str(bonos))
                                     break'''
+                                
