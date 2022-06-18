@@ -27,7 +27,7 @@ tipo = {'al':['30'],'gd':['35','30'],
 #'al':['30','29','35','41'],'ae':['38'],'gd':['30','29','35','38','41','46']
 }
 plazo = ['CI',
-'48hs', '24hs'
+'48hs', #'24hs'
 ]
 moneda = {
 'ccl|mep':['C','D'],
@@ -93,7 +93,7 @@ def resultado(tipo,tA,tB):
 
 while True:
     if time.strftime("%H:%M:%S") > '17:59:50':
-        print(f'FIN 17hs CERRADO |', datetime.now().strftime("%H:%M:%S  %d/%m/%Y"))
+        print(f'FIN 17hs MERCADO CERRADO |', datetime.now().strftime("%H:%M:%S  %d/%m/%Y"))
         break
     if time.strftime("%H:%M:%S") > '15:59:45': plazo = ['48hs','24hs']
     for clave, valor in tipo.items():

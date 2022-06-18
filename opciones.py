@@ -1,8 +1,14 @@
-from http.client import CONTINUE
 from Consultar import Consultar
 from Operar import Operar
+from datetime import datetime
 import math
 import time
+
+while True:
+    if time.strftime("%H:%M:%S") < '11:00:00':
+        print('Esperando la apertura ...', datetime.now().strftime("%H:%M:%S  %d/%m/%Y")),time.sleep(10)
+        continue
+    else: break
 
 pr = Consultar()
 op = Operar()
@@ -11,16 +17,13 @@ costo = 0.0052
 
 ratio = {
     '1':['GFG','C','185','.AG',1,10.88,  '195',2,   6.5,  0.15 ],
-    '2':['GFG','C','0','.JU',1,24.93, '220',2,   14,    0.15 ],
-    '3':['GFG','C','0','.AB',1,20.3,   '220',2,   11.15,  0.15 ]
+    '2':['GFG','C','0','.AG',1,24.93, '220',2,   14,    0.15 ],
+    '3':['GFG','C','0','.AG',1,20.3,   '220',2,   11.15,  0.15 ]
 }
 
 while True:
-    if time.strftime("%H:%M:%S") < '11:00:00':
-        print(time.strftime("%H:%M:%S"),'Esperando la apertura a las 11hs ... '),time.sleep(5)
-        continue
-    if time.strftime("%H:%M:%S") > '16:59:50':
-        print(f'FIN 17hs CERRADO |')
+    if time.strftime("%H:%M:%S") > '17:59:50':
+        print(f'FIN 17hs MERCADO CERRADO |', datetime.now().strftime("%H:%M:%S  %d/%m/%Y"))
         break
     for item, valor in ratio.items():
         if valor[2] == '0': continue
@@ -37,11 +40,11 @@ while True:
 
         if  ratioA > ratioO:
             if vendo[1] == 0 or compro[1] == 0: continue
-            
-            op.comprar  (('MERV - XMEV - ' + valor[0] + valor[1] + valor[6] + valor[3] +' - ' + '24hs'),  valor[7],   round(compro[0],3))
-            op.vender   (('MERV - XMEV - ' + valor[0] + valor[1] + valor[2] + valor[3] +' - ' + '24hs'),  valor[4],   round(vendo[0],3))
 
-            print(time.strftime("%H:%M:%S"),f'| CERRADO | {valor[0]}{valor[1]}{valor[2]}{valor[3]}: {vendo[0]} | {valor[0]}{valor[1]}{valor[6]}{valor[3]}: {compro[0]} || re: {res} raE: {ratioE} raA: {ratioA} raO: {ratioO} dif: {dif}')
+            '''op.comprar  (('MERV - XMEV - ' + valor[0] + valor[1] + valor[6] + valor[3] +' - ' + '24hs'),  valor[7],   round(compro[0],3))
+            op.vender   (('MERV - XMEV - ' + valor[0] + valor[1] + valor[2] + valor[3] +' - ' + '24hs'),  valor[4],   round(vendo[0],3))'''
+
+            print(time.strftime("%H:%M:%S"),f'| CERRADA | {valor[0]}{valor[1]}{valor[2]}{valor[3]}: {vendo[0]} | {valor[0]}{valor[1]}{valor[6]}{valor[3]}: {compro[0]} || re: {res} raE: {ratioE} raA: {ratioA} raO: {ratioO} dif: {dif}')
 
             ratio[item][2] = '0'
 
