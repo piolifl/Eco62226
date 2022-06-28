@@ -11,10 +11,15 @@ class Consultar(ECO_62226):
         var = pyRofex.get_market_data(ticker,entries=[pyRofex.MarketDataEntry.LAST])
         try: pr = var['marketData']['LA']['price'] 
         except: pr = 10000
-        try: bi = var['marketData']['BI'][0]['size']
+        try: 
+            var_bi = pyRofex.get_market_data(ticker,entries=[pyRofex.MarketDataEntry.BIDS])
+            bi = var_bi['marketData']['BI'][0]['size']
         except: bi = 0
-        try: of = var['marketData']['OF'][0]['size'] 
+        try: 
+            var_of = pyRofex.get_market_data(ticker,entries=[pyRofex.MarketDataEntry.OFFERS])
+            of = var_of['marketData']['OF'][0]['size'] 
         except: of = 0
+
         return pr, bi , of
 
     def precioBI(self,ticker=str):
