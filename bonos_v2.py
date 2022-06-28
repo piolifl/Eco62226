@@ -144,7 +144,6 @@ while True:
                                 if comA >= uso:
 
                                     #Cantidad LAST - uso puntas de bid/off   
-                                    print(f' {vendoA[1]} // {comproB[2]} // {vendoB[1]} // {comproB[2]}') 
                                     if vendoA[1] <= uso: break
                                     elif comproB[2] <= comB: break
                                     elif vendoB[1] <= comB: break
