@@ -20,6 +20,7 @@ ccl = 0
 mep = 0
 pes = 0
 bonos = {}
+vuelta = 1
 
 tipo = {'al':['30'],'gd':['35','30'], 
 's30j':['2'], #'s31g':['2'], #'s30s':['2'], #'s31o':['2'],
@@ -177,8 +178,8 @@ while True:
                                     gana += res
 
                                     #Muestra resultado positivo
-                                    if (clave=='s30j' or clave=='s31g') and (i[0]=='C' or i[0]=='D'): print('| -SI- |'+(clave[:1]+clave[3:]).upper()+a+i[0]+u.lower()+''+str(vendoA[0])+'|',end='')
-                                    else: print('| SI |'+clave.upper()+a+i[0]+u.lower()+''+str(vendoA[0])+'|',end='')
+                                    if (clave=='s30j' or clave=='s31g') and (i[0]=='C' or i[0]=='D'): print('| -SI- |'+str(vuelta)+'|'+(clave[:1]+clave[3:]).upper()+a+i[0]+u.lower()+''+str(vendoA[0])+'|',end='')
+                                    else: print('| SI |'+str(vuelta)+'|'+clave.upper()+a+i[0]+u.lower()+''+str(vendoA[0])+'|',end='')
                                     if (cla=='s30j' or cla=='s31g') and (i[0]=='C' or i[0]=='D'): print((cla[:1]+cla[3:]).upper()+aa+i[0]+u.lower()+''+str(comproB[0])+'| |',end='')
                                     else: print(cla.upper()+aa+i[0]+u.lower()+''+str(comproB[0])+'| |',end='') 
                                     if (cla=='s30j' or cla=='s31g') and (i[1]=='C' or i[1]=='D'): print((cla[:1]+cla[3:]).upper()+aa+i[1]+u.lower()+''+str(vendoB[0])+'|', end='')
@@ -189,7 +190,12 @@ while True:
 
                                     #Muestra tipo y catidad dinero
                                     resultado(e,clave,cla)
-                                    continue
+
+                                    vuelta += 1
+                                    if vuelta > 15: 
+                                        vuelta = 1
+                                        break
+                                    else: continue
 
                                 #Muestra resultado negativo
                                 else:
