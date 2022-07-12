@@ -14,7 +14,7 @@ pr = Consultar()
 op = Operar()
 
 costos = 0.0026
-limite = 100000
+limite = 99999
 gana = 0
 ccl = 0
 mep = 0
@@ -23,13 +23,13 @@ bonos = {}
 vuelta = 1
 
 tipo = {'al':['30'],'gd':['35','30'], 
-'s31g':['2'], #'s30s':['2'],#'s31o':['2'],
+#'s31g':['2'], #'s30s':['2'],#'s31o':['2'],
 #'aap':['L'], #'k':['O'], #'amz':['N'],
 #'al':['30','29','35','41'],'ae':['38'],'gd':['30','29','35','38','41','46']
 }
 plazo = [
 'CI',
-#'48hs', 
+'48hs', 
 #'24hs'
 ]
 moneda = {
@@ -98,8 +98,8 @@ while True:
     if time.strftime("%H:%M:%S") > '17:59:50':
         print(f'FIN 17hs MERCADO CERRADO |', datetime.now().strftime("%H:%M:%S  %d/%m/%Y"))
         break
-    if time.strftime("%H:%M:%S") > '15:59:45': plazo = ['48hs','24hs']
     for clave, valor in tipo.items():
+        if time.strftime("%H:%M:%S") > '16:29:00': plazo = ['48hs','24hs']
         for a in valor:
             for e,i in moneda.items():
                 for u in plazo:
@@ -195,10 +195,11 @@ while True:
 
                                     #Control de vueltas en mismo papel
                                     vuelta += 1
-                                    if vuelta > 10: 
+                                    if vuelta > 50: 
                                         vuelta = 1
                                         break
                                     else: continue
+                                    
 
                                 #Muestra resultado negativo
                                 else:
