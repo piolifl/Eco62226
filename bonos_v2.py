@@ -111,24 +111,24 @@ while True:
                                 if limite < 25 and ((clave + a) == 'al30' or (cla + aa) == 'al30') : break
 
                                 #Consulto precios LAST
-                                if (clave=='s30s' or clave=='s31g') and (i[0]=='C' or i[0]=='D'): vendoA = pr.precioLA('MERV - XMEV - '+(clave[:1]+clave[3:]).upper()+a+i[0]+' - '+u)
+                                '''if (clave=='s30s' or clave=='s31g') and (i[0]=='C' or i[0]=='D'): vendoA = pr.precioLA('MERV - XMEV - '+(clave[:1]+clave[3:]).upper()+a+i[0]+' - '+u)
                                 else: vendoA = pr.precioLA( 'MERV - XMEV - ' + clave.upper() + a + i[0] + ' - ' +u)
                                 if (cla=='s30s' or cla=='s31g') and (i[0]=='C' or i[0]=='D'): comproB= pr.precioLA('MERV - XMEV - '+(cla[:1]+cla[3:]).upper()+aa+i[0]+' - '+u)
                                 else: comproB= pr.precioLA( 'MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u)
                                 if (cla=='s30s' or cla=='s31g') and (i[1]=='C' or i[1]=='D'): vendoB = pr.precioLA('MERV - XMEV - '+(cla[:1]+cla[3:]).upper()+aa+i[1]+' - '+u)
                                 else: vendoB = pr.precioLA( 'MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u)
                                 if (clave=='s30s' or clave=='s31g') and (i[1]=='C' or i[1]=='D'): comproA= pr.precioLA('MERV - XMEV - '+(clave[:1]+clave[3:]).upper()+a+i[1]+' - '+u)
-                                else: comproA= pr.precioLA( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' +u)
+                                else: comproA= pr.precioLA( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' +u)'''
 
                                 #Consulto precios PUNTAS 
-                                '''if (clave=='s30s' or clave=='s31g') and (i[0]=='C' or i[0]=='D'): vendoA = pr.precioBI('MERV - XMEV - '+(clave[:1]+clave[3:]).upper()+a+i[0]+' - '+u)
+                                if (clave=='s30s' or clave=='s31g') and (i[0]=='C' or i[0]=='D'): vendoA = pr.precioBI('MERV - XMEV - '+(clave[:1]+clave[3:]).upper()+a+i[0]+' - '+u)
                                 else: vendoA = pr.precioBI( 'MERV - XMEV - ' + clave.upper() + a + i[0] + ' - ' +u)
                                 if (cla=='s30s' or cla=='s31g') and (i[0]=='C' or i[0]=='D'): comproB= pr.precioOF('MERV - XMEV - '+(cla[:1]+cla[3:]).upper()+aa+i[0]+' - '+u)
                                 else: comproB= pr.precioOF( 'MERV - XMEV - ' + cla.upper() + aa + i[0] + ' - ' + u)
                                 if (cla=='s30s' or cla=='s31g') and (i[1]=='C' or i[1]=='D'): vendoB = pr.precioBI('MERV - XMEV - '+(cla[:1]+cla[3:]).upper()+aa+i[1]+' - '+u)
                                 else: vendoB = pr.precioBI( 'MERV - XMEV - ' + cla.upper() + aa + i[1] + ' - ' + u)
                                 if (clave=='s30s' or clave=='s31g') and (i[1]=='C' or i[1]=='D'): comproA= pr.precioOF('MERV - XMEV - '+(clave[:1]+clave[3:]).upper()+a+i[1]+' - '+u)
-                                else: comproA= pr.precioOF( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' +u)'''
+                                else: comproA= pr.precioOF( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' +u)
                                 
                                 #print(f'Buscando... {u} | {clave.upper()}{a}{i[0]} | {cla.upper()}{aa}{i[0]} || {cla.upper()}{aa}{i[1]} | {clave.upper()}{a}{i[1]} || ',datetime.now().strftime("%H:%M:%S  %d/%m/%Y"))
 
@@ -147,15 +147,15 @@ while True:
                                 if comA >= uso:
 
                                     #Cantidad LAST - uso puntas de bid/off   
-                                    if vendoA[1] <= uso: break
+                                    '''if vendoA[1] <= uso: break
                                     elif comproB[2] <= comB: break
                                     elif vendoB[1] <= comB: break
-                                    elif comproA[2] <= comA: break
+                                    elif comproA[2] <= comA: break'''
                                     #Cantidad en las PUNTAS: bid/off
-                                    '''if vendoA[1] <= uso: break
+                                    if vendoA[1] <= uso: break
                                     elif comproB[1] <= comB: break
                                     elif vendoB[1] <= comB: break
-                                    elif comproA[1] <= comA: break'''
+                                    elif comproA[1] <= comA: break
 
                                     #    ****    ENVIO DE OPERACIONES AL BROKER    ****
                                     '''if (clave=='s30s' or clave=='s31g') and (i[0]=='C' or i[0]=='D'): op.vender(('MERV - XMEV - '+(clave[:1]+clave[3:]).upper()+a+i[0]+' - '+u), uso, vendoA[0])
@@ -198,9 +198,10 @@ while True:
                                     if vuelta > 50: 
                                         vuelta = 1
                                         break
-                                    else: continue
+                                    else: 
+                                        if time.strftime("%H:%M:%S") > '16:29:00': plazo = ['48hs','24hs']
+                                        continue
                                     
-
                                 #Muestra resultado negativo
                                 else:
                                     if (clave=='s30s' or clave=='s31g') and (i[0]=='C' or i[0]=='D'): print('|    |'+u.lower()+'|'+(clave[:1]+clave[3:]).upper()+a+i[0]+''+str(vendoA[0])+' ',end='')
