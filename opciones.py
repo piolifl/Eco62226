@@ -16,7 +16,7 @@ op = Operar()
 costo = 0.0052
 
 ratio = {
-    '1':['GFG','C','0','.AG',1,10.88,  '195',2,   6.5,  0.15 ],
+    '1':['GFG','C','175','.AG',1,17,'185',2,10.5, 0.15 ],
     '2':['GFG','C','0','.AG',1,24.93, '220',2,   14,    0.15 ],
     '3':['GFG','C','0','.AG',1,20.3,   '220',2,   11.15,  0.15 ]
 }
@@ -41,8 +41,8 @@ while True:
         if  ratioA > ratioO:
             if vendo[1] == 0 or compro[1] == 0: continue
 
-            '''op.comprar(('MERV - XMEV - ' + valor[0] + valor[1] + valor[6] + valor[3] +' - ' + '24hs'),valor[7],round(compro[0],3))
-            op.vender(('MERV - XMEV - ' + valor[0] + valor[1] + valor[2] + valor[3] +' - ' + '24hs'),valor[4],round(vendo[0],3))'''
+            op.vender(('MERV - XMEV - ' + valor[0] + valor[1] + valor[2] + valor[3] +' - ' + '24hs'),valor[4],round(vendo[0],3))
+            op.comprar(('MERV - XMEV - ' + valor[0] + valor[1] + valor[6] + valor[3] +' - ' + '24hs'),valor[7],round(compro[0],3))
 
             print(time.strftime("%H:%M:%S"),f'| CERRADA | {valor[0]}{valor[1]}{valor[2]}{valor[3]}: {vendo[0]} | {valor[0]}{valor[1]}{valor[6]}{valor[3]}: {compro[0]} || re: {res} raE: {ratioE} raA: {ratioA} raO: {ratioO} dif: {dif}')
 
