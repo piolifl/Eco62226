@@ -23,13 +23,13 @@ bonos = {}
 vuelta = 1
 
 tipo = {'al':['30'],'gd':['35','30'], 
-'s29l':['2'], #'s31g':['2'],'s29l':['2'],#'s31o':['2'],
+#'s29l':['2'], #'s31g':['2'],'s29l':['2'],#'s31o':['2'],
 #'aap':['L'], #'k':['O'], #'amz':['N'],
 #'al':['30','29','35','41'],'ae':['38'],'gd':['30','29','35','38','41','46']
 }
 plazo = [
 'CI',
-#'48hs', 
+'48hs', 
 #'24hs'
 ]
 moneda = {
@@ -195,7 +195,7 @@ while time.strftime("%H:%M:%S") < '17:59:50':
 
                                     #Control de vueltas en mismo papel
                                     vuelta += 1
-                                    if vuelta > 50: 
+                                    if vuelta > 25: 
                                         vuelta = 1
                                         break
                                     else: 
