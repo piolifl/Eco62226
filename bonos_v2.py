@@ -22,7 +22,7 @@ pes = 0
 bonos = {}
 vuelta = 1
 
-tipo = {'al':['30'],'gd':['35','30'], 
+tipo = {'al':['30'],'gd':['30','35'], 
 #'s29l':['2'], #'s31g':['2'],'s29l':['2'],#'s31o':['2'],
 #'aap':['L'], #'k':['O'], #'amz':['N'],
 #'al':['30','29','35','41'],'ae':['38'],'gd':['30','29','35','38','41','46']
@@ -35,10 +35,10 @@ plazo = [
 moneda = {
 'ccl|mep':['C','D'],
 #'ccl|pes':['C',''],
-#'mep|ccl':['D','C'],
+'#mep|ccl':['D','C'],
 #'mep|pes':['D','']
 }
-nominal = [300,2,1500]
+nominal = [1000,2,1500]
 
 def cruzar(tA,tB,vendo1,compro2,vendo2,compro1):
     global comA,comB,venA,venB
@@ -195,7 +195,7 @@ while time.strftime("%H:%M:%S") < '17:59:50':
 
                                     #Control de vueltas en mismo papel
                                     vuelta += 1
-                                    if vuelta > 25: 
+                                    if vuelta > 5: 
                                         vuelta = 1
                                         break
                                     else: 
