@@ -94,7 +94,7 @@ def resultado(tipo,tA,tB):
             mep  += round(venA - comB * comproB[0]/100,2)
             pes += round(venB - comA * comproA[0]/100,2)
 
-while time.strftime("%H:%M:%S") < '17:59:50':
+while True:
     if time.strftime("%H:%M:%S") > '16:29:00': plazo = ['48hs','24hs']
     for clave, valor in tipo.items():
         for a in valor:
@@ -127,10 +127,10 @@ while time.strftime("%H:%M:%S") < '17:59:50':
                                 if (clave=='s29l' or clave=='s31g') and (i[1]=='C' or i[1]=='D'): comproA= pr.precioOF('MERV - XMEV - '+(clave[:1]+clave[3:]).upper()+a+i[1]+' - '+u)
                                 else: comproA= pr.precioOF( 'MERV - XMEV - ' + clave.upper() + a + i[1] + ' - ' +u)'''
                                 
-                                #print(f'Buscando... {u} | {clave.upper()}{a}{i[0]} | {cla.upper()}{aa}{i[0]} || {cla.upper()}{aa}{i[1]} | {clave.upper()}{a}{i[1]} || ',datetime.now().strftime("%H:%M:%S  %d/%m/%Y"))
-
                                 #Salgo si falta algun precio
-                                if vendoA[0] == 10000 or comproB[0] == 10000 or vendoB[0] == 10000 or comproA[0] == 10000: break
+                                if vendoA[0] == 10000 or comproB[0] == 10000 or vendoB[0] == 10000 or comproA[0] == 10000:
+                                    print(f'Buscando... {u} | {clave.upper()}{a}{i[0]} | {cla.upper()}{aa}{i[0]} || {cla.upper()}{aa}{i[1]} | {clave.upper()}{a}{i[1]} || ',datetime.now().strftime("%H:%M:%S  %d/%m/%Y"))
+                                    break
 
                                 #Hacer el calculo del rulo
                                 cruzar(clave,cla,vendoA[0],comproB[0],vendoB[0],comproA[0])
@@ -191,15 +191,16 @@ while time.strftime("%H:%M:%S") < '17:59:50':
 
                                     #Reduce disponible de al30
                                     if (clave + a) == 'al30' or (cla + aa) == 'al30': limite -= nominal[0]
-                                    if time.strftime("%H:%M:%S") > '17:59:50': break
 
                                     #Control de vueltas en mismo papel
                                     vuelta += 1
                                     if vuelta > 5: 
                                         vuelta = 1
+                                        if time.strftime("%H:%M:%S") > '17:59:55': exit()
                                         break
                                     else: 
                                         if time.strftime("%H:%M:%S") > '16:29:00': plazo = ['48hs','24hs']
+                                        if time.strftime("%H:%M:%S") > '17:59:55': exit()
                                         continue
                                     
                                     
@@ -214,7 +215,7 @@ while time.strftime("%H:%M:%S") < '17:59:50':
                                     if (clave=='s29l' or clave=='s31g') and (i[1]=='C' or i[1]=='D'): print((clave[:1]+clave[3:]).upper()+a+i[1]+''+str(comproA[0])+
                                     '| |'+str(res)+'|'+str(limite)+'| |'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'| '+str(bonos))
                                     else: print(clave.upper()+a+i[1]+''+str(comproA[0])+'| |'+str(round(res))+'|'+str(limite)+'| |'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'| '+str(bonos))
-                                    if time.strftime("%H:%M:%S") > '17:59:50': break
+                                    if time.strftime("%H:%M:%S") > '17:59:55': exit()
                                     break
 
                                 
