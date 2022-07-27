@@ -1,12 +1,16 @@
+from numpy import histogramdd
 from Consultar import Consultar
 from Operar import Operar
 from datetime import datetime
 import math
 import time
 
+hora = time.strftime("%H:%M:%S")
+fecha_hora = datetime.now().strftime("%H:%M:%S  %d/%m/%Y")
+
 while True:
-    if time.strftime("%H:%M:%S") < '11:00:00':
-        print('Esperando la apertura ...', datetime.now().strftime("%H:%M:%S  %d/%m/%Y")),time.sleep(10)
+    if hora < '11:00:00':
+        print('Esperando la apertura ...', fecha_hora),time.sleep(10)
         continue
     else: break
 
@@ -27,11 +31,10 @@ tipo = {'al':['30'],'gd':['30','35'],
 #'aap':['L'], #'k':['O'], #'amz':['N'],
 #'al':['30','29','35','41'],'ae':['38'],'gd':['30','29','35','38','41','46']
 }
-plazo = [
-'CI',
-'48hs', 
-#'24hs'
-]
+
+if hora < '16:29:55': plazo = ['CI','48hs', '''24hs''']
+else: plazo = ['48hs','24hs']
+
 moneda = {
 'ccl|mep':['C','D'],
 #'ccl|pes':['C',''],
@@ -95,7 +98,7 @@ def resultado(tipo,tA,tB):
             pes += round(venB - comA * comproA[0]/100,2)
 
 while True:
-    if time.strftime("%H:%M:%S") > '16:29:00': plazo = ['48hs','24hs']
+    #if hora > '16:29:55': plazo = ['48hs','24hs']
     for clave, valor in tipo.items():
         for a in valor:
             for e,i in moneda.items():
@@ -196,13 +199,13 @@ while True:
                                     vuelta += 1
                                     if vuelta > 5: 
                                         vuelta = 1
-                                        if time.strftime("%H:%M:%S") > '17:59:55': exit()
+                                        if hora > '16:29:00': plazo = ['48hs','24hs']
+                                        if hora > '16:59:55': exit()
                                         break
                                     else: 
-                                        if time.strftime("%H:%M:%S") > '16:29:00': plazo = ['48hs','24hs']
-                                        if time.strftime("%H:%M:%S") > '17:59:55': exit()
+                                        if hora > '16:29:00': plazo = ['48hs','24hs']
+                                        if hora > '16:59:55': exit()
                                         continue
-                                    
                                     
                                 #Muestra resultado negativo
                                 else:
@@ -215,7 +218,7 @@ while True:
                                     if (clave=='s29l' or clave=='s31g') and (i[1]=='C' or i[1]=='D'): print((clave[:1]+clave[3:]).upper()+a+i[1]+''+str(comproA[0])+
                                     '| |'+str(res)+'|'+str(limite)+'| |'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'| '+str(bonos))
                                     else: print(clave.upper()+a+i[1]+''+str(comproA[0])+'| |'+str(round(res))+'|'+str(limite)+'| |'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'| '+str(bonos))
-                                    if time.strftime("%H:%M:%S") > '17:59:55': exit()
+                                    if hora > '16:59:55': exit()
                                     break
 
                                 
