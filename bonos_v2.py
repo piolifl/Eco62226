@@ -1,4 +1,3 @@
-from numpy import histogramdd
 from Consultar import Consultar
 from Operar import Operar
 from datetime import datetime
@@ -32,7 +31,7 @@ tipo = {'al':['30'],'gd':['30','35'],
 #'al':['30','29','35','41'],'ae':['38'],'gd':['30','29','35','38','41','46']
 }
 
-if hora < '16:29:55': plazo = ['CI','48hs', '''24hs''']
+if hora < '16:29:55': plazo = ['CI','48hs','24hs']
 else: plazo = ['48hs','24hs']
 
 moneda = {
