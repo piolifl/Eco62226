@@ -97,7 +97,7 @@ def resultado(tipo,tA,tB):
             pes += round(venB - comA * comproA[0]/100,2)
 
 while True:
-    #if hora > '16:29:55': plazo = ['48hs','24hs']
+    if hora > '16:29:55': plazo = ['48hs','24hs']
     for clave, valor in tipo.items():
         for a in valor:
             for e,i in moneda.items():
@@ -217,6 +217,7 @@ while True:
                                     if (clave=='s29l' or clave=='s31g') and (i[1]=='C' or i[1]=='D'): print((clave[:1]+clave[3:]).upper()+a+i[1]+''+str(comproA[0])+
                                     '| |'+str(res)+'|'+str(limite)+'| |'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'| '+str(bonos))
                                     else: print(clave.upper()+a+i[1]+''+str(comproA[0])+'| |'+str(round(res))+'|'+str(limite)+'| |'+str(round(ccl,2))+'|'+str(round(mep,2))+'|'+ str(round(pes,2))+'| '+str(bonos))
+                                    if hora > '16:29:00': plazo = ['48hs','24hs']
                                     if hora > '16:59:55': exit()
                                     break
 
